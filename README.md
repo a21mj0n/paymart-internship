@@ -1,3 +1,3 @@
 # paymart-internship
 
-azizbek
+aziz
