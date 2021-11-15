@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+.body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.wrapper{
+}
+.container{
+    width: 1200px;
+    margin: 0 auto;
+}
+
+
+.header{
+    height: 100px;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__block{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    h3{
+        cursor: pointer;
+        margin-right: 20px;
+    }
+    nav{
+        display: flex;
+        align-items: center;
+    }
+
+    nav ul {
+        display: flex;
+        list-style: none;
+        li {
+            transition: all 200ms ease;
+            margin: 0 10px;
+            color: rgb(146, 146, 146);
+            cursor: pointer;
+            position: relative;
+            transition: bottom 300ms ease-in;
+            &::before{
+                content: "";
+                position: absolute;
+                background: orange;
+                height: 3px;
+                bottom: -5px;
+            }
+            &:hover::before{
+                width: 100%;
+                color: #000;
+            }
+        }
+    }
+    &__info{
+        display: flex;
+        align-items: center;
+        .cart{
+            margin-right: 20px;
+            cursor: pointer;
+            &:hover{
+                opacity: .5;
+            }
+        }
+    }
+
+    img{
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+        border: 2px solid sandybrown;
+        border-radius: 50px;
+    }
+    
+}
+
+// ==================================== main 
+.main{
+    height: calc(100vh - 200px);
+    padding: 70px 0;
+    .container{
+        .content{
+            display: flex;
+            justify-content: space-between;
+            &__left{
+                .left__image-bg{
+                    height: 500px;
+                    width: 500px;
+                }
+                img{
+                    border-radius: 10px;
+                    width: 100%;
+                    height: 100%;
+                }
+                .left__slides{
+                    padding: 10px 0;
+                    display: flex;
+                    justify-content: space-between;
+                    &_image{
+                        cursor: pointer;
+                        height: 110px;
+                        width: 110px;
+                        border-color: orange;
+                        border-radius: 10px;
+                        img{
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            border-radius: 10px;
+                        }
+                        &:hover{
+                            border: 2px solid orange;
+                            transition: all 100ms ease-in;
+                            opacity: .5;
+                        }
+                    }
+                }
+            }
+            &__right{
+                padding: 100px;
+                h3{
+                    color: orange;
+                    font-weight: bold;
+                    margin-bottom: 20px;
+                }
+                h2{
+                    font-weight: bold;
+                    font-size: 50px;
+                    margin-bottom: 20px;
+                }
+                p{
+                    color:rgb(146, 146, 146);
+                    margin-bottom: 20px;
+                }
+                .right__price{
+                    font-size: 30px;
+                    align-items: center;
+                    margin-bottom: 7px;
+                    &-new{
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 10px;
+                        strong{
+                            margin-right: 15px;
+                        }
+                        span{
+                            font-weight: bold;
+                            color: rgb(236, 153, 0);
+                            background-color: rgba(251, 163, 0, 0.253);
+                            padding: 5px;
+                            border-radius: 5px;
+                            font-size: 16px;
+                        }
+                    }
+                    &-old{
+                        color: rgb(161, 161, 161);
+                        font-size: 18px;
+                        font-weight: bold;
+                        text-decoration: line-through;
+                        margin-bottom: 20px;
+                    }
+                }
+                .right__cart{
+                    display: flex;
+                    align-items: center;
+                    &-counter{
+                        button{
+                            color: orange;
+                            font-weight: bold;
+                            font-size: 25px;
+                            height: 50px;
+                            width: 50px;
+                            border-radius: 10px;
+                            border: none;
+                            cursor: pointer;
+                        }
+                        margin-right: 10px;
+                    }
+                    &-add{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        svg{
+                            height: 20px;
+                            width: 20px;
+                            margin-right: 10px;
+                        }
+                        font-weight: bold;
+                        cursor: pointer;
+                        color: #fff;
+                        background: rgba(248, 138, 12, 0.746);
+                        border-radius: 10px;
+                        border: none;
+                        height: 50px;
+                        width: 200px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.footer{
+    height: 100px;
+}
