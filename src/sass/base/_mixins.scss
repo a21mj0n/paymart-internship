@@ -1,0 +1,25 @@
+@function three-six-px() {
+    @return 36px;
+}
+@function posi-absolute() {
+    @return absolute;
+}
+@mixin before_circle {
+    &::before {
+        content: '';
+        position: posi-absolute();
+        z-index: -2;
+        top: -25%;
+        left: 0;
+        width: three-six-px();
+        height: 36px;
+        border-radius: 100%;
+        background:$main-color;
+        -webkit-border-radius: 100%;
+        -moz-border-radius: 100%;
+        -ms-border-radius: 100%;
+        -o-border-radius: 100%;
+    }
+}
+
+

@@ -1,0 +1,103 @@
+.resume {
+    padding-top: 120px;
+    &__title {
+        position: relative;
+        color:#000;
+        text-align: center;
+        @include before_circle;
+        &::before {
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            -webkit-transform: translateX(-50%);
+            -moz-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+            -o-transform: translateX(-50%);
+        } 
+    }
+    &__subtitle {
+        text-align: center;
+    }
+    &__wrapper {
+        padding: 60px 65px 0 65px;
+        display: grid;
+        grid-template-columns: repeat(2, 425px);
+        column-gap: 136px;
+    }
+    &__column {
+        &-title {
+            text-align: center;
+            position: relative;
+            &::before {
+                content: '';
+                position: posi-absolute();
+                width: 15px;
+                height: 15px;
+                top:  50%;
+                left: -7px;
+                background: $main-color;
+                transform: translateY(-50%);
+                border-radius: 100%;
+                -webkit-border-radius: 100%;
+                -moz-border-radius: 100%;
+                -ms-border-radius: 100%;
+                -o-border-radius: 100%;
+               
+            }
+        }
+        ul {
+            list-style-type: none;
+            li {
+                position: relative;
+                &::after {
+                    content: '';
+                    width: 1px;
+                    height: calc(100% + 16px);
+                    position: posi-absolute();
+                    top: -16px;
+                    left: 0;
+                    background-color:#000;
+                }
+            }
+        }
+    }
+    &__item {
+        position: relative;
+        &:before {
+            content: '';
+            height: 1px;
+            width: 45px;
+            position: posi-absolute();
+            top: 68px;
+            background-color: #000;
+        }
+        &-head {
+            position: relative;
+            padding: 45px 0 0  100px;
+            h2 {
+                margin-bottom: 0;
+            }
+        }
+        &-body {
+            padding-left: 43px;
+            margin-top: 12px;
+        }
+        &-icon {
+            position: posi-absolute();
+            left: 45px;
+            top: 50px;
+            @include before_circle;
+            img {
+                position: posi-absolute();
+                left: 17px;
+                top: 14px;
+            }
+        }
+        &-location {
+            font-size: 12px;
+            line-height: 18px;
+            margin-right: 5px;
+        }
+    }
+   
+}
