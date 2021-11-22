@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;500;700&display=swap');
+@import 'variables';
+@import 'mixins';
+
 *{
     padding: 0;
     margin: 0;
@@ -26,9 +29,7 @@ h1,h2,h3,h4,h5{
     padding: 20px;
     border-bottom: 1px solid #ccc;
     &__block{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        @include f-between;
         margin: 0 20px;
     }
     &__title{
@@ -41,7 +42,7 @@ h1,h2,h3,h4,h5{
     }
 
     nav ul {
-        display: flex;
+        @include d-flex;
         list-style: none;
         li {
             transition: all 200ms ease;
@@ -50,29 +51,17 @@ h1,h2,h3,h4,h5{
             cursor: pointer;
             position: relative;
             transition: bottom 300ms ease-in;
-            &::before{
-                content: "";
-                position: absolute;
-                background: orange;
-                height: 3px;
-                bottom: -5px;
-            }
+            @include bottom-line;
             &:hover::before{
                 width: 100%;
-                color: #000;
             }
         }
     }
     &__info{
-        display: flex;
-        align-items: center;
+        @include d-flex;
         .cart{
-            margin-right: 20px;
             cursor: pointer;
             position: relative;
-            &:hover{
-                // opacity: .5;
-            }
             &__body{
                 display: none;
                 padding: 25px 0 ;
@@ -96,7 +85,7 @@ h1,h2,h3,h4,h5{
         width: 50px;
         height: 50px;
         object-fit: contain;
-        border: 2px solid sandybrown;
+        border: 2px solid $orange;
         border-radius: 50px;
     }
     
@@ -114,9 +103,6 @@ h1,h2,h3,h4,h5{
                 margin-right: 120px;
                 height: 440px;
                 width: 50%;
-                .left__image-bg{
-
-                }
                 img{
                     border-radius: 10px;
                     width: 100%;
@@ -130,7 +116,7 @@ h1,h2,h3,h4,h5{
                         cursor: pointer;
                         height: 90px;
                         width: 90px;
-                        border-color: orange;
+                        border-color: $orange;
                         border-radius: 10px;
                         img{
                             width: 100%;
@@ -139,7 +125,7 @@ h1,h2,h3,h4,h5{
                             border-radius: 5px;
                         }
                         &:hover{
-                            border: 2px solid orange;
+                            border: 2px solid $orange;
                             transition: all 100ms ease-in;
                             opacity: .5;
                         }
@@ -150,7 +136,7 @@ h1,h2,h3,h4,h5{
                 width: 50%;
                 padding: 60px 0;
                 h3{
-                    color: orange;
+                    color: $orange;
                     font-weight: bold;
                     margin-bottom: 20px;
                     font-size: 12px;
@@ -178,8 +164,8 @@ h1,h2,h3,h4,h5{
                         }
                         span{
                             font-weight: bold;
-                            color: rgb(236, 153, 0);
-                            background-color: rgba(251, 163, 0, 0.253);
+                            color: $orange;
+                            background-color: $orange-background;
                             padding: 5px;
                             border-radius: 5px;
                             font-size: 16px;
@@ -190,19 +176,15 @@ h1,h2,h3,h4,h5{
                         font-size: 18px;
                         font-weight: bold;
                         text-decoration: line-through;
-                        margin-bottom: 20px;
                     }
                 }
                 .right__cart{
-                    display: flex;
-                    align-items: center;
+                    @include d-flex;
                     &-counter{
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
+                        @include j-center;
                         button{
                             padding-bottom: 4px;
-                            color: orange;
+                            color: $orange;
                             background: rgb(235, 235, 235);
                             font-weight: bold;
                             font-size: 25px;
@@ -217,7 +199,6 @@ h1,h2,h3,h4,h5{
                                 border-radius: 0 10px 10px 0px;
                             }
                         }
-                        margin-right: 10px;
                         span{
                             height: 50px;
                             width: 50px;
@@ -230,9 +211,7 @@ h1,h2,h3,h4,h5{
                         }
                     }
                     &-add{
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
+                        @include j-center;
                         svg{
                             height: 20px;
                             width: 20px;
@@ -241,7 +220,7 @@ h1,h2,h3,h4,h5{
                         font-weight: bold;
                         cursor: pointer;
                         color: #fff;
-                        background: rgba(248, 138, 12, 0.746);
+                        background: $orange;
                         border-radius: 10px;
                         border: none;
                         height: 50px;
@@ -295,7 +274,6 @@ h1,h2,h3,h4,h5{
                 }
                 &__right{
                     width: 600px;
-                    // height: 600px;
                     margin-top: 100px;
                 }
             }
@@ -331,7 +309,6 @@ h1,h2,h3,h4,h5{
                 }
                 &__right{
                     width: 400px;
-                    // height: 600px;
                     margin-top: 100px;
                 }
             }
