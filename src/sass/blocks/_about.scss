@@ -25,7 +25,7 @@
      &__title {
          position: relative;
          padding: 1 0 0 12px;
-         @include before_circle;
+         @include round_before;
          color: #000;
      }
 
@@ -57,7 +57,7 @@
              margin-top: 22px;
              position: relative;
              padding: 15px 0 0 15px;
-             @include before_circle;
+             @include round_before;
 
              &::before {
                  top: 0;

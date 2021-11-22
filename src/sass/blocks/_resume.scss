@@ -4,7 +4,7 @@
         position: relative;
         color:#000;
         text-align: center;
-        @include before_circle;
+        @include round_before;
         &::before {
             top: -5px;
             left: 50%;
@@ -86,7 +86,7 @@
             position: posi-absolute();
             left: 45px;
             top: 50px;
-            @include before_circle;
+            @include round_before;
             img {
                 position: posi-absolute();
                 left: 17px;

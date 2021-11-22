@@ -4,7 +4,7 @@
     &__title {
         position: relative;
         text-align: center;
-        @include before_circle;
+        @include round_before;
 
         &::before {
             top: -5px;
@@ -72,7 +72,7 @@
         &-title {
             position: relative;
             padding: 2px 0 0 13px;
-            @include before_circle;
+            @include round_before;
             &::before {
                 top: -6px;
             }
