@@ -1,32 +1,46 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link :to="{ name: 'home' }">Home</router-link> |
-      <router-link :to="{ name: 'about', params: { id: 4 } }">About</router-link>
-    </div>
-    <router-view/>
+    <component :is="layout">
+      <router-view></router-view>
+    </component>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import EmptyLayout from './layouts/EmptyLayout.vue';
+import MainLayout from './layouts/MainLayout.vue';
+import DefaultLayout from './layouts/DefaultLayout.vue';
 
-#nav {
-  padding: 30px;
+import NavBar from './components/navBar.vue';
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  name: 'App',
+  components: { 
+    NavBar,
+    EmptyLayout,
+    MainLayout, 
+    DefaultLayout,
+  },
+  computed: {
+    layout() {
+      return (this.$route.meta.layout || 'empty') + '-layout';
     }
   }
+  
 }
+</script>
+
+<style lang="scss">
+*{
+  padding: 0;
+  margin: 0;
+}
+body{
+  margin: 0;
+  padding: 0;
+}
+  .container{
+    width: 1100px;
+    margin: 50px auto;
+  }
 </style>

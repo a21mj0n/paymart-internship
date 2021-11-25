@@ -1,43 +1,36 @@
 <template>
     <nav>
         <ul>
-            <router-link 
-                tag="li" 
-                :to='{ name: link.name }' 
-                v-for="(link, index) in links" 
-                :key="index"
-            >
-                {{ link.text }}                
-            </router-link>
+            <li>
+                <router-link :to="{name: 'home'}">Home</router-link>
+            </li>
+            <li>
+                <router-link :to="{name: 'about'}">About</router-link>
+            </li>
         </ul>
     </nav>
 </template>
-
 <script>
 export default {
-    name: 'Navbar',
-    data() {
-        return {
-            links: [
-                {
-                    name: 'home',
-                    text: 'Home Page'
-                },
-                {
-                    name: 'about',
-                    text: 'About Page'
-                }
-            ]
-        }
-    },
+    
 }
 </script>
-
 <style lang="scss">
-    // nav {
-    //     ul {
-    //         display: flex;
-    //         justify-content: space-between;
-    //     }
-    // }
+    nav{
+        background: rgb(104, 104, 104);
+        padding: 20px 0;
+        display: flex;
+        justify-content: center;
+    }
+    ul {
+        display: flex;
+        align-items: center;
+        list-style-type: none;
+        li{
+            padding: 5px 10px;
+            a{
+                color: #fff;
+            }
+        }
+    }
 </style>
