@@ -7,26 +7,26 @@
 </template>
 
 <script>
+//====== layouts ==========================
 import EmptyLayout from './layouts/EmptyLayout.vue';
 import MainLayout from './layouts/MainLayout.vue';
 import DefaultLayout from './layouts/DefaultLayout.vue';
-
-import NavBar from './components/navBar.vue';
+import UpperLayout from './layouts/UpperLayout.vue';
+//======components=========================
 
 export default {
   name: 'App',
   components: { 
-    NavBar,
     EmptyLayout,
     MainLayout, 
     DefaultLayout,
+    UpperLayout
   },
   computed: {
     layout() {
       return (this.$route.meta.layout || 'empty') + '-layout';
     }
-  }
-  
+  },
 }
 </script>
 

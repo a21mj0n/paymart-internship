@@ -1,30 +1,46 @@
 <template>
     <div>
         <h2>Home page</h2>
+
         <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam corporis voluptas quidem mollitia veritatis itaque, nihil totam ipsa fuga modi.
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+            Nam corporis voluptas quidem mollitia veritatis itaque, nihil totam ipsa fuga modi.
         </p>
+
         <router-link :to="{name: 'about'}">
             Link to about page
         </router-link>
+
         <div class="block__row">
-            <div 
-                class="card"
+           <product-card 
                 v-for="product in products" 
                 :key="product.id"
-            >   
-                <p>{{ product.name }}</p>
-                <p>{{ product.price }}$</p>
-               <button @click="$router.push(`/cards/${product.id}`)">
-                    Link:
-               </button>
-            </div>
+                :product="product"
+                :bg-color="backgroundColor"
+            >
+ 
+                <template #header>
+                    <div>Card Header</div>
+                </template>
+
+                <template #default>
+                    Card Content (default)
+                </template>
+
+                <template #footer>
+                    <div v-html="title"></div>
+                </template>
+                
+            </product-card>
         </div>
     </div>
 </template>
 
 <script>
+import ProductCard from '../components/ProductCard.vue'
+
 export default {
+    name: 'HomePage',
     data() {
         return {
             products: [
@@ -43,8 +59,13 @@ export default {
                     name: 'MI',
                     price: 200,
                 },
-            ]   
+            ],
+            backgroundColor: 'yellow',  
+            title: 'Card <span style="color: red">Footer</span>',
         };
+    },
+    components: {
+        ProductCard,
     },
     created() {
         document.title = this.$route.meta.title;
@@ -58,10 +79,5 @@ export default {
         display: flex;
         justify-content: space-between;
     }
-    .card{
-        width: 200px;
-        height: 200px;
-        border: 1px solid #ccc;
-        box-shadow: 0 0 3px rgb(90, 90, 90);
-    }
+   
 </style>

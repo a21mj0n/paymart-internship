@@ -10,11 +10,14 @@
         </ul>
     </nav>
 </template>
+
 <script>
+
 export default {
-    
+    name: 'navbar',
 }
 </script>
+
 <style lang="scss">
     nav{
         background: rgb(104, 104, 104);

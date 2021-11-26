@@ -8,11 +8,6 @@
 
 export default {
     name: 'MainLayout',
-    components: { 
-
-},
-    
-    
 }
 </script>
 

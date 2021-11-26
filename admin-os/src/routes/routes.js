@@ -3,10 +3,10 @@ export default [
         path: '/',
         name: 'home',
         meta: {
-            layout: 'default',
+            layout: 'main',
             title: 'Home Page',
         },
-        component: () => import('../pages/homePage')
+        component: () => import('../pages/HomePage')
     },
     {
         path: '/about',
@@ -15,14 +15,19 @@ export default [
             layout: 'main',
             title: 'About Page',
         },
-        component: () => import ('../pages/aboutPage')
+        component: () => import ('../pages/AboutPage')
     },
     {
-        path: '/cards/:id', 
-        component: () => import('../pages/cardPage') 
+        path: '/cards/:id',
+        name: 'card',
+        meta: {
+            layout: 'upper'
+        },
+        props: true,
+        component: () => import('../pages/CardPage') 
     },
     {
         path: '*',
-        component: () => import ('../pages/notFound')
+        component: () => import ('../pages/NotFound')
     }
 ];
