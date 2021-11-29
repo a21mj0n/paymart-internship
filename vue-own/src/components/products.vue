@@ -1,23 +1,25 @@
 <template>
-  <div class="products">
-    <div class="product">
-
-    </div>
+  <div class="product">
+    {{product.name}}
+    <p>{{product.price}}</p>
+    <slot name="test"></slot>
   </div>
 </template>
 
 <script>
 export default {
-  
+  props: {
+    product: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>
 
 <style lang='scss'>
-  .products{
-    display: flex;
-    align-items: center;
-    .product{
-      width: 33.3%;
-    }
+  .product{
+    outline:1px solid black;
+    width: 33.3%;
   }
 </style>
