@@ -7,12 +7,20 @@
                 v-for="product in products" 
                 :key="product.id"
                 :product='product'
-            />
+            >
+                <template #test>
+                   <div>
+                        <h1>slot from home: {{product.name}}</h1>
+                   </div>
+                </template>
+            </product-card>
         </div>
+        <!-- <my-button>Click</my-button> -->
     </div>
 </template>
 <script>
-import ProductCard from '../components/ProductCard.vue'
+import ProductCard from '../components/ProductCard.vue';
+
 export default {
     components: {
         ProductCard,
@@ -38,10 +46,7 @@ export default {
                 ]
         }
     },
-    created(){
-        // console.log(this.$route);
-    }
-}
+};
 </script>
 
 <style>

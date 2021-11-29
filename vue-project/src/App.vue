@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import NavBar from './components/NavBar.vue'
-import EmptyLayout from './layouts/EmptyLayout.vue'
-import MainLayout from './layouts/MainLayout.vue'
-
+import NavBar from './components/NavBar.vue';
+import EmptyLayout from './layouts/EmptyLayout.vue';
+import MainLayout from './layouts/MainLayout.vue';
+  
 export default {
   name: 'App',
   components: {
@@ -20,12 +20,9 @@ export default {
   },
   computed: {
     layout(){
-      console.log(this.$router.meta);
-      // return (this.$router.meta.layout || 'empty') + '-layout'
-       return (this.$route.meta.layout || 'empty') + '-layout';
+      return (this.$route.meta.layout || 'empty') + '-layout';
     }
   }
-  
 }
 </script>
 

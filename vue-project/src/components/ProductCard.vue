@@ -1,9 +1,14 @@
 <template>
     <div class="card">
         {{product.name}}
+
+        <!-- slots -->
+        <slot name="test">
+
+        </slot>
+
         <p>{{product.price}}</p>
         <!-- old version -->
-        
        <button @click="$router.push(`/cards/${product.id}`)">
             Link to {{product.name}}
         </button>
