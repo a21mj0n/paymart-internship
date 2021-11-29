@@ -6,8 +6,7 @@
         <products 
           v-for="product in products" 
           :key="product.id"
-          :product='product'
-          
+          :product='product'  
         >
           <template #test>
             <div>
