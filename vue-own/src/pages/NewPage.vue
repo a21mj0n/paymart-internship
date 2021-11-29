@@ -2,11 +2,12 @@
   <div class="test">
     <div class="counter-block">
       <clicker></clicker>
-      <div class="products">
-        <products class="card" 
+      <div class="products" >
+        <products 
           v-for="product in products" 
           :key="product.id"
           :product='product'
+          
         >
           <template #test>
             <div>
@@ -33,22 +34,26 @@
           {
             id: 1,
             name: 'Apple',
-            price: 1000
+            price: 1000,
+            color:'red'
           },
           {
             id: 2,
             name: 'Samsung',
-            price: 400
+            price: 400,
+            color:'yellow'
           },
           {
             id: 3,
             name: 'Xiaomi',
-            price: 500
+            price: 500,
+            color:'green'
           },
           {
             id:4,
             name:'New',
-            price:600
+            price:600,
+            color:'transparent'
           }
         ]
       }
@@ -68,6 +73,7 @@
     justify-content: center;
   }
   .products{
+    margin-top: 30px;
     display: flex;
     flex-wrap:wrap;
   }

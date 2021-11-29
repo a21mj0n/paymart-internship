@@ -1,9 +1,11 @@
 <template>
-  <div class="product">
-    {{product.name}}
-    <p>{{product.price}}</p>
-    <slot name="test"></slot>
-    <button @click="$router.push(`/cardpage/${product.id}`)">{{product.name}}</button>
+  <div class="product-wrapper">
+    <div class="product" v-bind:style='{backgroundColor:product.color}'>
+      {{product.name}}
+      <p>{{product.price}}</p>
+      <slot name="test"></slot>
+      <button @click="$router.push(`/cardpage/${product.id}`)">{{product.name}}</button>
+    </div>
   </div>
 </template>
 
@@ -19,8 +21,15 @@ export default {
 </script>
 
 <style lang='scss'>
-  .product{
-    outline:1px solid black;
+  .product-wrapper{
+    
     width: 33.3%;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 30px;
+    .product{
+      padding: 20px;
+      outline:1px solid black;
+    }  
   }
 </style>
