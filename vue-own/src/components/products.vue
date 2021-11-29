@@ -3,6 +3,7 @@
     {{product.name}}
     <p>{{product.price}}</p>
     <slot name="test"></slot>
+    <button @click="$router.push(`/cardpage/${product.id}`)">{{product.name}}</button>
   </div>
 </template>
 

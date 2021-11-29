@@ -22,5 +22,14 @@ export default [
       layout:'empty'
     },
     component: () => import( '../pages/NewPage.vue')
+  },
+  {
+    path: '/cardpage/:id',
+    name: 'cardpage',
+    meta:{
+      layout:'main'
+    },
+    component: () => import( '../pages/CardPage.vue'),
+    props:true
   }
 ]
