@@ -1,6 +1,13 @@
 <template>
     <div>
         <h1>Home Page</h1>
+        <button @click="decrement">
+            -
+        </button>
+        <h2>Счетчик: {{this.$store.state.count}}</h2>
+        <button @click="increment">
+            +
+        </button>
         <router-link to="/about">Link to about page</router-link>
         <div class="flex">
             <product-card class="card" 
@@ -25,6 +32,14 @@ export default {
     components: {
         ProductCard,
     },
+    methods: {
+        increment(){
+            this.$store.dispatch('increment')
+        },
+        decrement(){
+            this.$store.dispatch('decrement')
+        }
+    },
     data() {
         return {
             products: [
@@ -43,7 +58,7 @@ export default {
                     name: 'Xiaomi',
                     price: 500
                 }
-                ]
+            ]
         }
     },
 };

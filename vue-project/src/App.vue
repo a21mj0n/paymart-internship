@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <component :is="layout">
+      <component :is="layout">
       <router-view></router-view>
     </component>
   </div>
@@ -22,6 +22,9 @@ export default {
     layout(){
       return (this.$route.meta.layout || 'empty') + '-layout';
     }
+  },
+  created(){
+    console.log(this.$store);
   }
 }
 </script>
