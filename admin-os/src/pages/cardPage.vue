@@ -1,6 +1,6 @@
 <template>
     <div>
-        Product with id: {{ id }}
+        Product with id: {{ product.name }}
     </div>
 </template>
 
@@ -8,6 +8,11 @@
 export default {
     name: 'CardPage',
     props: ['id'],
+    computed: {
+        product() {
+            return this.$store.getters['cart/getProduct'](this.id);
+        }
+    }
 }
 </script>
 

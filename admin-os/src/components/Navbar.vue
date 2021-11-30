@@ -7,6 +7,9 @@
             <li>
                 <router-link :to="{name: 'about'}">About</router-link>
             </li>
+            <li>
+                {{ productsCount }}
+            </li>
         </ul>
     </nav>
 </template>
@@ -15,6 +18,11 @@
 
 export default {
     name: 'navbar',
+    computed: {
+       productsCount() {
+            return this.$store.getters['cart/getProductsCount'];
+        }, 
+    }
 }
 </script>
 

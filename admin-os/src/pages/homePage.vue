@@ -33,6 +33,8 @@
                 
             </product-card>
         </div>
+
+        <button @click="addProduct">Add product</button>
     </div>
 </template>
 
@@ -57,18 +59,30 @@ export default {
                 {
                     id: 3,
                     name: 'MI',
-                    price: 200,
+                    price: 400,
                 },
             ],
             backgroundColor: 'yellow',  
             title: 'Card <span style="color: red">Footer</span>',
         };
     },
+    methods: {
+        addProduct() {
+            this.products.push( {
+                id: 4,
+                name: 'iWatch 6',
+                price: 500,
+            })
+        }
+    },
     components: {
         ProductCard,
     },
     created() {
         document.title = this.$route.meta.title;
+        // zapros('products) response
+
+        this.$store.dispatch('cart/setProduct', this.products);
     },
 }
 </script>
