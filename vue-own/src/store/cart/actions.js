@@ -1,3 +1,3 @@
-export function setProduct({commit}, payload){
-  commit({})
+export function setProduct({ commit }, payload) {
+  commit('set', payload)
 }

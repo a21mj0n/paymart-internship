@@ -49,13 +49,18 @@
             color:'green'
           },
           {
-            id:4,
+            id: 4,
             name:'New',
             price:600,
             color:'transparent'
           }
         ]
       }
+    },
+    created(){
+      document.title = this.$route.meta.title;
+
+      this.$store.dispatch('cart/setProduct', this.products);
     }
   }
 </script>
