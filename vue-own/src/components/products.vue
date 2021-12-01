@@ -22,7 +22,6 @@ export default {
 
 <style lang='scss'>
   .product-wrapper{
-    
     width: 33.3%;
     padding-left: 15px;
     padding-right: 15px;
