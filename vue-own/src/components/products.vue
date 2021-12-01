@@ -4,7 +4,7 @@
       {{product.name}}
       <p>{{product.price}}</p>
       <slot name="test"></slot>
-      <button @click="$router.push(`/cardpage/${product.id}`)">{{product.name}}</button>
+      <button @click="$router.push({ name: 'cardpage', params: { id: product.id } })">{{product.name}}</button>
     </div>
   </div>
 </template>

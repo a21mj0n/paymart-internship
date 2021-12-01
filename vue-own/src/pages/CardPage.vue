@@ -10,7 +10,7 @@ export default {
   props:['id'],
   computed: {
     product() {
-      return this.$store.getters['cart/getProduct'](+this.id);
+      return this.$store.getters['cart/getProduct'](this.id);
     }
   },
   created() {
