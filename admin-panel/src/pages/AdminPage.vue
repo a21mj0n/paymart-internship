@@ -1,11 +1,12 @@
 <template >
     <div class="wrapper">
-        123
-        <i class="fa fa-bath"></i>
+        <my-content/>
     </div>
 </template>
 <script>
+import MyContent from '../components/admin-panel/MyContent.vue'
 export default {
+  components: { MyContent },
     
 }
 </script>
