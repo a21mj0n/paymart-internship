@@ -8,10 +8,7 @@
                 <th>Data</th>    
                 <th>Actions</th>    
             </tr>
-            
-            <tr>
-                
-            </tr>
+            <tr></tr>
         </div>  
     </div>
 </template>
