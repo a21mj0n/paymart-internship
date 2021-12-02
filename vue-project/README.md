@@ -1,6 +1,5 @@
-# vuetest
+# vue-project
 
-<<<<<<< HEAD
 ## Project setup
 ```
 npm install
@@ -23,6 +22,3 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
-=======
-azizbek 2
->>>>>>> 08750c693ec865405f3fddb84dfb70a13a98f65c
