@@ -1,6 +1,5 @@
 <template>
     <div class="content">
-        <SideBar/>
         <h1>my content</h1> 
         <div class="content__table">
             <tr>
@@ -14,12 +13,8 @@
     </div>
 </template>
 <script>
-import SideBar from "../admin-panel/MySidebar.vue";
 export default {
-    components:{
-        SideBar
-    },
-   
+    
 }
 </script>
 <style scoped lang="scss">
