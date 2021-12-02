@@ -10,7 +10,7 @@
         <div class="overlay" v-if="isVisible">
             <div class="form">
                 <button class="form__close" @click="toggleForm">
-                    <i class="fa fa-close"></i>
+                    <i class="fa fa-close">&times;</i>
                 </button>
                 <h3>Добавить Категорию</h3>
                 <form>
@@ -75,7 +75,6 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-
     .content{
         width: 100%;
         margin: 0 auto;
@@ -83,7 +82,7 @@ export default {
         display: flex;
         flex-direction: column;
         background-color: rgb(238, 238, 238);
-        height: 100vh;
+        min-height: calc(100vh - 100px);
     }
 
     .wrapper__table{
@@ -91,7 +90,7 @@ export default {
     }
     .content__table{
         width: 100%;
-        min-width: 990px;
+        min-width: 720px;
         margin: 50px 0;
         border-collapse: collapse;
     }
@@ -145,6 +144,7 @@ export default {
         }
     }
     .btn{
+        margin-top: 20px;
         padding: 10px 20px;
         background-color: transparent;
         border: 1px solid green;
@@ -157,7 +157,7 @@ export default {
         }
     }
     .btn__add{
-        align-self: flex-end;
+        align-self: flex-start;
     }
     .btn__submit{
         margin-top: 10px;
@@ -219,6 +219,9 @@ export default {
     @media (max-width: 991px) {
         .wrapper__table{
             overflow-x: scroll;
+        }
+        .btn{
+            margin: 0 auto;
         }
     }
 </style>

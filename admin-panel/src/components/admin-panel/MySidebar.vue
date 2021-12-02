@@ -4,14 +4,20 @@
       <p class="logo"><span class="side__bar-visible">CT</span>Market</p>
       <hr class="logo__hr" />
       <div class="user__block">
-        <a href="#" class="user" @click.prevent="visible = !visible">
+        <a href="#" class="user" 
+        @click.prevent="visible = !visible"
+        
+        >
           <div class="user-wrapper"
           
           >
             <p class="user__img side__bar-visible">img</p>
             <p class="user__name">Tania Andrew</p>
           </div>
-          <i class="fa fa-caret-down" aria-hidden="true"></i>
+          <i class="fa fa-caret-down" aria-hidden="true"
+         
+          :class="{rotate: (visible)}"
+          ></i>
         </a>
         <transition name="slide">
           <div class="user__config" v-if="visible">
@@ -22,7 +28,7 @@
         </transition>
             
       </div>
-      <hr class="logo__hr" />
+      <hr class="log__hr" />
     </div>
     <nav>
         <ul class="navigation">
@@ -53,8 +59,9 @@ export default {
     margin-right: 10px;
 }
 .side__bar-wrapper {
-  padding: absolute;
-  
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 260px;
   height: 100vh;
   background: #000;
@@ -71,6 +78,11 @@ export default {
     font-size: 24px;
 
   }
+}
+.log__hr{
+  margin-top: 30px;
+  color: #e3e3e3;
+  height: 0.5px;
 }
 .logo__hr {
   margin-top: 4px;
@@ -104,7 +116,7 @@ export default {
     }
     
     i {
-      
+      transition: all 0.3s ease;
       font-size: 16px;
       color: white;
     }
@@ -174,4 +186,8 @@ nav{
    overflow: hidden;
    max-height: 0;
 }
+.rotate{
+ transform: rotate(540deg);
+}
 </style>
+
