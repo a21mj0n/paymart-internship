@@ -53,6 +53,9 @@ export default {
     margin-right: 10px;
 }
 .side__bar-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 260px;
   height: 100vh;
   background: #000;

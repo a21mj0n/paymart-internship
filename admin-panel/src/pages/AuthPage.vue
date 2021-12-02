@@ -2,12 +2,11 @@
   <div class="wrapper">
     <div class="login">
       <div class="login_block">
-        <form id="" action="#" class="feed-form">
+        <form id="" action="#" class="feed-form" v-if="isLogin">
           <div class="form_inputs">
             <input name="name" required placeholder="Username" type="text" />
             <i class="fa fa-user" aria-hidden="true"></i>
           </div>
-
           <div class="form_inputs">
             <input
               name="password"
@@ -17,35 +16,45 @@
             />
             <i class="fa fa-lock" aria-hidden="true"></i>
           </div>
+            <div class="form__block">
+            <button class="form__block_btn">Login</button>
+            <a href="#" class="form__block_link"
+                ><p class="form_block_text">Forgot password?</p></a
+            >
+            </div>
         </form>
-        <div class="form__block">
-          <button class="form__block_btn">Login</button>
-          <a href="#" class="form__block_link"
-            ><p class="form_block_text">Forgot password?</p></a
-          >
-        </div>
       </div>
     </div>
-    <div class="register"></div>
+
+    <div class="register">
+        
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "LoginPage",
+  data(){
+      return{
+          isLogin: true
+      }
+  },
+  created(){
+    console.log(this.$route);
+  }
 };
 </script>
 
 <style scoped lang="scss">
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+.wrapper{
+    height: 100vh;
 }
 .login {
   text-align: center;
+  min-height: 100vh;
   padding: 350px 0 150px 0;
-  background-image: url("../../assets/login_bg.jpg");
+  background-image: url("../assets/login_bg.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
