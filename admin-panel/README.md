@@ -1,4 +1,4 @@
-# vue-phone
+# admin-panel
 
 ## Project setup
 ```
