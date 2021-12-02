@@ -1,5 +1,9 @@
 {
+<<<<<<<< HEAD:vue2/package.json
   "name": "vuetest",
+========
+  "name": "vue-own",
+>>>>>>>> 402e6dbec60c02342d201430a0e04eae9676aafc:vue-own/package.json
   "version": "0.1.0",
   "private": true,
   "scripts": {
