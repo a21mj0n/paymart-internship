@@ -4,18 +4,23 @@
       <p class="logo"><span class="side__bar-visible">CT</span>Market</p>
       <hr class="logo__hr" />
       <div class="user__block">
-        <a href="#" class="user">
-          <div class="user-wrapper">
+        <a href="#" class="user" @click.prevent="visible = !visible">
+          <div class="user-wrapper"
+          
+          >
             <p class="user__img side__bar-visible">img</p>
             <p class="user__name">Tania Andrew</p>
           </div>
           <i class="fa fa-caret-down" aria-hidden="true"></i>
         </a>
-            <div class="user__config">
+        <transition name="slide">
+          <div class="user__config" v-if="visible">
                 <a href=""><span class="side__bar-visible">MP</span>My Profile</a>
                 <a href=""><span class="side__bar-visible">EP</span>Edit Profile</a>
                 <a href=""><span class="side__bar-visible">S</span>Settings</a>
             </div>
+        </transition>
+            
       </div>
       <hr class="logo__hr" />
     </div>
@@ -31,7 +36,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+   data(){
+        return {
+            visible:false
+        }
+    }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -125,5 +136,39 @@ nav{
             
         }
     }
+}
+
+/////////////////////////// animate ////////////////// 
+
+.slide-enter-active {
+   -moz-transition-duration: 0.3s;
+   -webkit-transition-duration: 0.3s;
+   -o-transition-duration: 0.3s;
+   transition-duration: 0.3s;
+   -moz-transition-timing-function: ease-in;
+   -webkit-transition-timing-function: ease-in;
+   -o-transition-timing-function: ease-in;
+   transition-timing-function: ease-in;
+}
+
+.slide-leave-active {
+   -moz-transition-duration: 0.3s;
+   -webkit-transition-duration: 0.3s;
+   -o-transition-duration: 0.3s;
+   transition-duration: 0.3s;
+   -moz-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+   -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+   -o-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+   transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+.slide-enter-to, .slide-leave {
+   max-height: 100px;
+   overflow: hidden;
+}
+
+.slide-enter, .slide-leave-to {
+   overflow: hidden;
+   max-height: 0;
 }
 </style>
