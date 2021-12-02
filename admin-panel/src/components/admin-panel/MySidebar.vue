@@ -53,6 +53,8 @@ export default {
     margin-right: 10px;
 }
 .side__bar-wrapper {
+  padding: absolute;
+  
   width: 260px;
   height: 100vh;
   background: #000;
@@ -62,7 +64,8 @@ export default {
   color: #fff;
   .logo {
       display: flex;
-    padding-top: 15px;
+    padding-top: 26px;
+    padding-bottom: 25px;
     text-transform: uppercase;
     font-weight: bold;
     font-size: 24px;
@@ -70,7 +73,7 @@ export default {
   }
 }
 .logo__hr {
-  margin-top: 15px;
+  margin-top: 4px;
   color: #e3e3e3;
   height: 0.5px;
 }
@@ -117,7 +120,7 @@ export default {
 }
 nav{
     .navigation{
-        margin: 15px 8px 0 8px;
+        padding: 8px 15px;
         li{
             display: flex;
             color: #fff;
