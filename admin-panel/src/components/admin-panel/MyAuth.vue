@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="login">
-
+      
     </div>
     <div class="register">
 
