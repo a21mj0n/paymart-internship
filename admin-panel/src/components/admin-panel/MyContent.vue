@@ -47,7 +47,7 @@
                         </td>
                         <td class="icons__flex">
                             <i class="fa fa-edit"></i>
-                            <i class="fa fa-close"></i>
+                            <i class="fa fa-close" @click="removeCategory(item.id)"></i>
                         </td>
                     </tr>
                 </tbody>
@@ -70,6 +70,13 @@ export default {
     methods: {
         toggleForm(){
             this.isVisible = !this.isVisible
+        },
+        removeCategory(id){
+            if(
+                window.confirm("Вы точно хотите удалить ?")
+            ){
+                this.categories = this.categories.filter(cat => cat.id !== id)
+            }
         }
     }
 }
