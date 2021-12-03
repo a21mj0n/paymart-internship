@@ -6,7 +6,7 @@ export default [
             layout: 'main',
             title: 'Home Page',
         },
-        component: () => import('../pages/HomePage')
+        component: () => import('../pages/homePage')
     },
     {
         path: '/about',
@@ -15,7 +15,7 @@ export default [
             layout: 'main',
             title: 'About Page',
         },
-        component: () => import ('../pages/AboutPage')
+        component: () => import ('../pages/aboutPage')
     },
     {
         path: '/cards/:id',
@@ -24,10 +24,10 @@ export default [
             layout: 'upper'
         },
         props: true,
-        component: () => import('../pages/CardPage') 
+        component: () => import('../pages/cardPage') 
     },
     {
         path: '*',
-        component: () => import ('../pages/NotFound')
+        component: () => import ('../pages/notFound')
     }
 ];

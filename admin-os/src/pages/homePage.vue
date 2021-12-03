@@ -37,12 +37,14 @@
 </template>
 
 <script>
+import axios from 'axios';
 import ProductCard from '../components/ProductCard.vue'
 
 export default {
     name: 'HomePage',
     data() {
         return {
+            todo: null,
             products: [
                 {
                     id: 1,
@@ -67,8 +69,71 @@ export default {
     components: {
         ProductCard,
     },
-    created() {
+    // created() {
+    //     document.title = this.$route.meta.title;
+    //     fetch('https://jsonplaceholder.typicode.com/posts/1')
+    //         .then(response => response.json())
+    //         .then(todo => {
+    //             console.log(todo);
+
+    //             fetch(`https://jsonplaceholder.typicode.com/comments?postId=${todo.id}`)
+    //                 .then(response => response.json())
+    //                 .then(commentsByTodoId => {
+
+    //                     console.log(commentsByTodoId);
+    //                 })
+    //                 .catch(error => {
+    //                     console.log('comments error: ', error)
+    //                 }) 
+    //         })
+    //         .catch(error => {
+    //             console.log('post error: ', error);
+    //         });
+
+
+//  try {
+//             const responsePost = await fetch('https://jsonplaceholder.typicode.com/posts/1')
+//             const todo = await responsePost.json()
+//             this.todo = todo;
+
+//             console.log(todo);
+//         } catch (error) {
+//             console.log('post error: ', error);
+//         }
+
+//         try {
+//             const responseComments = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${this.todo.id}`)
+//             const commentsByPostId = await responseComments.json();
+            
+//             console.log(commentsByPostId);
+//         } catch (error) {
+//             console.log('comments error: ', error) 
+//         }
+
+
+    // },
+    async created() {
         document.title = this.$route.meta.title;
+
+        try {
+
+            
+            const newTodo = await axios.put('https://jsonplaceholder.typicode.com/posts/3', {
+                title: 'lorem put edit',
+                userId: 5,
+            });
+
+            console.log(newTodo.data);
+
+            const todos = await axios.get('https://jsonplaceholder.typicode.com/posts')
+
+            console.log(todos.data);
+
+
+        } catch (error) {
+            console.log(error);
+        }
+       
     },
 }
 </script>
