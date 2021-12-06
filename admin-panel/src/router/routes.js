@@ -1,4 +1,3 @@
-
 export default [
     {
         path: '/admin',
@@ -13,6 +12,7 @@ export default [
         name: "auth",
         component:  () => import('../pages/AuthPage')
     },
+    // categories
     {
         path: '/admin/categories',
         name: "categories",
@@ -27,7 +27,7 @@ export default [
         meta: {
             layout: "admin"
         },
-        component:  () => import('../pages/AddCategoryPage')
+        component:  () => import('../pages/admin/categories/Create')
     },
     {
         path: '/admin/categories/edit/:id',
@@ -35,7 +35,7 @@ export default [
         meta: {
             layout: "admin"
         },
-        component:  () => import('../pages/AddCategoryPage')
+        component:  () => import('../pages/admin/categories/Edit')
     },
     {
         path: '/admin/categories/view/:id',
@@ -43,7 +43,7 @@ export default [
         meta: {
             layout: "admin"
         },
-        component:  () => import('../pages/AddCategoryPage')
+        component:  () => import('../pages/admin/categories/View')
     },
     // products
     {
