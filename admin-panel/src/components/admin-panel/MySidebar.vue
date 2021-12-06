@@ -43,11 +43,11 @@
 
 <script>
 export default {
-   data(){
-        return {
-            visible:false
-        }
-    }
+  data(){
+      return {
+        visible:false
+      }
+  }
 };
 </script>
 
