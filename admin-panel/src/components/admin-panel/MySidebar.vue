@@ -192,46 +192,5 @@ nav{
 .rotate{
  transform: rotate(540deg);
 }
-$color-scroll: rgba(255, 255, 255, 0.452) ;
-  // CHROME
-::-webkit-scrollbar{
-  width:5px;
-  position: absolute;
-  height: 5px;
-}
-
- ::-webkit-scrollbar-thumb{
-   border-radius: 5px;
-   z-index: 500;
-  background-color: lighten($color-scroll, 0%);
-}
-::-webkit-scrollbar-thumb:hover{
-  background-color: darken($color-scroll, 5%);
-} 
-::-webkit-scrollbar-thumb:active{
-  background-color: darken($color-scroll, 10%);
-} 
-::-webkit-scrollbar-track-piece{
-  background-color: black;
-}
-// OPERA
-::-o-scrollbar{
-  width:5px;
-  position: absolute;
-}
-::-o-scrollbar-thumb{
-  z-index: 500;
-  border-radius: 5px;
-  background-color: lighten($color-scroll, 5%);
-}
-::-o-scrollbar-thumb:hover{
-  background-color: darken($color-scroll, 5%);
-} 
-::-o-scrollbar-thumb:active{
-  background-color: darken($color-scroll, 10%);
-}
-::-o-scrollbar-track-piece{
-  background-color: rgba(black, 0.5);
-}
 </style>
 

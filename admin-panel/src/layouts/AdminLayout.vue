@@ -2,7 +2,7 @@
    <div class="wrapper">
         <div class="row">
             <my-sidebar/>
-            <div :class="(isActive) ? 'content' : 'content-full'">
+            <div :class="(isActive) ? 'content-wrapper' : 'content-full'">
                 <my-header @onToggle="onToggleIcon" :isActive="isActive"/>
                 <router-view/>
             </div>
@@ -36,7 +36,7 @@ export default {
         display: flex;
         width: 100%;
     }
-    .content{
+    .content-wrapper{
         z-index: 200;
         margin-left: auto;
         width: calc(100vw - 260px);

@@ -3,7 +3,6 @@
         <h1>Раздел категории</h1> 
         <button 
             class="btn btn__add"
-            @click="toggleForm"
         >
             Добавить категорию
         </button>
@@ -41,7 +40,7 @@
     </div>
 </template>
 <script>
-// import axios from 'axios'
+import axios from 'axios'
 
 export default {
     data(){
@@ -62,19 +61,13 @@ export default {
             }
         }
     },
+    async created(){
+        const {data} = await axios.get('https://61ade31fd228a9001703b022.mockapi.io/api/categories')
+        this.categories = data
+    }
 }
 </script>
 <style scoped lang="scss">
-    .content{
-        width: 100%;
-        margin: 0 auto;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        background-color: rgb(238, 238, 238);
-        min-height: calc(100vh - 100px);
-    }
-
     .wrapper__table{
         width: 100%;
     }
