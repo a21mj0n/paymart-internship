@@ -21,4 +21,12 @@ export default [
         },
         component:  () => import('../pages/CategoryPage')
     },
+    {
+        path: '/admin/products',
+        name: "products",
+        meta: {
+            layout: "admin"
+        },
+        component:  () => import('../pages/ProductsPage')
+    },
 ]
