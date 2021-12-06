@@ -1,15 +1,24 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <component :is="layout">
+      <router-view></router-view>
+    </component>
   </div>
 </template>
 
 <script>
+import AdminLayout from './layouts/AdminLayout.vue';
 
 export default {
   name: "App",
-  created(){
-    console.log(this.$route);
+  components: {
+    AdminLayout
+  },
+  computed: {
+    layout(){
+      console.log(this.$route.meta.layout);
+      return (this.$route.meta.layout || 'empty') + '-layout';
+    }
   }
 }
 </script>
