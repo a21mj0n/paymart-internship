@@ -3,7 +3,7 @@
     <div class="header-content">
       <div class="left-side">
         <div class="sidebar-button">
-          <a href="#">
+          <a href="#" @click="onClick" :class="(isActive) ? 'lined' : 'dotted' ">
             <span></span>  
             <span></span>  
             <span></span>  
@@ -40,7 +40,12 @@
 
 <script>
 export default {
-
+  props: ['isActive'],
+  methods: {
+    onClick(){
+      this.$emit("onToggle")
+    }
+  }
 }
 </script>
 
@@ -88,7 +93,15 @@ export default {
           justify-content: center;
           flex-direction: column;
         }
+        .dotted{
+          span{
+            height: 4px;
+            width: 4px;
+            border-radius: 50%;
+          }
+        }
         span{
+          transition: all 0.3s ease;
           height: 4px;
           width: 30px;
           background-color: #8d8d8d;
