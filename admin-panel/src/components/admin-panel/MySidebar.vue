@@ -34,7 +34,7 @@
         <ul class="navigation">
             <li><span class="side__bar-visible"><i class="fa fa-users" aria-hidden="true"></i></span>Пользователи</li>
             <li><span class="side__bar-visible"><i class="fa fa-th" aria-hidden="true"></i></span>Категории</li>
-            <li><span class="side__bar-visible"><i class="fa fa-square" aria-hidden="true"></i></span>Продукты</li>
+            <router-link tag="li" :to="'products'"><span class="side__bar-visible"><i class="fa fa-square" aria-hidden="true"></i></span>Продукты</router-link>
             <li><span class="side__bar-visible"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>Заказы</li>
         </ul>
     </nav>
@@ -52,6 +52,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .side__bar-visible{
     display: block;
     width: 50px;
@@ -60,6 +61,7 @@ export default {
 }
 .side__bar-wrapper {
   position: absolute;
+  overflow-y: auto;
   top: 0;
   left: 0;
   width: 260px;
@@ -116,7 +118,7 @@ export default {
     }
     
     i {
-      transition: all 0.3s ease;
+      transition: all 0.6s ease;
       font-size: 16px;
       color: white;
     }
@@ -132,6 +134,7 @@ export default {
 }
 nav{
     .navigation{
+      
         padding: 8px 15px;
         li{
             display: flex;
@@ -188,6 +191,47 @@ nav{
 }
 .rotate{
  transform: rotate(540deg);
+}
+$color-scroll: rgba(255, 255, 255, 0.452) ;
+  // CHROME
+::-webkit-scrollbar{
+  width:5px;
+  position: absolute;
+  height: 5px;
+}
+
+ ::-webkit-scrollbar-thumb{
+   border-radius: 5px;
+   z-index: 500;
+  background-color: lighten($color-scroll, 0%);
+}
+::-webkit-scrollbar-thumb:hover{
+  background-color: darken($color-scroll, 5%);
+} 
+::-webkit-scrollbar-thumb:active{
+  background-color: darken($color-scroll, 10%);
+} 
+::-webkit-scrollbar-track-piece{
+  background-color: black;
+}
+// OPERA
+::-o-scrollbar{
+  width:5px;
+  position: absolute;
+}
+::-o-scrollbar-thumb{
+  z-index: 500;
+  border-radius: 5px;
+  background-color: lighten($color-scroll, 5%);
+}
+::-o-scrollbar-thumb:hover{
+  background-color: darken($color-scroll, 5%);
+} 
+::-o-scrollbar-thumb:active{
+  background-color: darken($color-scroll, 10%);
+}
+::-o-scrollbar-track-piece{
+  background-color: rgba(black, 0.5);
 }
 </style>
 

@@ -144,4 +144,12 @@ export default [
         },
         component:  () => import('../pages/admin/brands/View')
     },
+    {
+        path: '/admin/products',
+        name: "products",
+        meta: {
+            layout: "admin"
+        },
+        component:  () => import('../pages/ProductsPage')
+    },
 ]
