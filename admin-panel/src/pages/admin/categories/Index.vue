@@ -3,6 +3,7 @@
         <h1>Раздел категории</h1> 
         <button 
             class="btn btn__add"
+            @click="$router.push({name: 'createCategory'})"
         >
             Добавить категорию
         </button>
@@ -14,6 +15,7 @@
                     <tr>
                         <th>ID</th>    
                         <th>Name</th>    
+                        <th>Icon</th>    
                         <th>Date</th>    
                         <th>Actions</th>    
                     </tr>
@@ -27,11 +29,15 @@
                             {{item.name}}
                         </td>
                         <td>
+                            <i :class="item.icon">{{item.icon}}</i>
+                        </td>
+                        <td>
                             {{item.date}}
                         </td>
                         <td class="icons__flex">
-                            <i class="fa fa-edit"></i>
-                            <i class="fa fa-close" @click="removeCategory(item.id)"></i>
+                            <i class="fa fa-search-plus" style="color: rgb(109, 109, 184);"></i>
+                            <i class="fa fa-edit" style="color: green" @click="$router.push({name: 'editCategory', params:{id: item.id}})"></i>
+                            <i class="fa fa-close" style="color: red"  @click="removeCategory(item.id)"></i>
                         </td>
                     </tr>
                 </tbody>
@@ -46,18 +52,17 @@ export default {
     data(){
         return{
             categories: [
-                {id: 1, name: "smth", date: "123"},
-                {id: 2, name: "smasdasdadasdasdadsadasdasdasdasdas asd asd sad as dasd ath", date: "123"},
-                {id: 3, name: "smth", date: "123"}
+                {id: 1, name: "SmartPhones", date: "123", icon: "fa fa-heart"},
+                {id: 2, name: "NoteBook", date: "123", icon: "fa fa-search"},
+                {id: 3, name: "Books", date: "123", icon: "fa fa-book"}
             ]
         }
     },
     methods: {
-        removeCategory(id){
-            if(
-                window.confirm("Вы точно хотите удалить ?")
-            ){
+    async removeCategory(id){
+            if(window.confirm("Вы точно хотите удалить ?")){
                 this.categories = this.categories.filter(cat => cat.id !== id)
+                await axios.delete(`https://61ade31fd228a9001703b022.mockapi.io/api/categories/${id}`)
             }
         }
     },
@@ -68,6 +73,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+$main-color: rgb(122, 123, 184);
     .wrapper__table{
         width: 100%;
     }
@@ -85,7 +91,7 @@ export default {
         padding: 20px;
         text-align: left;
         &:last-child{
-            text-align: right;
+            text-align: left;
         }
 
     }
@@ -100,42 +106,37 @@ export default {
         text-align: left;
         background-color: #fff;
         &:last-child{
-            text-align: right;
+            text-align: left;
         }
-
     }
     .icons__flex{
-        // display: flex;
-        // align-items: center;
-        // justify-content: center;
-        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 22px;
         i{
             cursor: pointer;
-        }
-        i:first-child{
-            color: rgb(0, 92, 28);
+            margin-right: 5px;
             &:hover{
-                opacity: .5;
-            }
-            margin-right: 20px;
-        }
-        i:last-child{
-            color: red;
-            &:hover{
-                opacity: .5;
+                opacity: .7;
             }
         }
+        i:nth-child(2){
+            padding-top: 5px;
+        }
+
     }
     .btn{
         margin-top: 20px;
         padding: 10px 20px;
         background-color: transparent;
-        border: 1px solid green;
-        color: green;
+        border: 1px solid $main-color;
+        color: $main-color;
         cursor: pointer;
         font-weight: bold;
+        transition: all 300ms linear;
         &:hover{
-            background-color: green;
+            background-color: $main-color;
             color: #fff;
         }
     }

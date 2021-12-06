@@ -1,18 +1,43 @@
 <template>
     <div class="add">
-        <form>
+        <form @submit.prevent="createCategory">
         <h2>Введите название категорию</h2>
-            <input type="text" placeholder="Название категори">
-            <button>Добавить</button>
+            <div class="flex">
+                <input type="text" placeholder="Название категори" v-model="value">
+                <input type="text" placeholder="Название иконки" v-model="iconVal">
+            </div>
+            <button type="submit">Добавить</button>
         </form>
     </div>
 </template>
 <script>
+import axios from 'axios'
+
 export default {
-    
+    name: 'create',
+    data(){
+        return{
+            value: "",
+            iconVal: ""
+        }
+    },
+    methods: {
+        async createCategory(){
+            const categoryData = {
+                name: this.value,
+                icon: this.iconVal,
+                date: new Date()
+            }
+
+            await axios.post('https://61ade31fd228a9001703b022.mockapi.io/api/categories', categoryData)
+            this.value = ''
+            this.$router.push('/admin/categories')
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>
+$main-color: rgb(122, 123, 184);
     .add{
         width: 100%;
         height: calc(100vh - 100px);
@@ -23,31 +48,35 @@ export default {
             }
             width: 600px;
             margin: auto;
-            display: flex;
-            flex-direction: column;
             input{
-                width: 100%;
-                height: 50px;
-                padding: 10px;
-                outline: none;
-                transition: all 300ms linear;
+            width: 100%;
+            height: 50px;
+            padding: 10px;
+            outline: none;
+            transition: all 200ms ease-in;
+            margin-top: 10px;
+            border: none;
+            border-bottom: 1px solid #ccc;
                 &:focus{
-                    border: 1px solid rgb(0, 167, 56);
+                    border-bottom: 1px solid rgb(0, 167, 56);
                 }
             }
             button{
-                transition: all 300ms linear;
-                width: 50%;
-                padding: 10px;
-                border: 1px solid rgb(0, 167, 56);
-                background-color: transparent;
-                color: rgb(0, 167, 56);
-                margin: 10px 0;
                 align-self: flex-end;
+                transition: all 300ms linear;
+                width: 30%;
+                padding: 10px;
+                border: 1px solid $main-color;
+                background-color: transparent;
+                color: rgb$main-color;
+                margin: 10px 0;
+                justify-content: center;
                 font-weight: bold;
                 cursor: pointer;
+                margin: 10px auto;
+                color: $main-color;
                 &:hover{
-                    background-color: rgb(0, 167, 56);
+                    background-color: $main-color;
                     color: #fff;
                 }
             }

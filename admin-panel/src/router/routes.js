@@ -23,7 +23,7 @@ export default [
     },
     {
         path: '/admin/categories/create',
-        name: "addCategory",
+        name: "createCategory",
         meta: {
             layout: "admin"
         },
@@ -31,7 +31,7 @@ export default [
     },
     {
         path: '/admin/categories/edit/:id',
-        name: "addCategory",
+        name: "editCategory",
         meta: {
             layout: "admin"
         },
@@ -39,7 +39,7 @@ export default [
     },
     {
         path: '/admin/categories/view/:id',
-        name: "addCategory",
+        name: "viewCategory",
         meta: {
             layout: "admin"
         },
