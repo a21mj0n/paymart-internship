@@ -116,7 +116,7 @@ export default {
     }
     
     i {
-      transition: all 0.3s ease;
+      transition: all 0.6s ease;
       font-size: 16px;
       color: white;
     }
