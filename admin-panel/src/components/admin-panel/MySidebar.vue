@@ -33,23 +33,19 @@
     <nav>
         <ul class="navigation">
             <li><span class="side__bar-visible"><i class="fa fa-users" aria-hidden="true"></i></span>Пользователи</li>
-            <li><span class="side__bar-visible"><i class="fa fa-th" aria-hidden="true"></i></span>Категории</li>
-            <li @click.prevent="productVisible = !productVisible"><span class="side__bar-visible"><i class="fa fa-square" aria-hidden="true"></i></span>Продукты</li>
+            <li @click="$router.push({name: 'categories'})"><span class="side__bar-visible"><i class="fa fa-th" aria-hidden="true"></i></span>Категории</li>
+            <li @click="productVisible = !productVisible"><span class="side__bar-visible"><i class="fa fa-square" aria-hidden="true"></i></span>Продукты</li>
               <transition name="slide">
           <div class="config" v-if="productVisible">
-                <router-link :to="{name: 'products'}"><span class="side__bar-visible">VP</span>View Products</router-link>
-                <router-link :to="{name: 'createProduct'}"><span class="side__bar-visible">CP</span>Create Product</router-link>
-                
-                
+              <router-link :to="{name: 'products'}"><span class="side__bar-visible">VP</span>View Products</router-link>
+              <router-link :to="{name: 'createProduct'}"><span class="side__bar-visible">CP</span>Create Product</router-link>
             </div>
         </transition>
-            <li @click.prevent="brandVisible = !brandVisible"><span class="side__bar-visible"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>Бренды</li>
+            <li @click="brandVisible = !brandVisible"><span class="side__bar-visible"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>Бренды</li>
             <transition name="slide">
           <div class="config" v-if="brandVisible">
-                <router-link :to="{name: 'brands'}"><span class="side__bar-visible">VB</span>View Brands</router-link>
-                <router-link :to="{name: 'createBrand'}"><span class="side__bar-visible">CB</span>Create Brand</router-link>
-                
-                
+              <router-link :to="{name: 'brands'}"><span class="side__bar-visible">VB</span>View Brands</router-link>
+              <router-link :to="{name: 'createBrand'}"><span class="side__bar-visible">CB</span>Create Brand</router-link>
             </div>
             </transition>
         </ul>
