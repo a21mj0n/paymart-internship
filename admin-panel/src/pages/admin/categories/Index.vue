@@ -32,7 +32,7 @@
                             <i :class="item.icon">{{item.icon}}</i>
                         </td>
                         <td>
-                            {{item.createdAt}}
+                            {{item.created_at}}
                         </td>
                         <td class="icons__flex">
                             <i class="fa fa-search-plus" style="color: rgb(109, 109, 184);" @click="$router.push(`categories/view/${item.id}`)"></i>
@@ -62,13 +62,13 @@ export default {
     async removeCategory(id){
             if(window.confirm("Вы точно хотите удалить ?")){
                 this.categories = this.categories.filter(cat => cat.id !== id)
-                await axios.delete(`https://61ade31fd228a9001703b022.mockapi.io/api/categories/${id}`)
+                await axios.delete(`https://marketpaymart.herokuapp.com/api/dashboard/categories/${id}`)
             }
         }
     },
     async created(){
-        const {data} = await axios.get('https://61ade31fd228a9001703b022.mockapi.io/api/categories')
-        this.categories = data
+        const resp = await axios.get('https://marketpaymart.herokuapp.com/api/dashboard/categories')
+        this.categories = resp.data.reverse()
     }
 }
 </script>

@@ -10,6 +10,9 @@ export default [
     {
         path: '/auth',
         name: "auth",
+        meta: {
+            layout: "empty"
+        },
         component:  () => import('../pages/AuthPage')
     },
     // categories

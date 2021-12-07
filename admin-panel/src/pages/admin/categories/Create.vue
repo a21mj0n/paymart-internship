@@ -29,7 +29,7 @@ export default {
                 createdAt: new Date()
             }
 
-            await axios.post('https://61ade31fd228a9001703b022.mockapi.io/api/categories', categoryData)
+            await axios.post('https://marketpaymart.herokuapp.com/api/dashboard/categories', categoryData)
             this.value = ''
             this.iconVal = ''
             this.$router.push('/admin/categories')

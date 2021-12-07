@@ -33,7 +33,7 @@
     <nav>
         <ul class="navigation">
             <li><span class="side__bar-visible"><i class="fa fa-users" aria-hidden="true"></i></span>Пользователи</li>
-            <li @click="$router.push({name:'categories'})"><span class="side__bar-visible"><i class="fa fa-th" aria-hidden="true"></i></span>Категории</li>
+            <router-link tag='li' :to="{name: 'categories'}"><span class="side__bar-visible"><i class="fa fa-th" aria-hidden="true"></i></span>Категории</router-link>
             <li @click="productVisible = !productVisible"><span class="side__bar-visible"><i class="fa fa-square" aria-hidden="true"></i></span>Продукты</li>
               <transition name="slide">
           <div class="config" v-if="productVisible">

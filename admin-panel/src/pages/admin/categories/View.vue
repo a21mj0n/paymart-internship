@@ -17,7 +17,7 @@
                         <td>{{this.categoryById.id}}</td>
                         <td>{{this.categoryById.name}}</td>
                         <td>{{this.categoryById.icon}}</td>
-                        <td>{{this.categoryById.createdAt}}</td>
+                        <td>{{this.categoryById.created_at}}</td>
                         <td @click="$router.push({name: 'categories'})">
                             <button>Back</button>
                         </td>
@@ -37,7 +37,7 @@ export default {
         }
     },
     async created(){
-        const {data} = await axios.get(`https://61ade31fd228a9001703b022.mockapi.io/api/categories/${this.$route.params.id}`)
+        const {data} = await axios.get(`https://marketpaymart.herokuapp.com/api/dashboard/categories/${this.$route.params.id}`)
         this.categoryById = data
     }
 }
