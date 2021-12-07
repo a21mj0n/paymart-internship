@@ -159,9 +159,6 @@ export default {
       .notification-wrapper{
         margin-right: 30px;
       }
-      .profile-wrapper{
-
-      }
     }
   }
 </style>

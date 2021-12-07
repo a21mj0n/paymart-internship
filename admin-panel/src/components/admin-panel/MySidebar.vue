@@ -34,7 +34,7 @@
         <ul class="navigation">
             <li><span class="side__bar-visible"><i class="fa fa-users" aria-hidden="true"></i></span>Пользователи</li>
             <li><span class="side__bar-visible"><i class="fa fa-th" aria-hidden="true"></i></span>Категории</li>
-            <li><span class="side__bar-visible"><i class="fa fa-square" aria-hidden="true"></i></span>Продукты</li>
+            <router-link tag="li" :to="'products'"><span class="side__bar-visible"><i class="fa fa-square" aria-hidden="true"></i></span>Продукты</router-link>
             <li><span class="side__bar-visible"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>Заказы</li>
         </ul>
     </nav>
@@ -52,6 +52,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .side__bar-visible{
     display: block;
     width: 50px;
@@ -60,6 +61,7 @@ export default {
 }
 .side__bar-wrapper {
   position: absolute;
+  overflow-y: auto;
   top: 0;
   left: 0;
   width: 260px;
@@ -116,7 +118,7 @@ export default {
     }
     
     i {
-      transition: all 0.3s ease;
+      transition: all 0.6s ease;
       font-size: 16px;
       color: white;
     }
@@ -132,6 +134,7 @@ export default {
 }
 nav{
     .navigation{
+      
         padding: 8px 15px;
         li{
             display: flex;
