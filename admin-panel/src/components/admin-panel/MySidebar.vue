@@ -37,13 +37,21 @@
             <li @click.prevent="productVisible = !productVisible"><span class="side__bar-visible"><i class="fa fa-square" aria-hidden="true"></i></span>Продукты</li>
               <transition name="slide">
           <div class="config" v-if="productVisible">
-                <router-link :to="{name: 'products'}" href=""><span class="side__bar-visible">V</span>View Product</router-link>
-                <router-link :to="{name: 'createProduct'}" href=""><span class="side__bar-visible">CP</span>Create Product</router-link>
+                <router-link :to="{name: 'products'}"><span class="side__bar-visible">VP</span>View Products</router-link>
+                <router-link :to="{name: 'createProduct'}"><span class="side__bar-visible">CP</span>Create Product</router-link>
                 
                 
             </div>
         </transition>
-            <li><span class="side__bar-visible"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>Заказы</li>
+            <li @click.prevent="brandVisible = !brandVisible"><span class="side__bar-visible"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>Бренды</li>
+            <transition name="slide">
+          <div class="config" v-if="brandVisible">
+                <router-link :to="{name: 'brands'}"><span class="side__bar-visible">VB</span>View Brands</router-link>
+                <router-link :to="{name: 'createBrand'}"><span class="side__bar-visible">CB</span>Create Brand</router-link>
+                
+                
+            </div>
+            </transition>
         </ul>
     </nav>
   </div>
@@ -55,6 +63,7 @@ export default {
       return {
         visible:false,
         productVisible: false,
+        brandVisible: false,
       }
   }
 };
