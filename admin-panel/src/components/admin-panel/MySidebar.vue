@@ -33,8 +33,21 @@
     <nav>
         <ul class="navigation">
             <li><span class="side__bar-visible"><i class="fa fa-users" aria-hidden="true"></i></span>Пользователи</li>
+<<<<<<< HEAD
             <li @click="$router.push({name:'categories'})"><span class="side__bar-visible"><i class="fa fa-th" aria-hidden="true"></i></span>Категории</li>
             <router-link tag="li" :to="'products'"><span class="side__bar-visible"><i class="fa fa-square" aria-hidden="true"></i></span>Продукты</router-link>
+=======
+            <li><span class="side__bar-visible"><i class="fa fa-th" aria-hidden="true"></i></span>Категории</li>
+            <li @click.prevent="productVisible = !productVisible"><span class="side__bar-visible"><i class="fa fa-square" aria-hidden="true"></i></span>Продукты</li>
+              <transition name="slide">
+          <div class="config" v-if="productVisible">
+                <router-link :to="{name: 'products'}" href=""><span class="side__bar-visible">V</span>View Product</router-link>
+                <router-link :to="{name: 'createProduct'}" href=""><span class="side__bar-visible">CP</span>Create Product</router-link>
+                
+                
+            </div>
+        </transition>
+>>>>>>> 937755719dd5eb7ef4016498de69865db9ba6056
             <li><span class="side__bar-visible"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>Заказы</li>
         </ul>
     </nav>
@@ -45,7 +58,8 @@
 export default {
   data(){
       return {
-        visible:false
+        visible:false,
+        productVisible: false,
       }
   }
 };
@@ -154,6 +168,24 @@ nav{
             
         }
     }
+}
+.config{
+  a{
+    
+    padding: 15px auto;
+    margin: 15px auto;
+    color: white;
+  font-weight: 400;
+  text-decoration: none;
+  display: flex;
+  border-radius: 15px;
+  transition: all 0.3s linear;
+  &:hover{
+    background: teal;
+  }
+  }
+  
+
 }
 
 /////////////////////////// animate ////////////////// 
