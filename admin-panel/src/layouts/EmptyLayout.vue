@@ -20,7 +20,7 @@ export default {
         display: flex;
         width: 100%;
     }
-    .content{
+    .content-wrapper{
         z-index: 200;
         margin-left: auto;
         width: calc(100vw - 260px);

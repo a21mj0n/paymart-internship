@@ -15,6 +15,7 @@ import MySidebar from '../components/admin-panel/MySidebar.vue'
 
 export default {
     name: "AdminLayout",
+    components: { MySidebar, MyHeader},
     data(){
         return {
             isActive: true
@@ -25,7 +26,6 @@ export default {
             this.isActive = !this.isActive
         }
     },
-  components: { MySidebar, MyHeader},
 }
 </script>
 <style lang="scss">
