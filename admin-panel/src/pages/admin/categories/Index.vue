@@ -32,10 +32,10 @@
                             <i :class="item.icon">{{item.icon}}</i>
                         </td>
                         <td>
-                            {{item.date}}
+                            {{item.createdAt}}
                         </td>
                         <td class="icons__flex">
-                            <i class="fa fa-search-plus" style="color: rgb(109, 109, 184);"></i>
+                            <i class="fa fa-search-plus" style="color: rgb(109, 109, 184);" @click="$router.push(`categories/view/${item.id}`)"></i>
                             <i class="fa fa-edit" style="color: green" @click="$router.push({name: 'editCategory', params:{id: item.id}})"></i>
                             <i class="fa fa-close" style="color: red"  @click="removeCategory(item.id)"></i>
                         </td>
@@ -72,8 +72,9 @@ export default {
     }
 }
 </script>
-<style scoped lang="scss">
-$main-color: rgb(122, 123, 184);
+<style lang="scss">
+// $back-color: rgb(31, 7, 110);
+$main-color: rgb(31, 7, 110);
     .wrapper__table{
         width: 100%;
     }

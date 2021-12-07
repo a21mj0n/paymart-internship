@@ -4,7 +4,7 @@
         <h2>Введите название категорию</h2>
             <div class="flex">
                 <input type="text" placeholder="Название категори" v-model="value">
-                <input type="text" placeholder="Название иконки" v-model="iconVal">
+                <input type="text" placeholder="Название иконкы" v-model="iconVal">
             </div>
             <button type="submit">Добавить</button>
         </form>
@@ -14,7 +14,7 @@
 import axios from 'axios'
 
 export default {
-    name: 'create',
+    name: 'createCategory',
     data(){
         return{
             value: "",
@@ -26,23 +26,26 @@ export default {
             const categoryData = {
                 name: this.value,
                 icon: this.iconVal,
-                date: new Date()
+                createdAt: new Date()
             }
 
             await axios.post('https://61ade31fd228a9001703b022.mockapi.io/api/categories', categoryData)
             this.value = ''
+            this.iconVal = ''
             this.$router.push('/admin/categories')
         }
     }
 }
 </script>
 <style lang="scss" scoped>
-$main-color: rgb(122, 123, 184);
+$main-color: rgb(31, 7, 110);
     .add{
         width: 100%;
         height: calc(100vh - 100px);
         background-color: #fff;
         form{
+            display: flex;
+            flex-direction: column;
             h2{
                 padding: 20px 0;
             }
@@ -70,10 +73,8 @@ $main-color: rgb(122, 123, 184);
                 background-color: transparent;
                 color: rgb$main-color;
                 margin: 10px 0;
-                justify-content: center;
                 font-weight: bold;
                 cursor: pointer;
-                margin: 10px auto;
                 color: $main-color;
                 &:hover{
                     background-color: $main-color;

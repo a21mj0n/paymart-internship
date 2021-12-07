@@ -1,29 +1,32 @@
 <template>
     <div class="add">
-        <form @submit="editCategory">
-            <h2>Изменить категорию {{ name }}</h2>
-            <div class="flex">
-                <input type="text" placeholder="Название категори" v-model="oldValue">
-                <input type="text" placeholder="Название иконки" v-model="oldIcon">
-            </div>
+        <form @submit.prevent="editCategory">
+            <h2>Изменить категорию Смартфоны</h2>
+            <input type="text" placeholder="Название категории"  v-model="categoryData.name">
+            <input type="text" placeholder="Название иконкы" v-model="categoryData.icon" >
             <button>Изменить</button>
         </form>
     </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
-    name: "edit",
-    date(){
+    name: "editCategory",
+    data(){
         return{
-            oldValue: "",
-            oldIcon: ""
+            categoryData: {}
         }
     },
     methods: {
-        editCategory(){
-            // console.log(this.oldValue);
-            // console.log(this.oldIcon);
+        async editCategory(){
+            await axios.put(`https://61ade31fd228a9001703b022.mockapi.io/api/categories/${this.$route.params.id}`, this.categoryData)
+            this.$router.push('/admin/categories')
         }
+    },
+    async created(){
+        console.log(this.$router);
+        const {data} = await axios.get(`https://61ade31fd228a9001703b022.mockapi.io/api/categories/${this.$route.params.id}`)
+        this.categoryData = data
     }
 }
 </script>
@@ -34,11 +37,13 @@ export default {
         height: calc(100vh - 100px);
         background-color: #fff;
         form{
+            display: flex;
+            flex-direction: column;
+            width: 500px;
+            margin: auto;
             h2{
                 padding: 20px 0;
             }
-            width: 600px;
-            margin: auto;
             input{
             width: 100%;
             height: 50px;
@@ -61,10 +66,8 @@ export default {
                 background-color: transparent;
                 color: rgb$main-color;
                 margin: 10px 0;
-                justify-content: center;
                 font-weight: bold;
                 cursor: pointer;
-                margin: 10px auto;
                 color: $main-color;
                 &:hover{
                     background-color: $main-color;
