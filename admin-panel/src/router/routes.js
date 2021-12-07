@@ -118,7 +118,7 @@ export default [
         meta: {
             layout: "admin"
         },
-        component:  () => import('../pages/admin/products/Index')
+        component:  () => import('../pages/admin/brands/Index')
     },
     {
         path: '/admin/brands/create',
