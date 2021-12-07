@@ -1,6 +1,6 @@
 <template>
     <div class="add">
-        <form @submit.prevent="createCategory">
+        <form @submit.prevent="createCategory"> 
         <h2>Введите название категорию</h2>
             <div class="flex">
                 <input type="text" placeholder="Название категори" v-model="value">
@@ -32,7 +32,7 @@ export default {
             await axios.post('https://marketpaymart.herokuapp.com/api/dashboard/categories', categoryData)
             this.value = ''
             this.iconVal = ''
-            this.$router.push('/admin/categories')
+            this.$router.push({name: 'admin.categories'})
         }
     }
 }

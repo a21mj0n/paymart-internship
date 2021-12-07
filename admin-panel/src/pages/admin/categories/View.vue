@@ -18,7 +18,7 @@
                         <td>{{this.categoryById.name}}</td>
                         <td>{{this.categoryById.icon}}</td>
                         <td>{{this.categoryById.created_at}}</td>
-                        <td @click="$router.push({name: 'categories'})">
+                        <td @click="$router.push({name: 'admin.categories'})">
                             <button>Back</button>
                         </td>
                     </tr>
@@ -39,6 +39,7 @@ export default {
     async created(){
         const {data} = await axios.get(`https://marketpaymart.herokuapp.com/api/dashboard/categories/${this.$route.params.id}`)
         this.categoryById = data
+        console.log(data);
     }
 }
 </script>

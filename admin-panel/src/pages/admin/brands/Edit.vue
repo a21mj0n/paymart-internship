@@ -30,7 +30,7 @@ export default {
   methods: {
     async editCategory(){
       await axios.put(`https://61ade31fd228a9001703b022.mockapi.io/api/brands/${this.$route.params.id}`, this.brandByID)
-      this.$router.push('/admin/brands')
+      this.$router.push({name: 'admin.brands'})
     }
   },
   async created(){

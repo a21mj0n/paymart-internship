@@ -3,7 +3,7 @@
         <h1>Раздел категории</h1> 
         <button 
             class="btn btn__add"
-            @click="$router.push({name: 'createCategory'})"
+            @click="$router.push({name: 'admin.categories.create'})"
         >
             Добавить категорию
         </button>
@@ -22,21 +22,28 @@
                 </thead>
                 <tbody>
                     <tr v-for="item in categories" :key="item.id">
-                        <td>
-                            {{item.id}}
-                        </td>
+                        <td>{{item.id}}</td>
                         <td>
                             {{item.name}}
                         </td>
                         <td>
-                            <i :class="item.icon">{{item.icon}}</i>
+                            <i :class="item.icon"></i>
                         </td>
                         <td>
                             {{item.created_at}}
                         </td>
                         <td class="icons__flex">
-                            <i class="fa fa-search-plus" style="color: rgb(109, 109, 184);" @click="$router.push(`categories/view/${item.id}`)"></i>
-                            <i class="fa fa-edit" style="color: green" @click="$router.push({name: 'editCategory', params:{id: item.id}})"></i>
+                            <i class="fa fa-search-plus" style="color: rgb(109, 109, 184);" 
+                            @click="$router.push({name: 'admin.categories.view', params: {id: item.id}})"></i>
+                            <!-- <i class="fa fa-edit" style="color: green" @click="$router.push({name: 'editCategory', params:{id: item.id}})"></i> -->
+                            
+                            <router-link 
+                                tag="i" 
+                                class="fa fa-edit" 
+                                style="color: green" 
+                                :to="{name: 'admin.categories.edit', params:{id: item.id}}"
+                            ></router-link>
+
                             <i class="fa fa-close" style="color: red"  @click="removeCategory(item.id)"></i>
                         </td>
                     </tr>

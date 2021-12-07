@@ -20,7 +20,7 @@ export default {
     methods: {
         async editCategory(){
             await axios.put(`https://marketpaymart.herokuapp.com/api/dashboard/categories/${this.$route.params.id}`, this.categoryData)
-            this.$router.push('/admin/categories')
+            this.$router.push({name: 'admin.categories'})
         }
     },
     async created(){

@@ -10,7 +10,7 @@
               <h3>{{ this.product.name}}</h3>
               <h5> by {{this.product.brand}}</h5>
                 <div class="btns">
-                    <button @click="$router.push({name: 'editProduct', params: {id: product.id}})" class="btn edit">Edit</button>
+                    <button @click="$router.push({name: 'admin.products.edit', params: {id: product.id}})" class="btn edit">Edit</button>
                     <button @click="deleteProduct(product.id)" class="btn delete">Delete</button>
                 </div>
               
@@ -34,7 +34,7 @@ methods:{
         if(window.confirm('Delete this Product??')){
           // eslint-disable-next-line no-undef
           await axios.delete(`https://61ade31fd228a9001703b022.mockapi.io/api/products/${id}`)
-          this.$router.push("/admin/products")  
+          this.$router.push("admin.products")  
         }
         
 

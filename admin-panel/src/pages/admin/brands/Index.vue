@@ -2,7 +2,7 @@
   <div class="content">
     <div class="all-items">
       <div class="item-wrapper" v-for="brand in brands" :key='brand.id'>
-        <div class="item" @click='$router.push(`brands/view/${brand.id}`)'>
+        <div class="item" @click='$router.push({name: "admin.brand.view", id: brand.id})'>
           <div class="img-content">
             <img :src="brand.image" alt="">
           </div>

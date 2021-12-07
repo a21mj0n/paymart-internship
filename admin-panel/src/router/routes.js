@@ -18,7 +18,7 @@ export default [
     // categories
     {
         path: '/admin/categories',
-        name: "categories",
+        name: "admin.categories",
         meta: {
             layout: "admin"
         },
@@ -26,7 +26,7 @@ export default [
     },
     {
         path: '/admin/categories/create',
-        name: "createCategory",
+        name: "admin.categories.create",
         meta: {
             layout: "admin"
         },
@@ -34,7 +34,7 @@ export default [
     },
     {
         path: '/admin/categories/edit/:id',
-        name: "editCategory",
+        name: "admin.categories.edit",
         meta: {
             layout: "admin"
         },
@@ -42,7 +42,7 @@ export default [
     },
     {
         path: '/admin/categories/view/:id',
-        name: "viewCategory",
+        name: "admin.categories.view",
         meta: {
             layout: "admin"
         },
@@ -51,7 +51,7 @@ export default [
     // products
     {
         path: '/admin/products',
-        name: "products",
+        name: "admin.products",
         meta: {
             layout: "admin"
         },
@@ -59,7 +59,7 @@ export default [
     },
     {
         path: '/admin/products/create',
-        name: "createProduct",
+        name: "admin.products.create",
         meta: {
             layout: "admin"
         },
@@ -67,7 +67,7 @@ export default [
     },
     {
         path: '/admin/products/edit/:id',
-        name: "editProduct",
+        name: "admin.products.edit",
         meta: {
             layout: "admin"
         },
@@ -75,7 +75,7 @@ export default [
     },
     {
         path: '/admin/products/view/:id',
-        name: "viewProduct",
+        name: "admin.products.view",
         meta: {
             layout: "admin"
         },
@@ -84,7 +84,7 @@ export default [
     // users
     {
         path: '/admin/users',
-        name: "Users",
+        name: "admin.users",
         meta: {
             layout: "admin"
         },
@@ -92,7 +92,7 @@ export default [
     },
     {
         path: '/admin/users/create',
-        name: "createUser",
+        name: "admin.users.create",
         meta: {
             layout: "admin"
         },
@@ -100,7 +100,7 @@ export default [
     },
     {
         path: '/admin/users/edit/:id',
-        name: "editUser",
+        name: "admin.users.edit",
         meta: {
             layout: "admin"
         },
@@ -108,7 +108,7 @@ export default [
     },
     {
         path: '/admin/users/view/:id',
-        name: "viewUser",
+        name: "admin.users.view",
         meta: {
             layout: "admin"
         },
@@ -117,7 +117,7 @@ export default [
     // brands
     {
         path: '/admin/brands',
-        name: "brands",
+        name: "admin.brands",
         meta: {
             layout: "admin"
         },
@@ -125,7 +125,7 @@ export default [
     },
     {
         path: '/admin/brands/create',
-        name: "createBrand",
+        name: "admin.brands.create",
         meta: {
             layout: "admin"
         },
@@ -133,7 +133,7 @@ export default [
     },
     {
         path: '/admin/brands/edit/:id',
-        name: "editBrand",
+        name: "admin.brands.edit",
         meta: {
             layout: "admin"
         },
@@ -141,18 +141,10 @@ export default [
     },
     {
         path: '/admin/brands/view/:id',
-        name: "viewBrand",
+        name: "admin.brands.view",
         meta: {
             layout: "admin"
         },
         component:  () => import('../pages/admin/brands/View')
-    },
-    {
-        path: '/admin/products',
-        name: "products",
-        meta: {
-            layout: "admin"
-        },
-        component:  () => import('../pages/ProductsPage')
     },
 ]
