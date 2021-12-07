@@ -10,7 +10,7 @@
               <h3>{{ this.product.name}}</h3>
               <h5> by {{this.product.brand}}</h5>
                 <div class="btns">
-                    <button @click="$router.push(`/admin/products/edit/${product.id}`)" class="btn edit">Edit</button>
+                    <button @click="$router.push({name: 'editProduct', params: {id: product.id}})" class="btn edit">Edit</button>
                     <button @click="deleteProduct(product.id)" class="btn delete">Delete</button>
                 </div>
               

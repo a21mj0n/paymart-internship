@@ -42,7 +42,7 @@
 
           <p class="amount">{{ product.amount = product.price * product.qty }}</p>
           <button class="to__cart"
-          @click="$router.push(`products/view/${product.id}`)"><i class="fa fa-shopping-cart"></i></button>
+          @click="$router.push({name: 'viewProduct', params: {id: product.id}})"><i class="fa fa-shopping-cart"></i></button>
         </div>
         <hr />
       </div>
