@@ -12,6 +12,7 @@
       <input class="color" placeholder="Введите цвет" type="text" v-model="color" />
       <input class="size" placeholder="Введите размер" type="text" v-model="size"/>
       <input class="price" placeholder="Назовите цену" type="text" v-model="price"/>
+      <input class="price" placeholder="Назовите цену" type="file" @change="selectImage" />
       <button class="btn">Создать</button>
     </form>
   </div>
@@ -50,6 +51,21 @@ export default {
             }
             await axios.post('https://61ade31fd228a9001703b022.mockapi.io/api/products', productData)
             this.img = this.name = this.brand = this.color = this.size = this.price = ""
+        },
+        selectImage(e) {
+          const file = e.target.files[0];
+          console.log('File: ', file); 
+
+          if (/image/.test(file.type)) {
+
+            const formData = new FormData();
+            formData.append('product_image', file)
+            const preview = URL.createObjectURL(file);
+            console.log(`%cPreview ${preview}`, 'padding: 5px; border: 2px solid red');
+            // axios.post('url', formData)
+          } else {
+            console.log('other type');
+          }
         }
     }
 }

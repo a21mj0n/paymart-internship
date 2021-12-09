@@ -3,15 +3,16 @@ export default [
         path: '/admin',
         name: 'admin',
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component: () => import('../pages/AdminPage')
     },
     {
-        path: '/auth',
+        path: '/',
         name: "auth",
         meta: {
-            layout: "empty"
+            layout: "empty",
         },
         component:  () => import('../pages/AuthPage')
     },
@@ -20,7 +21,8 @@ export default [
         path: '/admin/categories',
         name: "admin.categories",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/categories/Index')
     },
@@ -28,7 +30,8 @@ export default [
         path: '/admin/categories/create',
         name: "admin.categories.create",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/categories/Create')
     },
@@ -36,7 +39,8 @@ export default [
         path: '/admin/categories/edit/:id',
         name: "admin.categories.edit",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/categories/Edit')
     },
@@ -44,7 +48,8 @@ export default [
         path: '/admin/categories/view/:id',
         name: "admin.categories.view",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/categories/View')
     },
@@ -53,7 +58,8 @@ export default [
         path: '/admin/products',
         name: "admin.products",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/products/Index')
     },
@@ -61,7 +67,8 @@ export default [
         path: '/admin/products/create',
         name: "admin.products.create",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/products/Create')
     },
@@ -69,7 +76,8 @@ export default [
         path: '/admin/products/edit/:id',
         name: "admin.products.edit",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/products/Edit')
     },
@@ -77,7 +85,8 @@ export default [
         path: '/admin/products/view/:id',
         name: "admin.products.view",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/products/View')
     },
@@ -86,7 +95,8 @@ export default [
         path: '/admin/users',
         name: "admin.users",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/users/Index')
     },
@@ -94,7 +104,8 @@ export default [
         path: '/admin/users/create',
         name: "admin.users.create",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/users/Create')
     },
@@ -102,7 +113,8 @@ export default [
         path: '/admin/users/edit/:id',
         name: "admin.users.edit",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/users/Edit')
     },
@@ -110,7 +122,8 @@ export default [
         path: '/admin/users/view/:id',
         name: "admin.users.view",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/users/View')
     },
@@ -119,7 +132,8 @@ export default [
         path: '/admin/brands',
         name: "admin.brands",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/brands/Index')
     },
@@ -127,7 +141,8 @@ export default [
         path: '/admin/brands/create',
         name: "admin.brands.create",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/brands/Create')
     },
@@ -135,7 +150,8 @@ export default [
         path: '/admin/brands/edit/:id',
         name: "admin.brands.edit",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true
         },
         component:  () => import('../pages/admin/brands/Edit')
     },
@@ -143,7 +159,8 @@ export default [
         path: '/admin/brands/view/:id',
         name: "admin.brands.view",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true
         },
         component:  () => import('../pages/admin/brands/View')
     },
