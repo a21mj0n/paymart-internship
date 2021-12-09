@@ -13,33 +13,38 @@
       <input class="price" placeholder="Назовите цену" type="text" v-model="price"/>
       <div class="add__img">
         <label class="label__add-img-wrapper">
-          <input type="file" class="hide">
+          <input type="file" class="hide" @change="selectImage">
           <div class="label__add-img">
             <i class="fa fa-camera" aria-hidden="true"></i>
+            <img  :src="mainImg" class="prew__img">
           </div>
             
         </label>
-        <label class="label__add-img-wrapper">
-          <input type="file" class="hide">
+        <label v-if="secondVisible" class="label__add-img-wrapper">
+          <input type="file" class="hide" @change="selectImage2">
           <div class="label__add-img">
             <i class="fa fa-camera" aria-hidden="true"></i>
+            <img  :src="secondImg" class="prew__img">
           </div>
             
         </label>
-        <label class="label__add-img-wrapper">
-          <input type="file" class="hide">
+        <label v-if="threeVisible" class="label__add-img-wrapper">
+          <input type="file" class="hide" @change="selectImage3">
           <div class="label__add-img">
             <i class="fa fa-camera" aria-hidden="true"></i>
+            <img  :src="threeImg" class="prew__img">
           </div>
             
         </label>
-        <label class="label__add-img-wrapper">
-          <input type="file" class="hide">
+        <label v-if="fourVisible" class="label__add-img-wrapper">
+          <input type="file" class="hide" @change="selectImage4">
           <div class="label__add-img">
             <i class="fa fa-camera" aria-hidden="true"></i>
+            <img   :src="fourImg" class="prew__img">
           </div>
             
         </label>
+        
         
       </div>
       <button class="btn">Создать</button>
@@ -62,6 +67,17 @@ export default {
           price: "",
           qty: 0,
           amount:'',
+
+
+
+          mainImg: null,
+          secondImg: null,
+          threeImg: null,
+          fourImg: null,
+
+          secondVisible: false,
+          threeVisible: false,
+          fourVisible: false,
         }
     },
     methods:{
@@ -80,7 +96,68 @@ export default {
             }
             await axios.post('https://61ade31fd228a9001703b022.mockapi.io/api/products', productData)
             this.img = this.name = this.brand = this.color = this.size = this.price = ""
-        }
+        },
+        selectImage(e){
+          const file  = e.target.files[0]
+          if(/image/.test(file.type)){
+            const formData = new FormData()
+            formData.append('product__image', file)
+            const preview = URL.createObjectURL(file)
+            console.log(preview);
+            this.mainImg = preview
+            this.secondVisible = true
+          }else{
+            
+            console.log("не то");
+            
+          }
+        },
+        selectImage2(e){
+          const file  = e.target.files[0]
+          if(/image/.test(file.type)){
+            const formData = new FormData()
+            formData.append('product__image', file)
+            const preview = URL.createObjectURL(file)
+            console.log(preview);
+            this.secondImg = preview
+            this.threeVisible = true
+          }else{
+            
+            console.log("не то");
+            
+          }
+        },
+        selectImage3(e){
+          const file  = e.target.files[0]
+          if(/image/.test(file.type)){
+            const formData = new FormData()
+            formData.append('product__image', file)
+            const preview = URL.createObjectURL(file)
+            console.log(preview);
+            this.threeImg = preview
+            this.fourVisible = true
+          }else{
+            
+            console.log("не то");
+            
+          }
+        },
+        selectImage4(e){
+          const file  = e.target.files[0]
+          if(/image/.test(file.type)){
+            const formData = new FormData()
+            formData.append('product__image', file)
+            const preview = URL.createObjectURL(file)
+            console.log(preview);
+            this.fourImg = preview
+          }else{
+            
+            console.log("не то");
+            
+          }
+        },
+        
+
     }
 }
 </script>
@@ -138,6 +215,7 @@ form{
     .label__add-img-wrapper{
       padding: 0 5px;
       .label__add-img{
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -153,6 +231,12 @@ form{
     
     
   }
+}
+.prew__img{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 10px;
 }
 .hide{
   display: none;
