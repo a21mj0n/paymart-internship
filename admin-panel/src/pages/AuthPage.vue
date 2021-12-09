@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
-    <div class="content" v-if="isLogin">
-      <div class="content_block">
+    <div class="form" v-if="isLogin">
+      <div class="form_block">
         <h3>Login</h3>
         <p class="error" v-if="error">{{error}}</p>
         <form id="" action="#" class="feed-form" @submit.prevent="loginUser">
@@ -36,44 +36,46 @@
       </div>
     </div>
 
-    <div class="content" v-else>
-       <div class="content_block">
+    <div class="form" v-else>
+       <div class="form_block">
         <h3>Registration</h3>
         <form id="" action="#" class="feed-form register-form" @submit.prevent="registerUser">
-          <div class="form_inputs">
-            <i class="fa fa-user" aria-hidden="true"></i>
-            <input name="username" required placeholder="Username" type="text"  v-model="username"/>
-          </div>
-          <div class="form_inputs">
-            <i class="fa fa-user" aria-hidden="true"></i>
-            <input name="first_name" required placeholder="First name" type="text"  v-model="first_name"/>
-          </div>
-          <div class="form_inputs">
-            <i class="fa fa-user" aria-hidden="true"></i>
-            <input name="last_name" required placeholder="Last name" type="text"  v-model="last_name"/>
-          </div>
-          <div class="form_inputs">
-            <i class="fa fa-envelope" aria-hidden="true"></i>
-            <input name="email" required placeholder="Email" type="email"  v-model="email"/>
-          </div>
-          <div class="form_inputs">
-            <i class="fa fa-lock" aria-hidden="true"></i>
-            <input
-              name="password"
-              required
-              placeholder="password"
-              type="password" v-model="password"
-            />
-          </div>
-          <div class="form_inputs">
-            <i class="fa fa-lock" aria-hidden="true"></i>
-            <input
-              name="password_confirmation"
-              required
-              placeholder="confirm password"
-              type="password"
-              v-model="password_confirmation"
-            />
+          <div class="all_inputs">
+            <div class="form_inputs">
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <input name="username" required placeholder="Username" type="text"  v-model="username"/>
+            </div>
+            <div class="form_inputs">
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <input name="first_name" required placeholder="First name" type="text"  v-model="first_name"/>
+            </div>
+            <div class="form_inputs">
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <input name="last_name" required placeholder="Last name" type="text"  v-model="last_name"/>
+            </div>
+            <div class="form_inputs">
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              <input name="email" required placeholder="Email" type="email"  v-model="email"/>
+            </div>
+            <div class="form_inputs">
+              <i class="fa fa-lock" aria-hidden="true"></i>
+              <input
+                name="password"
+                required
+                placeholder="password"
+                type="password" v-model="password"
+              />
+            </div>
+            <div class="form_inputs">
+              <i class="fa fa-lock" aria-hidden="true"></i>
+              <input
+                name="password_confirmation"
+                required
+                placeholder="confirm password"
+                type="password"
+                v-model="password_confirmation"
+              />
+            </div>
           </div>
           <div class="form__block">
             <button class="form__block_btn">Sign Up</button>
@@ -156,20 +158,23 @@ a{
 }
 .wrapper{
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     background-color: rgb(235, 235, 235);
 }
-.content {
+.form {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
   h3{
     color: red;
     padding: 10px 0;
   }
   form {
+    
     .form_inputs {
       position: relative;
+      margin-bottom: 10px;
       input {
         background-color: transparent;
         height: 45px;
@@ -179,8 +184,12 @@ a{
         color: red;
         outline: none;
         font-size: 14px;
-        margin: 0 10px 10px 0px;
+        display: flex;
+        align-items:center;
         padding-left: 25px;
+        @media(max-width:400px){
+          width: 100%;
+        }
       }
       i {
         position: absolute;
@@ -206,10 +215,14 @@ a{
       font-size: 16px;
       text-transform: uppercase;
       color: #ff1141;
-      transition: all 0.4s;
+      transition: all 0.3s;
+      outline: none;
+      border:1px solid black;
+      @media(max-width:400px){
+        width: 100%;
+      }
       &:hover {
         background-color: #c02147;
-        border: none;
         border: 1px solid #ffffff;
         cursor: pointer;
         color: #ffffff;
@@ -220,17 +233,49 @@ a{
       font-weight: 500;
       font-size: 16px;
       color: red;
+      text-decoration: none;
+      transition: all 0.3s ease;
       &:hover {
-        text-decoration: none;
+        color:rgba(255, 0, 0, 0.603);
       }
     }
   }
 }
 // register 
-.register-form{
+.form_block{
+  width: 800px;
+  margin-right: auto;
+  margin-left: auto;
   display: flex;
-  width: 700px;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  @media(max-width:991px){
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+.register-form{
   flex-wrap: wrap;
+  .all_inputs{
+    margin-left: -10px;
+    margin-right: -10px;
+    display: flex;
+    flex-wrap:wrap;
+    input{
+      margin-right: 0;
+      width:100% !important;
+    }
+  }
+  .form_inputs{
+    width:50%;
+    padding-left: 10px;
+    padding-right: 10px;
+    @media(max-width:750px){
+      width: 100%;
+    }
+  }
 }
 @media (max-width: 576px) {
   .login {
