@@ -29,7 +29,7 @@
           </a>
         </div>
         <div class="profile-wrapper">
-          <a href="#">
+          <a href="#" @click.prevent="logout">
             <i class="fa fa-user"></i>
           </a>
         </div>
@@ -44,6 +44,10 @@ export default {
   methods: {
     onClick(){
       this.$emit("onToggle")
+    },
+    logout() {
+      this.$store.dispatch('auth/logout');
+      this.$router.push({ name: 'auth' })
     }
   }
 }
