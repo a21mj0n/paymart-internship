@@ -10,77 +10,105 @@
 
         <!-- table -->
         <div class="wrapper__table">
-            <table class="content__table">
-                <thead>
-                    <tr>
-                        <th>ID</th>    
-                        <th>Name</th>    
-                        <th>Icon</th>    
-                        <th>Date</th>    
-                        <th>Actions</th>    
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="item in categories" :key="item.id">
-                        <td>{{item.id}}</td>
-                        <td>
-                            {{item.name}}
-                        </td>
-                        <td>
-                            <i :class="item.icon"></i>
-                        </td>
-                        <td>
-                            {{item.created_at}}
-                        </td>
-                        <td class="icons__flex">
-                            <i class="fa fa-search-plus" style="color: rgb(109, 109, 184);" 
-                            @click="$router.push({name: 'admin.categories.view', params: {id: item.id}})"></i>
-                            <!-- <i class="fa fa-edit" style="color: green" @click="$router.push({name: 'editCategory', params:{id: item.id}})"></i> -->
-                            
-                            <router-link 
-                                tag="i" 
-                                class="fa fa-edit" 
-                                style="color: green" 
-                                :to="{name: 'admin.categories.edit', params:{id: item.id}}"
-                            ></router-link>
+                <!-- api-url="https://marketpaymart.herokuapp.com/api/dashboard/categories" -->
+            <vuetable 
+                api-url="https://vuetable.ratiw.net/api/users"                
+                ref="vuetable"
+                :fields="fields"
+                :css="css.table"
+                :first-page="0"
+                :per-page="5"
+                pagination-path=""
+                @vuetable:pagination-data="onPaginationData"
+            >
+                <template slot="actions" slot-scope="props">
+                   <div class="icons__flex">
+                        <i 
+                            class="fa fa-search-plus" 
+                            style="color: rgb(109, 109, 184);" 
+                            @click="$router.push({name: 'admin.categories.view', params: {id: props.rowData.id}})"
+                        >
+                        </i>
+                        <i 
+                            tag="i" 
+                            class="fa fa-edit" 
+                            style="color: green" 
+                            @click="$router.push({name: 'admin.categories.edit', params: {id: props.rowData.id}})"
+                        >
+                        </i>
+                        <i 
+                            class="fa fa-close" 
+                            style="color: red"  
+                            @click="removeCategory(props.rowData)"
+                        >
+                        </i>
+                   </div>
+                </template>
+            </vuetable>
 
-                            <i class="fa fa-close" style="color: red"  @click="removeCategory(item.id)"></i>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>  
+            <!-- pagination -->
+
+            <vuetable-pagination 
+                ref="pagination"
+                @vuetable-pagination:change-page="onChangePage"
+            >
+            </vuetable-pagination>
         </div>
     </div>
 </template>
 <script>
 import axios from 'axios'
-
+import Vuetable  from 'vuetable-2'
+import {categoryFields} from '@/utils-vuetable/FieldsDef'
+import cssTable  from '../../../utils-vuetable/CssTable'
+import VuetablePagination from "vuetable-2/src/components/VuetablePagination";
 export default {
+    components: {
+        Vuetable,
+        VuetablePagination,
+    },
     data(){
         return{
             categories: [
-                {id: 1, name: "SmartPhones", date: "123", icon: "fa fa-heart"},
-                {id: 2, name: "NoteBook", date: "123", icon: "fa fa-search"},
-                {id: 3, name: "Books", date: "123", icon: "fa fa-book"}
-            ]
+                {id: 1, name: "from local state", date: "123", icon: "fa fa-heart"},
+                {id: 2, name: "from local state", date: "123", icon: "fa fa-search"},
+                {id: 3, name: "from local state", date: "123", icon: "fa fa-book"}
+            ],
+            fields: categoryFields,
+            css: cssTable,
+            // pagination resourses
+            paginationComponent: "vuetable-pagination",
         }
     },
     methods: {
-    async removeCategory(id){
+        async removeCategory({id}){
             if(window.confirm("Вы точно хотите удалить ?")){
                 this.categories = this.categories.filter(cat => cat.id !== id)
                 await axios.delete(`https://marketpaymart.herokuapp.com/api/dashboard/categories/${id}`)
             }
-        }
+        },
+        // pagination methods
+        onChangePage(page) {
+            this.$refs.vuetable.changePage(page);
+        },
+        onPaginationData (paginationData) {
+            this.$refs.pagination.setPaginationData(paginationData)
+        },
     },
+    
     async created(){
         const resp = await axios.get('https://marketpaymart.herokuapp.com/api/dashboard/categories')
+        const api = await axios.get('https://vuetable.ratiw.net/api/users')
+        console.log(resp.data);
+        console.log(api);
         this.categories = resp.data.reverse()
-    }
+    },
+
+
 }
 </script>
+
 <style lang="scss">
-// $back-color: rgb(31, 7, 110);
 $main-color: rgb(31, 7, 110);
     .wrapper__table{
         width: 100%;
@@ -90,32 +118,6 @@ $main-color: rgb(31, 7, 110);
         min-width: 720px;
         margin: 50px 0;
         border-collapse: collapse;
-    }
-    table thead{
-        padding: 20px;
-        background: rgb(235, 235, 235);
-    }
-    table th {
-        padding: 20px;
-        text-align: left;
-        &:last-child{
-            text-align: left;
-        }
-
-    }
-    table tbody{
-        margin-top: 10px;
-        & tr{
-            box-shadow: 0 0 2px rgb(195, 195, 195);
-        }
-    }
-    table tbody td{
-        padding: 20px;
-        text-align: left;
-        background-color: #fff;
-        &:last-child{
-            text-align: left;
-        }
     }
     .icons__flex{
         display: flex;
@@ -132,7 +134,6 @@ $main-color: rgb(31, 7, 110);
         i:nth-child(2){
             padding-top: 5px;
         }
-
     }
     .btn{
         margin-top: 20px;
@@ -147,6 +148,7 @@ $main-color: rgb(31, 7, 110);
             background-color: $main-color;
             color: #fff;
         }
+        margin-bottom: 10px;
     }
     .btn__add{
         align-self: flex-start;
