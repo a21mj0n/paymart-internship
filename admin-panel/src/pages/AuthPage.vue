@@ -265,6 +265,9 @@ a{
     margin-right: -10px;
     display: flex;
     flex-wrap:wrap;
+    i{
+      left: 16px !important;
+    }
     input{
       margin-right: 0;
       width:100% !important;
