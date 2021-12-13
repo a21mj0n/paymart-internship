@@ -10,7 +10,7 @@
 
         <!-- table -->
         <div class="wrapper__table">
-                <!-- api-url="https://marketpaymart.herokuapp.com/api/dashboard/categories" -->
+                <!-- api-url="https://jsonplaceholder.typicode.com/users" -->
             <vuetable 
                 api-url="https://vuetable.ratiw.net/api/users"                
                 ref="vuetable"
@@ -97,11 +97,11 @@ export default {
     },
     
     async created(){
-        const resp = await axios.get('https://marketpaymart.herokuapp.com/api/dashboard/categories')
-        const api = await axios.get('https://vuetable.ratiw.net/api/users')
-        console.log(resp.data);
-        console.log(api);
-        this.categories = resp.data.reverse()
+        // const resp = await axios.get('https://jsonplaceholder.typicode.com/users')
+        // const resp = await axios.get('https://vuetable.ratiw.net/api/users')
+        // console.log(resp);
+        // console.log(api);
+        // this.categories = resp.data.reverse()
     },
 
 
