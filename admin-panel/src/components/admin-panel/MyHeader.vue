@@ -9,11 +9,11 @@
             <span></span>  
           </a>
         </div>
-        <p>Dashboard</p>
+        <p>{{$t('message.name')}}</p>
       </div>
       <div class="right-side">
         <div class="search-wrapper">
-          <input type="text" placeholder="Search...">
+          <input type="text" :placeholder="$t('message.placeholder')">
           <a href="#" class="search-button">
             <i class="fa fa-search"></i>
           </a>
@@ -28,8 +28,11 @@
             <i class="fa fa-bell"></i>
           </a>
         </div>
+        <div class="lang-wrapper">
+          <lang-change></lang-change>
+        </div>
         <div class="profile-wrapper">
-          <a href="#">
+          <a href="#" @click.prevent="logout">
             <i class="fa fa-user"></i>
           </a>
         </div>
@@ -37,13 +40,18 @@
     </div>
   </div>
 </template>
-
 <script>
+import langChange from '../LangChange.vue'
 export default {
+  components:{langChange},
   props: ['isActive'],
   methods: {
     onClick(){
       this.$emit("onToggle")
+    },
+    logout() {
+      this.$store.dispatch('auth/logout');
+      this.$router.push({ name: 'auth' })
     }
   }
 }
@@ -158,6 +166,14 @@ export default {
       }
       .notification-wrapper{
         margin-right: 30px;
+      }
+      .lang-wrapper{
+        margin-right: 30px;
+        select{
+          background-color: #ddd;
+          border:none;
+          outline: none;
+        }
       }
     }
   }

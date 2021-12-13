@@ -3,153 +3,165 @@ export default [
         path: '/admin',
         name: 'admin',
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component: () => import('../pages/AdminPage')
     },
     {
-        path: '/auth',
+        path: '/',
         name: "auth",
+        meta: {
+            layout: "empty",
+        },
         component:  () => import('../pages/AuthPage')
     },
     // categories
     {
         path: '/admin/categories',
-        name: "categories",
+        name: "admin.categories",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/categories/Index')
     },
     {
         path: '/admin/categories/create',
-        name: "addCategory",
+        name: "admin.categories.create",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/categories/Create')
     },
     {
         path: '/admin/categories/edit/:id',
-        name: "addCategory",
+        name: "admin.categories.edit",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/categories/Edit')
     },
     {
         path: '/admin/categories/view/:id',
-        name: "addCategory",
+        name: "admin.categories.view",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/categories/View')
     },
     // products
     {
         path: '/admin/products',
-        name: "products",
+        name: "admin.products",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/products/Index')
     },
     {
         path: '/admin/products/create',
-        name: "createProduct",
+        name: "admin.products.create",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/products/Create')
     },
     {
         path: '/admin/products/edit/:id',
-        name: "editProduct",
+        name: "admin.products.edit",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/products/Edit')
     },
     {
         path: '/admin/products/view/:id',
-        name: "viewProduct",
+        name: "admin.products.view",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/products/View')
     },
     // users
     {
         path: '/admin/users',
-        name: "Users",
+        name: "admin.users",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/users/Index')
     },
     {
         path: '/admin/users/create',
-        name: "createUser",
+        name: "admin.users.create",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/users/Create')
     },
     {
         path: '/admin/users/edit/:id',
-        name: "editUser",
+        name: "admin.users.edit",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/users/Edit')
     },
     {
         path: '/admin/users/view/:id',
-        name: "viewUser",
+        name: "admin.users.view",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/users/View')
     },
     // brands
     {
         path: '/admin/brands',
-        name: "brands",
+        name: "admin.brands",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/brands/Index')
     },
     {
         path: '/admin/brands/create',
-        name: "createBrand",
+        name: "admin.brands.create",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true,
         },
         component:  () => import('../pages/admin/brands/Create')
     },
     {
         path: '/admin/brands/edit/:id',
-        name: "editBrand",
+        name: "admin.brands.edit",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true
         },
         component:  () => import('../pages/admin/brands/Edit')
     },
     {
         path: '/admin/brands/view/:id',
-        name: "viewBrand",
+        name: "admin.brands.view",
         meta: {
-            layout: "admin"
+            layout: "admin",
+            protected: true
         },
         component:  () => import('../pages/admin/brands/View')
-    },
-    {
-        path: '/admin/products',
-        name: "products",
-        meta: {
-            layout: "admin"
-        },
-        component:  () => import('../pages/ProductsPage')
     },
 ]

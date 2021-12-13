@@ -8,11 +8,9 @@
         @click.prevent="visible = !visible"
         
         >
-          <div class="user-wrapper"
-          
-          >
+          <div class="user-wrapper">
             <p class="user__img side__bar-visible">img</p>
-            <p class="user__name">Tania Andrew</p>
+            <p class="user__name">{{$t('message.username')}}</p>
           </div>
           <i class="fa fa-caret-down" aria-hidden="true"
          
@@ -21,9 +19,9 @@
         </a>
         <transition name="slide">
           <div class="user__config" v-if="visible">
-                <a href=""><span class="side__bar-visible">MP</span>My Profile</a>
-                <a href=""><span class="side__bar-visible">EP</span>Edit Profile</a>
-                <a href=""><span class="side__bar-visible">S</span>Settings</a>
+                <a href=""><span class="side__bar-visible">{{$t('sidebar.insideProfile.shortcutMP')}}</span>{{$t('sidebar.insideProfile.myprofile')}}</a>
+                <a href=""><span class="side__bar-visible">{{$t('sidebar.insideProfile.shortcutE')}}</span>{{$t('sidebar.insideProfile.edit')}}</a>
+                <a href=""><span class="side__bar-visible">{{$t('sidebar.insideProfile.shortcutS')}}</span>{{$t('sidebar.insideProfile.settings')}}</a>
             </div>
         </transition>
             
@@ -32,10 +30,23 @@
     </div>
     <nav>
         <ul class="navigation">
-            <li><span class="side__bar-visible"><i class="fa fa-users" aria-hidden="true"></i></span>Пользователи</li>
-            <li><span class="side__bar-visible"><i class="fa fa-th" aria-hidden="true"></i></span>Категории</li>
-            <router-link tag="li" :to="'products'"><span class="side__bar-visible"><i class="fa fa-square" aria-hidden="true"></i></span>Продукты</router-link>
-            <li><span class="side__bar-visible"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>Заказы</li>
+            <li><span class="side__bar-visible"><i class="fa fa-users" aria-hidden="true"></i></span>{{$t('sidebar.users')}}</li>
+            <router-link tag='li' :to="{name: 'admin.categories'}"><span class="side__bar-visible"><i class="fa fa-th" aria-hidden="true"></i></span>{{$t('sidebar.categories')}}</router-link>
+            <li @click="productVisible = !productVisible"><span class="side__bar-visible"><i class="fa fa-square" aria-hidden="true"></i></span>{{$t('sidebar.products')}}</li>
+              <transition name="slide">
+          <div class="config" v-if="productVisible">
+              <router-link :to="{name: 'admin.products'}"><span class="side__bar-visible">{{$t('sidebar.insideProducts.shortcutView')}}</span>{{$t('sidebar.insideProducts.view')}}</router-link>
+              <router-link :to="{name: 'admin.products.create'}"><span class="side__bar-visible">{{$t('sidebar.insideProducts.shortcutCreate')}}</span>{{$t('sidebar.insideProducts.create')}}</router-link>
+            </div>
+        </transition>
+            <li @click="brandVisible = !brandVisible"><span class="side__bar-visible"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>{{$t('sidebar.brands')}}</li>
+            <transition name="slide">
+          <div class="config" v-if="brandVisible">
+              <router-link :to="{name: 'admin.brands'}"><span class="side__bar-visible">{{$t('sidebar.insideBrands.shortcutView')}}</span>{{$t('sidebar.insideBrands.view')}}</router-link>
+              <router-link :to="{name: 'admin.brands.create'}"><span class="side__bar-visible">{{$t('sidebar.insideBrands.shortcutCreate')}}</span>{{$t('sidebar.insideBrands.create')}}</router-link>
+            </div>
+            </transition>
+            <li><span class="side__bar-visible"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>{{$t('sidebar.cart')}}</li>
         </ul>
     </nav>
   </div>
@@ -45,7 +56,9 @@
 export default {
   data(){
       return {
-        visible:false
+        visible:false,
+        productVisible: false,
+        brandVisible: false,
       }
   }
 };
@@ -137,6 +150,7 @@ nav{
       
         padding: 8px 15px;
         li{
+            cursor: pointer;
             display: flex;
             color: #fff;
             list-style: none;
@@ -154,6 +168,24 @@ nav{
             
         }
     }
+}
+.config{
+  a{
+    
+    padding: 15px auto;
+    margin: 15px auto;
+    color: white;
+  font-weight: 400;
+  text-decoration: none;
+  display: flex;
+  border-radius: 15px;
+  transition: all 0.3s linear;
+  &:hover{
+    background: teal;
+  }
+  }
+  
+
 }
 
 /////////////////////////// animate ////////////////// 

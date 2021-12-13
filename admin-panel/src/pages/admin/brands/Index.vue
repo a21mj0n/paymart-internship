@@ -2,7 +2,7 @@
   <div class="content">
     <div class="all-items">
       <div class="item-wrapper" v-for="brand in brands" :key='brand.id'>
-        <div class="item" @click='$router.push(`brands/view/${brand.id}`)'>
+        <div class="item" @click='$router.push({name: "admin.brands.view", params:{id: brand.id}})'>
           <div class="img-content">
             <img :src="brand.image" alt="">
           </div>
@@ -26,7 +26,6 @@ export default {
   async created(){
     const {data} = await axios.get('https://61ade31fd228a9001703b022.mockapi.io/api/brands')
     this.brands = data
-    console.log(this.brands)
   }
 }
 </script>
