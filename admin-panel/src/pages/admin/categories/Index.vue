@@ -9,18 +9,17 @@
         </button>
 
         <!-- table -->
-        <div class="wrapper__table">
+        <div class="wrapper__table" :style="{marginTop: '20px'}">
           
             <vuetable 
-                api-url="https://vuetable.ratiw.net/api/users"
-                :fields="fields"
-                :css="css.table"
-                :per-page="5"
-                @vuetable:pagination-data="onPaginationData"
+                api-url="https://marketpaymart.herokuapp.com/api/dashboard/categories"
                 ref="vuetable"
+                :fields="fields"
+                :per-page="5"
+                pagination-path=""
+                @vuetable:pagination-data="onPaginationData" 
             >
-                <!-- pagination-path="" -->
-                <!-- :pagination-path="categoriesData.meta" -->
+            
                 <template slot="actions" slot-scope="props">
                    <div class="icons__flex">
                         <i 
@@ -44,10 +43,11 @@
                         </i>
                    </div>
                 </template>
+
             </vuetable>
 
             <!-- pagination -->
-            <vuetable-pagination 
+           <vuetable-pagination
                 ref="pagination"
                 @vuetable-pagination:change-page="onChangePage"
             >
@@ -56,29 +56,38 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
-import Vuetable  from 'vuetable-2'
-import {categoryFields} from '@/utils-vuetable/FieldsDef'
-import cssTable  from '../../../utils-vuetable/CssTable'
+import axios from 'axios';
+import Vuetable  from 'vuetable-2';
+import {categoryFields} from '@/utils-vuetable/FieldsDef';
 import VuetablePagination from "vuetable-2/src/components/VuetablePagination";
+import _ from "lodash";
+
 export default {
+    name: "categories",
     components: {
         Vuetable,
         VuetablePagination,
     },
     data(){
         return{
-            categories: [
-                {id: 1, name: "from local state", date: "123", icon: "fa fa-heart"},
-                {id: 2, name: "from local state", date: "123", icon: "fa fa-search"},
-                {id: 3, name: "from local state", date: "123", icon: "fa fa-book"}
-            ],
-            categoriesData: [],
+            data: [],
+            perPage: 5,
             fields: categoryFields,
-            // pagination resourses
-            paginationComponent: "vuetable-pagination",
-            css: cssTable,
         }
+    },
+    async mounted(){
+        // const market = await axios.get('https://marketpaymart.herokuapp.com/api/dashboard/categories')
+        const market = await axios.get('https://marketpaymart.herokuapp.com/api/dashboard/categories')
+        const users = await axios.get('https://vuetable.ratiw.net/api/users')
+        console.log(users)
+        console.log(market)
+        this.data = market.data.data;
+    },
+
+    watch: {
+        data() {
+            this.$refs.vuetable.refresh();
+        },
     },
     methods: {
         async removeCategory({id}){
@@ -88,25 +97,45 @@ export default {
             }
         },
         // pagination methods
+        onPaginationData(paginationData) {
+            this.$refs.pagination.setPaginationData(paginationData);
+        },
+
         onChangePage(page) {
             this.$refs.vuetable.changePage(page);
         },
-        onPaginationData (paginationData) {
-            this.$refs.pagination.setPaginationData(paginationData)
+        dataManager(sortOrder, pagination) {
+            if (this.data.length < 1) return;
+
+            let local = this.data;
+
+            // sortOrder can be empty, so we have to check for that as well
+            if (sortOrder.length > 0) {
+                console.log("orderBy:", sortOrder[0].sortField, sortOrder[0].direction);
+                local = _.orderBy(
+                local,
+                sortOrder[0].sortField,
+                sortOrder[0].direction
+                );
+            }
+
+            pagination = this.$refs.vuetable.makePagination(
+                local.length,
+                this.perPage
+            );
+            console.log('pagination:', pagination)
+            let from = pagination.from - 1;
+            let to = from + this.perPage;
+
+            return {
+                pagination: pagination,
+                data: _.slice(local, from, to)
+            };
         },
-    },
-    
-    async created(){
-        const market = await axios.get('https://vuetable.ratiw.net/api/users')
-        // const resp = await axios.get('https://vuetable.ratiw.net/api/users')
-        // console.log(resp);
-        // console.log(market);
-        this.categoriesData = market.data.data;
-        // console.log(api);
-        // this.categories = resp.data.reverse()
-    },
 
 
+      // end methods ==================================================================
+    },
 }
 </script>
 
@@ -120,6 +149,7 @@ $main-color: rgb(31, 7, 110);
         min-width: 720px;
         margin: 50px 0;
         border-collapse: collapse;
+        background-color: red;
     }
     .icons__flex{
         display: flex;

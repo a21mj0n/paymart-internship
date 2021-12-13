@@ -72,7 +72,7 @@ export default {
                 type: 'submit',
                 buttonText: "Добавить",
                 async onSubmit(model){
-                    await axios.post('https://61ade31fd228a9001703b022.mockapi.io/api/categories', model);
+                    await axios.post('https://marketpaymart.herokuapp.com/api/dashboard/categories', model);
                     $this.$router.push({name: 'admin.categories'});
                 },
                 label: '',
