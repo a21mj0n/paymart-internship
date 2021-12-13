@@ -50,6 +50,7 @@ export default {
             type: 'select',
             label: 'Выберите цвет',
             model: 'color',
+            required: true,
             values: ['white', 'black', 'green', 'blue', 'purple', 'orange','yellow']
             
           },
@@ -57,6 +58,7 @@ export default {
             type: 'select',
             label: 'Выберите размер',
             model: 'size',
+            required: true,
             values: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL']
             
           },
