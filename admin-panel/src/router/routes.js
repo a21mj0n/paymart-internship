@@ -164,4 +164,5 @@ export default [
         },
         component:  () => import('../pages/admin/brands/View')
     },
+    
 ]
