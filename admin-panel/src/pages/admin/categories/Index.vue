@@ -10,17 +10,17 @@
 
         <!-- table -->
         <div class="wrapper__table">
-                <!-- api-url="https://jsonplaceholder.typicode.com/users" -->
+          
             <vuetable 
-                api-url="https://vuetable.ratiw.net/api/users"                
-                ref="vuetable"
+                api-url="https://vuetable.ratiw.net/api/users"
                 :fields="fields"
                 :css="css.table"
-                :first-page="0"
                 :per-page="5"
-                pagination-path=""
                 @vuetable:pagination-data="onPaginationData"
+                ref="vuetable"
             >
+                <!-- pagination-path="" -->
+                <!-- :pagination-path="categoriesData.meta" -->
                 <template slot="actions" slot-scope="props">
                    <div class="icons__flex">
                         <i 
@@ -47,7 +47,6 @@
             </vuetable>
 
             <!-- pagination -->
-
             <vuetable-pagination 
                 ref="pagination"
                 @vuetable-pagination:change-page="onChangePage"
@@ -74,10 +73,11 @@ export default {
                 {id: 2, name: "from local state", date: "123", icon: "fa fa-search"},
                 {id: 3, name: "from local state", date: "123", icon: "fa fa-book"}
             ],
+            categoriesData: [],
             fields: categoryFields,
-            css: cssTable,
             // pagination resourses
             paginationComponent: "vuetable-pagination",
+            css: cssTable,
         }
     },
     methods: {
@@ -97,9 +97,11 @@ export default {
     },
     
     async created(){
-        // const resp = await axios.get('https://jsonplaceholder.typicode.com/users')
+        const market = await axios.get('https://vuetable.ratiw.net/api/users')
         // const resp = await axios.get('https://vuetable.ratiw.net/api/users')
         // console.log(resp);
+        // console.log(market);
+        this.categoriesData = market.data.data;
         // console.log(api);
         // this.categories = resp.data.reverse()
     },

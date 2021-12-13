@@ -2,7 +2,7 @@ export const categoryFields = [
   {
     name: "id",
     title: "Ид",
-    width: '40px'
+    width: '70px',
   },
   {
     name: 'name',
