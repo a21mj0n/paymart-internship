@@ -9,7 +9,9 @@
 <script>
 export default {
   data() {
-    return { langs: ['ru', 'en'] }
+    return { 
+      langs: ['ru', 'en'],
+    }
   },
 }
 </script>

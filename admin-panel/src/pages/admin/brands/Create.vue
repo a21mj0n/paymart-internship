@@ -1,15 +1,27 @@
 <template>
   <div class="content">
     <h2>Create Brand</h2>
-    <form @submit.prevent="createBrand">
+    <!-- <form @submit.prevent="createBrand">
       <div class="form-wrapper">
         <input v-model="name" type="text" placeholder="Brand name" name='brand-name'>
         <input v-model='image' type="text" placeholder="Brand image" name='brand-image'>
-        <!-- <label for="file">
+        <label for="file">
           <input type="text" readonly name='file-name' placeholder="Brand image">
           <input type="file" class="hide" id="file" placeholder="brand image" name='brand-image' onchange="javascript:this.previousElementSibling.value = this.files[0].name">
           <span><p>Choose file</p></span>
-        </label> -->
+        </label>
+        <span class="btn-def">
+          <button type='submit'>Create brand</button>
+        </span>
+      </div>
+    </form> -->
+    <form @submit.prevent="createBrand">
+      <div class="form-wrapper">
+        <vue-form-generator
+        :schema="schema"
+        :model="model"
+        :options="formOptions"
+        ></vue-form-generator>
         <span class="btn-def">
           <button type='submit'>Create brand</button>
         </span>
@@ -23,24 +35,69 @@ import axios from 'axios'
 export default {
   data(){
     return{
-      name:'',
-      image:'',
+      model:{
+        name:'',
+        image:'',
+      },
+      schema: null,
+      formOptions:{
+        validateAfterLoad: false,
+        validateAfterChange: true,
+        validateBeforeSubmit:true,
+        validateAsync: true,
+      }
     }
   },
   methods:{
-  async createBrand(){
-      const brand = {
-        name:this.name,
-        image:this.image,
-      }
-      await axios.post('https://61ade31fd228a9001703b022.mockapi.io/api/brands',brand)
-      this.image = this.name = ''
+    async createBrand(){
+      await axios.post('https://61ade31fd228a9001703b022.mockapi.io/api/brands',this.model)
+      this.model.name = this.model.image = ''
+      this.$router.push( {name:'admin.brands'})
+    },
+  },
+  created() {
+    const $this = this;
+    const fields = {
+      fields:[
+        {
+          type: 'input',
+          inputType: 'text',
+          placeholder:'Brands Name',
+          model: 'name',
+          required: true,
+          validator: 'string'
+        },
+        {
+          type: 'input',
+          inputType: 'text',
+          placeholder:'Brands Image',
+          model: 'image',
+          required: true,
+          validator: 'string'
+        },
+        {
+          type: 'submit',
+          async onSubmit(model){
+            await axios.post('https://61ade31fd228a9001703b022.mockapi.io/api/brands', model)
+            model.name = model.image = ''
+            await $this.$router.push({ name: 'admin.brands' });
+          },
+          label: '',
+          buttonText: 'Добавить продукт',
+          validateBeforeSubmit: true
+
+        },
+      ],
     }
+    this.schema = fields;
   }
 }
 </script>
 
 <style lang='scss' scoped>
+  fieldset{
+    border:none !important;
+  }
   .content{
     h2{
       margin-bottom: 30px;
@@ -53,13 +110,15 @@ export default {
       #file{
         display:none;
       }
-      input{
-        height: 50px;
-        padding: 5px 20px;
-        border:none;
-        outline: none;
-        margin-bottom: 20px;
-        min-width: 20%;
+      .vue-form-generator{
+        .form-control{
+          height: 50px;
+          padding: 5px 20px;
+          border:none;
+          outline: none;
+          margin-bottom: 20px;
+          min-width: 20%;
+        }
       }
       label{
         min-width: 20%;

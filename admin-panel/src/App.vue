@@ -32,6 +32,9 @@ export default {
    box-sizing: border-box;
    font-family: Poppins;
  }
+ fieldset{
+    border:none ;
+  }
   .content{
     height: calc(100vh - 100px);
     background: rgb(238, 238, 238);
