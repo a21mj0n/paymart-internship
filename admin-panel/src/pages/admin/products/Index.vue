@@ -21,11 +21,11 @@
       >
         <div class="naming">
           <div class="img">
-            <img :src="product.img" alt="" />
+            <!-- <img :src="product.img" alt="" /> -->
           </div>
 
           <p class="product">
-            {{ product.name }} <span>By {{ product.brand }}</span>
+            {{ product.name }} <span>By {{ product.brand_id }}</span>
           </p>
           <div class="color-size">
             <p class="color">{{ product.color }}</p>
@@ -35,12 +35,12 @@
           <div class="qty">
             <div class ="qty-wrapper">
               <button class="minus" @click="minus(product)"><i class="fa fa-minus"></i></button>
-              <p>{{ product.qty }}</p>
+              <p>{{ product.amount }}</p>
               <button class="plus" @click="plus(product)"><i class="fa fa-plus"></i></button>
             </div >
           </div>
 
-          <p class="amount">{{ product.amount = product.price * product.qty }}</p>
+          <p class="amount">{{ product.amount = product.price * product.count }}</p>
           <button class="to__cart"
           @click="$router.push({name: 'admin.products.view', params: {id: product.id}})"><i class="fa fa-shopping-cart"></i></button>
         </div>
@@ -98,15 +98,15 @@ export default {
   methods:{
       // eslint-disable-next-line vue/return-in-computed-property
       minus(product){
-           product.qty--
-          if(product.qty < 0 ){
-             product.qty = 0
+           product.count--
+          if(product.count < 0 ){
+             product.count = 0
           }
         },
     plus(product) {
-        product.qty++
-        if(product.qty > 10 ){
-            product.qty = 10
+        product.count++
+        if(product.count > 10 ){
+            product.count = 10
         }
     },
 
@@ -115,6 +115,7 @@ export default {
 },
 async created(){
   const {data} = await axios.get('https://61ade31fd228a9001703b022.mockapi.io/api/products')
+  console.log(data);
   this.products = data
 }
 }

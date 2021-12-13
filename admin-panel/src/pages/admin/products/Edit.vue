@@ -29,12 +29,12 @@ export default {
     },
     methods:{
       async editProduct(){
-          await axios.put(`https://61ade31fd228a9001703b022.mockapi.io/api/products/${this.$route.params.id}`, this.product)
+          await axios.put(`https://marketpaymart.herokuapp.com/api/dashboard/product${this.$route.params.id}`, this.product)
           this.$router.push({name: "admin.products"})
        }
         },
     async created(){
-          const {data} = await axios.get(`https://61ade31fd228a9001703b022.mockapi.io/api/products/${this.$route.params.id}`)
+          const {data} = await axios.get(`https://marketpaymart.herokuapp.com/api/dashboard/product${this.$route.params.id}`)
           this.product = data
     
     }
