@@ -129,6 +129,15 @@ export default [
     },
     // brands
     {
+        path: '/admin/brands/TestIndex',
+        name: "admin.brands.testindex",
+        meta: {
+            layout: "admin",
+            protected: true,
+        },
+        component:  () => import('../pages/admin/brands/TestIndex')
+    },
+    {
         path: '/admin/brands',
         name: "admin.brands",
         meta: {

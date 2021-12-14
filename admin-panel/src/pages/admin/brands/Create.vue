@@ -22,9 +22,9 @@
         :model="model"
         :options="formOptions"
         ></vue-form-generator>
-        <span class="btn-def">
+        <!-- <span class="btn-def">
           <button type='submit'>Create brand</button>
-        </span>
+        </span> -->
       </div>
     </form>
   </div>
