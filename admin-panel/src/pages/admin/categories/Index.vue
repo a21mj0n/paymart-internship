@@ -5,23 +5,21 @@
             class="btn btn__add"
             @click="$router.push({name: 'admin.categories.create'})"
         >
-            Добавить категорию
+            {{$t('message.name')}}
         </button>
-
+        <lang-changer></lang-changer>
         <!-- table -->
         <div class="wrapper__table" :style="{marginTop: '20px'}">
           
             <vuetable 
-                api-url="https://marketpaymart.herokuapp.com/api/dashboard/categories"
-                ref="vuetable"
+                :data="categories"
+                :api-mode="false"
                 :fields="fields"
                 :per-page="5"
-                pagination-path=""
-                @vuetable:pagination-data="onPaginationData" 
+                ref="vuetable"
             >
-            
                 <template slot="actions" slot-scope="props">
-                   <div class="icons__flex">
+                    <div class="icons__flex">
                         <i 
                             class="fa fa-search-plus" 
                             style="color: rgb(109, 109, 184);" 
@@ -41,99 +39,72 @@
                             @click="removeCategory(props.rowData)"
                         >
                         </i>
-                   </div>
+                    </div>
                 </template>
 
-            </vuetable>
+        </vuetable>
 
             <!-- pagination -->
-           <vuetable-pagination
-                ref="pagination"
-                @vuetable-pagination:change-page="onChangePage"
-            >
-            </vuetable-pagination>
+            <div class="pagination">
+                <button 
+                    v-for="pageNumber in this.totalPages" 
+                    :key="pageNumber"  
+                    @click="changePage(pageNumber)"
+                >
+                    <!-- :class="(pageNumber === this.page) ? 'btn' : ''" -->
+                    {{pageNumber}}
+                </button>
+            </div>
         </div>
     </div>
 </template>
 <script>
 import axios from 'axios';
 import Vuetable  from 'vuetable-2';
-import {categoryFields} from '@/utils-vuetable/FieldsDef';
-import VuetablePagination from "vuetable-2/src/components/VuetablePagination";
-import _ from "lodash";
-
+import FieldsDef from './FieldsDef';
+import LangChanger from '../../../components/LangChanger.vue';
 export default {
     name: "categories",
     components: {
         Vuetable,
-        VuetablePagination,
+        LangChanger
     },
     data(){
         return{
-            data: [],
+            fields: FieldsDef(this.$i18n),
+            categories: "",
             perPage: 5,
-            fields: categoryFields,
+            page: 1,
+            totalPages: ""
         }
     },
     async mounted(){
-        // const market = await axios.get('https://marketpaymart.herokuapp.com/api/dashboard/categories')
-        const market = await axios.get('https://marketpaymart.herokuapp.com/api/dashboard/categories')
-        const users = await axios.get('https://vuetable.ratiw.net/api/users')
-        console.log(users)
-        console.log(market)
-        this.data = market.data.data;
+        await this.fetchData()
     },
-
     watch: {
-        data() {
-            this.$refs.vuetable.refresh();
+        page(oldValue, newValue) {
+            console.log('newValue',newValue);
+            this.fetchData()
         },
     },
     methods: {
         async removeCategory({id}){
             if(window.confirm("Вы точно хотите удалить ?")){
-                this.categories = this.categories.filter(cat => cat.id !== id)
                 await axios.delete(`https://marketpaymart.herokuapp.com/api/dashboard/categories/${id}`)
+                this.categories = this.categories.filter(cat => cat.id !== id)
             }
+        }, 
+        changePage(pageNumber){
+            this.page = pageNumber
         },
-        // pagination methods
-        onPaginationData(paginationData) {
-            this.$refs.pagination.setPaginationData(paginationData);
-        },
-
-        onChangePage(page) {
-            this.$refs.vuetable.changePage(page);
-        },
-        dataManager(sortOrder, pagination) {
-            if (this.data.length < 1) return;
-
-            let local = this.data;
-
-            // sortOrder can be empty, so we have to check for that as well
-            if (sortOrder.length > 0) {
-                console.log("orderBy:", sortOrder[0].sortField, sortOrder[0].direction);
-                local = _.orderBy(
-                local,
-                sortOrder[0].sortField,
-                sortOrder[0].direction
-                );
-            }
-
-            pagination = this.$refs.vuetable.makePagination(
-                local.length,
-                this.perPage
-            );
-            console.log('pagination:', pagination)
-            let from = pagination.from - 1;
-            let to = from + this.perPage;
-
-            return {
-                pagination: pagination,
-                data: _.slice(local, from, to)
-            };
-        },
-
-
+        async fetchData(){
+            const resp = await axios.get('https://marketpaymart.herokuapp.com/api/dashboard/categories',{
+            params: {
+                page: this.page
+            }})
+            this.totalPages = Math.ceil(resp.data.meta.total / this.perPage)
+            this.categories = resp.data.data;
+        }
       // end methods ==================================================================
     },
 }
@@ -144,19 +115,24 @@ $main-color: rgb(31, 7, 110);
     .wrapper__table{
         width: 100%;
     }
+    .vuetable-body-wrapper{
+        min-height: 300px;
+    }
     .content__table{
         width: 100%;
         min-width: 720px;
         margin: 50px 0;
         border-collapse: collapse;
         background-color: red;
+        position: relative;
     }
     .icons__flex{
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-end;
         font-size: 22px;
         i{
+            margin: 0 10px;
             cursor: pointer;
             margin-right: 5px;
             &:hover{
@@ -239,6 +215,17 @@ $main-color: rgb(31, 7, 110);
                     opacity: 1;
                 }
             }
+        }
+    }
+    .pagination{
+        display: flex;
+        margin-top: 10px;
+        margin: 10px -10px;
+        justify-content: flex-end;
+        button{
+            padding: 10px;
+            margin: 0 10px;
+            cursor: pointer;
         }
     }
     // adaptive

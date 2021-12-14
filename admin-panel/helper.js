@@ -1,6 +1,16 @@
-const arr = [1,2,3,4,5, 1, 1]
+const arr = [
+    {
+        id: 1,
+        name: "Bekzod"
+    },
+    {
+        id: 2,
+        name: "Aziz"
+    }
+]
 
-const newArr = arr.filter(n => n === 1)
+const newArr = arr.filter(obj => obj.id === 1)
+ 
 console.log(newArr);
 
 // slot-scope
