@@ -97,6 +97,7 @@ fieldset {
 
   input {
     padding: 10px !important;
+    
     border: 1px solid rgb(122, 123, 184) !important;
     border-radius: 10px !important;
   }

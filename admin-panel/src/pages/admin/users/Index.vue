@@ -1,84 +1,69 @@
 <template>
   <div class="content">
     <h1>Авторы</h1>
-    <button class="btn btn__add" @click="$router.push({ name: 'admin.users.create' })">
+    <button
+      class="btn btn__add"
+      @click="$router.push({ name: 'admin.users.create' })"
+    >
       Добавить автора
     </button>
 
     <!-- table -->
     <div class="wrapper__table">
-      <table class="content__table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>surname</th>
-            <th>avatar</th>
-            <th>adress</th>
-            <th>age</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in users" :key="item.id">
-            <td>
-              {{ item.id }}
-            </td>
-            <td>
-              {{ item.name }}
-            </td>
-            <td>
-              {{ item.surname }}
-            </td>
-            <td>
-              <img :src="item.avatar" :alt="item.name" />
-            </td>
-            <td>
-              {{ item.address }}
-            </td>
-            <td>
-              {{ item.age }}
-            </td>
-
-            <td class="icons__flex">
-              <i
-                class="fa fa-search-plus"
-                style="color: rgb(109, 109, 184)"
-                @click="
-                  $router.push({
-                    name: 'admin.users.view',
-                    params: { id: item.id },
-                  })
-                "
-              ></i>
-              <i
-                class="fa fa-edit"
-                style="color: green"
-                @click="
-                  $router.push({
-                    name: 'admin.users.edit',
-                    params: { id: item.id },
-                  })
-                "
-              ></i>
-              <i
-                class="fa fa-close"
-                style="color: red"
-                @click="removeUser(item.id)"
-              ></i>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <!-- api-url="https://61ade31fd228a9001703b022.mockapi.io/api/users" -->
+      <Vuetable
+        :data="users"
+        api-mode="false"
+        :fields="UserFields"
+      >
+        <template slot="actions" slot-scope="props">
+          <div class="icons__flex">
+            <i
+              class="fa fa-search-plus"
+              style="color: rgb(109, 109, 184)"
+              @click="
+                $router.push({
+                  name: 'admin.users.view',
+                  params: { id: props.rowData.id },
+                })
+              "
+            >
+            </i>
+            <i
+              tag="i"
+              class="fa fa-edit"
+              style="color: green"
+              @click="
+                $router.push({
+                  name: 'admin.users.edit',
+                  params: { id: props.rowData.id },
+                })
+              "
+            >
+            </i>
+            <i
+              class="fa fa-close"
+              style="color: red"
+              @click="removeUser(props.rowData)"
+            >
+            </i>
+          </div>
+        </template>
+      </Vuetable>
     </div>
   </div>
 </template>
 <script>
 import axios from "axios";
-
+import Vuetable from "vuetable-2";
+import {UserFields} from './vuetable-fields';
 export default {
+  components: {
+    Vuetable,
+  },
   data() {
     return {
+      UserFields,
       users: [
         {
           id: 1,
@@ -103,13 +88,13 @@ export default {
     async removeUser(id) {
       if (window.confirm("Are you want to  delete ?")) {
         this.users = this.users.filter((author) => author.id !== id);
-        try{
-          const resp =await axios.delete(
-          `https://61ade31fd228a9001703b022.mockapi.io/api/users/${id}`
+        try {
+          const resp = await axios.delete(
+            `https://61ade31fd228a9001703b022.mockapi.io/api/users/${id}`
           );
           console.log(resp.data);
-        } catch(e) {
-            console.log(e);
+        } catch (e) {
+          console.log(e);
         }
       }
     },
