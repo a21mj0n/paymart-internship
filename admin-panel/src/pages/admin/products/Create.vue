@@ -30,6 +30,7 @@ export default {
         price: "",
         count: 0,
         amount: 0,
+        created_at: new Date().toLocaleString(),
         category_id: "",
       },
       schema: {
@@ -113,7 +114,7 @@ export default {
             buttonText: 'добавить',
             validateBeforeSubmit: true,
             async onSubmit(model){
-              await axios.post('https://61ade31fd228a9001703b022.mockapi.io/api/products', model)
+              await axios.post('https://marketpaymart.herokuapp.com/api/dashboard/product', model)
               await $this.$router.push({name: 'admin.products'})
             }
           }

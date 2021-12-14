@@ -29,13 +29,29 @@ export default {
   fieldset{
     border: none;
   }
-  
+   .test-wrapper{
+    .vuetable-td-size{
+        color: teal;
+        text-align: center !important;
+        font-size: 20px;
+        font-weight: 900;
+    }
+    .vuetable-td-color{
+        color: teal;
+        text-align: center !important;
+        font-size: 20px;
+        font-weight: bold;
+    }
+}
  *{
    margin: 0;
    padding: 0;
    box-sizing: border-box;
    font-family: Poppins;
  }
+ fieldset{
+    border:none ;
+  }
   .content{
     height: calc(100vh - 100px);
     background: rgb(238, 238, 238);

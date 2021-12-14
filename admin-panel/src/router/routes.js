@@ -64,6 +64,15 @@ export default [
         component:  () => import('../pages/admin/products/Index')
     },
     {
+        path: '/admin/products/test',
+        name: "admin.products.test",
+        meta: {
+            layout: "admin",
+            protected: true,
+        },
+        component:  () => import('../pages/admin/products/TestIndex')
+    },
+    {
         path: '/admin/products/create',
         name: "admin.products.create",
         meta: {

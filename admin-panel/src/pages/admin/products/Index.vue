@@ -114,6 +114,8 @@ export default {
   
 },
 async created(){
+
+  'https://marketpaymart.herokuapp.com/api/dashboard/product'
   const {data} = await axios.get('https://61ade31fd228a9001703b022.mockapi.io/api/products')
   console.log(data);
   this.products = data
@@ -223,6 +225,7 @@ $color-scroll: #686464;
                    color: white;
                }
           }
+         
       }
 // CHROME
 ::-webkit-scrollbar {
