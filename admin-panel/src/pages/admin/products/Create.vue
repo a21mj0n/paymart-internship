@@ -14,28 +14,27 @@
 
 <script>
 import axios from "axios";
-import VueFormGenerator from "vue-form-generator";
+import VueFormGenerator from "vue-form-generator/dist/vfg-core.js";
 
 export default {
   name: "createProduct",
   data() {
     return {
+      pullCat: "",
+      pullBrand: "",
       model: {
         id: Date.now(),
-        img: "",
+        image: [],
         name: "",
         brand_id: "",
         color: "",
-        size: "",
+        category_id: "",
         price: "",
-        count: 0,
+        quantity: null,
         amount: 0,
         created_at: new Date().toLocaleString(),
-        category_id: "",
       },
-      schema: {
- 
-      },
+      schema: {},
       formOptions: {
         validateBeforeSubmit: true,
         validateAfterLoad: false,
@@ -44,84 +43,89 @@ export default {
       },
     };
   },
-  created(){
-    const $this = this
+  methods: {
+    async getCategory() {
+      const resp = await axios.get(
+        "https://marketpaymart.herokuapp.com/api/dashboard/categories"
+      );
+      const resp2 = await axios.get(
+        "https://marketpaymart.herokuapp.com/api/dashboard/brands"
+      );
+
+      this.pullCat = resp.data.data;
+      this.pullBrand = resp2.data.data;
+    },
+  },
+  async created() {
+    await this.getCategory();
+    const $this = this;
     const fields = {
       fields: [
-          {
-            type: "select",
-            label: "Выберите Категорию",
-            model: "category_id",
-            values: [
-              "Носки",
-              "Трусы",
-              "Штаны",
-              "Шорты",
-              "Майки",
-              "Шапки",
-              "Свитеры",
-            ],
-          },
-          {
-            type: "input",
-            inputType: "text",
-            label: "Название товара",
-            model: "name",
-            required: true,
-            validator: VueFormGenerator.validators.string.locale({
-              fieldIsRequired: "Введите корректное название",
-            }),
-          },
-          {
-            type: "input",
-            inputType: "text",
-            label: "Название бренда",
-            model: "brand_id",
-            required: true,
-            validator: "string",
-          },
-          {
-            type: "select",
-            label: "Выберите цвет",
-            model: "color",
-            values: [
-              "white",
-              "black",
-              "green",
-              "blue",
-              "purple",
-              "orange",
-              "yellow",
-            ],
-          },
-          {
-            type: "select",
-            label: "Выберите размер",
-            model: "size",
-            values: ["S", "M", "L", "XL", "XXL", "XXXL"],
-          },
-          {
-            type: "input",
-            inputType: "number",
-            label: "Назовите цену",
-            model: "price",
-            required: true,
-            validator: "number",
-          },
-          {
-            type: 'submit',
-            label: '',
-            buttonText: 'добавить',
-            validateBeforeSubmit: true,
-            async onSubmit(model){
-              await axios.post('https://marketpaymart.herokuapp.com/api/dashboard/product', model)
-              await $this.$router.push({name: 'admin.products'})
-            }
-          }
-        ],
-  }
-  this.schema =fields
+        {
+          type: "select",
+          label: "Выберите категорию",
+          model: "category_id",
+          values: () => this.pullCat,
+        },
+        {
+          type: "select",
+          label: "Выберите бренд",
+          model: "brand_id",
+          values: () => this.pullBrand,
+        },
+        {
+          type: "input",
+          inputType: "text",
+          label: "Название товара",
+          model: "name",
+          required: true,
+          validator: VueFormGenerator.validators.string.locale({
+            fieldIsRequired: "Введите корректное название",
+          }),
+        },
 
+       
+        {
+          type: "input",
+          inputType: "number",
+          label: "Назовите цену",
+          model: "price",
+          required: true,
+          validator: "number",
+        },
+        {
+          type: "input",
+          inputType: "number",
+          label: "Выберите колличество",
+          model: "quantity",
+          default: 0,
+          validator: "number",
+        },
+        {
+          type: "file",
+          // inputType: "file",
+          label: "hollo",
+          model: "image",
+          preview: true,
+          browse: false 
+        },
+        {
+          type: "submit",
+          label: "",
+          buttonText: "добавить",
+          validateBeforeSubmit: true,
+          async onSubmit(model) {
+            await axios.post(
+              "https://marketpaymart.herokuapp.com/api/dashboard/products",
+              model
+            );
+            await $this.$router.push({ name: "admin.products" });
+          },
+        },
+      ],
+    };
+
+    this.schema = fields;
   },
 };
 </script>

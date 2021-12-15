@@ -1,22 +1,17 @@
 <template>
   <div class="content test-wrapper">
-    <!-- table -->
     <div class="wrapper__table">
-      <!-- api-url="https://61ade31fd228a9001703b022.mockapi.io/api/products" -->
       <vuetable
         :data="categoriesData"
         :fields="fields"
         pagination-path=""
         :api-mode="false"
       >
-        <!-- :per-page="5"
-        @vuetable:pagination-data="onPaginationData"
-        ref="vuetable" -->
-        <!-- pagination-path="" -->
-        <!-- :pagination-path="categoriesData.meta" -->
-  <template slot="img" slot-scope="props">
+  <template slot="image" slot-scope="props">
           <div class="img__wrapper">
-            <img :src="props.rowData.img" alt="">
+            <!-- {{ props.rowData.image.length > 0 ? props.rowData.image[0].name : 'asdasd' }} -->
+            <img v-if="props.rowData.image.length > 0" :src="'https://marketpaymart.herokuapp.com/storage/' + props.rowData.image[0].name" alt="">
+            <img v-else :src="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZWyg5k6Y2X4OaOfDMPcFaAwL9r_eN34CUXbEgCEjMepep7WMua2z90y_DGL0YobiBjRY&usqp=CAU'"  alt="">
           </div>
         </template>
         <template slot="product" slot-scope="props">
@@ -25,7 +20,7 @@
               {{ props.rowData.name }}
             </p>
             <p class="brand">
-             <span>By</span> {{ props.rowData.brand }}
+             <span>By</span> {{ props.rowData.brand_name}}
             </p>
           </div>
         </template>
@@ -34,12 +29,12 @@
             <p class="price">€ {{ props.rowData.price }}</p>
           </div>
         </template>
-        <template slot="count" slot-scope="props">
+        <template slot="quantity" slot-scope="props">
           <div class="count-wrapper">
             <button class="minus" @click="minus(props.rowData)">
               <i class="fa fa-minus"></i>
             </button>
-            <p>{{ props.rowData.count }}</p>
+            <p>{{ props.rowData.quantity }}</p>
             <button class="plus" @click="plus(props.rowData)">
               <i class="fa fa-plus"></i>
             </button>
@@ -47,7 +42,7 @@
         </template>
         <template slot="amount" slot-scope="props">
           <div>
-              <p class="amount">€ {{props.rowData.amount = props.rowData.count * props.rowData.price}}</p>
+              <p class="amount">€ {{props.rowData.amount = props.rowData.quantity * props.rowData.price}}</p>
           </div>
         </template>
 
@@ -62,7 +57,7 @@
                 })
               "
             >
-              <i class="fa fa-shopping-cart"></i>
+              <i class="fa fa-edit"></i>
             </button>
           </div>
         </template>
@@ -73,8 +68,10 @@
 <script>
 
 import Vuetable from "vuetable-2";
-import { productFields } from "@/utils-vuetable/productVuetable/Fields";
+import  productFields  from "@/utils-vuetable/productVuetable/Fields";
 import axios from "axios";
+import defaultImage from '../../../assets/login_bg.jpg'
+
 export default {
   components: {
     Vuetable,
@@ -82,28 +79,27 @@ export default {
   },
   data() {
     return {
-     
+      defaultImage,
       categoriesData: [],
-      fields: productFields,
+      fields: productFields(this.$i18n),
     };
   },
   methods: {
     minus(product) {
-      product.count--;
-      if (product.count < 0) {
-        product.count = 0;
+      product.quantity--;
+      if (product.quantity < 0) {
+        product.quantity = 0;
       }
     },
     plus(product) {
-      product.count++;
-      if (product.count > 10) {
-        product.count = 10;
-      }
+      product.quantity++;
+      console.log(product.image[0].name);
+     
     },
   },
   async created() {
     const resp = await axios.get(
-      "https://61ade31fd228a9001703b022.mockapi.io/api/products"
+      "https://marketpaymart.herokuapp.com/api/dashboard/products"
     );
     this.categoriesData = resp.data;
   },

@@ -1,43 +1,40 @@
-export const productFields = [
+export default (i18n) => {
+  return[
     {
-      name: 'img',
-      title: "img",
+      name: 'image',
+      title: "",
       width: '10%',
     },
     {
       name: 'product',
-      title: `product`,
+      title: () => i18n.t('products.product'),
+      width: '14%'
+    },
+   
+    {
+      name: "category_name",
+      title: () => i18n.t('products.category'),
       width: '10%'
     },
     {
-      name: "color",
-      title: 'color' ,
-      width: '7%',
-    },
-    {
-      name: "size",
-      title: 'size' ,
-      width: '7%'
-    },
-    {
         name: "price",
-        title: 'price' ,
+        title: () => i18n.t('products.price'),
         width: '10%'
       },
     {
-        name: "count",
-        title: 'count' ,
+        name: "quantity",
+        title: () => i18n.t('products.count'),
         width: '10%'
       },
     {
         name: "amount",
-        title: 'amount' ,
+        title: () => i18n.t('products.amount'),
         width: '10%'
       },
     {
         name: "cart",
-        title: 'To Cart' ,
-        width: '5%'
+        title: () => i18n.t('products.toCart'),
+        width: '6%'
       },
     
-  ]
+  ]}

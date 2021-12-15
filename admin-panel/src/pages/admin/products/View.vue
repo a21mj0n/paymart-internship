@@ -33,7 +33,7 @@ methods:{
     async deleteProduct(id){
         if(window.confirm('Delete this Product??')){
           // eslint-disable-next-line no-undef
-          await axios.delete(`https://61ade31fd228a9001703b022.mockapi.io/api/products/${id}`)
+          await axios.delete(`https://marketpaymart.herokuapp.com/api/dashboard/products/${id}`)
           this.$router.push({name: 'admin.products'})  
         }
         
@@ -41,7 +41,7 @@ methods:{
     }
 },
 async created(){
-    const {data} = await axios.get(`https://61ade31fd228a9001703b022.mockapi.io/api/products/${this.$route.params.id}`)
+    const {data} = await axios.get(`https://marketpaymart.herokuapp.com/api/dashboard/products/${this.$route.params.id}`)
     this.product = data
 }
 }

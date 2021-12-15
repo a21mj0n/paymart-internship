@@ -32,10 +32,10 @@ const messages = {
       },
       cart:'Cart',
     },
-    product:{
+    products:{
       product:'product',
       color:'color',
-      size:'size',
+      category:'category',
       price:'price',
       count:'count',
       amount:'amount',
@@ -75,13 +75,13 @@ const messages = {
       },
       cart:'Заказы',
     },
-    product:{
+    products:{
       product:'продукция',
       color:'цвет',
-      size:'размер',
+      category:'категория',
       price:'цена',
       count:'количество',
-      amount:'стоимость',
+      amount:'общая стоимость',
       toCart:'В корзину'
     }
   }
