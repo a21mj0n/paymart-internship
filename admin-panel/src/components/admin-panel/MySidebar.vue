@@ -30,7 +30,12 @@
     </div>
     <nav>
         <ul class="navigation">
-            <li><span class="side__bar-visible"><i class="fa fa-users" aria-hidden="true"></i></span>{{$t('sidebar.users')}}</li>
+            <router-link :to="{name: 'admin.users'}" tag="li">
+              <span class="side__bar-visible">
+                <i class="fa fa-users" aria-hidden="true"></i>
+              </span>
+              {{$t('sidebar.users')}}
+            </router-link>
             <router-link tag='li' :to="{name: 'admin.categories'}"><span class="side__bar-visible"><i class="fa fa-th" aria-hidden="true"></i></span>{{$t('sidebar.categories')}}</router-link>
             <li @click="productVisible = !productVisible"><span class="side__bar-visible"><i class="fa fa-square" aria-hidden="true"></i></span>{{$t('sidebar.products')}}</li>
               <transition name="slide">

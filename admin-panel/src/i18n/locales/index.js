@@ -65,7 +65,11 @@ const messages = {
       count:'count',
       amount:'amount',
       toCart:'To cart'
-    }
+    },
+    msg: {
+      title: "Users",
+      btn : 'add User'
+    },
   },
   ru: {
     brandsHeaders:{
@@ -133,7 +137,11 @@ const messages = {
       count:'количество',
       amount:'общая стоимость',
       toCart:'В корзину'
-    }
-  }
+    },
+      msg: {
+        title: "Пользаватели",
+        btn : 'Добавить Пользавателя '
+      },
+  },
 }
 export default messages
