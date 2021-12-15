@@ -119,6 +119,7 @@ export default {
       try{
          const resp = await axios.post('https://marketpaymart.herokuapp.com/api/register', user)
         if(resp.data.access_token){
+          localStorage.setItem('token', resp.data.access_token)
           this.$store.dispatch('auth/login', { isAuthenticated: true, token: resp.data.access_token });
           this.$router.push({name: "admin"})
         }
@@ -135,6 +136,7 @@ export default {
         }
         const resp = await axios.post('https://marketpaymart.herokuapp.com/api/login', user)
         if(resp.data.access_token){
+          localStorage.setItem('token', resp.data.access_token)
           this.$store.dispatch('auth/login', { isAuthenticated: true, token: resp.data.access_token });
           this.$router.push({name: "admin"})
         }

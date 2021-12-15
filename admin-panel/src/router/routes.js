@@ -5,6 +5,7 @@ export default [
         meta: {
             layout: "admin",
             protected: true,
+            
         },
         component: () => import('../pages/AdminPage')
     },
