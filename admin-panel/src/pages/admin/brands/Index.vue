@@ -38,7 +38,6 @@ export default {
     async removeCategory(id){
       if(window.confirm("Are you sure that you want to delete brand?")){
         await axios.delete(`https://marketpaymart.herokuapp.com/api/dashboard/brands/${id}`)
-        this.$router.push({name: 'admin.brands'})
       }
     }
   }
