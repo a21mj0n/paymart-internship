@@ -49,7 +49,7 @@ export default {
    box-sizing: border-box;
    font-family: Poppins;
  }
- fieldset{
+  fieldset{
     border:none ;
   }
   .content{

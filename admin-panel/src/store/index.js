@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 // modules
 import auth from './auth/#index'
+import lang from './lang/#index'
 
 const authState = createPersistedState({
     key: 'auth',
@@ -19,7 +20,23 @@ const authState = createPersistedState({
   })
 
 
+// export default new Vuex.Store({
+//     modules: { auth },
+//     plugins: [authState]
+// })
+
+const langState = createPersistedState({
+    key: 'lang',
+    paths: ['lang'],
+    storage: {
+        getItem: (key) => Cookies.get(key),
+        setItem: (key, value) => Cookies.set(key, value, { expires: 1, secure: true }),
+        removeItem: (key) => Cookies.remove(key),
+      },
+  })
+
+
 export default new Vuex.Store({
-    modules: { auth },
-    plugins: [authState]
+    modules: { auth,lang },
+    plugins: [authState,langState]
 })

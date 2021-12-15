@@ -22,9 +22,9 @@
         :model="model"
         :options="formOptions"
         ></vue-form-generator>
-        <span class="btn-def">
+        <!-- <span class="btn-def">
           <button type='submit'>Create brand</button>
-        </span>
+        </span> -->
       </div>
     </form>
   </div>
@@ -37,7 +37,6 @@ export default {
     return{
       model:{
         name:'',
-        image:'',
       },
       schema: null,
       formOptions:{
@@ -49,11 +48,7 @@ export default {
     }
   },
   methods:{
-    async createBrand(){
-      await axios.post('https://61ade31fd228a9001703b022.mockapi.io/api/brands',this.model)
-      this.model.name = this.model.image = ''
-      this.$router.push( {name:'admin.brands'})
-    },
+    
   },
   created() {
     const $this = this;
@@ -68,22 +63,14 @@ export default {
           validator: 'string'
         },
         {
-          type: 'input',
-          inputType: 'text',
-          placeholder:'Brands Image',
-          model: 'image',
-          required: true,
-          validator: 'string'
-        },
-        {
           type: 'submit',
           async onSubmit(model){
-            await axios.post('https://61ade31fd228a9001703b022.mockapi.io/api/brands', model)
+            await axios.post('https://marketpaymart.herokuapp.com/api/dashboard/brands', model)
             model.name = model.image = ''
             await $this.$router.push({ name: 'admin.brands' });
           },
           label: '',
-          buttonText: 'Добавить продукт',
+          buttonText: 'Добавить бренд',
           validateBeforeSubmit: true
 
         },

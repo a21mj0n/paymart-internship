@@ -138,6 +138,15 @@ export default [
     },
     // brands
     {
+        path: '/admin/brands/Index2',
+        name: "admin.brands.index2",
+        meta: {
+            layout: "admin",
+            protected: true,
+        },
+        component:  () => import('../pages/admin/brands/Index2')
+    },
+    {
         path: '/admin/brands',
         name: "admin.brands",
         meta: {
