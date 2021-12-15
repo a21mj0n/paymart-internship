@@ -33,7 +33,7 @@ export default {
     // }
   },
   async created(){
-    const {data} = await axios.get(`https://61ade31fd228a9001703b022.mockapi.io/api/brands/${this.$route.params.id}`)
+    const {data} = await axios.get(`https://marketpaymart.herokuapp.com/api/dashboard/brands/${this.$route.params.id}`)
     this.brandByID = data
   }
 }
