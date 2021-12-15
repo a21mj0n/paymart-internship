@@ -1,79 +1,94 @@
 <template>
     <div class="add">
+        <h2>Изменить категорию {{categoryData.name}}</h2>
         <form @submit.prevent="editCategory">
-            <h2>Изменить категорию Смартфоны</h2>
-            <input type="text" placeholder="Название категории"  v-model="categoryData.name">
-            <input type="text" placeholder="Название иконкы" v-model="categoryData.icon" >
-            <button>Изменить</button>
+            <vue-form-generator
+                :schema="schema"
+                :model="model"
+                :options="formOptions"
+            >
+
+            </vue-form-generator>
         </form>
     </div>
 </template>
 <script>
-import axios from 'axios'
+import axios from 'axios';
+import VueFormGenerator from 'vue-form-generator';
+import i18n from '../../../i18n/i18n';
+
 export default {
     name: "editCategory",
     data(){
         return{
-            categoryData: {}
+            categoryData: {},
+            model: {
+                name: ""
+            },
+            schema: {
+                fields: []
+            },
+            formOptions: {
+                validateAfterChanged: true,
+            }
         }
     },
     methods: {
         async editCategory(){
-            await axios.put(`https://marketpaymart.herokuapp.com/api/dashboard/categories/${this.$route.params.id}`, this.categoryData)
+            const resp = await axios.put(`https://marketpaymart.herokuapp.com/api/dashboard/categories/${this.$route.params.id}`, this.categoryData)
+            console.log(resp);
             this.$router.push({name: 'admin.categories'})
         }
     },
     async created(){
-        console.log(this.$router);
         const {data} = await axios.get(`https://marketpaymart.herokuapp.com/api/dashboard/categories/${this.$route.params.id}`)
         this.categoryData = data
+        this.model.name = this.categoryData.name
+        const $this = this;
+        const fields = [
+            {
+                type: 'input',
+                inputType: 'text',
+                name: 'name',
+                model: "name",
+                label: i18n.t('category.title'),
+                validator:  VueFormGenerator.validators.string.locale({
+                    fieldIsRequired: "Поля не может быть пустым",
+                })
+            },
+            {
+                type: 'submit',
+                buttonText: "Изменить",
+                async onSubmit(model){
+                    await axios.post('https://marketpaymart.herokuapp.com/api/dashboard/categories', model);
+                    $this.$router.push({name: 'admin.categories'});
+                },
+                label: '',
+                validateBeforeSubmit: true
+            }
+                
+        ];
+
+        this.schema.fields = fields;
     }
 }
 </script>
+
 <style lang="scss" scoped>
     $main-color: rgb(122, 123, 184);
     .add{
+        padding: 50px;
         width: 100%;
         height: calc(100vh - 100px);
         background-color: #fff;
+        h2{
+            text-align: center;
+        }
         form{
             display: flex;
             flex-direction: column;
-            width: 500px;
+            width: 700px;
             margin: auto;
-            h2{
-                padding: 20px 0;
-            }
-            input{
-            width: 100%;
-            height: 50px;
-            padding: 10px;
-            outline: none;
-            transition: all 200ms ease-in;
-            margin-top: 10px;
-            border: none;
-            border-bottom: 1px solid #ccc;
-                &:focus{
-                    border-bottom: 1px solid rgb(0, 167, 56);
-                }
-            }
-            button{
-                align-self: flex-end;
-                transition: all 300ms linear;
-                width: 30%;
-                padding: 10px;
-                border: 1px solid $main-color;
-                background-color: transparent;
-                color: rgb$main-color;
-                margin: 10px 0;
-                font-weight: bold;
-                cursor: pointer;
-                color: $main-color;
-                &:hover{
-                    background-color: $main-color;
-                    color: #fff;
-                }
-            }
         }
     }
 </style>
