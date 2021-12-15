@@ -101,42 +101,42 @@ export default [
         component:  () => import('../pages/admin/products/View')
     },
     // users
-    {
-        path: '/admin/users',
-        name: "admin.users",
-        meta: {
-            layout: "admin",
-            protected: true,
-        },
-        component:  () => import('../pages/admin/users/Index')
-    },
-    {
-        path: '/admin/users/create',
-        name: "admin.users.create",
-        meta: {
-            layout: "admin",
-            protected: true,
-        },
-        component:  () => import('../pages/admin/users/Create')
-    },
-    {
-        path: '/admin/users/edit/:id',
-        name: "admin.users.edit",
-        meta: {
-            layout: "admin",
-            protected: true,
-        },
-        component:  () => import('../pages/admin/users/Edit')
-    },
-    {
-        path: '/admin/users/view/:id',
-        name: "admin.users.view",
-        meta: {
-            layout: "admin",
-            protected: true,
-        },
-        component:  () => import('../pages/admin/users/View')
-    },
+    // {
+    //     path: '/admin/users',
+    //     name: "admin.users",
+    //     meta: {
+    //         layout: "admin",
+    //         protected: true,
+    //     },
+    //     component:  () => import('../pages/admin/users/Index')
+    // },
+    // {
+    //     path: '/admin/users/create',
+    //     name: "admin.users.create",
+    //     meta: {
+    //         layout: "admin",
+    //         protected: true,
+    //     },
+    //     component:  () => import('../pages/admin/users/Create')
+    // },
+    // {
+    //     path: '/admin/users/edit/:id',
+    //     name: "admin.users.edit",
+    //     meta: {
+    //         layout: "admin",
+    //         protected: true,
+    //     },
+    //     component:  () => import('../pages/admin/users/Edit')
+    // },
+    // {
+    //     path: '/admin/users/view/:id',
+    //     name: "admin.users.view",
+    //     meta: {
+    //         layout: "admin",
+    //         protected: true,
+    //     },
+    //     component:  () => import('../pages/admin/users/View')
+    // },
     // brands
     {
         path: '/admin/brands/Index2',

@@ -11,6 +11,7 @@
         <div class="wrapper__table" :style="{marginTop: '20px'}">
           
             <vuetable 
+                v-if="categoriesData.length"
                 :data="categoriesData"
                 :api-mode="false"
                 :fields="fields"
@@ -37,7 +38,8 @@
                    </div>
                 </template>
 
-            </vuetable>
+        </vuetable>
+            <h2 v-else>{{$t('category.category_if')}}</h2>
 
             <!-- pagination -->
             <div class="pagination">
