@@ -11,15 +11,13 @@
         <div class="wrapper__table" :style="{marginTop: '20px'}">
           
             <vuetable 
-                v-if="categoriesData.length"
                 :data="categoriesData"
                 :api-mode="false"
                 :fields="fields"
                 :per-page="5"
             >
-            
                 <template slot="actions" slot-scope="props">
-                   <div class="icons__flex">
+                    <div class="icons__flex">
                         <i 
                             class="fa fa-search-plus" 
                             @click="$router.push({name: 'admin.categories.view', params: {id: props.rowData.id}})"
@@ -35,11 +33,10 @@
                             @click="removeCategory(props.rowData)"
                         >
                         </i>
-                   </div>
+                    </div>
                 </template>
 
         </vuetable>
-            <h2 v-else>{{$t('category.category_if')}}</h2>
 
             <!-- pagination -->
             <div class="pagination">
@@ -73,13 +70,13 @@ export default {
             fields: TableFields(this.$i18n),
             categoriesData: [],
             perPage: 5,
-            
+            page: 1,
+            totalPages: ""
         }
     },
     async mounted(){
         await this.fetchData();
     },
-
     watch: {
         page() {
             this.fetchData()
@@ -91,6 +88,9 @@ export default {
                 await axios.delete(`https://marketpaymart.herokuapp.com/api/dashboard/categories/${id}`)
                 this.categoriesData = this.categoriesData.filter(cat => cat.id !== id)
             }
+        }, 
+        changePage(pageNumber){
+            this.page = pageNumber
         },
         async fetchData(){
             const resp = await axios.get('https://marketpaymart.herokuapp.com/api/dashboard/categories',{
@@ -114,7 +114,7 @@ $main-color: rgb(31, 7, 110);
     .icons__flex{
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-end;
         font-size: 22px;
         i{
             font-size: 22px;

@@ -3,7 +3,6 @@ export default {
     category: {
       category_name: "Category name",
       category_icon: "Name of the icon",
-      category_if: "Empty",
       category_btn: "Create",
       view_title: "Page",
       view_btn: "Back",
@@ -23,7 +22,6 @@ export default {
       category_name: "Название",
       category_icon: "Название иконки",
       category_btn: "Создать",
-      category_if: "Пусто",
       view_title: "Страница",
       view_btn: "Назад",
       edit_label: "Название категории",

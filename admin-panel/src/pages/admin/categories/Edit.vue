@@ -60,7 +60,6 @@ export default {
                 type: 'submit',
                 buttonText: i18n.t('category.edit_btn'),
                 async onSubmit(model){
-                    console.log(model);
                     await axios.post('https://marketpaymart.herokuapp.com/api/dashboard/categories', model);
                     $this.$router.push({name: 'admin.categories'});
                 },
