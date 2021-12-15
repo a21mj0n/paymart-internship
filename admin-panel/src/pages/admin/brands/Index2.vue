@@ -1,31 +1,26 @@
 <template>
   <div class="content">
-    <vuetable
-    :data="brands"
-    :fields="fields"
-    :api-mode='false'
-    >
-      <template slot='image' slot-scope="props">
-        <div class="">
-          <img :src="props.rowData.image">
+    <div class="all-items">
+      <div class="item-wrapper" v-for="brand in brands" :key='brand.id'>
+        <div class="item" @click='$router.push({name: "admin.brands.view", params:{id: brand.id}})'>
+          <div class="img-content">
+            <img :src="brand.image" alt="" >
+          </div>
+          <div class="name-desc">
+            <h3>{{brand.name}}</h3>
+          </div>
         </div>
-      </template>
-    </vuetable>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import Vuetable from 'vuetable-2'
-import { brandFields } from '../../../utils-vuetable/brands-vuetable/field'
 export default {
-  components:{
-    Vuetable
-  },
   data(){
     return{
       brands:[],
-      fields:brandFields,
     }
   },
   async created(){

@@ -3,6 +3,7 @@
     <option  v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang" >
       {{lang}}
     </option>
+      <img src="https://openclipart.org/download/268175/1481383216.svg" alt="">
   </select>
 </template>
 

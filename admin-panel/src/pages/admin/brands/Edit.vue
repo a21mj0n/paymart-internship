@@ -7,10 +7,6 @@
           <p>Name</p>
           <input type="text" v-model="brandByID.name" name='name' placeholder="Change name" >
         </div>
-        <div class="input-wrapper">
-          <p>Image link</p>
-          <input type="text" v-model="brandByID.image" name='link' placeholder="Change image" >
-        </div>
         <span class="btn-def">
           <button>Edit</button>
         </span>
@@ -29,12 +25,12 @@ export default {
   },
   methods: {
     async editCategory(){
-      await axios.put(`https://61ade31fd228a9001703b022.mockapi.io/api/brands/${this.$route.params.id}`, this.brandByID)
+      await axios.put(`https://marketpaymart.herokuapp.com/api/dashboard/brands/${this.$route.params.id}`, this.brandByID)
       this.$router.push({name: 'admin.brands'})
     }
   },
   async created(){
-    const {data} = await axios.get(`https://61ade31fd228a9001703b022.mockapi.io/api/brands/${this.$route.params.id}`)
+    const {data} = await axios.get(`https://marketpaymart.herokuapp.com/api/dashboard/brands/${this.$route.params.id}`)
     this.brandByID = data
   }
 }

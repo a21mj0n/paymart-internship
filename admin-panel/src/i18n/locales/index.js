@@ -1,5 +1,14 @@
 const messages = {
   en: {
+    brandsHeaders:{
+      id:'ID',
+      name:'Name',
+      actions:'Actions'
+
+    },
+    image:{
+      src:'https://openclipart.org/download/268175/1481383216.svg'
+    },
     message: {
       name: 'Dashboard',
       placeholder:  'Search...',
@@ -25,8 +34,8 @@ const messages = {
       },
       brands:'Brands',
       insideBrands:{
-        create:'Create Brands',
-        view:'View Brand',
+        create:'Create Brand',
+        view:'View Brands',
         shortcutCreate:'CB',
         shortcutView:'VB'
       },
@@ -34,6 +43,15 @@ const messages = {
     }
   },
   ru: {
+    brandsHeaders:{
+      id:'ID',
+      name:'Название',
+      actions:'Действия'
+
+    },
+    image:{
+      src:'https://www.pngitem.com/pimgs/m/34-348962_flag-ru-clip-arts-russia-circle-flag-png.png'
+    },
     message: {
       name: 'Доска',
       placeholder:  'Поиск...',
@@ -59,8 +77,8 @@ const messages = {
       },
       brands:'Бренды',
       insideBrands:{
-        create:'Создать Бренды',
-        view:'Посмотреть Бренд',
+        create:'Создать Бренд',
+        view:'Посмотреть Бренды',
         shortcutCreate:'СБ',
         shortcutView:'ПБ'
       },
