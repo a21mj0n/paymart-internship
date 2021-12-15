@@ -1,6 +1,6 @@
 <template>
     <div class="add">
-        <h2>Изменить категорию {{categoryData.name}}</h2>
+        <h2>{{$t('category.edit_title')}}: {{categoryData.name}}</h2>
         <form @submit.prevent="editCategory">
             <vue-form-generator
                 :schema="schema"
@@ -51,14 +51,14 @@ export default {
                 inputType: 'text',
                 name: 'name',
                 model: "name",
-                label: i18n.t('category.title'),
+                label: i18n.t('category.edit_label'),
                 validator:  VueFormGenerator.validators.string.locale({
                     fieldIsRequired: "Поля не может быть пустым",
                 })
             },
             {
                 type: 'submit',
-                buttonText: "Изменить",
+                buttonText: i18n.t('category.edit_btn'),
                 async onSubmit(model){
                     await axios.post('https://marketpaymart.herokuapp.com/api/dashboard/categories', model);
                     $this.$router.push({name: 'admin.categories'});
