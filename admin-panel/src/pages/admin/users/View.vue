@@ -6,11 +6,10 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>surname</th>
-            <th>avatar</th>
-            <th>address</th>
-            <th>age</th>
+            <th>Username</th>
+            <th>Fullname</th>
+            <th>icons</th>
+            <th>email</th>
             <th>Actions</th>
             >
           </tr>
@@ -18,11 +17,11 @@
         <tbody>
           <tr>
             <td>{{ this.UserId.id }}</td>
-            <td>{{ this.UserId.name }}</td>
-            <td>{{ this.UserId.surname }}</td>
-            <td><img :src="UserId.avatar" :alt="UserId.name" /></td>
-            <td>{{ this.UserId.address }}</td>
-            <td>{{ this.UserId.age }}</td>
+            <td>{{ this.UserId.username }}</td>
+            <td>{{ this.UserId.full_name }}</td>
+            <td><img :src="UserId.avatar" :alt="UserId.username" /></td>
+            <td>{{ this.UserId.email }}</td>
+            
             <td @click="$router.push({ name: 'admin.users' })">
               <button>Back</button>
             </td>
@@ -43,7 +42,7 @@ export default {
   async created() {
     try {
       const { data } = await axios.get(
-        `https://61ade31fd228a9001703b022.mockapi.io/api/users/${this.$route.params.id}`
+        `https://marketpaymart.herokuapp.com/api/dashboard/users/${this.$route.params.id}`
       );
       this.UserId = data;
       console.log(data);

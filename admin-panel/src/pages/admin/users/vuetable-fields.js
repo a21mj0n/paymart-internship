@@ -2,36 +2,41 @@ export const UserFields = [
     {
         name: "id",
         title: "Id",
-        width: '40px',
+        width:'5%',
+       
     },
     {
-        name: 'name',
-        title: "name"
+        name: 'username',
+        title: "username",
+        width: '12%'
+     
     },
     {
-        name: "surname",
-        title: 'surname'
+        name: "full_name",
+        title: 'full name',
+        width: '12%'
+
     },
     {
         name: "avatar",
-        title: 'icons'
-    },
-    {
-        name: "address",
-        title: 'address'
-    },
-    {
-        name: "age",
-        title: "Age",
-        width: '60px',
+        title: 'icons' ,
+        width: '10%'
 
+        
 
     },
-
     {
+        name: "email",
+        title: 'email',
+        width: '15%'
+
+        
+
+    },
+   {
         name: 'actions',
         title: "actions",
         // title: '<span class="orange glyphicon glyphicon-user"></span> Actions',
-        width: '20%',
+        width: '15%',
     },
 ]

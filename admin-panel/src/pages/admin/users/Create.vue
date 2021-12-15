@@ -23,18 +23,18 @@ export default {
   data() {
     return {
       model: {
-        name: "",
-        surname: "",
-        age: "",
-        address: "",
+        username: "",
+        full_name: "",
+        avatar: "",
+        email: "",
       },
       schema: {
         fields: [
           {
             type: "input",
             inputType: "text",
-            placeholder: "enter your name",
-            model: "name",
+            placeholder: "enter your username",
+            model: "username",
             required: true,
             validator: "string",
             styleClasses: "inps",
@@ -42,17 +42,17 @@ export default {
           {
             type: "input",
             inputType: "text",
-            placeholder: "enter your surname",
-            model: "surname",
+            placeholder: "enter your fullname",
+            model: "full_name",
             required: true,
             validator: "string",
             styleClasses: "inps",
           },
           {
             type: "input",
-            inputType: "number",
-            placeholder: "enter your age",
-            model: "age",
+            inputType: "string",
+            placeholder: "url img",
+            model: "avatar",
             required: true,
             validator: "number",
             styleClasses: "inps",
@@ -60,8 +60,8 @@ export default {
           {
             type: "input",
             inputType: "text",
-            placeholder: "enter your address",
-            model: "address",
+            placeholder: "enter your email",
+            model: "email",
             required: true,
             styleClasses: "inps",
           },
@@ -80,7 +80,7 @@ export default {
           this.model
         );
         this.value, this.value_surname, this.value_age, this.value_address;
-        this.$router.push({ name: 'admin.users' });
+        this.$router.push({ name: "admin.users" });
         console.log(resp.data);
       } catch (e) {
         console.log(e);
@@ -90,19 +90,26 @@ export default {
 };
 </script>
 
-
 <style lang="scss" >
+select {
+
+  margin-bottom: 20px;
+}
+div.add {
+  padding-top: 20px;
+}
 fieldset {
+  padding: 20px;
   border: none;
 
   input {
     padding: 10px !important;
-    
     border: 1px solid rgb(122, 123, 184) !important;
     border-radius: 10px !important;
   }
 }
 h2 {
+ 
   text-align: center;
   // color: #;
 }
@@ -112,17 +119,18 @@ h2 {
 }
 
 button {
+  display: flex;
   font-size: 18px;
   transition: all 300ms linear;
-  width: 20%;
+  justify-self: center;
   padding: 10px;
   border: 1px solid rgb(122, 123, 184);
   border-radius: 10px;
   background-color: transparent;
   color: rgb(122, 123, 184);
   cursor: pointer;
-  margin: 10px;
-  color: rgb(122, 123, 184) ;
+  margin: 10px auto;
+  color: rgb(122, 123, 184) r;
   &:hover {
     background-color: rgb(122, 123, 184);
     color: #fff;

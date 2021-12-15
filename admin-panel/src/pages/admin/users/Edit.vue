@@ -5,22 +5,22 @@
       <input
         type="text"
         placeholder="enter users name"
-        v-model="userData.name"
+        v-model="userData.username"
       />
       <input
         type="text"
-        placeholder="enter users surname"
-        v-model="userData.surname"
+        placeholder="enter users  surname"
+        v-model="userData.full_name"
       />
       <input
-        type="number"
-        placeholder="enter users age"
-        v-model="userData.age"
+        type="string"
+        placeholder="enter users avatar"
+        v-model="userData.avatar"
       />
       <input
         type="text"
-        placeholder="enter users address"
-        v-model="userData.address"
+        placeholder="enter users email"
+        v-model="userData.email"
       />
       <button type="submit">Изменить</button>
     </form>
@@ -39,7 +39,7 @@ export default {
     async editOneUser() {
       try {
         const resp = await axios.put(
-          `https://61ade31fd228a9001703b022.mockapi.io/api/users/${this.$route.params.id}`,
+          `https://marketpaymart.herokuapp.com/api/dashboard/users/${this.$route.params.id}`,
           this.userData
         );
         this.$router.push({ name: "admin.users" });
@@ -52,7 +52,7 @@ export default {
   async created() {
     console.log(this.$router);
     const { data } = await axios.get(
-      `https://61ade31fd228a9001703b022.mockapi.io/api/users/${this.$route.params.id}`
+      `https://marketpaymart.herokuapp.com/api/dashboard/users/${this.$route.params.id}`
     );
     this.userData = data;
   },
