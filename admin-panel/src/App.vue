@@ -42,7 +42,6 @@ export default {
     overflow-y: auto;
     padding: 30px;
   }
-
 //  ============================= scroll ====================================
 $color-scroll: rgba(255, 255, 255, 0.452) ;
   // CHROME

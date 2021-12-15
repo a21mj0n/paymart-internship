@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import messages from './locales/messages'
+import messages from './locales/CategoriesLang'
 
 Vue.use(VueI18n)
 
 const i18n = new VueI18n({
-  locale: 'ru',
+  locale: 'en',
   messages // установка сообщений локализаций
 })
 

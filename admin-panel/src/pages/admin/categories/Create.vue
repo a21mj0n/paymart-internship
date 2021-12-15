@@ -1,7 +1,7 @@
 <template>
     <div class="add">
         <form class="form" @submit.prevent="createCategory" @validated="onValidated"> 
-            <h2>Введите название категорию</h2>
+            <h2>{{$t('category.add_title')}}</h2>
             <vue-form-generator
                 :schema="schema"
                 :model="model"
@@ -11,9 +11,11 @@
         </form>
     </div>
 </template>
+
 <script>
 import axios from 'axios'
 import VueFormGenerator from 'vue-form-generator'
+import i18n from '../../../i18n/i18n'
 export default {
     name: 'createCategory',
     data(){
@@ -43,14 +45,14 @@ export default {
     },
     created(){
         const $this = this;
+
         this.schema.fields = [
             {
                 type: 'input',
                 inputType: 'text',
                 required: true,
-                label: 'Название категории',
+                label: i18n.t('category.category_name'),
                 model: 'name',
-                styleClasses: 'form__input',
                 validator: VueFormGenerator.validators.string.locale({
                     fieldIsRequired: "Поля не может быть пустым",
                     textTooSmall: ""
@@ -59,18 +61,13 @@ export default {
             {
                 type: 'input',
                 inputType: 'text',
-                required: true,
-                label: 'Название иконки',
+                required: false,
+                label: i18n.t('category.category_icon'),
                 model: 'icon_name',
-                styleClasses: "form__input",
-                validator: VueFormGenerator.validators.string.locale({
-                    fieldIsRequired: "Поля не может быть пустым",
-                    textTooSmall: ""
-                })
             },
             {
                 type: 'submit',
-                buttonText: "Добавить",
+                buttonText: i18n.t('category.category_btn'),
                 async onSubmit(model){
                     await axios.post('https://marketpaymart.herokuapp.com/api/dashboard/categories', model);
                     $this.$router.push({name: 'admin.categories'});
@@ -82,8 +79,9 @@ export default {
     }
 }
 </script>
+
 <style lang="scss" scoped>
-$main-color: rgb(31, 7, 110);
+    $main-color: rgb(31, 7, 110);
     .add{
         width: 100%;
         height: calc(100vh - 100px);
@@ -115,8 +113,9 @@ $main-color: rgb(31, 7, 110);
         &:focus{
             border-bottom: 1px solid rgb(0, 167, 56);
         }
-     }
+    }
     .add__btn{
+        font-weight: 300;
         align-self: flex-end;
         transition: all 300ms linear;
         width: 30%;
@@ -125,7 +124,6 @@ $main-color: rgb(31, 7, 110);
         background-color: transparent;
         color: rgb$main-color;
         margin: 10px 0;
-        font-weight: bold;
         cursor: pointer;
         color: $main-color;
         &:hover{
