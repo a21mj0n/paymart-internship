@@ -58,6 +58,9 @@ export default {
     page() {
       this.fetchData()
     },
+    // brands(){
+    //   this.fetchData()
+    // }
   },
   methods:{
     async removeCategory(id){
