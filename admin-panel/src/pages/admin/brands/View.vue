@@ -6,7 +6,7 @@
     </div>
     <div class="change-buttons">
       <span class="btn-def" @click="$router.push({name: 'admin.brands'})">
-        <p>Go back</p>
+        <p>{{$t('viewButton.name')}}</p>
       </span>
       <!-- <span class="btn-def" @click="removeCategory(brandByID.id)">
         <p>Delete</p>

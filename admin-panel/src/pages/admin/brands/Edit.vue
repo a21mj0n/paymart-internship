@@ -1,14 +1,14 @@
 <template>
   <div class="content">
-    <h3>Edit {{brandByID.name}}</h3>
+    <h3>{{$t('editPage.main')}} {{brandByID.name}}</h3>
     <form @submit.prevent="editCategory">
       <div class="change-wrapper">
         <div class="input-wrapper">
-          <p>Name</p>
-          <input type="text" v-model="brandByID.name" name='name' placeholder="Change name" >
+          <p>{{$t('editPage.name')}}</p>
+          <input type="text" v-model="brandByID.name" name='name' :placeholder="$t('editPage.placeholder')" >
         </div>
         <span class="btn-def">
-          <button>Edit</button>
+          <button>{{$t('editPage.button')}}</button>
         </span>
       </div>
     </form>
