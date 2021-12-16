@@ -14,7 +14,7 @@
             <img v-else :src="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZWyg5k6Y2X4OaOfDMPcFaAwL9r_eN34CUXbEgCEjMepep7WMua2z90y_DGL0YobiBjRY&usqp=CAU'"  alt="">
           </div>
         </template>
-        <template slot="brand.name" slot-scope="props">
+        <template slot="product" slot-scope="props">
           <div class="product__wrapper">
             <p class="name">
               {{ props.rowData.name }}
