@@ -26,12 +26,10 @@ export default {
         id: Date.now(),
         image: [],
         name: "",
-        brand_id: "",
-        color: "",
-        category_id: "",
+        brand: {id: Date.now(), name: ''},
+        category: "",
         price: "",
         quantity: null,
-        amount: 0,
         created_at: new Date().toLocaleString(),
       },
       schema: {},
@@ -51,9 +49,10 @@ export default {
       const resp2 = await axios.get(
         "https://marketpaymart.herokuapp.com/api/dashboard/brands"
       );
-
-      this.pullCat = resp.data.data;
+      console.log(resp2.data);
+      this.pullCat = resp.data;
       this.pullBrand = resp2.data.data;
+      console.log(this.pullBrand);
     },
   },
   async created() {
@@ -64,13 +63,13 @@ export default {
         {
           type: "select",
           label: "Выберите категорию",
-          model: "category_id",
+          model: "category",
           values: () => this.pullCat,
         },
         {
           type: "select",
           label: "Выберите бренд",
-          model: "brand_id",
+          model: "brand.name",
           values: () => this.pullBrand,
         },
         {
@@ -101,14 +100,14 @@ export default {
           default: 0,
           validator: "number",
         },
-        {
-          type: "file",
-          // inputType: "file",
-          label: "hollo",
-          model: "image",
-          preview: true,
-          browse: false 
-        },
+        // {
+        //   type: "file",
+        //   // inputType: "file",
+        //   label: "hollo",
+        //   model: "image",
+        //   preview: true,
+        //   browse: false 
+        // },
         {
           type: "submit",
           label: "",
@@ -117,9 +116,10 @@ export default {
           async onSubmit(model) {
             await axios.post(
               "https://marketpaymart.herokuapp.com/api/dashboard/products",
-              model
+              model , model.brand.name , model.category.name
             );
-            await $this.$router.push({ name: "admin.products" });
+            console.log(model,);
+            await $this.$router.push({ name: "admin.products.test" });
           },
         },
       ],

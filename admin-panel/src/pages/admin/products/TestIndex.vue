@@ -10,7 +10,7 @@
   <template slot="image" slot-scope="props">
           <div class="img__wrapper">
             <!-- {{ props.rowData.image.length > 0 ? props.rowData.image[0].name : 'asdasd' }} -->
-            <img v-if="props.rowData.image.length > 0" :src="'https://marketpaymart.herokuapp.com/storage/' + props.rowData.image[0].name" alt="">
+            <img v-if="props.rowData.image" :src="'https://marketpaymart.herokuapp.com/storage/' + props.rowData.image[0].name" alt="">
             <img v-else :src="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZWyg5k6Y2X4OaOfDMPcFaAwL9r_eN34CUXbEgCEjMepep7WMua2z90y_DGL0YobiBjRY&usqp=CAU'"  alt="">
           </div>
         </template>
@@ -20,7 +20,7 @@
               {{ props.rowData.name }}
             </p>
             <p class="brand">
-             <span>By</span> {{ props.rowData.brand_name}}
+             <span>By</span> {{ props.rowData.brand}}
             </p>
           </div>
         </template>
@@ -101,7 +101,7 @@ export default {
     const resp = await axios.get(
       "https://marketpaymart.herokuapp.com/api/dashboard/products"
     );
-    this.categoriesData = resp.data;
+    this.categoriesData = resp.data.reverse();
   },
 };
 </script>

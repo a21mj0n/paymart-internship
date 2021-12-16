@@ -6,22 +6,6 @@ const messages = {
       actions:'Actions'
 
     },
-    category: {
-      category_name: "Category name",
-      category_icon: "Name of the icon",
-      category_btn: "Create",
-      view_title: "Page",
-      view_btn: "Back",
-      edit_label: "Name of the category",
-      edit_btn: "Change",
-      edit_title: "Change category",
-      add_title: "Create category",
-      table_id: 'Id',
-      table_name: 'Name',
-      table_created: 'Created',
-      table_actions: 'Actions',
-      table_create: "Create Category"
-    },
     image:{
       src:'https://openclipart.org/download/268175/1481383216.svg'
     },
@@ -73,22 +57,6 @@ const messages = {
       name:'Название',
       actions:'Действия'
 
-    },
-    category: {
-      category_name: "Название",
-      category_icon: "Название иконки",
-      category_btn: "Создать",
-      view_title: "Страница",
-      view_btn: "Назад",
-      edit_label: "Название категории",
-      edit_btn: "Изменить",
-      edit_title: "Изменить категорию",
-      add_title: "Создать категорию",
-      table_id: "Ид",
-      table_name: "Название",
-      table_created: 'Создано',
-      table_actions: 'Действия',
-      table_create: "Создать категорию"
     },
     image:{
       src:'https://www.pngitem.com/pimgs/m/34-348962_flag-ru-clip-arts-russia-circle-flag-png.png'
