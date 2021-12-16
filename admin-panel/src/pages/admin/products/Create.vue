@@ -26,7 +26,7 @@ export default {
         id: Date.now(),
         image: [],
         name: "",
-        brand: {id: Date.now(), name: ''},
+        brand: '',
         category: "",
         price: "",
         quantity: null,
@@ -49,10 +49,14 @@ export default {
       const resp2 = await axios.get(
         "https://marketpaymart.herokuapp.com/api/dashboard/brands"
       );
-      console.log(resp2.data);
-      this.pullCat = resp.data;
-      this.pullBrand = resp2.data.data;
-      console.log(this.pullBrand);
+      
+      this.pullCat = resp.data.map(cat => {
+        return cat.name
+      });
+      this.pullBrand = resp2.data.map(brand => {
+        return brand.name
+      });
+      
     },
   },
   async created() {
@@ -69,7 +73,7 @@ export default {
         {
           type: "select",
           label: "Выберите бренд",
-          model: "brand.name",
+          model: "brand",
           values: () => this.pullBrand,
         },
         {
@@ -116,9 +120,9 @@ export default {
           async onSubmit(model) {
             await axios.post(
               "https://marketpaymart.herokuapp.com/api/dashboard/products",
-              model , model.brand.name , model.category.name
+              model 
             );
-            console.log(model,);
+            console.log(model);
             await $this.$router.push({ name: "admin.products.test" });
           },
         },
