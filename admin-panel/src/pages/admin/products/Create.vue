@@ -52,7 +52,8 @@ export default {
         "https://marketpaymart.herokuapp.com/api/dashboard/brands"
       );
 
-      this.pullCat = resp.data.data;
+      // resp.data.data to resp.data
+      this.pullCat = resp.data;
       this.pullBrand = resp2.data.data;
     },
   },

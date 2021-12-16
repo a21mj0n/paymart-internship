@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-        <h1>Раздел категории</h1> 
+        <h1>{{$t('category.category_title')}}</h1> 
         <button 
             class="btn btn__add"
             @click="$router.push({name: 'admin.categories.create'})"
@@ -39,7 +39,7 @@
         </vuetable>
 
             <!-- pagination -->
-            <div class="pagination">
+            <div class="pagination" v-if="this.totalPages > 1">
                 <button 
                     v-for="pageNumber in this.totalPages" 
                     :key="pageNumber"  
@@ -69,7 +69,7 @@ export default {
         return{
             fields: TableFields(this.$i18n),
             categoriesData: [],
-            perPage: 5,
+            perPage: 10,
             page: 1,
             totalPages: ""
         }
@@ -81,6 +81,9 @@ export default {
         page() {
             this.fetchData()
         },
+        categoriesData(){
+            this.fetchData()
+        }
     },
     methods: {
         async removeCategory({id}){
@@ -93,7 +96,7 @@ export default {
             this.page = pageNumber
         },
         async fetchData(){
-            const resp = await axios.get('https://marketpaymart.herokuapp.com/api/dashboard/categories',{
+            const resp = await axios.get(`https://marketpaymart.herokuapp.com/api/dashboard/categories?limit=${this.perPage}`,{
             params: {
                 page: this.page
             }})
@@ -108,7 +111,7 @@ export default {
 <style lang="scss">
 $main-color: rgb(31, 7, 110);
     .vuetable-body-wrapper{
-        min-height: 300px;
+        min-height: 550px;
     }
 
     .icons__flex{
