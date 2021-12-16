@@ -1,5 +1,19 @@
 const messages = {
   en: {
+    editPage:{
+      main:'Edit',
+      name:'Name',
+      placeholder:'Change Name',
+      button:'Edit',
+    },
+    viewButton:{
+      name:'Go Back'
+    },
+    createPlaceholder:{
+      main:'Create Brand',
+      name:'Brands Name',
+      button:'Add Brand',
+    },
     brandsHeaders:{
       id:'ID',
       name:'Name',
@@ -73,6 +87,20 @@ const messages = {
     },
   },
   ru: {
+    editPage:{
+      main:'Изменить',
+      name:'Название',
+      placeholder:'Изменить название',
+      button:'Изменить',
+    },
+    viewButton:{
+      name:'Вернуться назад'
+    },
+    createPlaceholder:{
+      main:'Добавить Бренд',
+      name:'Название Бренда',
+      button:'Добавить Бренд',
+    },
     brandsHeaders:{
       id:'ID',
       name:'Название',

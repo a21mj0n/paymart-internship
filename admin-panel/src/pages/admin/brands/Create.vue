@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <h2>Create Brand</h2>
+    <h2>{{$t('createPlaceholder.main')}}</h2>
     <!-- <form @submit.prevent="createBrand">
       <div class="form-wrapper">
         <input v-model="name" type="text" placeholder="Brand name" name='brand-name'>
@@ -31,14 +31,18 @@
 </template>
 
 <script>
+import i18n from '../../../i18n/i18n'
 import axios from 'axios'
+import {mapGetters} from 'vuex'
 export default {
   data(){
     return{
       model:{
         name:'',
       },
-      schema: null,
+      schema: {
+        fields: []
+      },
       formOptions:{
         validateAfterLoad: false,
         validateAfterChange: true,
@@ -47,36 +51,46 @@ export default {
       }
     }
   },
-  methods:{
-    
+    methods:{
+      fillFields($this){
+        this.schema.fields = [
+          {
+            type: 'input',
+            inputType: 'text',
+            placeholder:i18n.t('createPlaceholder.name'),
+            model: 'name',
+            required: true,
+            validator: 'string'
+          },
+          {
+            type: 'submit',
+            async onSubmit(model){
+              await axios.post('https://marketpaymart.herokuapp.com/api/dashboard/brands', model)
+              model.name = model.image = ''
+              await $this.$router.push({ name: 'admin.brands' });
+            },
+            label: '',
+            buttonText: i18n.t('createPlaceholder.button'),
+            validateBeforeSubmit: true
+
+          },
+        ];
+      }
+    },
+  
+  computed: {
+    ...mapGetters({
+      langChanged: 'lang/langChanged'
+    }),
+  },
+  watch: {
+    langChanged(){
+      this.fillFields()
+    }
   },
   created() {
     const $this = this;
-    const fields = {
-      fields:[
-        {
-          type: 'input',
-          inputType: 'text',
-          placeholder:'Brands Name',
-          model: 'name',
-          required: true,
-          validator: 'string'
-        },
-        {
-          type: 'submit',
-          async onSubmit(model){
-            await axios.post('https://marketpaymart.herokuapp.com/api/dashboard/brands', model)
-            model.name = model.image = ''
-            await $this.$router.push({ name: 'admin.brands' });
-          },
-          label: '',
-          buttonText: 'Добавить бренд',
-          validateBeforeSubmit: true
-
-        },
-      ],
-    }
-    this.schema = fields;
+    this.fillFields($this);
   }
 }
 </script>

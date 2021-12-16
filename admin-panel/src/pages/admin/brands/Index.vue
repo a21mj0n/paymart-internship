@@ -67,7 +67,6 @@ export default {
     },
     changePage(pageNumber){
       this.page = pageNumber
-      console.log(this.page);
     },
     async fetchData(){
         const resp = await axios.get('https://marketpaymart.herokuapp.com/api/dashboard/brands',{
