@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <h1> {{$t('msg.title')}}</h1>
+    <h1> {{$t('user.create_title')}}</h1>
     <button 
             class="btn btn__add"
             @click="$router.push({name: 'admin.users.create'})"
@@ -16,7 +16,7 @@
         
         :data="users"
         :api-mode="false"
-        :fields="UserFields"
+        :fields="fields"
       >
         <template slot="actions" slot-scope="props">
           <div class="icons__flex">
@@ -58,7 +58,7 @@
 <script>
 import axios from "axios";
 import Vuetable from "vuetable-2";
-import {UserFields} from './vuetable-fields';
+import UserFields from './UserFields';
 export default {
   name:"users",
   components: {
@@ -66,25 +66,8 @@ export default {
   },
   data() {
     return {
-      UserFields,
-       users: [
-        {
-          id: 1,
-          name: "Rosella",
-          surname: "Howe",
-          avatar: "",
-          adress: "College Station",
-          age: "65",
-        },
-        {
-          id: 2,
-          name: "Reilly",
-          surname: "Schaden",
-          avatar: "",
-          adress: "Wheaton",
-          age: "39",
-        },
-      ],
+     fields: UserFields(this.$i18n),
+       users: [],
     };
   },
   methods: {
@@ -99,7 +82,7 @@ export default {
     const resp = await axios.get(
       "https://marketpaymart.herokuapp.com/api/dashboard/users"
     );
-    this.users = resp.data.data;
+    this.users = resp.data;
   },
 };
 </script>

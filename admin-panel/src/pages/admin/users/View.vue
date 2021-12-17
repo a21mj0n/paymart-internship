@@ -1,42 +1,31 @@
 <template>
   <div class="view">
-    <h2>users page: {{ this.UserId.name }}</h2>
+    <h2>{{$t('user.view_title')}}</h2>
     <div class="info">
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Fullname</th>
-            <th>icons</th>
-            <th>email</th>
-            <th>Actions</th>
-            >
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{ this.UserId.id }}</td>
-            <td>{{ this.UserId.username }}</td>
-            <td>{{ this.UserId.full_name }}</td>
-            <td><img :src="UserId.avatar" :alt="UserId.username" /></td>
-            <td>{{ this.UserId.email }}</td>
-            
-            <td @click="$router.push({ name: 'admin.users' })">
-              <button>Back</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+     <Vuetable
+            :data=" UserId"
+            :fields="fields"
+            :api-mode="false"
+        >
+            <template slot="actions">
+                <button  @click="$router.push({name: 'admin.users'})">{{$t('user.view_btn')}}</button>
+            </template>
+        </Vuetable>
     </div>
   </div>
 </template>
 <script>
 import axios from "axios";
+import Vuetable from "vuetable-2";
+import UserFields from  './UserFields';
 export default {
+  components: {
+    Vuetable
+  },
   data() {
     return {
       UserId: {},
+      fields: UserFields(this.$i18n),
     };
   },
   async created() {
@@ -44,7 +33,7 @@ export default {
       const { data } = await axios.get(
         `https://marketpaymart.herokuapp.com/api/dashboard/users/${this.$route.params.id}`
       );
-      this.UserId = data;
+      this.UserId = [data];
       console.log(data);
     } catch (e) {
       console.log(e);
