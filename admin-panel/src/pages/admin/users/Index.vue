@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <h1> {{$t('msg.title')}}</h1>
+    <h1> {{$t('user.create_title')}}</h1>
     <button 
             class="btn btn__add"
             @click="$router.push({name: 'admin.users.create'})"

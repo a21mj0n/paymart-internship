@@ -68,7 +68,8 @@ const messages = {
     },
     msg: {
       title: "Users",
-      btn: 'add User'
+      btn: 'add User',
+      create_user:""
     },
     user: {
 
@@ -84,7 +85,7 @@ const messages = {
 
       edit_btn: "Change",
       edit_title: "Change User",
-      add_title: "Create USer",
+      add_title: "Create one User",
       table_id: 'Id',
       table_name: 'Username',
       table_fullname: 'Fullname',
@@ -178,7 +179,7 @@ const messages = {
       edit_email: "Почта пользователя ",
       edit_btn: "Изменить",
       edit_title: "Изменить пользователя",
-      add_title: "Создать пользователя",
+      add_title: "Создать пользователeй",
       table_id: 'Ид',
       table_name: 'Логин',
       table_fullname: 'ФИО',

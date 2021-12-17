@@ -1,13 +1,18 @@
 export default {
     en: {
       user: {
-        // category_name: "Category name",
-        // category_icon: "Name of the icon",
-        // category_btn: "Create",
-        // view_title: "Page",
-        // view_btn: "Back",
-        // edit_label: "Name of the category",
-        // edit_btn: "Change",
+
+        user_name: "User name",
+        user_icon: "Name of the icon",
+        user_btn: "Create",
+        view_title: "User page ",
+        view_btn: "Back",
+        edit_label: "Name of user",
+        edit_fullname: "fullname of user",
+        edit_ava: "enter users icons ",
+        edit_email: "enter users email ",
+  
+        edit_btn: "Change",
         edit_title: "Change User",
         add_title: "Create USer",
         table_id: 'Id',
@@ -21,22 +26,26 @@ export default {
     },
     ru: {
       user: {
-        // category_name: "Название",
-        // category_icon: "Название иконки",
-        // category_btn: "Создать",
-        // view_title: "Страница",
-        // view_btn: "Назад",
-        // edit_label: "Название категории",
-        // edit_btn: "Изменить",
-        edit_title: "Изменить Пользователя",
-        add_title: "Создать Пользователя",
+
+        user_name: "Название",
+        user_icon: "Название иконки",
+        user_btn: "Создать",
+        view_title: "Страница пользователя",
+        view_btn: "Назад",
+        edit_label: "Название пользователя",
+        edit_fullname: "ФИО пользователя",
+        edit_ava: "Иконки пользователя ",
+        edit_email: "Почта пользователя ",
+        edit_btn: "Изменить",
+        edit_title: "Изменить пользователя",
+        add_title: "Создать пользователя",
         table_id: 'Ид',
         table_name: 'Логин',
         table_fullname: 'ФИО',
         table_icons: 'Иконки',
         table_email: 'Почта',
         table_actions: 'Действия',
-        table_create: "Создать Пользователя"
+        table_create: "Создать пользователя"
       }
     }
   }
