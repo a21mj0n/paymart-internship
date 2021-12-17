@@ -14,7 +14,6 @@
                 :data="categoriesData"
                 :api-mode="false"
                 :fields="fields"
-                :per-page="5"
             >
                 <template slot="actions" slot-scope="props">
                     <div class="icons__flex">
@@ -38,19 +37,19 @@
 
         </vuetable>
 
-            <!-- pagination -->
-            <div class="pagination" v-if="this.totalPages > 1">
-                <button 
-                    v-for="pageNumber in this.totalPages" 
-                    :key="pageNumber"  
-                    @click="changePage(pageNumber)"
-                    :class="{
-                        'btn__active': page ===pageNumber
-                    }"
-                >
-                    {{pageNumber}}
-                </button>
-            </div>
+        <!-- pagination -->
+        <div class="pagination" v-if="this.totalPages > 1" >
+            <button 
+                v-for="pageNumber in this.totalPages" 
+                :key="pageNumber"  
+                @click="changePage(pageNumber)"
+                :class="{
+                    'btn__active': page ===pageNumber
+                }"
+            >
+                {{pageNumber}}
+            </button>
+        </div>
             
         </div>
     </div>
@@ -69,7 +68,7 @@ export default {
         return{
             fields: TableFields(this.$i18n),
             categoriesData: [],
-            perPage: 10,
+            perPage: 5,
             page: 1,
             totalPages: ""
         }
@@ -81,8 +80,11 @@ export default {
         page() {
             this.fetchData()
         },
-        categoriesData(){
-            this.fetchData()
+        categoriesData(oldValue, newValue){
+            if(oldValue === newValue){
+                // this.fetchData()
+                console.log('fetchingg');
+            }
         }
     },
     methods: {
@@ -96,11 +98,13 @@ export default {
             this.page = pageNumber
         },
         async fetchData(){
-            const resp = await axios.get(`https://marketpaymart.herokuapp.com/api/dashboard/categories?limit=${this.perPage}`,{
+            const resp = await axios.get(`https://marketpaymart.herokuapp.com/api/dashboard/categories`,{
             params: {
+                limit: this.perPage,
                 page: this.page
             }})
             this.totalPages = Math.ceil(resp.data.meta.total / this.perPage)
+            console.log(this.totalPages);
             this.categoriesData = resp.data.data
         }
       // end methods ==================================================================
@@ -111,7 +115,7 @@ export default {
 <style lang="scss">
 $main-color: rgb(31, 7, 110);
     .vuetable-body-wrapper{
-        min-height: 550px;
+        min-height: 300px;
     }
 
     .icons__flex{
