@@ -4,6 +4,7 @@
     :data="brands"
     :fields="fields"
     :api-mode='false'
+    :per-page="5"
     >
       <template slot='actions' slot-scope="props">
         <div class="flex-wrapper">
@@ -13,6 +14,19 @@
         </div>
       </template>
     </vuetable>
+    <!-- pagination -->
+    <div class="pagination">
+      <button 
+        v-for="pageNumber in this.totalPages" 
+        :key="pageNumber"  
+        @click="changePage(pageNumber)"
+        :class="{
+            'btn__active': page ===pageNumber
+        }"
+        >
+        {{pageNumber}}
+      </button>
+    </div>
   </div>
 </template>
 
@@ -28,24 +42,59 @@ export default {
     return{
       brands:[],
       fields:brandFields(this.$i18n),
+      perPage: 5,
+      page: 1,
+      totalPages: ""
     }
   },
   async created(){
     const {data} = await axios.get('https://marketpaymart.herokuapp.com/api/dashboard/brands')
     this.brands = data
   },
+  async mounted(){
+    await this.fetchData();
+  },
+  watch: {
+    page() {
+      this.fetchData()
+    },
+  },
   methods:{
     async removeCategory(id){
       if(window.confirm("Are you sure that you want to delete brand?")){
         await axios.delete(`https://marketpaymart.herokuapp.com/api/dashboard/brands/${id}`)
-        this.$router.push({name: 'admin.brands'})
       }
+    },
+    changePage(pageNumber){
+      this.page = pageNumber
+    },
+    async fetchData(){
+        const resp = await axios.get('https://marketpaymart.herokuapp.com/api/dashboard/brands',{
+        params: {
+          page: this.page
+        }})
+        this.totalPages = Math.ceil(resp.data.meta.total / this.perPage)
+        this.brands = resp.data.data
     }
   }
 }
 </script>
 
 <style lang='scss' scoped>
+.pagination{
+  display: flex;
+  margin-top: 10px;
+  margin: 10px -10px;
+  justify-content: flex-end;
+  button{
+    color: rgb(117, 117, 117);
+    padding: 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 2px solid rgb(117, 117, 117);
+  }
+}
   img{
     max-width:100%;
   }

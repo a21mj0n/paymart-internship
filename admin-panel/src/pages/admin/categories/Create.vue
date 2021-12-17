@@ -16,6 +16,7 @@
 import axios from 'axios'
 import VueFormGenerator from 'vue-form-generator'
 import i18n from '../../../i18n/i18n'
+import { mapGetters } from 'vuex'
 export default {
     name: 'createCategory',
     data(){
@@ -41,12 +42,9 @@ export default {
         },
         onValidated(isValid, errors) {
             console.log("Validation result: ", isValid, ", Errors:", errors);
-        }
-    },
-    created(){
-        const $this = this;
-
-        this.schema.fields = [
+        },
+        fillSchemaFields($this){
+            this.schema.fields = [
             {
                 type: 'input',
                 inputType: 'text',
@@ -76,6 +74,21 @@ export default {
                 validateBeforeSubmit: true
             }
         ];
+        }
+    },
+    computed: {
+        ...mapGetters({
+            langChanged: 'lang/langChanged'
+        }),
+    },
+    watch: {
+        langChanged(){
+            this.fillSchemaFields()
+        }
+    },
+    created(){
+        const $this = this;
+        this.fillSchemaFields($this)
     }
 }
 </script>
