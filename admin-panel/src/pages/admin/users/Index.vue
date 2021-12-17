@@ -11,7 +11,7 @@
     <!-- table -->
     <div class="wrapper__table">
       <!-- api-url="https://61ade31fd228a9001703b022.mockapi.io/api/users" -->
-      <Vuetable :data="users" :api-mode="false" :fields="fields" >
+      <Vuetable :data="users" :api-mode="false" :fields="fields">
         <template slot="actions" slot-scope="props">
           <div class="icons__flex">
             <i
@@ -80,7 +80,7 @@ export default {
     };
   },
   async created() {
-    this.fetchData() 
+    this.fetchData();
   },
   watch: {
     page() {
@@ -100,9 +100,11 @@ export default {
       this.page = pageNumber;
     },
     async fetchData() {
-      const resp = await axios.get("https://marketpaymart.herokuapp.com/api/dashboard/users",{
+      const resp = await axios.get(
+        "https://marketpaymart.herokuapp.com/api/dashboard/users",
+        {
           params: {
-            limit: this.perPage,
+            limit: 9,
             page: this.page,
           },
         }
@@ -117,6 +119,7 @@ export default {
 
 <style lang="scss" scoped>
 $main-color: rgb(31, 7, 110);
+
 .wrapper__table {
   width: 100%;
 }
@@ -215,6 +218,26 @@ $main-color: rgb(31, 7, 110);
         opacity: 1;
       }
     }
+  }
+}
+.pagination {
+  margin-top: 25px;
+  display: flex;
+  justify-content: flex-end;
+  button {
+    width: 30px;
+    margin-left: 10px;
+    height: 30px;
+    background-color: transparent;
+    border: 1px solid $main-color;
+    color: $main-color;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 300ms linear;
+    &:hover {
+    background-color: $main-color;
+    color: #fff;
+  }
   }
 }
 // adaptive
