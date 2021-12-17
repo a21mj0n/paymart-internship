@@ -1,9 +1,9 @@
 const messages = {
   en: {
-    brandsHeaders:{
-      id:'ID',
-      name:'Name',
-      actions:'Actions'
+    brandsHeaders: {
+      id: 'ID',
+      name: 'Name',
+      actions: 'Actions'
 
     },
     category: {
@@ -22,60 +22,83 @@ const messages = {
       table_actions: 'Actions',
       table_create: "Create Category"
     },
-    image:{
-      src:'https://openclipart.org/download/268175/1481383216.svg'
+    image: {
+      src: 'https://openclipart.org/download/268175/1481383216.svg'
     },
     message: {
       name: 'Dashboard',
-      placeholder:  'Search...',
-      username:'Tanya Andrew',
+      placeholder: 'Search...',
+      username: 'Tanya Andrew',
     },
-    sidebar:{
-      insideProfile:{
-        myprofile:'My Profile',
-        edit:'Edit Profile',
-        settings:'Settings',
-        shortcutMP:'MP',
-        shortcutE:'EP',
-        shortcutS:'S',
+    sidebar: {
+      insideProfile: {
+        myprofile: 'My Profile',
+        edit: 'Edit Profile',
+        settings: 'Settings',
+        shortcutMP: 'MP',
+        shortcutE: 'EP',
+        shortcutS: 'S',
       },
-      users:'Users',
-      categories:'Categories',
-      products:'Products',
-      insideProducts:{
-        create:'Create Products',
-        view:'View Product',
-        shortcutCreate:'CP',
-        shortcutView:'VP'
+      users: 'Users',
+      categories: 'Categories',
+      products: 'Products',
+      insideProducts: {
+        create: 'Create Products',
+        view: 'View Product',
+        shortcutCreate: 'CP',
+        shortcutView: 'VP'
       },
-      brands:'Brands',
-      insideBrands:{
-        create:'Create Brand',
-        view:'View Brands',
-        shortcutCreate:'CB',
-        shortcutView:'VB'
+      brands: 'Brands',
+      insideBrands: {
+        create: 'Create Brand',
+        view: 'View Brands',
+        shortcutCreate: 'CB',
+        shortcutView: 'VB'
       },
-      cart:'Cart',
+      cart: 'Cart',
     },
-    products:{
-      product:'product',
-      color:'color',
-      category:'category',
-      price:'price',
-      count:'count',
-      amount:'amount',
-      toCart:'To cart'
+    products: {
+      product: 'product',
+      color: 'color',
+      category: 'category',
+      price: 'price',
+      count: 'count',
+      amount: 'amount',
+      toCart: 'To cart'
     },
     msg: {
       title: "Users",
-      btn : 'add User'
+      btn: 'add User'
     },
+    user: {
+
+      user_name: "User name",
+      user_icon: "Name of the icon",
+      user_btn: "Create",
+      view_title: "User page ",
+      view_btn: "Back",
+      edit_label: "Name of user",
+      edit_fullname: "fullname of user",
+      edit_ava: "enter users icons ",
+      edit_email: "enter users email ",
+
+      edit_btn: "Change",
+      edit_title: "Change User",
+      add_title: "Create USer",
+      table_id: 'Id',
+      table_name: 'Username',
+      table_fullname: 'Fullname',
+      table_icons: 'Icons',
+      table_email: 'Email',
+      table_actions: 'Actions',
+      table_create: "Create Users"
+    }
   },
   ru: {
-    brandsHeaders:{
-      id:'ID',
-      name:'Название',
-      actions:'Действия'
+    brandsHeaders: {
+      id: 'ID',
+      name: 'Название',
+      actions: 'Действия'
 
     },
     category: {
@@ -94,54 +117,76 @@ const messages = {
       table_actions: 'Действия',
       table_create: "Создать категорию"
     },
-    image:{
-      src:'https://www.pngitem.com/pimgs/m/34-348962_flag-ru-clip-arts-russia-circle-flag-png.png'
+    image: {
+      src: 'https://www.pngitem.com/pimgs/m/34-348962_flag-ru-clip-arts-russia-circle-flag-png.png'
     },
     message: {
       name: 'Доска',
-      placeholder:  'Поиск...',
-      username:'Таня Эндрю',
+      placeholder: 'Поиск...',
+      username: 'Таня Эндрю',
     },
-    sidebar:{
-      insideProfile:{
-        myprofile:'Мой Профиль',
-        edit:'Редактировать Профиль',
-        settings:'Настройки',
-        shortcutMP:'МП',
-        shortcutE:'РП',
-        shortcutS:'Н',
+    sidebar: {
+      insideProfile: {
+        myprofile: 'Мой Профиль',
+        edit: 'Редактировать Профиль',
+        settings: 'Настройки',
+        shortcutMP: 'МП',
+        shortcutE: 'РП',
+        shortcutS: 'Н',
       },
-      users:'Пользователи',
-      categories:'Категории',
-      products:'Продукты',
-      insideProducts:{
-        create:'Создать Продукты',
-        view:'Посмотреть Продукт',
-        shortcutCreate:'СП',
-        shortcutView:'ПП'
+      users: 'Пользователи',
+      categories: 'Категории',
+      products: 'Продукты',
+      insideProducts: {
+        create: 'Создать Продукты',
+        view: 'Посмотреть Продукт',
+        shortcutCreate: 'СП',
+        shortcutView: 'ПП'
       },
-      brands:'Бренды',
-      insideBrands:{
-        create:'Создать Бренд',
-        view:'Посмотреть Бренды',
-        shortcutCreate:'СБ',
-        shortcutView:'ПБ'
+      brands: 'Бренды',
+      insideBrands: {
+        create: 'Создать Бренд',
+        view: 'Посмотреть Бренды',
+        shortcutCreate: 'СБ',
+        shortcutView: 'ПБ'
       },
-      cart:'Заказы',
+      cart: 'Заказы',
     },
-    products:{
-      product:'продукция',
-      color:'цвет',
-      category:'категория',
-      price:'цена',
-      count:'количество',
-      amount:'общая стоимость',
-      toCart:'В корзину'
+    products: {
+      product: 'продукция',
+      color: 'цвет',
+      category: 'категория',
+      price: 'цена',
+      count: 'количество',
+      amount: 'общая стоимость',
+      toCart: 'В корзину'
     },
-      msg: {
-        title: "Пользаватели",
-        btn : 'Добавить Пользавателя '
-      },
+    msg: {
+      title: "Пользаватели",
+      btn: 'Добавить Пользавателя '
+    },
+    user: {
+
+      user_name: "Название",
+      user_icon: "Название иконки",
+      user_btn: "Создать",
+      view_title: "Страница пользователя",
+      view_btn: "Назад",
+      edit_label: "Название пользователя",
+      edit_fullname: "ФИО пользователя",
+      edit_ava: "Иконки пользователя ",
+      edit_email: "Почта пользователя ",
+      edit_btn: "Изменить",
+      edit_title: "Изменить пользователя",
+      add_title: "Создать пользователя",
+      table_id: 'Ид',
+      table_name: 'Логин',
+      table_fullname: 'ФИО',
+      table_icons: 'Иконки',
+      table_email: 'Почта',
+      table_actions: 'Действия',
+      table_create: "Создать пользователя"
+    }
   },
 }
 export default messages
