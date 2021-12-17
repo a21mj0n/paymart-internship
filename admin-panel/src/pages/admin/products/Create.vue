@@ -26,8 +26,8 @@ export default {
         id: Date.now(),
         image: [],
         name: "",
-        brand: '',
-        category: "",
+        brand_id: '',
+        category_id: "",
         price: "",
         quantity: null,
         created_at: new Date().toLocaleString(),
@@ -50,12 +50,9 @@ export default {
         "https://marketpaymart.herokuapp.com/api/dashboard/brands"
       );
       
-      this.pullCat = resp.data.map(cat => {
-        return cat.name
-      });
-      this.pullBrand = resp2.data.map(brand => {
-        return brand.name
-      });
+      this.pullCat = resp.data
+      this.pullBrand = resp2.data
+      console.log(this.pullBrand);
       
     },
   },
@@ -67,13 +64,13 @@ export default {
         {
           type: "select",
           label: "Выберите категорию",
-          model: "category",
+          model: "category_id",
           values: () => this.pullCat,
         },
         {
           type: "select",
           label: "Выберите бренд",
-          model: "brand",
+          model: "brand_id",
           values: () => this.pullBrand,
         },
         {

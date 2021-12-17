@@ -34,7 +34,7 @@ methods:{
         if(window.confirm('Delete this Product??')){
           // eslint-disable-next-line no-undef
           await axios.delete(`https://marketpaymart.herokuapp.com/api/dashboard/products/${id}`)
-          this.$router.push({name: 'admin.products'})  
+          this.$router.push({name: 'admin.products.test'})  
         }
         
 

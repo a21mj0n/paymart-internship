@@ -20,7 +20,7 @@
               {{ props.rowData.name }}
             </p>
             <p class="brand">
-             <span >By  {{ props.rowData.brand}}</span> 
+             <span >By  {{ props.rowData.brand }}</span> 
               
             </p>
           </div>

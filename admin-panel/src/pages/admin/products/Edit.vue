@@ -30,7 +30,7 @@ export default {
     methods:{
       async editProduct(){
           await axios.put(`https://marketpaymart.herokuapp.com/api/dashboard/products/${this.$route.params.id}`, this.product)
-          this.$router.push({name: "admin.products"})
+          this.$router.push({name: "admin.products.test"})
        }
         },
     async created(){

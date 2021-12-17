@@ -12,7 +12,7 @@ export default (i18n) => {
     },
    
     {
-      name: "category",
+      name: "category.name",
       title: () => i18n.t('products.category'),
       width: '10%'
     },
