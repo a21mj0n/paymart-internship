@@ -59,6 +59,7 @@
 import axios from 'axios';
 import Vuetable  from 'vuetable-2';
 import TableFields from './TableFields';
+import config  from '../../../config';
 export default {
     name: "categories",
     components: {
@@ -90,7 +91,7 @@ export default {
     methods: {
         async removeCategory({id}){
             if(window.confirm("Вы точно хотите удалить ?")){
-                await axios.delete(`https://marketpaymart.herokuapp.com/api/dashboard/categories/${id}`)
+                await axios.delete(`${config.URL.dev}/api/dashboard/categories/${id}`)
                 this.categoriesData = this.categoriesData.filter(cat => cat.id !== id)
             }
         }, 
@@ -98,7 +99,7 @@ export default {
             this.page = pageNumber
         },
         async fetchData(){
-            const resp = await axios.get(`/api/dashboard/categories`,{
+            const resp = await axios.get(`${config.URL.dev}/api/dashboard/categories`,{
             params: {
                 limit: this.perPage,
                 page: this.page
