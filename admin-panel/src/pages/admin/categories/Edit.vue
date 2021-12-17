@@ -1,6 +1,6 @@
 <template>
     <div class="add">
-        <h2>{{$t('category.edit_title')}}: {{categoryData.name}}</h2>
+        <h2>Изменить категорию {{categoryData.name}}</h2>
         <form @submit.prevent="editCategory">
             <vue-form-generator
                 :schema="schema"

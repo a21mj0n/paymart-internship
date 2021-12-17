@@ -2,46 +2,44 @@
   <div class="add">
     <form @submit.prevent="editOneUser">
       <h2>change one user</h2>
-      <input
-        type="text"
-        placeholder="enter users name"
-        v-model="userData.username"
-      />
-      <input
-        type="text"
-        placeholder="enter users  surname"
-        v-model="userData.full_name"
-      />
-      <input
-        type="string"
-        placeholder="enter users avatar"
-        v-model="userData.avatar"
-      />
-      <input
-        type="text"
-        placeholder="enter users email"
-        v-model="userData.email"
-      />
+      <VueFormGenerator
+        :schema="schema"
+        :model="model"
+        :options="formOptions"
+      >
+      </VueFormGenerator>
       <button type="submit">Изменить</button>
     </form>
   </div>
 </template>
 <script>
 import axios from "axios";
+import VueFormGenerator from "vue-form-generator";
+import i18n from "../../../i18n/i18n";
 export default {
   name: "editOneUser",
   data() {
     return {
       userData: {},
+     model: {
+        username: "",
+        full_name: "",
+        avatar: "",
+        email: "",
+      },
+      schema: {
+        fields: [],
+      },
+      formOptions: {
+        validateAfterChanged: true,
+      },
     };
   },
   methods: {
     async editOneUser() {
       try {
         const resp = await axios.put(
-          `https://marketpaymart.herokuapp.com/api/dashboard/users/${this.$route.params.id}`,
-          this.userData
-        );
+          `https://marketpaymart.herokuapp.com/api/dashboard/users/${this.$route.params.id}`, this.userData);
         this.$router.push({ name: "admin.users" });
         console.log(resp.data);
       } catch (error) {
@@ -50,11 +48,69 @@ export default {
     },
   },
   async created() {
-    console.log(this.$router);
-    const { data } = await axios.get(
-      `https://marketpaymart.herokuapp.com/api/dashboard/users/${this.$route.params.id}`
-    );
-    this.userData = data;
+   const {data} = await axios.get(`https://marketpaymart.herokuapp.com/api/dashboard/users/${this.$route.params.id}`)
+        this.userData = data
+        this.model.username = this.userData.username
+        this.model.full_name = this.userData.full_name
+        this.model.avatar = this.userData.avatar
+        this.model.email = this.userData.email
+        const $this = this;
+          
+        const fields = [
+            {
+                type: 'input',
+                inputType: 'text',
+                name: 'username',
+                model: "username",
+                label: i18n.t('user.edit_label'),
+                validator:  VueFormGenerator.validators.string.locale({
+                    fieldIsRequired: "Поля не может быть пустым",
+                })
+            },
+             {
+                type: 'input',
+                inputType: 'text',
+                name: 'fullname',
+                model: "full_name",
+                label: i18n.t('user.edit_fullname'),
+                validator:  VueFormGenerator.validators.string.locale({
+                    fieldIsRequired: "Поля не может быть пустым",
+                })
+            },
+            {
+                type: 'input',
+                inputType: 'text',
+                name: 'avatar',
+                model: "avatar",
+                label: i18n.t('user.edit_ava'),
+                validator:  VueFormGenerator.validators.string.locale({
+                    fieldIsRequired: "Поля не может быть пустым",
+                })
+            },
+             {
+                type: 'input',
+                inputType: 'email',
+                name: 'email',
+                model: "email",
+                label: i18n.t('user.edit_email'),
+                validator:  VueFormGenerator.validators.string.locale({
+                    fieldIsRequired: "Поля не может быть пустым",
+                })
+            },
+            {
+                type: 'submit',
+                buttonText: i18n.t('user.edit_btn'),
+                async onSubmit(model){
+                    await axios.post('https://marketpaymart.herokuapp.com/api/dashboard/users/', model);
+                    $this.$router.push({name: 'users'});
+                },
+                label: '',
+                validateBeforeSubmit: true
+            }
+                
+        ];
+
+        this.schema.fields = fields;
   },
 };
 </script>

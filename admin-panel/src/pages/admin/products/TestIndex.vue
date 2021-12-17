@@ -20,7 +20,8 @@
               {{ props.rowData.name }}
             </p>
             <p class="brand">
-             <span>By</span> {{ props.rowData.brand_name}}
+             <span >By  {{ props.rowData.brand}}</span> 
+              
             </p>
           </div>
         </template>
@@ -79,29 +80,35 @@ export default {
   },
   data() {
     return {
+      brand: '',
       defaultImage,
       categoriesData: [],
       fields: productFields(this.$i18n),
     };
   },
   methods: {
+    
     minus(product) {
       product.quantity--;
+      
       if (product.quantity < 0) {
         product.quantity = 0;
       }
     },
     plus(product) {
       product.quantity++;
-      console.log(product.image[0].name);
+      
      
     },
   },
   async created() {
+
     const resp = await axios.get(
       "https://marketpaymart.herokuapp.com/api/dashboard/products"
     );
-    this.categoriesData = resp.data;
+    this.categoriesData = resp.data.reverse();
+    
+    
   },
 };
 </script>

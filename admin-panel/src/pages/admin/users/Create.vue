@@ -1,7 +1,7 @@
 <template>
   <div class="add">
     <form action="#" @submit.prevent="createUser">
-      <h2>Add User</h2>
+      <h2>{{$t('user.add_title')}}</h2>
       <div class="input_wrapper">
         <vue-form-generator
           :schema="schema"
@@ -9,7 +9,7 @@
           :options="formOptions"
         >
         </vue-form-generator>
-        <button type="submit">add user</button>
+        <button type="submit">{{$t('msg.btn')}}</button>
       </div>
     </form>
   </div>
@@ -50,11 +50,11 @@ export default {
           },
           {
             type: "input",
-            inputType: "string",
+            inputType: "text",
             placeholder: "url img",
             model: "avatar",
             required: true,
-            validator: "number",
+            validator: "string",
             styleClasses: "inps",
           },
           {
@@ -90,7 +90,7 @@ export default {
 };
 </script>
 
-<style lang="scss" >
+<style lang="scss"  scoped>
 select {
 
   margin-bottom: 20px;

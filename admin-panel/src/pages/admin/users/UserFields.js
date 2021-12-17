@@ -1,25 +1,25 @@
-export const UserFields = [
+export default (i18n) => [
     {
         name: "id",
-        title: "Id",
+        title: () => i18n.t("user.table_id"),
         width:'5%',
        
     },
     {
         name: 'username',
-        title: "username",
+        title:  () => i18n.t("user.table_name"),
         width: '12%'
      
     },
     {
         name: "full_name",
-        title: 'full name',
+        title:  () => i18n.t("user.table_fullname"),
         width: '12%'
 
     },
     {
         name: "avatar",
-        title: 'icons' ,
+        title:  () => i18n.t("user.table_icons"),
         width: '10%'
 
         
@@ -27,7 +27,7 @@ export const UserFields = [
     },
     {
         name: "email",
-        title: 'email',
+        title:  () => i18n.t("user.table_email"),
         width: '15%'
 
         
@@ -35,7 +35,7 @@ export const UserFields = [
     },
    {
         name: 'actions',
-        title: "actions",
+        title:  () => i18n.t("user.table_actions"),
         // title: '<span class="orange glyphicon glyphicon-user"></span> Actions',
         width: '15%',
     },
