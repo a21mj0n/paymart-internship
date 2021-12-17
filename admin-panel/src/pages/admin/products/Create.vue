@@ -7,6 +7,7 @@
           :model="model"
           :options="formOptions"
         ></vue-form-generator>
+        <!-- <input type="file" name="" id="" @change="change"> -->
       </form>
     </div>
   </div>
@@ -25,7 +26,7 @@ export default {
       pullBrand: "",
       model: {
         id: Date.now(),
-        image: [],
+        images: [],
         name: "",
         brand_id: '',
         category_id: "",
@@ -43,12 +44,15 @@ export default {
     };
   },
   methods: {
+    change(e) {
+      this.model.images = e.target.files;
+    },
     async getCategory() {
       const resp = await axios.get(
-        "https://marketpaymart.herokuapp.com/api/dashboard/categories"
+        `${config.URL.dev}/api/dashboard/categories`
       );
       const resp2 = await axios.get(
-        "https://marketpaymart.herokuapp.com/api/dashboard/brands"
+        `${config.URL.dev}/api/dashboard/brands`
       );
       
       this.pullCat = resp.data
@@ -102,25 +106,37 @@ export default {
           default: 0,
           validator: "number",
         },
-        // {
-        //   type: "file",
-        //   // inputType: "file",
-        //   label: "hollo",
-        //   model: "image",
-        //   preview: true,
-        //   browse: false 
-        // },
+        {
+          
+          type:'upload',
+          // model: "images",
+          files: true,
+          multiple: true,
+          onChanged(model, schema, event) {
+            console.log(schema);
+            return model.images = event.target.files[0];
+          } 
+        },
         {
           type: "submit",
           label: "",
           buttonText: "добавить",
           validateBeforeSubmit: true,
           async onSubmit(model) {
-            await axios.post(
-              `${config.URL.prod}/api/dashboard/products`,
-              model 
-            );
             console.log(model);
+            const formData = new FormData();
+            formData.append('images[]', model.images);
+            formData.append('brand_id', model.brand_id)
+            formData.append('сategory_id', model.category_id)
+            formData.append('name', model.name)
+            formData.append('price', model.price)
+            formData.append('quantity', model.quantity)
+
+            await axios.post(
+              `${config.URL.dev}/api/dashboard/products`,
+              formData 
+            );
+            console.log('success');
             await $this.$router.push({ name: "admin.products.test" });
           },
         },

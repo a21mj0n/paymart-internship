@@ -8,20 +8,20 @@
         :api-mode="false"
         :per-page="5"
       >
-  <!-- <template slot="image" slot-scope="props">
+  <template slot="images" slot-scope="props">
           <div class="img__wrapper">
-            {{ props.rowData.image.length > 0 ? props.rowData.image[0].name : 'asdasd' }}
-            <img v-if="props.rowData.image.length > 0" :src="'https://marketpaymart.herokuapp.com/storage/' + props.rowData.image[0].name" alt="">
+            {{ }}
+            <img v-if="props.rowData.image.length > 0" :src="`${configURL}/storage/product_images/${props.rowData.image[0].product_id}/` + props.rowData.image[0].name" alt="">
             <img v-else :src="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZWyg5k6Y2X4OaOfDMPcFaAwL9r_eN34CUXbEgCEjMepep7WMua2z90y_DGL0YobiBjRY&usqp=CAU'"  alt="">
           </div>
-        </template> -->
+        </template>
         <template slot="product" slot-scope="props">
           <div class="product__wrapper">
             <p class="name">
               {{ props.rowData.name }}
             </p>
             <p class="brand">
-             <span >By  {{ props.rowData.brand }}</span> 
+             <span >By  {{ props.rowData.brand.name }}</span> 
               
             </p>
           </div>
@@ -64,18 +64,18 @@
           </div>
         </template>
       </vuetable>
-          <div class="pagination">
-      <button 
-        v-for="pageNumber in this.totalPages" 
-        :key="pageNumber"  
-        @click="changePage(pageNumber)"
-        :class="{
-            'btn__active': page ===pageNumber
-        }"
-        >
-        {{pageNumber}}
-      </button>
-    </div>
+      <div class="pagination" v-if="this.totalPages > 1" >
+            <button 
+                v-for="pageNumber in this.totalPages" 
+                :key="pageNumber"  
+                @click="changePage(pageNumber)"
+                :class="{
+                    'btn__active': page ===pageNumber
+                }"
+            >
+                {{pageNumber}}
+            </button>
+        </div>
     </div>
   </div>
 </template>
@@ -85,6 +85,7 @@ import Vuetable from "vuetable-2";
 import  productFields  from "@/utils-vuetable/productVuetable/Fields";
 import axios from "axios";
 import defaultImage from '../../../assets/login_bg.jpg'
+import config  from '../../../config';
 
 export default {
   components: {
@@ -100,6 +101,8 @@ export default {
       page: 1,
       totalPages: "",
       fields: productFields(this.$i18n),
+
+      configURL: config.URL.dev
     };
   },
   methods: {
@@ -116,34 +119,34 @@ export default {
       
      
     },
-     changePage(pageNumber){
+    changePage(pageNumber){
       this.page = pageNumber
     },
     async fetchData(){
-        const resp = await axios.get('https://marketpaymart.herokuapp.com/api/dashboard/products',{
+        const resp = await axios.get(`${config.URL.dev}/api/dashboard/products`,{
         params: {
           limit: 5,
           page: this.page
         }})
         this.totalPages = Math.ceil(resp.data.meta.total / this.perPage)
-        this.productsData = resp.data.data.reverse()
+        this.productsData = resp.data.data
     }
   },
   async created() {
 
     const resp = await axios.get(
-      "https://marketpaymart.herokuapp.com/api/dashboard/products"
+      `${config.URL.dev}/api/dashboard/products`
     );
     this.productsData = resp.data.reverse();    
   },
    async mounted(){
     await this.fetchData();
   },
-  // watch: {
-  //   page() {
-  //     this.fetchData()
-  //   },
-  // },
+  watch: {
+    page() {
+      this.fetchData()
+    },
+  },
 };
 </script>
 

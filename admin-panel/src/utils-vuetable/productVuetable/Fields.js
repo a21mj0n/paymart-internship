@@ -1,7 +1,7 @@
 export default (i18n) => {
   return[
     {
-      name: 'image',
+      name: 'images',
       title: "",
       width: '10%',
     },
