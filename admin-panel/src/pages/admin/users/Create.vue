@@ -50,11 +50,11 @@ export default {
           },
           {
             type: "input",
-            inputType: "string",
+            inputType: "text",
             placeholder: "url img",
             model: "avatar",
             required: true,
-            validator: "number",
+            validator: "string",
             styleClasses: "inps",
           },
           {
@@ -90,7 +90,7 @@ export default {
 };
 </script>
 
-<style lang="scss" >
+<style lang="scss"  scoped>
 select {
 
   margin-bottom: 20px;

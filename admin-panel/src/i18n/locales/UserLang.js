@@ -1,7 +1,7 @@
 export default {
     en: {
       user: {
-
+        user:"Users",
         user_name: "User name",
         user_icon: "Name of the icon",
         user_btn: "Create",
@@ -11,7 +11,6 @@ export default {
         edit_fullname: "fullname of user",
         edit_ava: "enter users icons ",
         edit_email: "enter users email ",
-  
         edit_btn: "Change",
         edit_title: "Change User",
         add_title: "Create USer",
@@ -26,7 +25,7 @@ export default {
     },
     ru: {
       user: {
-
+        user:"Пользователи",
         user_name: "Название",
         user_icon: "Название иконки",
         user_btn: "Создать",
