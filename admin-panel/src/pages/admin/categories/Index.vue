@@ -98,7 +98,7 @@ export default {
             this.page = pageNumber
         },
         async fetchData(){
-            const resp = await axios.get(`https://marketpaymart.herokuapp.com/api/dashboard/categories`,{
+            const resp = await axios.get(`/api/dashboard/categories`,{
             params: {
                 limit: this.perPage,
                 page: this.page
