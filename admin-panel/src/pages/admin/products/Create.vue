@@ -124,10 +124,10 @@ export default {
           validateBeforeSubmit: true,
           async onSubmit(model) {
             console.log(model);
-            const formData = new FormData();
-            formData.append('images[]', model.images);
-            formData.append('brand_id', model.brand_id)
+            const formData = new FormData()
             formData.append('сategory_id', model.category_id)
+            formData.append('images[]', model.images)
+            formData.append('brand_id', model.brand_id)
             formData.append('name', model.name)
             formData.append('price', model.price)
             formData.append('quantity', model.quantity)

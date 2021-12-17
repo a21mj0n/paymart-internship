@@ -137,7 +137,8 @@ export default {
     const resp = await axios.get(
       `${config.URL.dev}/api/dashboard/products`
     );
-    this.productsData = resp.data.reverse();    
+    this.productsData = resp.data.reverse();   
+    console.log(resp.data); 
   },
    async mounted(){
     await this.fetchData();
