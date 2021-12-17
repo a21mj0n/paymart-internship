@@ -58,6 +58,9 @@ export default {
     page() {
       this.fetchData()
     },
+    // brands(){
+    //   this.fetchData()
+    // }
   },
   methods:{
     async removeCategory(id){
@@ -71,8 +74,10 @@ export default {
     async fetchData(){
         const resp = await axios.get('https://marketpaymart.herokuapp.com/api/dashboard/brands',{
         params: {
+          limit: 5,
           page: this.page
         }})
+        console.log(resp);
         this.totalPages = Math.ceil(resp.data.meta.total / this.perPage)
         this.brands = resp.data.data
     }
