@@ -65,6 +65,8 @@
 import axios from "axios";
 import Vuetable from "vuetable-2";
 import UserFields from "./UserFields";
+import config from  '../../../config'
+
 export default {
   name: "users",
   components: {
@@ -92,7 +94,7 @@ export default {
       if (window.confirm("Are you want to  delete ?")) {
         this.users = this.users.filter((user) => user.id !== id);
         await axios.delete(
-          `https://marketpaymart.herokuapp.com/api/dashboard/users/${id}`
+      `${config.URL.dev}/api/dashboard/users/${id}`
         );
       }
     },
@@ -101,7 +103,7 @@ export default {
     },
     async fetchData() {
       const resp = await axios.get(
-        "https://marketpaymart.herokuapp.com/api/dashboard/users",
+        `${config.URL.dev}/api/dashboard/users`,
         {
           params: {
             limit: 9,
@@ -235,9 +237,9 @@ $main-color: rgb(31, 7, 110);
     font-weight: bold;
     transition: all 300ms linear;
     &:hover {
-    background-color: $main-color;
-    color: #fff;
-  }
+      background-color: $main-color;
+      color: #fff;
+    }
   }
 }
 // adaptive
