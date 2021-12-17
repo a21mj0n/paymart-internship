@@ -2,10 +2,11 @@
   <div class="content test-wrapper">
     <div class="wrapper__table">
       <vuetable
-        :data="categoriesData"
+        :data="productsData"
         :fields="fields"
         pagination-path=""
         :api-mode="false"
+        :per-page="5"
       >
   <template slot="image" slot-scope="props">
           <div class="img__wrapper">
@@ -63,6 +64,18 @@
           </div>
         </template>
       </vuetable>
+          <div class="pagination">
+      <button 
+        v-for="pageNumber in this.totalPages" 
+        :key="pageNumber"  
+        @click="changePage(pageNumber)"
+        :class="{
+            'btn__active': page ===pageNumber
+        }"
+        >
+        {{pageNumber}}
+      </button>
+    </div>
     </div>
   </div>
 </template>
@@ -82,7 +95,10 @@ export default {
     return {
       brand: '',
       defaultImage,
-      categoriesData: [],
+      productsData: [],
+      perPage: 5,
+      page: 1,
+      totalPages: "",
       fields: productFields(this.$i18n),
     };
   },
@@ -100,22 +116,54 @@ export default {
       
      
     },
+     changePage(pageNumber){
+      this.page = pageNumber
+    },
+    async fetchData(){
+        const resp = await axios.get('https://marketpaymart.herokuapp.com/api/dashboard/products',{
+        params: {
+          limit: 5,
+          page: this.page
+        }})
+        this.totalPages = Math.ceil(resp.data.meta.total / this.perPage)
+        this.productsData = resp.data.data.reverse()
+    }
   },
   async created() {
 
     const resp = await axios.get(
       "https://marketpaymart.herokuapp.com/api/dashboard/products"
     );
-    this.categoriesData = resp.data.reverse();
-    
-    
+    this.productsData = resp.data.reverse();    
   },
+   async mounted(){
+    await this.fetchData();
+  },
+  // watch: {
+  //   page() {
+  //     this.fetchData()
+  //   },
+  // },
 };
 </script>
 
 <style lang="scss" scoped>
 
 $main-color: rgb(31, 7, 110);
+.pagination{
+  display: flex;
+  margin-top: 10px;
+  margin: 10px -10px;
+  justify-content: flex-end;
+  button{
+    color: rgb(117, 117, 117);
+    padding: 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 2px solid rgb(117, 117, 117);
+  }
+}
 .count-wrapper {
   display: flex;
   align-items: center;

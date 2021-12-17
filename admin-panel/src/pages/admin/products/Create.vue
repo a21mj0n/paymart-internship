@@ -15,6 +15,7 @@
 <script>
 import axios from "axios";
 import VueFormGenerator from "vue-form-generator/dist/vfg-core.js";
+import config  from '../../../config';
 
 export default {
   name: "createProduct",
@@ -116,7 +117,7 @@ export default {
           validateBeforeSubmit: true,
           async onSubmit(model) {
             await axios.post(
-              "https://marketpaymart.herokuapp.com/api/dashboard/products",
+              `${config.URL.prod}/api/dashboard/products`,
               model 
             );
             console.log(model);
