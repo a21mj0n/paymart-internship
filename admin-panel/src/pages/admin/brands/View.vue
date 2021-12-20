@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import config from '../../../config'
 import axios from 'axios'
 export default {
   data(){
@@ -33,7 +34,7 @@ export default {
     // }
   },
   async created(){
-    const {data} = await axios.get(`https://marketpaymart.herokuapp.com/api/dashboard/brands/${this.$route.params.id}`)
+    const {data} = await axios.get(`${config.URL.dev}/api/dashboard/brands/${this.$route.params.id}`)
     this.brandByID = data
   }
 }

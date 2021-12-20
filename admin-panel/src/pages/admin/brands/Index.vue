@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import config from '../../../config'
 import axios from 'axios'
 import Vuetable from 'vuetable-2'
 import brandFields from '../../../utils-vuetable/brands-vuetable/field'
@@ -48,7 +49,7 @@ export default {
     }
   },
   async created(){
-    const {data} = await axios.get('https://marketpaymart.herokuapp.com/api/dashboard/brands')
+    const {data} = await axios.get(`${config.URL.dev}/api/dashboard/brands`)
     this.brands = data
   },
   async mounted(){
@@ -65,14 +66,14 @@ export default {
   methods:{
     async removeCategory(id){
       if(window.confirm("Are you sure that you want to delete brand?")){
-        await axios.delete(`https://marketpaymart.herokuapp.com/api/dashboard/brands/${id}`)
+        await axios.delete(`${config.URL.dev}/api/dashboard/brands/${id}`)
       }
     },
     changePage(pageNumber){
       this.page = pageNumber
     },
     async fetchData(){
-        const resp = await axios.get('https://marketpaymart.herokuapp.com/api/dashboard/brands',{
+        const resp = await axios.get(`${config.URL.dev}/api/dashboard/brands`,{
         params: {
           limit: 5,
           page: this.page
