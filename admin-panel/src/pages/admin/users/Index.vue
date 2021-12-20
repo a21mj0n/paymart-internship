@@ -65,7 +65,7 @@
 import axios from "axios";
 import Vuetable from "vuetable-2";
 import UserFields from "./UserFields";
-import config from  '../../../config'
+import config from "../../../config";
 
 export default {
   name: "users",
@@ -93,24 +93,19 @@ export default {
     async removeUser(id) {
       if (window.confirm("Are you want to  delete ?")) {
         this.users = this.users.filter((user) => user.id !== id);
-        await axios.delete(
-      `${config.URL.dev}/api/dashboard/users/${id}`
-        );
+        await axios.delete(`${config.URL.dev}/api/dashboard/users/${id}`);
       }
     },
     changePage(pageNumber) {
       this.page = pageNumber;
     },
     async fetchData() {
-      const resp = await axios.get(
-        `${config.URL.dev}/api/dashboard/users`,
-        {
-          params: {
-            limit: 9,
-            page: this.page,
-          },
-        }
-      );
+      const resp = await axios.get(`${config.URL.dev}/api/dashboard/users`, {
+        params: {
+          limit: 9,
+          page: this.page,
+        },
+      });
       this.totalPages = Math.ceil(resp.data.meta.total / this.perPage);
       console.log(this.totalPages);
       this.users = resp.data.data;

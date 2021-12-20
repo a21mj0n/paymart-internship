@@ -25,7 +25,7 @@ export default {
       model: {
         username: "",
         full_name: "",
-        avatar: "",
+        avatar: [],
         email: "",
       },
       schema: {
@@ -50,11 +50,10 @@ export default {
           },
           {
             type: "input",
-            inputType: "text",
-            placeholder: "url img",
+            inputType: "",
+            placeholder: "file",
             model: "avatar",
             required: true,
-            validator: "string",
             styleClasses: "inps",
           },
           {
