@@ -1,7 +1,8 @@
 <template>
   <div class="content">
     <div class="center">
-      <form>
+      <Loader v-if="loading"/>
+      <form v-else>
         <vue-form-generator
           :schema="schema"
           :model="model"
@@ -22,6 +23,9 @@ export default {
   name: "createProduct",
   data() {
     return {
+       loading: true,
+
+
       pullCat: "",
       pullBrand: "",
       model: {
@@ -61,7 +65,11 @@ export default {
     },
   },
   async created() {
-    await this.getCategory();
+   
+  },
+  async mounted(){
+
+     await this.getCategory();
     const $this = this;
     const fields = {
       fields: [
@@ -142,7 +150,9 @@ export default {
     };
 
     this.schema = fields;
-  },
+
+    this.loading = false
+  }
 };
 </script>
 
