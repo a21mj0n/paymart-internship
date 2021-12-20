@@ -132,6 +132,7 @@ export default {
   },
   computed:{
  filterProducts() {
+    // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       if (this.sortedProducts.length) {
         return this.sortedProducts;
       } else {
@@ -155,6 +156,7 @@ export default {
         }
       });
       this.selected = category.name;
+      
     },
     
     minus(product) {
