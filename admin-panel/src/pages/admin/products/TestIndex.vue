@@ -26,6 +26,11 @@
             </p>
           </div>
         </template>
+        <template slot="category" slot-scope="props">
+          <div class="product__wrapper">
+            <p class="price">{{ props.rowData.category }}</p>
+          </div>
+        </template>
         <template slot="price" slot-scope="props">
           <div class="product__wrapper">
             <p class="price">€ {{ props.rowData.price }}</p>
@@ -130,6 +135,7 @@ export default {
         }})
         this.totalPages = Math.ceil(resp.data.meta.total / this.perPage)
         this.productsData = resp.data.data
+        console.log(this.productsData)
     }
   },
   async created() {

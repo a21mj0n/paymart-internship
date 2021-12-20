@@ -57,7 +57,6 @@ export default {
       
       this.pullCat = resp.data
       this.pullBrand = resp2.data
-      console.log(this.pullBrand);
       
     },
   },
@@ -123,18 +122,17 @@ export default {
           buttonText: "добавить",
           validateBeforeSubmit: true,
           async onSubmit(model) {
-            console.log(model);
             const formData = new FormData();
             formData.append('images[]', model.images);
             formData.append('brand_id', model.brand_id)
-            formData.append('сategory_id', model.category_id)
+            formData.append('category_id', model.category_id)
             formData.append('name', model.name)
             formData.append('price', model.price)
             formData.append('quantity', model.quantity)
-
+            
             await axios.post(
               `${config.URL.dev}/api/dashboard/products`,
-              formData 
+              formData
             );
             console.log('success');
             await $this.$router.push({ name: "admin.products.test" });
