@@ -1,7 +1,7 @@
 export default (i18n) => {
   return[
     {
-      name: 'image',
+      name: 'images',
       title: "",
       width: '10%',
     },
@@ -12,7 +12,7 @@ export default (i18n) => {
     },
    
     {
-      name: "category",
+      name: "category.name",
       title: () => i18n.t('products.category'),
       width: '10%'
     },

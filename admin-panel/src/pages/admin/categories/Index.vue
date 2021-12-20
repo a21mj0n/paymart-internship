@@ -81,18 +81,12 @@ export default {
         page() {
             this.fetchData()
         },
-        categoriesData(oldValue, newValue){
-            if(oldValue === newValue){
-                // this.fetchData()
-                console.log('fetchingg');
-            }
-        }
     },
     methods: {
         async removeCategory({id}){
             if(window.confirm("Вы точно хотите удалить ?")){
                 await axios.delete(`${config.URL.dev}/api/dashboard/categories/${id}`)
-                this.categoriesData = this.categoriesData.filter(cat => cat.id !== id)
+                this.fetchData()
             }
         }, 
         changePage(pageNumber){

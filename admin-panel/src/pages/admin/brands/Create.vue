@@ -34,6 +34,7 @@
 import i18n from '../../../i18n/i18n'
 import axios from 'axios'
 import {mapGetters} from 'vuex'
+import config  from '../../../config'
 export default {
   data(){
     return{
@@ -65,7 +66,7 @@ export default {
           {
             type: 'submit',
             async onSubmit(model){
-              await axios.post('https://marketpaymart.herokuapp.com/api/dashboard/brands', model)
+              await axios.post(`${config.URL.dev}/api/dashboard/brands`, model)
               model.name = model.image = ''
               await $this.$router.push({ name: 'admin.brands' });
             },
