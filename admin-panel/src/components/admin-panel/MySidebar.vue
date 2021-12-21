@@ -126,6 +126,7 @@ export default {
       align-items: center;
       background: red;
       height: 50px;
+      margin-bottom: 0;
 
       border-radius: 50%;
       margin-right: 10px;
