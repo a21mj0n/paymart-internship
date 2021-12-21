@@ -11,7 +11,7 @@
     <!-- table -->
     <div class="wrapper__table">
       <!-- api-url="https://61ade31fd228a9001703b022.mockapi.io/api/users" -->
-      <Vuetable :data="users" :api-mode="false" :fields="fields" >
+      <Vuetable :data="users" :api-mode="false" :fields="fields">
         <template slot="actions" slot-scope="props">
           <div class="icons__flex">
             <i
@@ -65,7 +65,7 @@
 import axios from "axios";
 import Vuetable from "vuetable-2";
 import UserFields from "./UserFields";
-import config from '../../../config';
+import config from "../../../config";
 
 export default {
   name: "users",
@@ -82,8 +82,7 @@ export default {
     };
   },
   async created() {
-    this.fetchData() 
-    console.log('test');
+    this.fetchData();
   },
   watch: {
     page() {
@@ -94,20 +93,19 @@ export default {
     async removeUser(id) {
       if (window.confirm("Are you want to  delete ?")) {
         this.users = this.users.filter((user) => user.id !== id);
-        await axios.delete(`https://marketpaymart.herokuapp.com/api/dashboard/users/${id}`);
+        await axios.delete(`${config.URL.dev}/api/dashboard/users/${id}`);
       }
     },
     changePage(pageNumber) {
       this.page = pageNumber;
     },
     async fetchData() {
-      const resp = await axios.get(`${config.URL.dev}/api/dashboard/users`,{
-          params: {
-            limit: this.perPage,
-            page: this.page,
-          },
-        }
-      );
+      const resp = await axios.get(`${config.URL.dev}/api/dashboard/users`, {
+        params: {
+          limit: 9,
+          page: this.page,
+        },
+      });
       this.totalPages = Math.ceil(resp.data.meta.total / this.perPage);
       console.log(this.totalPages);
       this.users = resp.data.data;
@@ -118,6 +116,7 @@ export default {
 
 <style lang="scss" scoped>
 $main-color: rgb(31, 7, 110);
+
 .wrapper__table {
   width: 100%;
 }
@@ -215,6 +214,26 @@ $main-color: rgb(31, 7, 110);
       &:hover {
         opacity: 1;
       }
+    }
+  }
+}
+.pagination {
+  margin-top: 25px;
+  display: flex;
+  justify-content: flex-end;
+  button {
+    width: 30px;
+    margin-left: 10px;
+    height: 30px;
+    background-color: transparent;
+    border: 1px solid $main-color;
+    color: $main-color;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 300ms linear;
+    &:hover {
+      background-color: $main-color;
+      color: #fff;
     }
   }
 }

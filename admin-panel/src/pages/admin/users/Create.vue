@@ -25,7 +25,7 @@ export default {
       model: {
         username: "",
         full_name: "",
-        avatar: "",
+        avatar: [],
         email: "",
       },
       schema: {
@@ -50,11 +50,10 @@ export default {
           },
           {
             type: "input",
-            inputType: "text",
-            placeholder: "url img",
+            inputType: "",
+            placeholder: "file",
             model: "avatar",
             required: true,
-            validator: "string",
             styleClasses: "inps",
           },
           {
@@ -76,7 +75,7 @@ export default {
     async createUser() {
       try {
         const resp = await axios.post(
-          "https://61ade31fd228a9001703b022.mockapi.io/api/users",
+          "https://marketpaymart.herokuapp.com/api/dashboard/users",
           this.model
         );
         this.value, this.value_surname, this.value_age, this.value_address;

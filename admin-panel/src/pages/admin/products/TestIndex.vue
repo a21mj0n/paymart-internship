@@ -10,7 +10,6 @@
       >
   <template slot="images" slot-scope="props">
           <div class="img__wrapper">
-            {{ }}
             <img v-if="props.rowData.image.length > 0" :src="`${configURL}/storage/product_images/${props.rowData.image[0].product_id}/` + props.rowData.image[0].name" alt="">
             <img v-else :src="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZWyg5k6Y2X4OaOfDMPcFaAwL9r_eN34CUXbEgCEjMepep7WMua2z90y_DGL0YobiBjRY&usqp=CAU'"  alt="">
           </div>
@@ -106,7 +105,6 @@ export default {
       page: 1,
       totalPages: "",
       fields: productFields(this.$i18n),
-
       configURL: config.URL.dev
     };
   },
@@ -143,7 +141,8 @@ export default {
     const resp = await axios.get(
       `${config.URL.dev}/api/dashboard/products`
     );
-    this.productsData = resp.data.reverse();    
+    this.productsData = resp.data.reverse();   
+    console.log(resp.data); 
   },
    async mounted(){
     await this.fetchData();
