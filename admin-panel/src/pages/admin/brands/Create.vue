@@ -34,7 +34,7 @@
 import i18n from '../../../i18n/i18n'
 import axios from 'axios'
 import {mapGetters} from 'vuex'
-import config  from '../../../config';
+import config  from '../../../config'
 export default {
   data(){
     return{
