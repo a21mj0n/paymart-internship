@@ -121,12 +121,7 @@ export default {
       page: 1,
       totalPages: "",
       fields: productFields(this.$i18n),
-
-      configURL: config.URL.dev,
-      categories: [],
-      sortedProducts: [],
-      selected: "All",
-      allCategory: {created_at: '', name: 'All' , id: Date.now() }
+      configURL: config.URL.dev
     };
   },
   computed:{
@@ -187,12 +182,8 @@ export default {
     const resp = await axios.get(
       `${config.URL.dev}/api/dashboard/products`
     );
-    const cat = await axios.get(
-      `${config.URL.dev}/api/dashboard/categories`
-    );
-    this.productsData = resp.data; 
-    this.categories = cat.data 
-    this.categories.unshift(this.allCategory)
+    this.productsData = resp.data.reverse();   
+    console.log(resp.data); 
   },
    async mounted(){
     await this.fetchData();

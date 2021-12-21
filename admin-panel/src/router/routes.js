@@ -136,6 +136,15 @@ export default [
         },
         component:  () => import('../pages/admin/users/View')
     },
+    {
+        path: '/admin/users/create_role',
+        name: "admin.users.create_role",
+        meta: {
+            layout: "admin",
+            protected: true,
+        },
+        component:  () => import('../pages/admin/users/CreateRole')
+    },
     // brands
     {
         path: '/admin/brands/Index2',
