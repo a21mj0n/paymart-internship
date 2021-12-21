@@ -7,6 +7,7 @@
           :model="model"
           :options="formOptions"
         ></vue-form-generator>
+        <!-- <input type="file" name="" id="" @change="change"> -->
       </form>
     </div>
   </div>
@@ -15,6 +16,7 @@
 <script>
 import axios from "axios";
 import VueFormGenerator from "vue-form-generator/dist/vfg-core.js";
+import config  from '../../../config';
 
 export default {
   name: "createProduct",
@@ -24,10 +26,10 @@ export default {
       pullBrand: "",
       model: {
         id: Date.now(),
-        image: [],
+        images: [],
         name: "",
-        brand: '',
-        category: "",
+        brand_id: '',
+        category_id: "",
         price: "",
         quantity: null,
         created_at: new Date().toLocaleString(),
@@ -42,20 +44,19 @@ export default {
     };
   },
   methods: {
+    change(e) {
+      this.model.images = e.target.files;
+    },
     async getCategory() {
       const resp = await axios.get(
-        "https://marketpaymart.herokuapp.com/api/dashboard/categories"
+        `${config.URL.dev}/api/dashboard/categories`
       );
       const resp2 = await axios.get(
-        "https://marketpaymart.herokuapp.com/api/dashboard/brands"
+        `${config.URL.dev}/api/dashboard/brands`
       );
       
-      this.pullCat = resp.data.map(cat => {
-        return cat.name
-      });
-      this.pullBrand = resp2.data.map(brand => {
-        return brand.name
-      });
+      this.pullCat = resp.data
+      this.pullBrand = resp2.data
       
     },
   },
@@ -67,13 +68,13 @@ export default {
         {
           type: "select",
           label: "Выберите категорию",
-          model: "category",
+          model: "category_id",
           values: () => this.pullCat,
         },
         {
           type: "select",
           label: "Выберите бренд",
-          model: "brand",
+          model: "brand_id",
           values: () => this.pullBrand,
         },
         {
@@ -104,25 +105,36 @@ export default {
           default: 0,
           validator: "number",
         },
-        // {
-        //   type: "file",
-        //   // inputType: "file",
-        //   label: "hollo",
-        //   model: "image",
-        //   preview: true,
-        //   browse: false 
-        // },
+        {
+          
+          type:'upload',
+          // model: "images",
+          files: true,
+          multiple: true,
+          onChanged(model, schema, event) {
+            console.log(schema);
+            return model.images = event.target.files[0];
+          } 
+        },
         {
           type: "submit",
           label: "",
           buttonText: "добавить",
           validateBeforeSubmit: true,
           async onSubmit(model) {
+            const formData = new FormData();
+            formData.append('images[]', model.images);
+            formData.append('brand_id', model.brand_id)
+            formData.append('category_id', model.category_id)
+            formData.append('name', model.name)
+            formData.append('price', model.price)
+            formData.append('quantity', model.quantity)
+            
             await axios.post(
-              "https://marketpaymart.herokuapp.com/api/dashboard/products",
-              model 
+              `${config.URL.dev}/api/dashboard/products`,
+              formData
             );
-            console.log(model);
+            console.log('success');
             await $this.$router.push({ name: "admin.products.test" });
           },
         },

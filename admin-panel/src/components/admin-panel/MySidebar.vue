@@ -40,9 +40,8 @@
             <li @click="productVisible = !productVisible"><span class="side__bar-visible"><i class="fa fa-square" aria-hidden="true"></i></span>{{$t('sidebar.products')}}</li>
               <transition name="slide">
           <div class="config" v-if="productVisible">
-              <router-link :to="{name: 'admin.products'}"><span class="side__bar-visible">{{$t('sidebar.insideProducts.shortcutView')}}</span>{{$t('sidebar.insideProducts.view')}}</router-link>
               <router-link :to="{name: 'admin.products.create'}"><span class="side__bar-visible">{{$t('sidebar.insideProducts.shortcutCreate')}}</span>{{$t('sidebar.insideProducts.create')}}</router-link>
-              <router-link :to="{name: 'admin.products.test'}"><span class="side__bar-visible">test</span>{{$t('sidebar.insideProducts.create')}}</router-link>
+              <router-link :to="{name: 'admin.products.test'}"><span class="side__bar-visible">{{$t('sidebar.insideProducts.shortcutView')}}</span>{{$t('sidebar.insideProducts.view')}}</router-link>
             </div>
         </transition>
             <li @click="brandVisible = !brandVisible"><span class="side__bar-visible"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>{{$t('sidebar.brands')}}</li>

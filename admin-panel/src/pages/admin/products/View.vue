@@ -21,6 +21,7 @@
 
 <script>
 import axios from "axios";
+import config  from '../../../config';
 export default {
      name: "viewProduct",
 data(){
@@ -33,15 +34,15 @@ methods:{
     async deleteProduct(id){
         if(window.confirm('Delete this Product??')){
           // eslint-disable-next-line no-undef
-          await axios.delete(`https://marketpaymart.herokuapp.com/api/dashboard/products/${id}`)
-          this.$router.push({name: 'admin.products'})  
+          await axios.delete(`${config.URL.dev}/api/dashboard/products/${id}`)
+          this.$router.push({name: 'admin.products.test'})  
         }
         
 
     }
 },
 async created(){
-    const {data} = await axios.get(`https://marketpaymart.herokuapp.com/api/dashboard/products/${this.$route.params.id}`)
+    const {data} = await axios.get(`${config.URL.dev}/api/dashboard/products/${this.$route.params.id}`)
     this.product = data
 }
 }
