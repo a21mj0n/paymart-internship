@@ -79,7 +79,7 @@ export default {
 }
 .side__bar-wrapper {
   position: absolute;
-  overflow-y: auto;
+  overflow-y: scroll;
   top: 0;
   left: 0;
   width: 260px;

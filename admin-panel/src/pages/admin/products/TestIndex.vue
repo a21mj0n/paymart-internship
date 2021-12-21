@@ -177,12 +177,10 @@ export default {
     async fetchData(){
         const resp = await axios.get(`${config.URL.dev}/api/dashboard/products`,{
         params: {
-          limit: 5,
-          page: this.page,
           
         }})
-        this.totalPages = Math.ceil(resp.data.meta.total / this.perPage)
-        this.productsData = resp.data.data.reverse()
+        // this.totalPages = Math.ceil(resp.data.meta.total / this.perPage)
+        this.productsData = resp.data.data
     }
   },
   async created() {
@@ -195,7 +193,6 @@ export default {
     );
     this.productsData = resp.data; 
     this.categories = cat.data 
-    console.log(this.categories);
     this.categories.unshift(this.allCategory)
   },
    async mounted(){
@@ -206,6 +203,7 @@ export default {
     page() {
       this.fetchData()
     },
+    
   },
 };
 </script>
