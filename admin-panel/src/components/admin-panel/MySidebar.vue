@@ -41,15 +41,15 @@
               <div class="config" v-if="usersVisible">
                 <router-link :to="{name: 'admin.users'}">
                   <span class="side__bar-visible">
-                    VU
+                    {{$t('user.view_sb_ms')}}
                   </span>
-                  View Users
+                  {{$t('user.view_sb_xs')}}
                 </router-link>
                 <router-link :to="{name: 'admin.users.create_role'}">
                   <span class="side__bar-visible">
-                    CR
+                    {{$t('user.create_sb_ms')}}
                   </span>
-                    Create Role
+                    {{$t('user.create_sb_xs')}}
                 </router-link>
               </div>
           </transition>

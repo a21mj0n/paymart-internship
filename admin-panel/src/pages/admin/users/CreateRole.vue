@@ -9,16 +9,23 @@
             >
             </vue-form-generator>
 
+            <p class="error" v-if="error.length > 0">{{error}}</p>
+
             <div 
                 v-if="permissions.length > 0"
                 class="permissions"
             >
                 <span
-                    v-for="permission in permissions" 
+                    v-for="(permission, index) in permissions" 
                     :key="permission"
                     class="permission"
                 >
                     {{permission}}
+                    <i class="fa fa-close"
+                        @click="removePermission(index)"
+                    >
+
+                    </i>
                 </span>
             </div>
 
@@ -46,7 +53,8 @@ export default {
             formOptions: {
                 validateAfterChanged: true,
             },
-            permissions: []
+            permissions: [],
+            error: ""
         }
     },
     methods: {
@@ -58,6 +66,9 @@ export default {
         onValidated(isValid, errors) {
             console.log("Validation result: ", isValid, ", Errors:", errors);
         },
+        removePermission(id){
+            this.permissions = this.permissions.filter((per, idx) => idx !== id)
+        },
         fillSchemaFields($this){
             this.schema.fields = [
             {
@@ -68,22 +79,38 @@ export default {
                 model: 'role_name',
                 validator: VueFormGenerator.validators.string.locale({
                     fieldIsRequired: i18n.t('user.role_input_validate'),
-                    textTooSmall: ""
                 })
             },
             {
-                type: 'input',
+                type: 'select',
                 inputType: 'text',
                 required: false,
                 label: i18n.t('user.role_permissions'),
                 model: 'role_permission',
+                values: [
+                    'test1',
+                    'test2',
+                    'test3',
+                    'test4',
+                    'test5'
+                ],
                 buttons: [
                     {
                         classes: "btn-location",
                         label: i18n.t('user.role_btn_add'),
                         onclick: function(model) {
                             if(model.role_permission === ''){
+                                $this.error = i18n.t('user.role_error_empty')
+                                setTimeout(() => {
+                                    $this.error = ''
+                                }, 2000)
                                 return 
+                            }else if($this.permissions.includes(model.role_permission)){
+                                $this.error = i18n.t('user.role_error_repeat')
+                                setTimeout(() => {
+                                    $this.error = ''
+                                }, 2000)
+                                return
                             }
                             $this.permissions.push(model.role_permission)
                             model.role_permission = ''
@@ -177,13 +204,25 @@ export default {
     }
     .permissions{
         align-items: center;
-        margin-top: 20px;
         display: flex;
         flex-wrap: wrap;
+    }
+    p{
+        padding: 0 10px;
     }
     .permission{
         border: 1px solid #ccc;
         padding: 10px;
         margin: 10px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+    }
+    i {
+        cursor: pointer;
+        margin-left: 10px;
+    }
+    .error{
+        color: red;
     }
 </style>

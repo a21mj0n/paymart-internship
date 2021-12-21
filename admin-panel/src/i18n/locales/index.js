@@ -111,7 +111,13 @@ const messages = {
       role_permissions: "Role Permissions",
       role_btn_add: "Add Role",
       role_btn_create: "Create",
-      role_input_validate: "Input can't be empty"
+      role_input_validate: "Input can't be empty",
+      role_error_repeat: "You had this permission",
+      role_error_empty: "You can't add empty value",
+      create_sb_xs: 'Create Role',
+      create_sb_ms: 'CU',
+      view_sb_xs: 'View Users',
+      view_sb_ms: 'VU'
     }
   },
   ru: {
@@ -222,10 +228,16 @@ const messages = {
       table_create: "Создать пользователя",
       role_create: "Создать роль",
       role_name: "Название роли",
-      role_permissions: "Разрешение роли",
-      role_btn_add: "Добавить роль",
+      role_permissions: "Разрешения",
+      role_btn_add: "Добавить Разрешение",
       role_btn_create: "Создать",
-      role_input_validate: "Поля не может быть пустым"
+      role_input_validate: "Поля не может быть пустым",
+      role_error_repeat: "Вы уже добавили это разрешение",
+      role_error_empty: "Невозможно добавить пустую значению",
+      create_sb_xs: 'Создать Роль',
+      create_sb_ms: 'СР',
+      view_sb_xs: 'Посмотреть Пользователи',
+      view_sb_ms: 'ПП'
     }
   },
 }
