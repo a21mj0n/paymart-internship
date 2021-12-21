@@ -17,6 +17,7 @@
 
 <script>
 import axios from 'axios'
+import config  from '../../../config';
 export default {
   data(){
     return{
@@ -25,12 +26,12 @@ export default {
   },
   methods: {
     async editCategory(){
-      await axios.put(`https://marketpaymart.herokuapp.com/api/dashboard/brands/${this.$route.params.id}`, this.brandByID)
+      await axios.put(`${config.URL.dev}/api/dashboard/brands/${this.$route.params.id}`, this.brandByID)
       this.$router.push({name: 'admin.brands'})
     }
   },
   async created(){
-    const {data} = await axios.get(`https://marketpaymart.herokuapp.com/api/dashboard/brands/${this.$route.params.id}`)
+    const {data} = await axios.get(`${config.URL.dev}/api/dashboard/brands/${this.$route.params.id}`)
     this.brandByID = data
   }
 }

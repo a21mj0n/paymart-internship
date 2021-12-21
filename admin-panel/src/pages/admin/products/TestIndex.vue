@@ -1,8 +1,15 @@
 <template>
   <div class="content test-wrapper">
-    <div class="wrapper__table">
+      <Loader v-if="loading" />
+
+    <div v-else class="wrapper__table">
+      <Select
+        :options="categories"
+        @select="sortByCategories"
+        :selected="selected"
+      />
       <vuetable
-        :data="productsData"
+        :data="filterProducts"
         :fields="fields"
         pagination-path=""
         :api-mode="false"
@@ -23,6 +30,11 @@
              <span >By  {{ props.rowData.brand.name }}</span> 
               
             </p>
+          </div>
+        </template>
+        <template slot="category" slot-scope="props">
+          <div class="product__wrapper">
+            <p class="price">{{ props.rowData.category }}</p>
           </div>
         </template>
         <template slot="price" slot-scope="props">
@@ -85,14 +97,23 @@ import  productFields  from "@/utils-vuetable/productVuetable/Fields";
 import axios from "axios";
 import defaultImage from '../../../assets/login_bg.jpg'
 import config  from '../../../config';
+import Loader from '../../../components/Loader.vue';
+import Select from '../../../components/Select.vue'
 
 export default {
   components: {
     Vuetable,
+    Loader,
+    Select,
     // VuetablePagination,
   },
   data() {
     return {
+
+      loading: true,
+
+
+
       brand: '',
       defaultImage,
       productsData: [],
@@ -100,10 +121,42 @@ export default {
       page: 1,
       totalPages: "",
       fields: productFields(this.$i18n),
-      configURL: config.URL.dev
+
+      configURL: config.URL.dev,
+      categories: [],
+      sortedProducts: [],
+      selected: "All",
+      allCategory: {created_at: '', name: 'All' , id: Date.now() }
     };
   },
+  computed:{
+ filterProducts() {
+    // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      if (this.sortedProducts.length) {
+        return this.sortedProducts;
+      } else {
+        return this.productsData;
+      }
+    },
+  },
   methods: {
+    optionSelect(option) {
+      this.selected = option.name;
+    },
+     sortByCategories(category) {
+      this.productsData
+      this.sortedProducts = [];
+      let vm = this;
+      this.productsData.map(function (item) {
+        // eslint-disable-next-line no-empty
+        if (item.category.name == category.name) {
+          vm.sortedProducts.push(item);
+          
+        }
+      });
+      this.selected = category.name;
+      
+    },
     
     minus(product) {
       product.quantity--;
@@ -123,10 +176,9 @@ export default {
     async fetchData(){
         const resp = await axios.get(`${config.URL.dev}/api/dashboard/products`,{
         params: {
-          limit: 5,
-          page: this.page
+          
         }})
-        this.totalPages = Math.ceil(resp.data.meta.total / this.perPage)
+        // this.totalPages = Math.ceil(resp.data.meta.total / this.perPage)
         this.productsData = resp.data.data
     }
   },
@@ -135,22 +187,30 @@ export default {
     const resp = await axios.get(
       `${config.URL.dev}/api/dashboard/products`
     );
-    this.productsData = resp.data.reverse();   
-    console.log(resp.data); 
+    const cat = await axios.get(
+      `${config.URL.dev}/api/dashboard/categories`
+    );
+    this.productsData = resp.data; 
+    this.categories = cat.data 
+    this.categories.unshift(this.allCategory)
   },
    async mounted(){
     await this.fetchData();
+    this.loading = false
   },
   watch: {
     page() {
       this.fetchData()
     },
+    
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
+.v__select{
+  margin-bottom: 10px;
+}
 $main-color: rgb(31, 7, 110);
 .pagination{
   display: flex;
@@ -352,5 +412,47 @@ $main-color: rgb(31, 7, 110);
   .btn {
     margin: 0 auto;
   }
+}
+
+$color-scroll: rgb(109, 104, 104)  ;
+
+::-webkit-scrollbar {
+  width: 5px;
+  position: absolute;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  z-index: 500;
+  background-color: lighten($color-scroll, 0%);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: darken($color-scroll, 5%);
+}
+::-webkit-scrollbar-thumb:active {
+  background-color: darken($color-scroll, 10%);
+}
+::-webkit-scrollbar-track-piece {
+  background-color: white;
+}
+// OPERA
+::-o-scrollbar {
+  width: 5px;
+  position: absolute;
+}
+::-o-scrollbar-thumb {
+  z-index: 500;
+  border-radius: 5px;
+  background-color: lighten($color-scroll, 5%);
+}
+::-o-scrollbar-thumb:hover {
+  background-color: darken($color-scroll, 5%);
+}
+::-o-scrollbar-thumb:active {
+  background-color: darken($color-scroll, 10%);
+}
+::-o-scrollbar-track-piece {
+  background-color: rgba(white, 0.5);
 }
 </style>

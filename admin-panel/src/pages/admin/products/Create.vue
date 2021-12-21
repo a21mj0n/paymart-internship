@@ -1,7 +1,8 @@
 <template>
   <div class="content">
     <div class="center">
-      <form>
+      <Loader v-if="loading"/>
+      <form v-else>
         <vue-form-generator
           :schema="schema"
           :model="model"
@@ -22,6 +23,9 @@ export default {
   name: "createProduct",
   data() {
     return {
+       loading: true,
+
+
       pullCat: "",
       pullBrand: "",
       model: {
@@ -57,12 +61,15 @@ export default {
       
       this.pullCat = resp.data
       this.pullBrand = resp2.data
-      console.log(this.pullBrand);
       
     },
   },
   async created() {
-    await this.getCategory();
+   
+  },
+  async mounted(){
+
+     await this.getCategory();
     const $this = this;
     const fields = {
       fields: [
@@ -123,18 +130,17 @@ export default {
           buttonText: "добавить",
           validateBeforeSubmit: true,
           async onSubmit(model) {
-            console.log(model);
-            const formData = new FormData()
-            formData.append('сategory_id', model.category_id)
-            formData.append('images[]', model.images)
+            const formData = new FormData();
+            formData.append('images[]', model.images);
             formData.append('brand_id', model.brand_id)
+            formData.append('category_id', model.category_id)
             formData.append('name', model.name)
             formData.append('price', model.price)
             formData.append('quantity', model.quantity)
-
+            
             await axios.post(
               `${config.URL.dev}/api/dashboard/products`,
-              formData 
+              formData
             );
             console.log('success');
             await $this.$router.push({ name: "admin.products.test" });
@@ -144,7 +150,9 @@ export default {
     };
 
     this.schema = fields;
-  },
+
+    this.loading = false
+  }
 };
 </script>
 

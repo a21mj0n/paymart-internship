@@ -49,7 +49,6 @@ export default {
     }
   },
   async created(){
-    
     const {data} = await axios.get(`${config.URL.dev}/api/dashboard/brands`)
     this.brands = data
   },
@@ -67,7 +66,7 @@ export default {
   methods:{
     async removeCategory(id){
       if(window.confirm("Are you sure that you want to delete brand?")){
-        await  axios.delete(`${config.URL.dev}/api/dashboard/brands/${id}`)
+        await axios.delete(`${config.URL.dev}/api/dashboard/brands/${id}`)
       }
     },
     changePage(pageNumber){
