@@ -36,6 +36,6 @@ export default {
         z-index: 200;
         margin-left: auto;
         transition: all 300ms linear;
-        width: calc(100vw - 75px);
+        width: calc(100vw - 74px);
     }
 </style>
