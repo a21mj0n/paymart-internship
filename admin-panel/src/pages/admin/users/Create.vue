@@ -17,6 +17,7 @@
 
 <script>
 import axios from "axios";
+import config from '../../../config';
 export default {
   name: "create",
 
@@ -75,7 +76,7 @@ export default {
     async createUser() {
       try {
         const resp = await axios.post(
-          "https://marketpaymart.herokuapp.com/api/dashboard/users",
+          `${config.URL.dev}/api/dashboard/users`,
           this.model
         );
         this.value, this.value_surname, this.value_age, this.value_address;
