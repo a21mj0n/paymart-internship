@@ -30,12 +30,30 @@
     </div>
     <nav>
         <ul class="navigation">
-            <router-link :to="{name: 'admin.users'}" tag="li">
+            <li @click="usersVisible = !usersVisible" >
               <span class="side__bar-visible">
                 <i class="fa fa-users" aria-hidden="true"></i>
               </span>
               {{$t('sidebar.users')}}
-            </router-link>
+            </li>
+            
+            <transition name="slide">
+              <div class="config" v-if="usersVisible">
+                <router-link :to="{name: 'admin.users'}">
+                  <span class="side__bar-visible">
+                    {{$t('user.view_sb_ms')}}
+                  </span>
+                  {{$t('user.view_sb_xs')}}
+                </router-link>
+                <router-link :to="{name: 'admin.users.create_role'}">
+                  <span class="side__bar-visible">
+                    {{$t('user.create_sb_ms')}}
+                  </span>
+                    {{$t('user.create_sb_xs')}}
+                </router-link>
+              </div>
+          </transition>
+
             <router-link tag='li' :to="{name: 'admin.categories'}"><span class="side__bar-visible"><i class="fa fa-th" aria-hidden="true"></i></span>{{$t('sidebar.categories')}}</router-link>
             <li @click="productVisible = !productVisible"><span class="side__bar-visible"><i class="fa fa-square" aria-hidden="true"></i></span>{{$t('sidebar.products')}}</li>
               <transition name="slide">
@@ -64,6 +82,7 @@ export default {
         visible:false,
         productVisible: false,
         brandVisible: false,
+        usersVisible: false
       }
   }
 };

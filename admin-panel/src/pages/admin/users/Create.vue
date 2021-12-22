@@ -91,6 +91,23 @@ export default {
 </script>
 
 <style lang="scss"  scoped>
+.add{
+  width: 100%;
+  height: calc(100vh - 100px);
+  background-color: #fff;
+  .form {
+    border: none !important;
+    display: flex;
+    flex-direction: column;
+    h2{
+        padding: 20px 0;
+        text-align: center;
+    }
+    width: 600px;
+    margin: auto;
+      
+}
+}
 select {
 
   margin-bottom: 20px;

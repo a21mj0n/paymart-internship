@@ -1,0 +1,228 @@
+<template>
+    <div class="add">
+        <form class="form" @submit.prevent="users" @validated="onValidated"> 
+            <h2>{{$t('user.role_create')}}</h2>
+            <vue-form-generator
+                :schema="schema"
+                :model="model"
+                :options="formOptions"
+            >
+            </vue-form-generator>
+
+            <p class="error" v-if="error.length > 0">{{error}}</p>
+
+            <div 
+                v-if="permissions.length > 0"
+                class="permissions"
+            >
+                <span
+                    v-for="(permission, index) in permissions" 
+                    :key="permission"
+                    class="permission"
+                >
+                    {{permission}}
+                    <i class="fa fa-close"
+                        @click="removePermission(index)"
+                    >
+
+                    </i>
+                </span>
+            </div>
+
+        </form>
+    </div>
+</template>
+
+<script>
+import axios from 'axios'
+import VueFormGenerator from 'vue-form-generator'
+import i18n from '../../../i18n/i18n'
+import { mapGetters } from 'vuex'
+import config  from '../../../config';
+export default {
+    name: 'CreateRole',
+    data(){
+        return{
+            model: {
+               role_name: '',
+               role_permission: '',
+            },
+            schema: {
+                fields: []
+            },
+            formOptions: {
+                validateAfterChanged: true,
+            },
+            permissions: [],
+            error: ""
+        }
+    },
+    methods: {
+        async createCategory(){
+            console.log(this.model)
+            await axios.post(`${config.URL.dev}/api/dashboard/categories`, this.model);
+            this.$router.push({name: 'admin.categories'});
+        },
+        onValidated(isValid, errors) {
+            console.log("Validation result: ", isValid, ", Errors:", errors);
+        },
+        removePermission(id){
+            this.permissions = this.permissions.filter((per, idx) => idx !== id)
+        },
+        fillSchemaFields($this){
+            this.schema.fields = [
+            {
+                type: 'input',
+                inputType: 'text',
+                required: true,
+                label: i18n.t('user.role_name'),
+                model: 'role_name',
+                validator: VueFormGenerator.validators.string.locale({
+                    fieldIsRequired: i18n.t('user.role_input_validate'),
+                })
+            },
+            {
+                type: 'select',
+                inputType: 'text',
+                required: false,
+                label: i18n.t('user.role_permissions'),
+                model: 'role_permission',
+                values: [
+                    'test1',
+                    'test2',
+                    'test3',
+                    'test4',
+                    'test5'
+                ],
+                buttons: [
+                    {
+                        classes: "btn-location",
+                        label: i18n.t('user.role_btn_add'),
+                        onclick: function(model) {
+                            if(model.role_permission === ''){
+                                $this.error = i18n.t('user.role_error_empty')
+                                setTimeout(() => {
+                                    $this.error = ''
+                                }, 2000)
+                                return 
+                            }else if($this.permissions.includes(model.role_permission)){
+                                $this.error = i18n.t('user.role_error_repeat')
+                                setTimeout(() => {
+                                    $this.error = ''
+                                }, 2000)
+                                return
+                            }
+                            $this.permissions.push(model.role_permission)
+                            model.role_permission = ''
+                        }
+                    },
+                ]
+            },
+            {
+                type: 'submit',
+                buttonText: i18n.t('user.role_btn_create'),
+                async onSubmit(model){
+                    await axios.post(`${config.URL.dev}/api/dashboard/categories`, model);
+                    $this.$router.push({name: 'admin.categories'});
+                    console.log(model);
+                    this.permissions.push.model
+                },
+                label: '',
+                validateBeforeSubmit: true
+            }
+        ];
+        }
+    },
+    computed: {
+        ...mapGetters({
+            langChanged: 'lang/langChanged'
+        }),
+    },
+    watch: {
+        langChanged(){
+            this.fillSchemaFields()
+        }
+    },
+    created(){
+        const $this = this;
+        this.fillSchemaFields($this)
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+    $main-color: rgb(31, 7, 110);
+    .add{
+        width: 100%;
+        height: calc(100vh - 100px);
+        background-color: #fff;
+        .form {
+            border: none !important;
+            display: flex;
+            flex-direction: column;
+            margin: 0 -20px;
+            h2{
+                padding: 20px 0;
+                text-align: center;
+            }
+            width: 600px;
+            margin: auto;
+            
+        }
+    }
+    .form__input{
+        background-color: red;
+        width: 100% !important;
+        height: 50px !important;
+        padding: 10px !important;
+        outline: none;
+        transition: all 200ms ease-in;
+        margin-top: 10px;
+        border: none;
+        box-shadow: none;
+        border-bottom: 1px solid #ccc;
+        &:focus{
+            border-bottom: 1px solid rgb(0, 167, 56);
+        }
+    }
+    .add__btn{
+        font-weight: 300;
+        align-self: flex-end;
+        transition: all 300ms linear;
+        width: 30%;
+        padding: 10px;
+        border: 1px solid $main-color;
+        background-color: transparent;
+        color: rgb$main-color;
+        margin: 10px 0;
+        cursor: pointer;
+        color: $main-color;
+        &:hover{
+            background-color: $main-color;
+            color: #fff;
+        }
+    }
+    .permissions{
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    p{
+        padding: 0 10px;
+    }
+    .permission{
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+    }
+    i {
+        cursor: pointer;
+        margin-left: 10px;
+    }
+    .error{
+        color: red;
+    }
+</style>

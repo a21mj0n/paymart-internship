@@ -87,7 +87,6 @@ const messages = {
       create_user:""
     },
     user: {
-
       user_name: "User name",
       user_icon: "Name of the icon",
       user_btn: "Create",
@@ -97,7 +96,6 @@ const messages = {
       edit_fullname: "fullname of user",
       edit_ava: "enter users icons ",
       edit_email: "enter users email ",
-
       edit_btn: "Change",
       edit_title: "Change User",
       add_title: "Create one User",
@@ -107,7 +105,19 @@ const messages = {
       table_icons: 'Icons',
       table_email: 'Email',
       table_actions: 'Actions',
-      table_create: "Create Users"
+      table_create: "Create Users",
+      role_create: "Create Role",
+      role_name: "Role Name",
+      role_permissions: "Role Permissions",
+      role_btn_add: "Add Role",
+      role_btn_create: "Create",
+      role_input_validate: "Input can't be empty",
+      role_error_repeat: "You had this permission",
+      role_error_empty: "You can't add empty value",
+      create_sb_xs: 'Create Role',
+      create_sb_ms: 'CU',
+      view_sb_xs: 'View Users',
+      view_sb_ms: 'VU'
     }
   },
   ru: {
@@ -197,7 +207,6 @@ const messages = {
       btn: 'Добавить Пользавателя '
     },
     user: {
-
       user_name: "Название",
       user_icon: "Название иконки",
       user_btn: "Создать",
@@ -216,7 +225,19 @@ const messages = {
       table_icons: 'Иконки',
       table_email: 'Почта',
       table_actions: 'Действия',
-      table_create: "Создать пользователя"
+      table_create: "Создать пользователя",
+      role_create: "Создать роль",
+      role_name: "Название роли",
+      role_permissions: "Разрешения",
+      role_btn_add: "Добавить Разрешение",
+      role_btn_create: "Создать",
+      role_input_validate: "Поля не может быть пустым",
+      role_error_repeat: "Вы уже добавили это разрешение",
+      role_error_empty: "Невозможно добавить пустую значению",
+      create_sb_xs: 'Создать Роль',
+      create_sb_ms: 'СР',
+      view_sb_xs: 'Посмотреть Пользователи',
+      view_sb_ms: 'ПП'
     }
   },
 }

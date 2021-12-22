@@ -68,6 +68,7 @@ export default {
     async removeCategory(id){
       if(window.confirm("Are you sure that you want to delete brand?")){
         await  axios.delete(`${config.URL.dev}/api/dashboard/brands/${id}`)
+        this.fetchData()
       }
     },
     changePage(pageNumber){
