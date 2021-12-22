@@ -8,14 +8,7 @@ export default [
         },
         component: () => import('../pages/AdminPage')
     },
-    {
-        path: '/',
-        name: "auth",
-        meta: {
-            layout: "empty",
-        },
-        component:  () => import('../pages/AuthPage')
-    },
+
     // categories
     {
         path: '/admin/categories',
