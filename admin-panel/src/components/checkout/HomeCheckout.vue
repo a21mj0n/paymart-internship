@@ -38,37 +38,37 @@
           </div>
         </div>
         <div class="checkout_products-checks">
+
           <div class="checkout_products-check">
-            <input @click="showDirect = !showDirect" type="radio" />
-            <label for="">Direct Bank Transfer</label>
-            <div v-if="showDirect" class="checkbox_products-descr">
-              <label for=""
-                >Lorem ipsum dolor sit, amet consectetur adipisicing
-                elit.</label
-              >
-            </div>
+            <input
+                type="radio" 
+                value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut " 
+                id="one"
+                @click="changeDescr"
+            />
+            <label for="one" >Direct Bank Transfer</label>
+          </div>
+
+          <div class="checkout_products-check">
+            <input  
+                id="two" 
+                value="Lorem ipsum dolor sit amet, consectetur adipisicing elit "
+                type="radio" 
+                @click="changeDescr"
+            />
+            <label for="two">Cheque Payment</label>
           </div>
           <div class="checkout_products-check">
-            <input @click="showCheque = !showCheque" type="radio" />
-            <label for="">Cheque Payment</label>
-            <div v-if="showCheque" class="checkbox_products-descr">
-              <label for="">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.</label
-              >
-            </div>
-          </div>
-          <div class="checkout_products-check">
-            <input @click="showPaypal = !showPaypal" type="radio" />
-            <label>Paypal System</label>
-            <div v-if="showPaypal" class="checkbox_products-descr">
-              <label for="">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.</label
-              >
-            </div>
+            <input  
+                id="three" 
+                type="radio"
+                value="Lorem ipsum dolor sit amet, consectetur "
+            />
+            <label for="three">Paypal System</label>
           </div>
           <div class="checkout_products-check checkout_products-check_mt20">
-            <input type="checkbox" />
-            <label>I've read and accept the terms & conditions</label>
+            <input  type="checkbox" />
+            <label >I've read and accept the terms & conditions</label>
           </div>
         </div>
         <button class="btn" type="submit">Place order</button>
@@ -81,20 +81,35 @@
 export default {
   data() {
     return {
-      showPaypal: false,
-      showDirect: false,
-      showCheque: false,
+      activeDescr: 0
     };
   },
 
   mounted() {},
 
-  methods: {},
+  methods: {
+      changeDescr(value){
+          this.activeDescr = value
+          console.log(value)
+      }
+  },
 };
 </script>
 
 <style lang="scss" scoped >
 $main_color: #72e019;
+// input[type="radio"] {
+//   position: relative;
+//   height: 12px;
+//   width: 12px;
+//   -webkit-appearance: none;
+//   -moz-appearance: none;
+//   appearance: none;
+//   outline: none;
+//   border-radius: 50%;
+//   border: 1px solid #ccc;
+//   //   background-color: red;
+// }
 .btn {
   margin-top: 30px;
   padding: 12px 30px;
@@ -106,8 +121,14 @@ $main_color: #72e019;
   font-weight: 700;
   text-align: center;
   -webkit-transition: 0.2s all;
-  transition: 0.2s all;
+  transition: 0.5s all;
   width: 100%;
+  &:hover {
+    border: 1px solid $main_color;
+    color: $main_color;
+    background-color: #fff;
+    cursor: pointer;
+  }
 }
 .price {
   font-size: 24px;
@@ -166,6 +187,10 @@ $main_color: #72e019;
       &_mt20 {
         margin-top: 30px;
       }
+    }
+    &-descr {
+      padding-left: 40px;
+      text-align: left;
     }
   }
 }
