@@ -38,37 +38,58 @@
           </div>
         </div>
         <div class="checkout_products-checks">
+          <div class="checkout_products-check">
+            <input
+              @click="
+                ShowOne = !ShowOne;
+                ShowSecond = false;
+                ShowThird = false;
+              "
+              type="radio"
+              value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut "
+              id="one"
+            />
+            <label for="one">Direct Bank Transfer</label>
+            <div v-if="ShowOne" class="checkbox_products-descr">
+              Lorem ipsum dolor sit 11, amet consectetur adipisicing elit.
+            </div>
+          </div>
 
           <div class="checkout_products-check">
             <input
-                type="radio" 
-                value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut " 
-                id="one"
-                @click="changeDescr"
-            />
-            <label for="one" >Direct Bank Transfer</label>
-          </div>
-
-          <div class="checkout_products-check">
-            <input  
-                id="two" 
-                value="Lorem ipsum dolor sit amet, consectetur adipisicing elit "
-                type="radio" 
-                @click="changeDescr"
+              id="two"
+              value="Lorem ipsum dolor sit amet, consectetur adipisicing elit "
+              type="radio"
+              @click="
+                ShowSecond = !ShowSecond;
+                ShowOne = false;
+                ShowThird = false;
+              "
             />
             <label for="two">Cheque Payment</label>
+            <div v-if="ShowSecond" class="checkbox_products-descr">
+              Lorem ipsum dolor sit 22, amet consectetur adipisicing elit.
+            </div>
           </div>
           <div class="checkout_products-check">
-            <input  
-                id="three" 
-                type="radio"
-                value="Lorem ipsum dolor sit amet, consectetur "
+            <input
+              @click="
+                ShowThird = !ShowThird;
+                ShowOne = false;
+                ShowSecond = false;
+              "
+              id="three"
+              type="radio"
+              value="Lorem ipsum dolor sit amet, consectetur "
             />
             <label for="three">Paypal System</label>
+            <div v-if="ShowThird" class="checkbox_products-descr">
+              ipsum dolor sit 33, amet consectetur adipisicing elit.
+            </div>
           </div>
           <div class="checkout_products-check checkout_products-check_mt20">
-            <input  type="checkbox" />
-            <label >I've read and accept the terms & conditions</label>
+            <input type="checkbox" />
+            <label>I've read and accept the terms & conditions</label>
           </div>
         </div>
         <button class="btn" type="submit">Place order</button>
@@ -81,35 +102,39 @@
 export default {
   data() {
     return {
-      activeDescr: 0
+      ShowSecond: false,
+      ShowOne: false,
+      ShowThird: false,
     };
   },
 
   mounted() {},
 
-  methods: {
-      changeDescr(value){
-          this.activeDescr = value
-          console.log(value)
-      }
-  },
+  methods: {},
 };
 </script>
 
 <style lang="scss" scoped >
 $main_color: #72e019;
-// input[type="radio"] {
-//   position: relative;
-//   height: 12px;
-//   width: 12px;
-//   -webkit-appearance: none;
-//   -moz-appearance: none;
-//   appearance: none;
-//   outline: none;
-//   border-radius: 50%;
-//   border: 1px solid #ccc;
-//   //   background-color: red;
-// }
+input:checked {
+  color: red;
+}
+input[type="radio"] {
+  position: relative;
+  height: 12px;
+  width: 12px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  &:checked {
+    background-color: red !important;
+  }
+   
+  //   background-color: red;
+}
 .btn {
   margin-top: 30px;
   padding: 12px 30px;
