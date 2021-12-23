@@ -34,6 +34,7 @@ export default {
   fieldset{
     border: none;
   }
+
   // homePage 
   .container {
     margin-left: auto;
