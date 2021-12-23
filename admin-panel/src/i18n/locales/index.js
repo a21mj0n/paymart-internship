@@ -233,7 +233,7 @@ const messages = {
       role_btn_create: "Создать",
       role_input_validate: "Поля не может быть пустым",
       role_error_repeat: "Вы уже добавили это разрешение",
-      role_error_empty: "Невозможно добавить пустую значению",
+      role_error_empty: "Невозможно добавить пустую значение",
       create_sb_xs: 'Создать Роль',
       create_sb_ms: 'СР',
       view_sb_xs: 'Посмотреть Пользователи',

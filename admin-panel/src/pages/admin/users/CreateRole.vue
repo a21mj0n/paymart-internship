@@ -20,7 +20,7 @@
                     :key="permission"
                     class="permission"
                 >
-                    {{permission}}
+                    {{permission.name}}
                     <i class="fa fa-close"
                         @click="removePermission(index)"
                     >
@@ -44,8 +44,8 @@ export default {
     data(){
         return{
             model: {
-               role_name: '',
-               role_permission: '',
+               name: '',
+               permission: '',
             },
             schema: {
                 fields: []
@@ -69,14 +69,14 @@ export default {
         removePermission(id){
             this.permissions = this.permissions.filter((per, idx) => idx !== id)
         },
-        fillSchemaFields($this){
+        fillSchemaFields($this ,data){
             this.schema.fields = [
             {
                 type: 'input',
                 inputType: 'text',
                 required: true,
                 label: i18n.t('user.role_name'),
-                model: 'role_name',
+                model: 'name',
                 validator: VueFormGenerator.validators.string.locale({
                     fieldIsRequired: i18n.t('user.role_input_validate'),
                 })
@@ -86,34 +86,28 @@ export default {
                 inputType: 'text',
                 required: false,
                 label: i18n.t('user.role_permissions'),
-                model: 'role_permission',
-                values: [
-                    'test1',
-                    'test2',
-                    'test3',
-                    'test4',
-                    'test5'
-                ],
+                model: 'permission',
+                values: [...data],
                 buttons: [
                     {
                         classes: "btn-location",
                         label: i18n.t('user.role_btn_add'),
                         onclick: function(model) {
-                            if(model.role_permission === ''){
+                            if(model.permission === ''){
                                 $this.error = i18n.t('user.role_error_empty')
                                 setTimeout(() => {
                                     $this.error = ''
                                 }, 2000)
                                 return 
-                            }else if($this.permissions.includes(model.role_permission)){
+                            }else if($this.permissions.includes(model.permission)){
                                 $this.error = i18n.t('user.role_error_repeat')
                                 setTimeout(() => {
                                     $this.error = ''
                                 }, 2000)
                                 return
                             }
-                            $this.permissions.push(model.role_permission)
-                            model.role_permission = ''
+                            $this.permissions.push({name: model.permission.name, id: model.permission})
+                            model.permission = ''
                         }
                     },
                 ]
@@ -122,10 +116,14 @@ export default {
                 type: 'submit',
                 buttonText: i18n.t('user.role_btn_create'),
                 async onSubmit(model){
-                    await axios.post(`${config.URL.dev}/api/dashboard/categories`, model);
-                    $this.$router.push({name: 'admin.categories'});
-                    console.log(model);
-                    this.permissions.push.model
+                    const data = {
+                        name: model.name,
+                        permissions: $this.permissions
+                    }
+                    
+                    await axios.post(`${config.URL.dev}/api/dashboard/roles`, data);
+                    // $this.$router.push({name: 'admin.categories'});
+                    // this.permissions.push.model
                 },
                 label: '',
                 validateBeforeSubmit: true
@@ -143,9 +141,11 @@ export default {
             this.fillSchemaFields()
         }
     },
-    created(){
+    async created(){
         const $this = this;
-        this.fillSchemaFields($this)
+        const {data} = await axios.get('http://market.local/api/dashboard/permissions')
+        console.log(data);
+        this.fillSchemaFields($this, data)
     }
 }
 </script>

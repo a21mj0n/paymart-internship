@@ -165,6 +165,11 @@ export default {
             text-align: center;
             margin: 0;
             margin: 0 0 10px;
+            &:hover{
+                color: $green-color;
+                cursor: pointer;
+                transition: all 300ms ease-in;
+            }
         }
         &-price{
             color: $green-color;

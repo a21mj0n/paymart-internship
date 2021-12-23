@@ -24,20 +24,24 @@
                 </Slide>
 
             </Carousel>
+            <product-item />
+            
         </div>
     </div>
 </template>
 
 <script>
 import CartItem from '../components/home/CartItem.vue'
+import ProductItem from '../components/home/ProductItem.vue'
 import ItemCategories from '../components/home/ItemCategories.vue'
 import { Carousel, Slide } from 'vue-carousel';
 export default {
     components: { 
         CartItem, 
+        ProductItem,
         ItemCategories,
         Carousel,
-        Slide
+        Slide,
     },
     name: "home",
     data(){
