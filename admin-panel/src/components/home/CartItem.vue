@@ -46,6 +46,7 @@
             </div>
             <div class="item-add">
                 <button @click="console.log('clicked')">
+                    <i class="fa fa-shopping-cart"></i>
                     ADD
                 </button>
             </div>
@@ -99,17 +100,30 @@ export default {
             border-radius: 0 0 10px 10px;
             button{
                 background-color: #fff;
-                padding: 5px 20px;
+                padding: 8px 0 5px 20px;
                 color: $green-color;
                 border: 1px solid $green-color;
                 cursor: pointer;
                 transition: all 300ms linear;
                 border-radius: 3px;
+                position: relative;
+                width: 100px;
+                position: relative;
                 &:hover{
-                    position: relative;
                     background-color: $green-color;
                     color: #fff;
-                    
+                    width: 120px;
+                    text-align: center;
+                    i{
+                        color: #fff;
+                        visibility: visible;
+                    }
+                }
+                i{
+                    position: absolute;
+                    left: 20px;
+                    color: $green-color;
+                    // visibility: hidden;
                 }
             }
         }

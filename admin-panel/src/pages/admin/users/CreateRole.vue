@@ -17,10 +17,10 @@
             >
                 <span
                     v-for="(permission, index) in permissions" 
-                    :key="permission"
+                    :key="index"
                     class="permission"
                 >
-                    {{permission.name}}
+                    {{permissionsName.find(per => per.id === permission.id).name}}
                     <i class="fa fa-close"
                         @click="removePermission(index)"
                     >
@@ -54,6 +54,7 @@ export default {
                 validateAfterChanged: true,
             },
             permissions: [],
+            permissionsName: [],
             error: ""
         }
     },
@@ -87,27 +88,33 @@ export default {
                 required: false,
                 label: i18n.t('user.role_permissions'),
                 model: 'permission',
-                values: [...data],
+                values:  function() {
+                    return [...data]
+                },
                 buttons: [
                     {
                         classes: "btn-location",
                         label: i18n.t('user.role_btn_add'),
                         onclick: function(model) {
+
                             if(model.permission === ''){
                                 $this.error = i18n.t('user.role_error_empty')
                                 setTimeout(() => {
                                     $this.error = ''
                                 }, 2000)
                                 return 
-                            }else if($this.permissions.includes(model.permission)){
+
+                            }else if($this.permissions.length > 0 && $this.permissions.find(per => per.id === model.permission)){
                                 $this.error = i18n.t('user.role_error_repeat')
                                 setTimeout(() => {
                                     $this.error = ''
                                 }, 2000)
                                 return
                             }
-                            $this.permissions.push({name: model.permission.name, id: model.permission})
+                            $this.permissions = [...$this.permissions, {id: model.permission}]
+
                             model.permission = ''
+
                         }
                     },
                 ]
@@ -116,14 +123,22 @@ export default {
                 type: 'submit',
                 buttonText: i18n.t('user.role_btn_create'),
                 async onSubmit(model){
+                    // соберем данные тут по названия 
                     const data = {
                         name: model.name,
                         permissions: $this.permissions
                     }
                     
-                    await axios.post(`${config.URL.dev}/api/dashboard/roles`, data);
-                    // $this.$router.push({name: 'admin.categories'});
-                    // this.permissions.push.model
+                    try{
+                        await axios.post(`${config.URL.dev}/api/dashboard/roles`, data);
+                        // clear inputs 
+                        model.name = ''
+                        model.permission = ''
+                        $this.permissions = ''
+                    }catch(err){
+                        $this.error = err.response.data.message
+                    }
+                    
                 },
                 label: '',
                 validateBeforeSubmit: true
@@ -144,7 +159,7 @@ export default {
     async created(){
         const $this = this;
         const {data} = await axios.get('http://market.local/api/dashboard/permissions')
-        console.log(data);
+        this.permissionsName = data
         this.fillSchemaFields($this, data)
     }
 }

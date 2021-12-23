@@ -6,6 +6,10 @@
             <Carousel 
                 :perPageCustom="[[500, 2], [768, 3], [1200, 4]]"
                 :navigationEnabled="true"
+                :paginationEnabled="false"  
+                :autoplay="true"
+                :autoplayHoverPause="true"
+                :loop="true"
             >
                 <Slide>
                     <cart-item/>
@@ -24,7 +28,33 @@
                 </Slide>
 
             </Carousel>
-            <product-item />
+            <div class="row">
+                <div class="small-carousel" 
+                    v-for="i in 3"
+                    :key="i"
+                >
+                    <h2>Top Selling</h2>
+                    <Carousel 
+                        :perPageCustom="[[500, 1]]" 
+                        :paginationEnabled="false"  
+                        :navigationEnabled="true"
+                        :autoplay="true"
+                        :autoplayTimeout="2000"
+                        :autoplayHoverPause="true"
+                        :loop="true"
+                    >
+                        <Slide  
+                            v-for="i in 3"
+                            :key="i"
+                        >
+                            <product-item />
+                            <product-item />
+                            <product-item />
+                        </Slide>
+                        
+                    </Carousel>
+                </div>
+            </div>
             
         </div>
     </div>
@@ -54,11 +84,27 @@ export default {
 </script>
 
 <style lang="scss" >
-    .flex{
+    .row{
         display: flex;
-        flex-wrap: wrap;
+        justify-content: space-between;
     }
-    .VueCarousel-slide {
+    .small-carousel{
+        width:33.333%;
+        .VueCarousel-navigation-button {
+            z-index: 99;
+            top: -5% !important;
+        }
+        .VueCarousel-navigation > button{
+            left: 75% !important;
+        }
+    }
+    // carousel ===========================================================
+    .VueCarousel-navigation-button {
+        z-index: 99;
+        top: 95% !important;
+    }
+    .VueCarousel-navigation > button{
+        left: 100% !important;
+    }
 
-    }
 </style>

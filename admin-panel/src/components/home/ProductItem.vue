@@ -12,7 +12,7 @@
                     Category
                 </p>
                 <h3 class="product-title">
-                    name
+                    product name goes here
                 </h3>
                 <h4 class="product-price">
                     100$
@@ -32,5 +32,53 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-
+    $green-color:#72E019;
+    $green-shadow: #64c515;
+    .product {
+        // width: 360px;
+        display: flex;
+        align-items: center;
+        margin: 30px 0;
+        &-img{
+            width: 60px;
+            height: 60px;
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+        &-body{
+            min-height: 60px;
+            margin-left: 10px;
+            flex: 1;
+            .product-category{
+                text-transform: uppercase;
+                font-size: 10px;
+                color: #8D99AE;
+                margin: 0 0 10px;
+            }
+            .product-title{
+                margin: 0 0 10px;
+                text-transform: uppercase;
+                font-size: 12px;
+                &:hover{
+                    color: $green-color;
+                    cursor: pointer;
+                }
+            }
+            .product-price{
+                color: $green-color;
+                margin: 0 0 10px;
+                font-size: 14px;
+                &-old{
+                    font-size: 14px;
+                    color: #ccc;
+                    font-weight: 300;
+                    text-decoration: line-through;
+                }
+            }
+        }
+        
+    }
 </style>
