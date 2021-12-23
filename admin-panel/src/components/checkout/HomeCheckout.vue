@@ -116,23 +116,19 @@ export default {
 
 <style lang="scss" scoped >
 $main_color: #72e019;
-input:checked {
-  color: red;
-}
+
 input[type="radio"] {
   position: relative;
   height: 12px;
   width: 12px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   outline: none;
   border-radius: 50%;
   border: 1px solid #ccc;
   &:checked {
-    background-color: red !important;
+    background-color: $main_color;
   }
-   
+
   //   background-color: red;
 }
 .btn {
@@ -160,13 +156,16 @@ input[type="radio"] {
   color: $main_color;
 }
 .checkout {
+  height: 100vh;
   &_wrapper {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
   }
   &_form {
-    width: 60%;
+    width: 100%;
     form {
+      margin-bottom: 50px;
       display: flex;
       flex-direction: column;
       textarea {
@@ -185,18 +184,20 @@ input[type="radio"] {
   }
 
   &_order {
+    margin-top: 30px;
     position: relative;
     padding: 0px 30px 30px;
     border-right: 1px solid #e4e7ed;
     border-left: 1px solid #e4e7ed;
     border-bottom: 1px solid #e4e7ed;
-    width: 38%;
+    width: 100%;
   }
   &_products {
     &-item {
       display: flex;
       justify-content: space-between;
       padding: 10px 0;
+      font-size: 12px;
     }
 
     &-check {
@@ -217,6 +218,37 @@ input[type="radio"] {
       padding-left: 40px;
       text-align: left;
     }
+  }
+  &_title {
+    text-align: center;
+  }
+}
+//  MEDIA
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  @media (min-width: 768px) {
+    width: 750px;
+    
+  }
+  @media (min-width: 992px) {
+    width: 980px;
+    .checkout {
+      &_wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: unset;
+        justify-content: space-between;
+      }
+      &_form {
+        margin-right: 40px;
+      }
+    }
+  }
+  @media (min-width: 1200px) {
+    width: 1170px;
   }
 }
 </style>
