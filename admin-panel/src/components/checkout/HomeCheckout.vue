@@ -47,7 +47,7 @@
               "
               type="radio"
               value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut "
-              id="one"
+              name="one"
             />
             <label for="one">Direct Bank Transfer</label>
             <div v-if="ShowOne" class="checkbox_products-descr">
@@ -57,7 +57,7 @@
 
           <div class="checkout_products-check">
             <input
-              id="two"
+              name="one"
               value="Lorem ipsum dolor sit amet, consectetur adipisicing elit "
               type="radio"
               @click="
@@ -78,7 +78,7 @@
                 ShowOne = false;
                 ShowSecond = false;
               "
-              id="three"
+              name="one"
               type="radio"
               value="Lorem ipsum dolor sit amet, consectetur "
             />
