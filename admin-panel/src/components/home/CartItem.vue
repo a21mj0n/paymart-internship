@@ -58,7 +58,7 @@ export default {
     
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     // variables
     $green-color:#72E019;
     $green-shadow: #64c515;

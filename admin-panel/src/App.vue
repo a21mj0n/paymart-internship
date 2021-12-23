@@ -25,8 +25,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600&display=swap');
-// ОБНУЛЕНИЕ
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600&display=swap');
+  // ОБНУЛЕНИЕ
   p,h1,h2,h3,h4,h5{
     padding: 0;
     margin: 0;
