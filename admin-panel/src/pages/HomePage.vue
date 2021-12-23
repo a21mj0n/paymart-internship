@@ -1,6 +1,7 @@
 <template>
-    <div class="container">
-        <h1>Home Page</h1>
+    <div class="containe">
+        <div class="container">
+            <h1>Home Page</h1>
         <div class="card__link-wrapper">
              <my-card-link
         :srcImage="srcImageLaptop"
@@ -12,12 +13,15 @@
         :srcImage="srcImageCamera"
         />
         </div>
+        </div>
+
        
     </div>
 </template>
 
 <script>
 import MyCardLink from '../components/home/MyCardLink.vue'
+
 export default {
   components: { MyCardLink },
     name: "home",
