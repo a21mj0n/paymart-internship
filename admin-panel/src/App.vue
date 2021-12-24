@@ -9,12 +9,14 @@
 <script>
 import AdminLayout from './layouts/AdminLayout.vue';
 import EmptyLayout from './layouts/EmptyLayout.vue';
+import HomeLayout from './layouts/HomeLayout.vue'
 
 export default {
   name: "App",
   components: {
     AdminLayout,
-    EmptyLayout
+    EmptyLayout,
+    HomeLayout
   },
   computed: {
     layout(){
@@ -28,6 +30,21 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Poppins:wght@300;400;600&display=swap');
   fieldset{
     border: none;
+  }
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    @media(min-width:768px){
+      width: 750px;
+    }
+    @media(min-width: 992px){
+      width: 980px;
+    }
+    @media(min-width:1200px){
+      width: 1170px;
+    }
   }
    .test-wrapper{
     .vuetable-td-size{
