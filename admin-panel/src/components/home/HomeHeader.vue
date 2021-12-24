@@ -29,6 +29,11 @@
               </a>
             </div>
           </div>
+          <div class="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
       </div>
     </div>
@@ -120,6 +125,19 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      .mobile-menu{
+        display: none;
+        @media(max-width:991px){
+          display: block;
+        }
+        span{
+          display: block;
+          width: 30px;
+          height: 3px;
+          background-color: $color-1;
+          margin-bottom: 2px;
+        }
+      }
       .login{
         .item{
           margin-right: 0;
@@ -152,7 +170,9 @@ export default {
     .contacts-info{
       display: flex;
       align-items: center;
-      
+      @media(max-width:991px){
+        display: none;
+      }
     }
   }
   .header-bottom-wrapper{
@@ -252,6 +272,9 @@ export default {
         }
       }
       .search-wrapper{
+        @media(max-width:991px){
+          display: none;
+        }
         .form-content{
           display: flex;
           align-items: center;
@@ -289,6 +312,11 @@ export default {
         color:white;
         display: flex;
         align-items: center;
+        p{
+          @media(max-width:991px){
+            display: none;
+          }
+        }
         .item{
           a{
             color:white;
@@ -331,10 +359,21 @@ export default {
             font-size: 20px;
             margin-bottom: 10px;
             color:white;
+            @media(max-width:991px){
+              margin-bottom: 0;
+            }
           }
           margin-right: 20px;
+          @media(max-width:991px){
+            margin-right: 40px;
+          }
           &:last-child{
-            margin-right: 0;
+            margin-right: 20px;
+          }
+          @media(min-width:992px){
+            &:last-child{
+              margin-right: 0;
+            }
           }
         }
       }
