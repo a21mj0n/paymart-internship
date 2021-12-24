@@ -4,14 +4,14 @@
       <div class="checkout_form">
         <h2 class="checkout_title">Billing address</h2>
         <form action="#">
-          <input class="checkout_input" placeholder="First Name" type="text" />
-          <input class="checkout_input" placeholder="last-name" type="text" />
-          <input class="checkout_input" placeholder="Email" type="text" />
-          <input class="checkout_input" placeholder="Address" type="text" />
-          <input class="checkout_input" placeholder="City" type="text" />
-          <input class="checkout_input" placeholder="Country" type="text" />
-          <input class="checkout_input" placeholder="ZipCode" type="number" />
-          <input class="checkout_input" placeholder="Telephone" type="tel" />
+          <input required class="checkout_input" placeholder="First Name" type="text" />
+          <input required class="checkout_input" placeholder="last-name" type="text" />
+          <input required class="checkout_input" placeholder="Email" type="text" />
+          <input required class="checkout_input" placeholder="Address" type="text" />
+          <input required class="checkout_input" placeholder="City" type="text" />
+          <input required class="checkout_input" placeholder="Country" type="text" />
+          <input required class="checkout_input" placeholder="ZipCode" type="number" />
+          <input required class="checkout_input" placeholder="Telephone" type="tel" />
           <textarea placeholder="Order Notes" cols="3" rows="3"></textarea>
         </form>
       </div>
@@ -37,61 +37,65 @@
             <span class="price">$2940.00</span>
           </div>
         </div>
-        <div class="checkout_products-checks">
-          <div class="checkout_products-check">
-            <input
-              @click="
-                ShowOne = !ShowOne;
-                ShowSecond = false;
-                ShowThird = false;
-              "
-              type="radio"
-              value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut "
-              name="one"
-            />
-            <label for="one">Direct Bank Transfer</label>
-            <div v-if="ShowOne" class="checkbox_products-descr">
-              Lorem ipsum dolor sit 11, amet consectetur adipisicing elit.
-            </div>
-          </div>
+        
+          <div class="checkout_products-checks">
+            <div class="checkout_products-check">
+              <input
+                @click="
+                  ShowOne = !ShowOne;
+                  ShowSecond = false;
+                  ShowThird = false;
+                "
+                type="radio"
+                value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut "
+                name="one"
+              />
+              <label for="one">Direct Bank Transfer</label>
 
-          <div class="checkout_products-check">
-            <input
-              name="one"
-              value="Lorem ipsum dolor sit amet, consectetur adipisicing elit "
-              type="radio"
-              @click="
-                ShowSecond = !ShowSecond;
-                ShowOne = false;
-                ShowThird = false;
-              "
-            />
-            <label for="two">Cheque Payment</label>
-            <div v-if="ShowSecond" class="checkbox_products-descr">
-              Lorem ipsum dolor sit 22, amet consectetur adipisicing elit.
+              <div v-if="ShowOne" class="checkbox_products-descr">
+                Lorem ipsum dolor sit 11, amet consectetur adipisicing elit.
+              </div>
+            </div>
+
+            <div class="checkout_products-check">
+              <input
+                name="one"
+                value="Lorem ipsum dolor sit amet, consectetur adipisicing elit "
+                type="radio"
+                @click="
+                  ShowSecond = !ShowSecond;
+                  ShowOne = false;
+                  ShowThird = false;
+                "
+              />
+              <label for="two">Cheque Payment</label>
+
+              <div v-if="ShowSecond" class="checkbox_products-descr">
+                Lorem ipsum dolor sit 22, amet consectetur adipisicing elit.
+              </div>
+            </div>
+            <div class="checkout_products-check">
+              <input
+                @click="
+                  ShowThird = !ShowThird;
+                  ShowOne = false;
+                  ShowSecond = false;
+                "
+                name="one"
+                type="radio"
+                value="Lorem ipsum dolor sit amet, consectetur "
+              />
+              <label for="three">Paypal System</label>
+              <div v-if="ShowThird" class="checkbox_products-descr">
+                ipsum dolor sit 33, amet consectetur adipisicing elit.
+              </div>
+            </div>
+            <div class="checkout_products-check checkout_products-check_mt20">
+              <input type="checkbox" />
+              <label>I've read and accept the terms & conditions</label>
             </div>
           </div>
-          <div class="checkout_products-check">
-            <input
-              @click="
-                ShowThird = !ShowThird;
-                ShowOne = false;
-                ShowSecond = false;
-              "
-              name="one"
-              type="radio"
-              value="Lorem ipsum dolor sit amet, consectetur "
-            />
-            <label for="three">Paypal System</label>
-            <div v-if="ShowThird" class="checkbox_products-descr">
-              ipsum dolor sit 33, amet consectetur adipisicing elit.
-            </div>
-          </div>
-          <div class="checkout_products-check checkout_products-check_mt20">
-            <input type="checkbox" />
-            <label>I've read and accept the terms & conditions</label>
-          </div>
-        </div>
+        
         <button class="btn" type="submit">Place order</button>
       </div>
     </div>
@@ -161,6 +165,9 @@ input[type="radio"] {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-right: auto;
+    margin-left: auto;
+
   }
   &_form {
     width: 100%;
@@ -231,7 +238,6 @@ input[type="radio"] {
   padding-right: 15px;
   @media (min-width: 768px) {
     width: 750px;
-    
   }
   @media (min-width: 992px) {
     width: 980px;
@@ -251,4 +257,5 @@ input[type="radio"] {
     width: 1170px;
   }
 }
+
 </style>
