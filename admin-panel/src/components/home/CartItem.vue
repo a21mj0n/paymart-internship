@@ -86,7 +86,7 @@ export default {
         border: 1px solid #ccc;
         box-sizing: border-box;
         background-color: white;
-        border-radius: 3px;
+        border-radius: 2px;
           &-add{
             transition: all 0.3s ease;
             position: absolute;
@@ -105,12 +105,12 @@ export default {
                 border: 1px solid $green-color;
                 cursor: pointer;
                 transition: all 300ms linear;
-                border-radius: 3px;
+                border-radius: 1px;
                 position: relative;
                 width: 100px;
                 position: relative;
                 &:hover{
-                    background-color: $green-color;
+                    background-color: rgb($green-color, 1);
                     color: #fff;
                     width: 120px;
                     text-align: center;
@@ -160,7 +160,7 @@ export default {
                 transition: all 300ms linear;
                 border-radius: 5px 0 5px 0;
                 &:hover{
-                    background-color: $green-color;
+                    background-color: rgb($green-color, .7);
                     color: #fff;
                     box-shadow: 0 0 3px $green-shadow;
                 }

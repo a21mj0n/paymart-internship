@@ -24,7 +24,7 @@ export default {
     
 }
 </script>
-<style lang="scss">
+<style scoped lang="scss" >
     $green-color:#72E019;
     .row{
         display: flex;

@@ -62,6 +62,7 @@ export default {
                 margin: 0 0 10px;
                 text-transform: uppercase;
                 font-size: 12px;
+                transition: all 300ms ease-in;
                 &:hover{
                     color: $green-color;
                     cursor: pointer;
@@ -70,7 +71,7 @@ export default {
             .product-price{
                 color: $green-color;
                 margin: 0 0 10px;
-                font-size: 14px;
+                font-size: 16px;
                 &-old{
                     font-size: 14px;
                     color: #ccc;
