@@ -8,6 +8,14 @@ export default [
         component: () => import('../pages/HomePage')
     },
     {
+        path: '/checkout',
+        name: 'checkout',
+        meta: {
+            layout: "empty",
+        },
+        component: () => import('../pages/CheckoutPage')
+    },
+    {
         path: '/auth',
         name: "auth",
         meta: {

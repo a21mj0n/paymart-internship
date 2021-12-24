@@ -1,14 +1,16 @@
 <template>
   <div class="add">
     <form @submit.prevent="editOneUser">
-      <h2>change one user</h2>
+      <h2>{{$t('user.edit_title')}}</h2>
       <VueFormGenerator
         :schema="schema"
         :model="model"
         :options="formOptions"
       >
       </VueFormGenerator>
-      <button type="submit">Изменить</button>
+      <button type="submit">{{$t('user.edit_title')}}
+        
+      </button>
     </form>
   </div>
 </template>
