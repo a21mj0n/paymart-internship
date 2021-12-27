@@ -9,8 +9,24 @@
             :model="model"
             :options="formOptions"
           >
-            <textarea class="input" placeholder="Order Notes"></textarea>
           </vue-form-generator>
+
+          <div class="checkout_accaunt">
+            <input
+              @click="ShowPassword = !ShowPassword"
+              type="checkbox"
+              name="accaunt"
+            />
+            <label for="accaunt"> Create Account?</label>
+            <div v-if="ShowPassword" class="checkout_accaunt-item">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing</p>
+              <input
+                type="password"
+                required
+                placeholder="enter your password"
+              />
+            </div>
+          </div>
         </form>
       </div>
       <div class="checkout_order">
@@ -108,6 +124,7 @@ export default {
       ShowSecond: false,
       ShowOne: false,
       ShowThird: false,
+      ShowPassword: false,
       model: {
         FirstName: "",
         LastName: "",
@@ -194,13 +211,13 @@ export default {
             required: true,
             validator: "string",
           },
-          {
-            type: "checkbox",
-            label: "Create Account?",
-            model: "accaunt",
-            required: true,
-            default: true,
-          },
+          // {
+          //   type: "checkbox",
+          //   label: "Create Account?",
+          //   model: "accaunt",
+          //   required: true,
+          //   default: true,
+          // },
         ],
       },
       formOptions: {
@@ -257,7 +274,7 @@ input[type="radio"] {
   }
 }
 .price {
-  font-size: 24px;
+  font-size: 14px;
   color: $main_color;
 }
 
@@ -269,25 +286,45 @@ input[type="radio"] {
 
   margin-right: auto;
   margin-left: auto;
-}
-.checkout_form {
-  padding-top: 50px;
-  margin-right: 50px;
-  width: 100%;
-  form {
-    margin-bottom: 50px;
-    display: flex;
-    flex-direction: column;
-    padding-top: 10px;
-    input {
-      height: 45px;
-    }
-    textarea {
-      padding: 10px;
-      resize: none;
+  .checkout_form {
+    padding-top: 50px;
+    margin-right: 50px;
+    width: 100%;
+    form {
+      margin-bottom: 50px;
+      display: flex;
+      flex-direction: column;
+      padding-top: 10px 20px;
+      .checkout_accaunt {
+        padding: 15px;
+        &-item {
+          p {
+            margin: 10px 0;
+          }
+          input {
+            
+            height: 40px;
+            width: 100%;
+            padding: 0px 15px;
+            border: 1px solid #e4e7ed;
+            background-color: #fff;
+          }
+        }
+      }
+      input {
+        padding: 0px 15px;
+        border: 1px solid #e4e7ed;
+        background-color: #fff;
+        // width: 100%;
+      }
+      textarea {
+        padding: 10px;
+        resize: none;
+      }
     }
   }
 }
+
 .vue-form-generator .form-control {
   height: 45px;
 }
@@ -350,7 +387,7 @@ input[type="radio"] {
 .checkout_title {
   text-align: center;
   font-size: 24px;
-
+  margin-bottom: 10px;
   text-transform: uppercase;
 }
 //  MEDIA
@@ -364,16 +401,27 @@ input[type="radio"] {
   }
   @media (min-width: 992px) {
     width: 980px;
-    .checkout {
-      &_wrapper {
-        display: flex;
-        flex-direction: row;
-        align-items: unset;
-        justify-content: space-between;
+    .price {
+      font-size: 24px;
+      color: $main_color;
+    }
+    .checkout_wrapper {
+      display: flex;
+      flex-direction: row;
+
+      justify-content: space-between;
+      font-size: 16px;
+      .checkout_order {
+        font-size: 16px;
+        width: 40%;
       }
-      &_form {
-        margin-right: 40px;
+      .checkout_products-item {
+        font-size: 14px;
       }
+    }
+    .checkout_form {
+      width: 60%;
+      margin-right: 40px;
     }
   }
   @media (min-width: 1200px) {
