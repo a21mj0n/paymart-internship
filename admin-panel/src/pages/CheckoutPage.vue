@@ -1,18 +1,16 @@
 <template>
-  <section class="checkout">
+  <div class="container">
     <div class="checkout_wrapper">
       <div class="checkout_form">
         <h2 class="checkout_title">Billing address</h2>
         <form action="#">
-          <input required class="checkout_input" placeholder="First Name" type="text" />
-          <input required class="checkout_input" placeholder="last-name" type="text" />
-          <input required class="checkout_input" placeholder="Email" type="text" />
-          <input required class="checkout_input" placeholder="Address" type="text" />
-          <input required class="checkout_input" placeholder="City" type="text" />
-          <input required class="checkout_input" placeholder="Country" type="text" />
-          <input required class="checkout_input" placeholder="ZipCode" type="number" />
-          <input required class="checkout_input" placeholder="Telephone" type="tel" />
-          <textarea placeholder="Order Notes" cols="3" rows="3"></textarea>
+          <vue-form-generator
+            :schema="schema"
+            :model="model"
+            :options="formOptions"
+          >
+            <textarea class="input" placeholder="Order Notes"></textarea>
+          </vue-form-generator>
         </form>
       </div>
       <div class="checkout_order">
@@ -37,69 +35,70 @@
             <span class="price">$2940.00</span>
           </div>
         </div>
-        
-          <div class="checkout_products-checks">
-            <div class="checkout_products-check">
-              <input
-                @click="
-                  ShowOne = !ShowOne;
-                  ShowSecond = false;
-                  ShowThird = false;
-                "
-                type="radio"
-                value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut "
-                name="one"
-              />
-              <label for="one">Direct Bank Transfer</label>
 
-              <div v-if="ShowOne" class="checkbox_products-descr">
-                Lorem ipsum dolor sit 11, amet consectetur adipisicing elit.
-              </div>
-            </div>
+        <div class="checkout_products-checks">
+          <div class="checkout_products-check">
+            <input
+              @click="
+                ShowOne = !ShowOne;
+                ShowSecond = false;
+                ShowThird = false;
+              "
+              type="radio"
+              value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut "
+              name="one"
+            />
+            <label for="one">Direct Bank Transfer</label>
 
-            <div class="checkout_products-check">
-              <input
-                name="one"
-                value="Lorem ipsum dolor sit amet, consectetur adipisicing elit "
-                type="radio"
-                @click="
-                  ShowSecond = !ShowSecond;
-                  ShowOne = false;
-                  ShowThird = false;
-                "
-              />
-              <label for="two">Cheque Payment</label>
-
-              <div v-if="ShowSecond" class="checkbox_products-descr">
-                Lorem ipsum dolor sit 22, amet consectetur adipisicing elit.
-              </div>
-            </div>
-            <div class="checkout_products-check">
-              <input
-                @click="
-                  ShowThird = !ShowThird;
-                  ShowOne = false;
-                  ShowSecond = false;
-                "
-                name="one"
-                type="radio"
-                value="Lorem ipsum dolor sit amet, consectetur "
-              />
-              <label for="three">Paypal System</label>
-              <div v-if="ShowThird" class="checkbox_products-descr">
-                ipsum dolor sit 33, amet consectetur adipisicing elit.
-              </div>
-            </div>
-            <div class="checkout_products-check checkout_products-check_mt20">
-              <input type="checkbox" />
-              <label>I've read and accept the terms & conditions</label>
+            <div v-if="ShowOne" class="checkbox_products-descr">
+              Lorem ipsum dolor sit 11, amet consectetur adipisicing elit.
             </div>
           </div>
-        
-        <button class="btn" type="submit">Place order</button>
+
+          <div class="checkout_products-check">
+            <input
+              name="one"
+              value="Lorem ipsum dolor sit amet, consectetur adipisicing elit "
+              type="radio"
+              @click="
+                ShowSecond = !ShowSecond;
+                ShowOne = false;
+                ShowThird = false;
+              "
+            />
+            <label for="two">Cheque Payment</label>
+
+            <div v-if="ShowSecond" class="checkbox_products-descr">
+              Lorem ipsum dolor sit 22, amet consectetur adipisicing elit.
+            </div>
+          </div>
+          <div class="checkout_products-check">
+            <input
+              @click="
+                ShowThird = !ShowThird;
+                ShowOne = false;
+                ShowSecond = false;
+              "
+              name="one"
+              type="radio"
+              value="Lorem ipsum dolor sit amet, consectetur "
+            />
+            <label for="three">Paypal System</label>
+            <div v-if="ShowThird" class="checkbox_products-descr">
+              ipsum dolor sit 33, amet consectetur adipisicing elit.
+            </div>
+          </div>
+          <div class="checkout_products-check checkout_products-check_mt20">
+            <input type="checkbox" />
+            <label>I've read and accept the terms & conditions</label>
+          </div>
+        </div>
+        <div class="submit">
+          <button class="btn" type="submit">Place order</button>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -109,6 +108,104 @@ export default {
       ShowSecond: false,
       ShowOne: false,
       ShowThird: false,
+      model: {
+        FirstName: "",
+        LastName: "",
+        email: "",
+        address: "",
+        city: "",
+        country: "",
+        zipCode: "",
+        telephone: "",
+        textarea: "",
+        accaunt: "",
+      },
+      schema: {
+        fields: [
+          {
+            type: "input",
+            inputType: "text",
+            placeholder: "First name",
+            model: "FirstName",
+            required: true,
+            validator: "string",
+          },
+          {
+            type: "input",
+            inputType: "text",
+            placeholder: "Last name",
+            model: "LastName",
+            required: true,
+            validator: "string",
+          },
+          {
+            type: "input",
+            inputType: "email",
+            placeholder: "Email",
+            model: "email",
+            required: true,
+          },
+          {
+            type: "input",
+            inputType: "text",
+            placeholder: "Address",
+            model: "address",
+            required: true,
+            validator: "string",
+          },
+          {
+            type: "input",
+            inputType: "text",
+            placeholder: "City",
+            model: "city",
+            required: true,
+            validator: "string",
+          },
+          {
+            type: "input",
+            inputType: "text",
+            placeholder: "Country",
+            model: "country",
+            required: true,
+            validator: "string",
+          },
+          {
+            type: "input",
+            inputType: "number",
+            placeholder: "ZipCode",
+            model: "zipCode",
+            required: true,
+            validator: "string",
+          },
+          {
+            type: "input",
+            inputType: "tel",
+            placeholder: "Telephone",
+            model: "telephone",
+            required: true,
+            validator: "string",
+          },
+          {
+            type: "textArea",
+            inputType: "text",
+            placeholder: "Order  Notes",
+            model: "textarea",
+            hint: "Max 500 characters",
+            required: true,
+            validator: "string",
+          },
+          {
+            type: "checkbox",
+            label: "Create Account?",
+            model: "accaunt",
+            required: true,
+            default: true,
+          },
+        ],
+      },
+      formOptions: {
+        validateAfterChanged: true,
+      },
     };
   },
 
@@ -120,7 +217,10 @@ export default {
 
 <style lang="scss" scoped >
 $main_color: #72e019;
-
+.submit {
+  display: flex;
+  align-items: flex-end;
+}
 input[type="radio"] {
   position: relative;
   height: 12px;
@@ -135,9 +235,10 @@ input[type="radio"] {
 
   //   background-color: red;
 }
+
 .btn {
-  margin-top: 30px;
-  padding: 12px 30px;
+  margin-top: 87px;
+  padding: 19px 30px;
   background-color: $main_color;
   border: none;
   border-radius: 40px;
@@ -159,76 +260,98 @@ input[type="radio"] {
   font-size: 24px;
   color: $main_color;
 }
-.checkout {
-  height: 100vh;
-  &_wrapper {
+
+.checkout_wrapper {
+  padding-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  margin-right: auto;
+  margin-left: auto;
+}
+.checkout_form {
+  padding-top: 50px;
+  margin-right: 50px;
+  width: 100%;
+  form {
+    margin-bottom: 50px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-right: auto;
-    margin-left: auto;
-
-  }
-  &_form {
-    width: 100%;
-    form {
-      margin-bottom: 50px;
-      display: flex;
-      flex-direction: column;
-      textarea {
-        padding: 10px;
-        resize: none;
-      }
+    padding-top: 10px;
+    input {
+      height: 45px;
+    }
+    textarea {
+      padding: 10px;
+      resize: none;
     }
   }
-  &_input {
-    margin-bottom: 15px;
-    height: 40px;
-    padding: 0px 15px;
-    border: 1px solid #e4e7ed;
-    background-color: #fff;
-    width: 100%;
-  }
+}
+.vue-form-generator .form-control {
+  height: 45px;
+}
+.checkout_input {
+  margin-bottom: 15px;
+  height: 40px;
+  padding: 0px 15px;
+  border: 1px solid #e4e7ed;
+  background-color: #fff;
+  width: 100%;
+}
 
-  &_order {
-    margin-top: 30px;
-    position: relative;
-    padding: 0px 30px 30px;
-    border-right: 1px solid #e4e7ed;
+.checkout_order {
+  margin-top: 40px;
+  position: relative;
+  padding: 0px 30px 30px;
+  border-right: 1px solid #e4e7ed;
+  border-left: 1px solid #e4e7ed;
+  border-bottom: 1px solid #e4e7ed;
+  width: 100%;
+  &::before {
+    content: "";
+    position: absolute;
+    right: -1px;
+    top: -15px;
+    left: -1px;
+    height: 30px;
+    border-top: 1px solid #e4e7ed;
     border-left: 1px solid #e4e7ed;
-    border-bottom: 1px solid #e4e7ed;
-    width: 100%;
+    border-right: 1px solid #e4e7ed;
   }
-  &_products {
-    &-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 0;
-      font-size: 12px;
-    }
+}
+.checkout_products {
+  &-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 12px;
+  }
 
-    &-check {
-      margin-top: 7px;
-      font-weight: 500;
-      min-height: 20px;
+  &-check {
+    margin-top: 7px;
+    font-weight: 500;
+    min-height: 20px;
 
-      margin-bottom: 5px;
-      cursor: pointer;
-      label {
-        padding-left: 10px;
-      }
-      &_mt20 {
-        margin-top: 30px;
-      }
+    margin-bottom: 5px;
+    cursor: pointer;
+    label {
+      padding-left: 10px;
     }
-    &-descr {
-      padding-left: 40px;
-      text-align: left;
+    &_mt20 {
+      margin-top: 30px;
     }
   }
-  &_title {
-    text-align: center;
+  &-descr {
+    padding-left: 40px;
+    text-align: left;
   }
+}
+.checkout_title {
+  text-align: center;
+  font-size: 24px;
+
+  text-transform: uppercase;
 }
 //  MEDIA
 .container {
@@ -257,5 +380,4 @@ input[type="radio"] {
     width: 1170px;
   }
 }
-
 </style>
