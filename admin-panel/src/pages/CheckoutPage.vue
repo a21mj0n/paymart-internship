@@ -10,6 +10,23 @@
             :options="formOptions"
           >
           </vue-form-generator>
+
+          <div class="checkout_accaunt">
+            <input
+              @click="ShowPassword = !ShowPassword"
+              type="checkbox"
+              name="accaunt"
+            />
+            <label for="accaunt"> Create Account?</label>
+            <div v-if="ShowPassword" class="checkout_accaunt-item">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing</p>
+              <input
+                type="password"
+                required
+                placeholder="enter your password"
+              />
+            </div>
+          </div>
         </form>
       </div>
       <div class="checkout_order">
@@ -107,6 +124,7 @@ export default {
       ShowSecond: false,
       ShowOne: false,
       ShowThird: false,
+      ShowPassword: false,
       model: {
         FirstName: "",
         LastName: "",
@@ -277,8 +295,27 @@ input[type="radio"] {
       display: flex;
       flex-direction: column;
       padding-top: 10px 20px;
+      .checkout_accaunt {
+        padding: 15px;
+        &-item {
+          p {
+            margin: 10px 0;
+          }
+          input {
+            
+            height: 40px;
+            width: 100%;
+            padding: 0px 15px;
+            border: 1px solid #e4e7ed;
+            background-color: #fff;
+          }
+        }
+      }
       input {
-        height: 45px;
+        padding: 0px 15px;
+        border: 1px solid #e4e7ed;
+        background-color: #fff;
+        // width: 100%;
       }
       textarea {
         padding: 10px;
