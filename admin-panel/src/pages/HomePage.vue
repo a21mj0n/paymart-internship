@@ -1,52 +1,92 @@
 <template>
-    <div class="containe">
-        <div class="container">
-            <h1>Home Page</h1>
-        <div class="card__link-wrapper">
-             <my-card-link
-        :srcImage="srcImageLaptop"
-        />
-        <my-card-link
-        :srcImage="srcImageAccessories"
-        />
-        <my-card-link
-        :srcImage="srcImageCamera"
-        />
-        </div>
-        </div>
+    <div class="wrapper">
+        <my-nav-to-page />
+        <section-collection />
 
-       
+        <section-products />
+
+        <my-promotion/>
+
+        <section-selling />
+
+        <section-subscribe/> 
+
+        <section-navigation/>
+
+        <my-footer-home />
+
     </div>
 </template>
 
 <script>
-import MyCardLink from '../components/home/MyCardLink.vue'
+
+import MyNavToPage from '../components/home/MyNavToPage.vue'
+import MyPromotion from '../components/home/MyPromotion.vue'
+import MyFooterHome from '../components/home/MyFooterHome.vue'
+import SectionNavigation from '../sections/SectionNavigation.vue'
+import SectionCollection from '../sections/SectionCollection.vue'
+import SectionProducts from '../sections/SectionProducts.vue'
+import SectionSelling from '../sections/SectionSelling.vue'
+import SectionSubscribe from '../sections/SectionSubscribe.vue'
 
 export default {
-  components: { MyCardLink },
+    components: { 
+        MyPromotion,
+        SectionNavigation,
+        MyFooterHome,
+        SectionSubscribe,
+        SectionCollection,
+        SectionProducts,
+        SectionSelling,
+        MyNavToPage
+    },
     name: "home",
     data(){
         return{
-            srcImageAccessories: 'https://st.depositphotos.com/1203063/2785/i/950/depositphotos_27856497-stock-photo-headphones.jpg',
-            srcImageLaptop: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0QfaPWOIyXNa0rq9vjtQ0OusYrU3ztKzR-g&usqp=CAU',
-            srcImageCamera: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdc8v84ZjbEfCS7O5jB0uWSUIYSUMjcrPsmA&usqp=CAU',
-            
 
-        }
-    }
-    
 }
+    }
+
+}
+
 </script>
 
-<style lang="scss" scoped>
-.container{
-    .card__link-wrapper{
-        margin-left: -15px;
-        margin-right: -15px;
-        display: flex;
-
-
-    }
+<style lang="scss" >
+.wrapper{
+    margin: 0 auto;
 }
+    .row{
+        display: flex;
+        justify-content: space-between;
+    }
+    .small-carousel{
+        width:33.333%;
+        .VueCarousel-navigation-button {
+            z-index: 99;
+            top: -5% !important;
+        }
+        .VueCarousel-navigation > button{
+            left: 75% !important;
+        }
+    }
+    // collections ========================================================
+    .collection{
+        margin: 50px 0;
+    }
+
+    // products ==========================================================
+    .products{
+        margin: 50px 0; 
+    }
+
+    // selling ==========================================================
+    .selling{
+        margin: 50px 0;
+    }
+
+    .subscribe{
+        margin: 50px 0;
+    }
+
 
 </style>
