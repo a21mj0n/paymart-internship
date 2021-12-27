@@ -101,6 +101,7 @@
 <script>
 import HeaderCart from './HeaderCart.vue'
 export default {
+  name: 'HomeHeader',
   data(){
     return{
       isOpen: false

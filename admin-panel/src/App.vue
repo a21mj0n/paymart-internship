@@ -20,6 +20,7 @@ export default {
   },
   computed: {
     layout(){
+      console.log(this.$route.meta.layout);
       return (this.$route.meta.layout || 'empty') + '-layout';
     }
   }
@@ -28,6 +29,10 @@ export default {
 
 <style lang="scss">
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600&display=swap');
+  
+  $green-color:#72E019;
+  $green-shadow: #64c515;
+
   // ОБНУЛЕНИЕ
   p,h1,h2,h3,h4,h5{
     padding: 0;
@@ -36,11 +41,42 @@ export default {
   fieldset{
     border: none;
   }
-<<<<<<< HEAD
 
+  .vue-form-generator{
+    .field-wrap{
+      input{
+        padding: 10px !important;
+        outline: none;
+        &:hover{
+          border-color: $green-color;
+        }
+      }
+      select{
+        padding: 10px 5px;
+        padding: 10px !important;
+        outline: none;
+        &:focus{
+          border-color: $green-color;
+        }
+      }
+      button{
+        line-height: 0 !important;
+        padding: 10px !important;
+      }
+      
+      input[type="submit"]{
+        padding: 10px !important;
+        background-color: $green-color !important;
+        border-color: $green-color !important;
+        outline: none !important;
+        box-shadow: none !important;
+        width: 120px;
+        line-height: 0 !important;
+      }
+      
+    }
+  }
   // homePage 
-=======
->>>>>>> d00442344fcd84401892c9279e9d9fc6f37cdf2d
   .container {
     margin-left: auto;
     margin-right: auto;

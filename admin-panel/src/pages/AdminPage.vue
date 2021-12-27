@@ -5,10 +5,6 @@
       <my-cart :items="categories" name="categories" />
       <my-cart :items="brands" name="brands" />
       <my-cart :items="products" name="products" />
-      <my-cart :items="products" name="products" />
-      <my-cart :items="products" name="products" />
-      <my-cart :items="products" name="products" />
-      <my-cart :items="products" name="products" />
     </div>
   </div>
 </template>
@@ -40,7 +36,6 @@ export default {
       this.brands = brandsData.data
       const productsData = await axios.get(`${config.URL.dev}/api/dashboard/products`)
       this.products = productsData.data
-    console.log(this.users);
   },
   methods: {
     onToggleIcon() {
