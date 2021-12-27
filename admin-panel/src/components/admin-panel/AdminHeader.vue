@@ -71,7 +71,7 @@ export default {
       padding-left: 30px;
       padding-right: 30px;
       height:100px;
-      background-color:#ddd;
+      background-color:rgb(231, 231, 231);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -142,7 +142,7 @@ export default {
           height: 40px;
           border:none;
           outline: none;
-          background-color: #ddd;
+          background-color: rgb(231, 231, 231);
           border-bottom: 1px solid #8d8d8d;
         }
         .search-button{
@@ -170,7 +170,7 @@ export default {
       .lang-wrapper{
         margin-right: 30px;
         select{
-          background-color: #ddd;
+          background-color: rgb(236, 236, 236);;
           border:none;
           outline: none;
         }

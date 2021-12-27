@@ -1,19 +1,19 @@
 <template>
   <div class="content">
     <div class="content__wrapper">
-      <my-cart :items="users" name="users" />
-      <my-cart :items="categories" name="categories" />
-      <my-cart :items="brands" name="brands" />
-      <my-cart :items="products" name="products" />
+      <admin-cart :items="users" name="users" />
+      <admin-cart :items="categories" name="categories" />
+      <admin-cart :items="brands" name="brands" />
+      <admin-cart :items="products" name="products" />
     </div>
   </div>
 </template>
 <script>
 import axios from "axios";
 import config from "../config";
-import MyCart from "../components/admin-panel/MyCart.vue";
+import AdminCart from "../components/admin-panel/AdminCart.vue";
 export default {
-  components: { MyCart },
+  components: { AdminCart },
   name: "AdminPage",
   data() {
     return {

@@ -23,4 +23,12 @@ export default [
         },
         component:  () => import('../pages/AuthPage')
     },
+    {
+        path: '*',
+        name: "auth",
+        meta: {
+            layout: "home",
+        },
+        component:  () => import('../pages/NotFound')
+    },
 ]

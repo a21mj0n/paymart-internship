@@ -89,6 +89,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$green-color:#72E019;
+$green-shadow: #64c515;  
+
 
 .side__bar-visible{
     display: block;
@@ -143,7 +146,7 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-      background: red;
+      background: $green-shadow;
       height: 50px;
       margin-bottom: 0;
 
@@ -187,8 +190,8 @@ nav{
                 color: #fff;
             }
             &:hover{
-                background: red;
-                border-radius: 10px;
+              background:$green-shadow;
+              border-radius: 10px;
             }
             
         }
