@@ -3,7 +3,7 @@ export default [
         path: '/',
         name: 'home',
         meta: {
-            layout: "empty",
+            layout: "home",
         },
         component: () => import('../pages/HomePage')
     },

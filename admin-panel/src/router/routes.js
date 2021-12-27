@@ -130,8 +130,8 @@ export default [
         component:  () => import('../pages/admin/users/View')
     },
     {
-        path: '/admin/users/create_role',
-        name: "admin.users.create_role",
+        path: '/admin/users/create-role',
+        name: "admin.users.create-role",
         meta: {
             layout: "admin",
             protected: true,

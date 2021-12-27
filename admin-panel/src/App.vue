@@ -9,12 +9,14 @@
 <script>
 import AdminLayout from './layouts/AdminLayout.vue';
 import EmptyLayout from './layouts/EmptyLayout.vue';
+import HomeLayout from './layouts/HomeLayout.vue'
 
 export default {
   name: "App",
   components: {
     AdminLayout,
-    EmptyLayout
+    EmptyLayout,
+    HomeLayout
   },
   computed: {
     layout(){
@@ -34,8 +36,11 @@ export default {
   fieldset{
     border: none;
   }
+<<<<<<< HEAD
 
   // homePage 
+=======
+>>>>>>> d00442344fcd84401892c9279e9d9fc6f37cdf2d
   .container {
     margin-left: auto;
     margin-right: auto;

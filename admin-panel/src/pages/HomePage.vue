@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
     <div class="wrapper">
         <section-collection />
 
@@ -14,10 +15,16 @@
 
         <my-footer-home />
 
+=======
+    <div>
+        <home-header/>
+        <h1>Home Page</h1>
+>>>>>>> d00442344fcd84401892c9279e9d9fc6f37cdf2d
     </div>
 </template>
 
 <script>
+<<<<<<< HEAD
 
 import MyPromotion from '../components/home/MyPromotion.vue'
 import MyFooterHome from '../components/home/MyFooterHome.vue'
@@ -41,6 +48,12 @@ export default {
     data(){
         return{
 
+=======
+import HomeHeader from '../components/home/HomeHeader.vue'
+export default {
+  components: { HomeHeader },
+    name: "home"
+>>>>>>> d00442344fcd84401892c9279e9d9fc6f37cdf2d
 }
     }
 

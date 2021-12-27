@@ -45,7 +45,7 @@
                   </span>
                   {{$t('user.view_sb_xs')}}
                 </router-link>
-                <router-link :to="{name: 'admin.users.create_role'}">
+                <router-link :to="{name: 'admin.users.create-role'}">
                   <span class="side__bar-visible">
                     {{$t('user.create_sb_ms')}}
                   </span>
