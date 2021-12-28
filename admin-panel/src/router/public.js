@@ -31,4 +31,12 @@ export default [
         },
         component:  () => import('../pages/NotFound')
     },
+    {
+        path: '/store',
+        name: "store",
+        meta: {
+            layout: "home",
+        },
+        component:  () => import('../pages/StorePage')
+    },
 ]
