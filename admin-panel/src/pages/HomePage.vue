@@ -9,9 +9,6 @@
 
         <section-selling />
 
-        <section-subscribe/> 
-
-        <section-navigation/>
 
     </div>
 </template>
@@ -19,17 +16,13 @@
 <script>
 
 import MyPromotion from '../components/home/MyPromotion.vue'
-import SectionNavigation from '../sections/SectionNavigation.vue'
 import SectionCollection from '../sections/SectionCollection.vue'
 import SectionProducts from '../sections/SectionProducts.vue'
 import SectionSelling from '../sections/SectionSelling.vue'
-import SectionSubscribe from '../sections/SectionSubscribe.vue'
 
 export default {
     components: { 
         MyPromotion,
-        SectionNavigation,
-        SectionSubscribe,
         SectionCollection,
         SectionProducts,
         SectionSelling
