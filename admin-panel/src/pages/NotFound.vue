@@ -16,9 +16,9 @@ export default {
     $green-color:#72E019;
     $green-shadow: #64c515;
     .wrapper{
-        padding: 100px;
+        padding-top: 80px;
         text-align: center;
-        height: calc(100vh - 420px);
+        min-height: calc(100vh - 1000px);
         h1{
             color: $green-color;
             font-size: 100px;

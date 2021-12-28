@@ -11,7 +11,7 @@ export default [
         path: '/checkout',
         name: 'checkout',
         meta: {
-            layout: "empty",
+            layout: "home",
         },
         component: () => import('../pages/CheckoutPage')
     },
@@ -25,7 +25,7 @@ export default [
     },
     {
         path: '*',
-        name: "auth",
+        name: "notFound",
         meta: {
             layout: "home",
         },
