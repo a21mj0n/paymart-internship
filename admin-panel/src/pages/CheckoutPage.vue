@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    
     <div class="checkout_wrapper">
       <div class="checkout_form">
         <h2 class="checkout_title">Billing address</h2>
@@ -122,7 +123,7 @@
 import SectionSubscribe from "../sections/SectionSubscribe.vue";
 
 export default {
-  components: { SectionSubscribe },
+  components: { SectionSubscribe, },
   data() {
     return {
       ShowSecond: false,
