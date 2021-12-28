@@ -168,10 +168,13 @@ export default {
   components: {
     VueSlickCarousel,
   },
+  created(){
+    
+  }
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 .bg{
     background: #FBFBFC;
 }

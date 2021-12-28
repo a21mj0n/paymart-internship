@@ -1,5 +1,5 @@
 <template>
-  <div class="breadcrumb" v-if="links.length > 1">
+  <div class="breadcrumb" v-if="links">
     <div class="container">
       <ul class="breadcrumb_list" >
         <li class="breadcrumb_item" v-for="link in links" :key="link.name" >
@@ -16,7 +16,7 @@
 export default {
   computed: {
     links() {
-      let links = this.$route.meta.breadcrumbItems || 0;
+      let links = this.$route.meta.breadcrumbItems || [0];
       let currentRoutePath = 0
 
       if(links){
@@ -27,9 +27,6 @@ export default {
       return links
 
     }
-  },
-  created(){
-    this.links
   }
 };
 </script>

@@ -20,7 +20,6 @@ export default {
   },
   computed: {
     layout(){
-      console.log(this.$route.meta.layout);
       return (this.$route.meta.layout || 'empty') + '-layout';
     }
   }
@@ -52,26 +51,16 @@ export default {
         }
       }
       select{
-<<<<<<< HEAD
         padding: 12px;
         line-height: 1.4;
-=======
-        padding: 10px 5px;
-        padding: 10px !important;
->>>>>>> a904ddc03ca4b65022a6bd8522a01ed270e2f398
         outline: none;
         &:focus{
           border-color: $green-color;
         }
       }
       button{
-<<<<<<< HEAD
         padding: 10px !important;
         line-height: 14px;
-=======
-        line-height: 0 !important;
-        padding: 10px !important;
->>>>>>> a904ddc03ca4b65022a6bd8522a01ed270e2f398
       }
       
       input[type="submit"]{
@@ -81,15 +70,11 @@ export default {
         outline: none !important;
         box-shadow: none !important;
         width: 120px;
-<<<<<<< HEAD
         line-height: 14px;
       }
 
       .wrapper{
         width: 100%;
-=======
-        line-height: 0 !important;
->>>>>>> a904ddc03ca4b65022a6bd8522a01ed270e2f398
       }
       
     }

@@ -9,19 +9,6 @@ import VueFormGenerator from 'vue-form-generator/dist/vfg-core.js'
 import VueSlickCarousel from 'vue-slick-carousel'
 
 import Loader from '@/components/Loader'
-<<<<<<< HEAD
-import VueSlider from 'vue-slider-component'
-import VueCarousel from 'vue-carousel'
-
-//css styles
-import '../node_modules/vue-form-generator/dist/vfg-core.css'
-import 'vue-slider-component/theme/default.css'
-
-Vue.config.productionTip = false
-
-// plugins activated
-Vue.component('VueSlider', VueSlider)
-=======
 import '../node_modules/vue-form-generator/dist/vfg-core.css'
 
 Vue.config.productionTip = false
@@ -34,7 +21,6 @@ Vue.use(VueSlickCarousel)
 
 
 
->>>>>>> a904ddc03ca4b65022a6bd8522a01ed270e2f398
 Vue.component('Loader', Loader)
 Vue.use(VueCarousel)
 Vue.use(VueFormGenerator)

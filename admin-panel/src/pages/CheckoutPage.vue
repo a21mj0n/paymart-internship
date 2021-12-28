@@ -1,9 +1,6 @@
 <template>
   <div class="container">
-<<<<<<< HEAD
     
-=======
->>>>>>> a904ddc03ca4b65022a6bd8522a01ed270e2f398
     <div class="checkout_wrapper">
       <div class="checkout_form">
         <h2 class="checkout_title">Billing address</h2>
@@ -284,7 +281,6 @@ input[type="radio"] {
 }
 
 .checkout_wrapper {
-<<<<<<< HEAD
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -297,24 +293,6 @@ input[type="radio"] {
     form {
       display: flex;
       flex-direction: column;   
-=======
-  padding-bottom: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  margin-right: auto;
-  margin-left: auto;
-  .checkout_form {
-    padding-top: 50px;
-    margin-right: 50px;
-    width: 100%;
-    form {
-      margin-bottom: 50px;
-      display: flex;
-      flex-direction: column;
-      padding-top: 10px 20px;
->>>>>>> a904ddc03ca4b65022a6bd8522a01ed270e2f398
       .checkout_accaunt {
         padding: 15px;
         &-item {
@@ -322,10 +300,6 @@ input[type="radio"] {
             margin: 10px 0;
           }
           input {
-<<<<<<< HEAD
-=======
-            
->>>>>>> a904ddc03ca4b65022a6bd8522a01ed270e2f398
             height: 40px;
             width: 100%;
             padding: 0px 15px;
@@ -348,13 +322,10 @@ input[type="radio"] {
   }
 }
 
-<<<<<<< HEAD
 .wrapper{
   margin-top: 0;
 }
 
-=======
->>>>>>> a904ddc03ca4b65022a6bd8522a01ed270e2f398
 .vue-form-generator .form-control {
   height: 45px;
 }
@@ -375,10 +346,7 @@ input[type="radio"] {
   border-left: 1px solid #e4e7ed;
   border-bottom: 1px solid #e4e7ed;
   width: 100%;
-<<<<<<< HEAD
   align-self: flex-start;
-=======
->>>>>>> a904ddc03ca4b65022a6bd8522a01ed270e2f398
   &::before {
     content: "";
     position: absolute;

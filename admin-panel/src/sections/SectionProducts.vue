@@ -2,7 +2,6 @@
     <section class="products">
         <div class="container">
             <item-categories/>
-<<<<<<< HEAD
             <VueSlickCarousel 
                v-bind="slickOptions"
             >
@@ -14,12 +13,12 @@
                 <cart-item/>
 
                  <template #prevArrow="">
-                    <button class="slick-arrow slick-prev">
+                    <button class="slick-custom-arrow ">
                         <i class="fa fa-angle-left"/>
                     </button>
                 </template>
                  <template #nextArrow="">
-                    <button class="slick-arrow slick-next">
+                    <button class="slick-custom-arrow ">
                         <i class="fa fa-angle-right"/>
                     </button>
                 </template>
@@ -37,44 +36,10 @@
 import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import CartItem from '../components/home/CartItem.vue'
-=======
-            <Carousel 
-                :perPageCustom="[[500, 2], [768, 3], [1200, 4]]"
-                :navigationEnabled="true"
-                :paginationEnabled="false"  
-                :autoplay="true"
-                :autoplayHoverPause="true"
-                :loop="true"
-            >
-                <Slide>
-                    <cart-item/>
-                </Slide>
-                <Slide>
-                    <cart-item/>
-                </Slide>
-                <Slide>
-                    <cart-item/>
-                </Slide>
-                <Slide>
-                    <cart-item/>
-                </Slide>
-                <Slide>
-                    <cart-item/>
-                </Slide>
-
-            </Carousel>
-        </div>
-    </section>
-</template>
-<script>
-import CartItem from '../components/home/CartItem.vue'
-import { Carousel, Slide } from 'vue-carousel'
->>>>>>> a904ddc03ca4b65022a6bd8522a01ed270e2f398
 import ItemCategories from '../components/home/ItemCategories.vue'
 export default {
   components: { 
         CartItem ,
-<<<<<<< HEAD
         VueSlickCarousel,
         ItemCategories
     },
@@ -138,8 +103,8 @@ export default {
             cursor: pointer;
         }
         .slick-active{
-            background-color: $green-color !important;
-            border-color: $green-shadow !important;
+            background-color: $green-color ;
+            border-color: $green-shadow ;
         }
     }
     .slick-prev {
@@ -152,7 +117,7 @@ export default {
         right: 0;
         width: 25px;
         height: 25px;
-        display: inline-block !important;
+        display: inline-block ;
         margin: 0px 2px;
         z-index: 99;
         border: 1px solid #ccc;
@@ -188,20 +153,6 @@ export default {
             }
         }
         
-=======
-        Carousel,
-        Slide,
-        ItemCategories
-    },
-    
-}
-</script>
-<style lang="scss">
-        // carousel ===========================================================
-    .VueCarousel-navigation-button {
-        z-index: 99;
-        top: 95% !important;
->>>>>>> a904ddc03ca4b65022a6bd8522a01ed270e2f398
     }
     .VueCarousel-navigation > button{
         left: 100% !important;
