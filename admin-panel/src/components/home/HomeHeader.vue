@@ -189,7 +189,10 @@ export default {
       align-items: center;
       justify-content: space-between;
       .cart-wrapper{
+<<<<<<< HEAD
         z-index: 2000;
+=======
+>>>>>>> a904ddc03ca4b65022a6bd8522a01ed270e2f398
         border:1px solid black;
         padding: 20px;
         width: 300px;

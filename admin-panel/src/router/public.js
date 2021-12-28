@@ -4,6 +4,7 @@ export default [
         name: 'home',
         meta: {
             layout: "home",
+<<<<<<< HEAD
             breadcrumbItems: [
                 {
                     name: 'home',
@@ -16,6 +17,8 @@ export default [
                     isDisabled: true,
                 },
             ]
+=======
+>>>>>>> a904ddc03ca4b65022a6bd8522a01ed270e2f398
         },
         component: () => import('../pages/HomePage')
     },
@@ -23,6 +26,7 @@ export default [
         path: '/checkout',
         name: 'checkout',
         meta: {
+<<<<<<< HEAD
             layout: "home",
             breadcrumbItems: [
                 {
@@ -36,6 +40,9 @@ export default [
                     isDisabled: true,
                 },
             ]
+=======
+            layout: "empty",
+>>>>>>> a904ddc03ca4b65022a6bd8522a01ed270e2f398
         },
         component: () => import('../pages/CheckoutPage')
     },
@@ -62,5 +69,14 @@ export default [
             layout: "home",
         },
         component:  () => import('../pages/StorePage')
+    },
+
+    {
+        path: '/home/product/view/',
+        name: "home.product.view",
+        meta: {
+            layout: "home",
+        },
+        component:  () => import('../pages/ViewProductPage')
     },
 ]

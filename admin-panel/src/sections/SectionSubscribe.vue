@@ -26,7 +26,10 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper{
+<<<<<<< HEAD:admin-panel/src/sections/SectionSubscribe.vue
     border-top: 1px solid #ccc;
+=======
+>>>>>>> a904ddc03ca4b65022a6bd8522a01ed270e2f398:admin-panel/src/components/home/MyFormSubscribe.vue
     margin: 50px 0;
     width: 100%;
     display: flex;

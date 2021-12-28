@@ -13,9 +13,15 @@
                     ref="close"
                     @click="close()"
                     >back</button>
+<<<<<<< HEAD
                 <li><router-link :to="{name: 'home'}">home</router-link></li>
                 <li><router-link :to="{name: 'checkout'}">Checkout</router-link></li>
                 <li><router-link :to="{name: 'store'}">Store</router-link></li>
+=======
+                <li class="home">home</li>
+                <li>hot deals</li>
+                <li>categories</li>
+>>>>>>> a904ddc03ca4b65022a6bd8522a01ed270e2f398
                 <li>laptops</li>
                 <li>smartphones</li>
                 <li>cameras</li>
@@ -99,9 +105,13 @@ export default {
             font-size: 18px;
             font-weight: 500;
             transition: all 0.3s linear;
+<<<<<<< HEAD
             a{
                 color: #1A1A1A;
             }
+=======
+            color: #1A1A1A;
+>>>>>>> a904ddc03ca4b65022a6bd8522a01ed270e2f398
             cursor: pointer;
             &::before{
                 content: '';
@@ -109,9 +119,13 @@ export default {
                 transition: all 0.3s ease;
             }
             &:hover {
+<<<<<<< HEAD
                 a{
                     color: #72E019;
                 }
+=======
+                 color: #72E019;
+>>>>>>> a904ddc03ca4b65022a6bd8522a01ed270e2f398
                  &::before{ 
                 content: '';
                 position: absolute;

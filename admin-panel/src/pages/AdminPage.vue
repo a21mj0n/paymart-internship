@@ -1,10 +1,17 @@
 <template>
   <div class="content">
     <div class="content__wrapper">
+<<<<<<< HEAD
       <admin-cart :items="users" name="users" />
       <admin-cart :items="categories" name="categories" />
       <admin-cart :items="brands" name="brands" />
       <admin-cart :items="products" name="products" />
+=======
+      <my-cart :items="users" name="users" />
+      <my-cart :items="categories" name="categories" />
+      <my-cart :items="brands" name="brands" />
+      <my-cart :items="products" name="products" />
+>>>>>>> a904ddc03ca4b65022a6bd8522a01ed270e2f398
     </div>
   </div>
 </template>
