@@ -2,6 +2,14 @@
     <div class="wrapper" >
 
         <section-collection />
+
+        <my-slider/>
+
+        <!-- <input v-model="range.value" type="range" id="" :min="range.min" :max="range.max">
+
+        <p>min {{ range.min }}</p>
+        <p>max {{ range.max }}</p>
+        <p>VALUE {{ range.value }}</p> -->
         
         <section-products />
 
@@ -9,32 +17,35 @@
 
         <section-selling />
 
-
     </div>
 </template>
 
 <script>
 
 import MyPromotion from '../components/home/MyPromotion.vue'
+import MySlider from '../components/MySlider.vue'
 import SectionCollection from '../sections/SectionCollection.vue'
 import SectionProducts from '../sections/SectionProducts.vue'
 import SectionSelling from '../sections/SectionSelling.vue'
 
 export default {
+    name: "home",
     components: { 
         MyPromotion,
         SectionCollection,
         SectionProducts,
-        SectionSelling
+        SectionSelling,
+        MySlider
     },
-    name: "home",
-    data(){
-        return{
-
+    data: () => ({
+        range: {
+            min: 0,
+            max: 20000,
+            value: 0
+        }
+    })
 }
-    }
 
-}
 
 </script>
 
