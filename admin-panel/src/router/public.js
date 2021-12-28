@@ -4,6 +4,18 @@ export default [
         name: 'home',
         meta: {
             layout: "home",
+            breadcrumbItems: [
+                {
+                    name: 'home',
+                    text: 'Home',
+                    isDisabled: false,
+                },
+                {
+                    name: 'checkout',
+                    text: 'Checkout',
+                    isDisabled: true,
+                },
+            ]
         },
         component: () => import('../pages/HomePage')
     },
@@ -12,6 +24,18 @@ export default [
         name: 'checkout',
         meta: {
             layout: "home",
+            breadcrumbItems: [
+                {
+                    name: 'home',
+                    text: 'Home /',
+                    isDisabled: false,
+                },
+                {
+                    name: 'checkout',
+                    text: 'Checkout',
+                    isDisabled: true,
+                },
+            ]
         },
         component: () => import('../pages/CheckoutPage')
     },
@@ -21,7 +45,7 @@ export default [
         meta: {
             layout: "empty",
         },
-        component:  () => import('../pages/AuthPage')
+        component: () => import('../pages/AuthPage')
     },
     {
         path: '*',
@@ -29,7 +53,7 @@ export default [
         meta: {
             layout: "home",
         },
-        component:  () => import('../pages/NotFound')
+        component: () => import('../pages/NotFound')
     },
     {
         path: '/store',
