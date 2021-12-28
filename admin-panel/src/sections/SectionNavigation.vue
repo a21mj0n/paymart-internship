@@ -6,12 +6,12 @@
             <h1>about</h1>
             <ul>
                 <li><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p></li>
-                <li><p><i class="fa fa-map-marker" aria-hidden="true"></i>1734 Stonecoal Road</p></li>
+                <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>1734 Stonecoal Road</a></li>
                 <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i>+021-95-51-84</a></li>
                 <li><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i>email@email.com</a></li> 
             </ul>
         </div>
-        <div class=" nav__wrapper categoriess">
+        <div class=" nav__wrapper categories">
             <h1>categories</h1>
             <ul>
                 <li><a href="">hot ideals</a></li>

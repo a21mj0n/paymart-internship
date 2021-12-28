@@ -1,8 +1,8 @@
 <template>
-    <div class="wrapper">
-        <my-nav-to-page />
-        <section-collection />
+    <div class="wrapper" >
 
+        <section-collection />
+        
         <section-products />
 
         <my-promotion/>
@@ -13,16 +13,12 @@
 
         <section-navigation/>
 
-        <my-footer-home />
-
     </div>
 </template>
 
 <script>
 
-import MyNavToPage from '../components/home/MyNavToPage.vue'
 import MyPromotion from '../components/home/MyPromotion.vue'
-import MyFooterHome from '../components/home/MyFooterHome.vue'
 import SectionNavigation from '../sections/SectionNavigation.vue'
 import SectionCollection from '../sections/SectionCollection.vue'
 import SectionProducts from '../sections/SectionProducts.vue'
@@ -33,12 +29,10 @@ export default {
     components: { 
         MyPromotion,
         SectionNavigation,
-        MyFooterHome,
         SectionSubscribe,
         SectionCollection,
         SectionProducts,
-        SectionSelling,
-        MyNavToPage
+        SectionSelling
     },
     name: "home",
     data(){

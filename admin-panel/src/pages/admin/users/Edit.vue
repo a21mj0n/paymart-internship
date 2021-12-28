@@ -1,14 +1,10 @@
 <template>
   <div class="add">
     <form @submit.prevent="editOneUser">
-      <h2>change one user</h2>
-      <VueFormGenerator
-        :schema="schema"
-        :model="model"
-        :options="formOptions"
-      >
+      <h2>{{ $t("user.edit_title") }}</h2>
+      <VueFormGenerator :schema="schema" :model="model" :options="formOptions">
       </VueFormGenerator>
-      <button type="submit">Изменить</button>
+      <button type="submit">{{ $t("user.edit_title") }}</button>
     </form>
   </div>
 </template>
@@ -21,7 +17,7 @@ export default {
   data() {
     return {
       userData: {},
-     model: {
+      model: {
         username: "",
         full_name: "",
         avatar: "",
@@ -39,7 +35,9 @@ export default {
     async editOneUser() {
       try {
         const resp = await axios.put(
-          `https://marketpaymart.herokuapp.com/api/dashboard/users/${this.$route.params.id}`, this.userData);
+          `https://marketpaymart.herokuapp.com/api/dashboard/users/${this.$route.params.id}`,
+          this.userData
+        );
         this.$router.push({ name: "admin.users" });
         console.log(resp.data);
       } catch (error) {
@@ -48,69 +46,73 @@ export default {
     },
   },
   async created() {
-   const {data} = await axios.get(`https://marketpaymart.herokuapp.com/api/dashboard/users/${this.$route.params.id}`)
-        this.userData = data
-        this.model.username = this.userData.username
-        this.model.full_name = this.userData.full_name
-        this.model.avatar = this.userData.avatar
-        this.model.email = this.userData.email
-        const $this = this;
-          
-        const fields = [
-            {
-                type: 'input',
-                inputType: 'text',
-                name: 'username',
-                model: "username",
-                label: i18n.t('user.edit_label'),
-                validator:  VueFormGenerator.validators.string.locale({
-                    fieldIsRequired: "Поля не может быть пустым",
-                })
-            },
-             {
-                type: 'input',
-                inputType: 'text',
-                name: 'fullname',
-                model: "full_name",
-                label: i18n.t('user.edit_fullname'),
-                validator:  VueFormGenerator.validators.string.locale({
-                    fieldIsRequired: "Поля не может быть пустым",
-                })
-            },
-            {
-                type: 'input',
-                inputType: 'text',
-                name: 'avatar',
-                model: "avatar",
-                label: i18n.t('user.edit_ava'),
-                validator:  VueFormGenerator.validators.string.locale({
-                    fieldIsRequired: "Поля не может быть пустым",
-                })
-            },
-             {
-                type: 'input',
-                inputType: 'email',
-                name: 'email',
-                model: "email",
-                label: i18n.t('user.edit_email'),
-                validator:  VueFormGenerator.validators.string.locale({
-                    fieldIsRequired: "Поля не может быть пустым",
-                })
-            },
-            {
-                type: 'submit',
-                buttonText: i18n.t('user.edit_btn'),
-                async onSubmit(model){
-                    await axios.post('https://marketpaymart.herokuapp.com/api/dashboard/users/', model);
-                    $this.$router.push({name: 'users'});
-                },
-                label: '',
-                validateBeforeSubmit: true
-            }
-                
-        ];
+    const { data } = await axios.get(
+      `https://marketpaymart.herokuapp.com/api/dashboard/users/${this.$route.params.id}`
+    );
+    this.userData = data;
+    this.model.username = this.userData.username;
+    this.model.full_name = this.userData.full_name;
+    this.model.avatar = this.userData.avatar;
+    this.model.email = this.userData.email;
+    const $this = this;
 
-        this.schema.fields = fields;
+    const fields = [
+      {
+        type: "input",
+        inputType: "text",
+        name: "username",
+        model: "username",
+        label: i18n.t("user.edit_label"),
+        validator: VueFormGenerator.validators.string.locale({
+          fieldIsRequired: "Поля не может быть пустым",
+        }),
+      },
+      {
+        type: "input",
+        inputType: "text",
+        name: "fullname",
+        model: "full_name",
+        label: i18n.t("user.edit_fullname"),
+        validator: VueFormGenerator.validators.string.locale({
+          fieldIsRequired: "Поля не может быть пустым",
+        }),
+      },
+      {
+        type: "input",
+        inputType: "text",
+        name: "avatar",
+        model: "avatar",
+        label: i18n.t("user.edit_ava"),
+        validator: VueFormGenerator.validators.string.locale({
+          fieldIsRequired: "Поля не может быть пустым",
+        }),
+      },
+      {
+        type: "input",
+        inputType: "email",
+        name: "email",
+        model: "email",
+        label: i18n.t("user.edit_email"),
+        validator: VueFormGenerator.validators.string.locale({
+          fieldIsRequired: "Поля не может быть пустым",
+        }),
+      },
+      {
+        type: "submit",
+        buttonText: i18n.t("user.edit_btn"),
+        async onSubmit(model) {
+          await axios.post(
+            "https://marketpaymart.herokuapp.com/api/dashboard/users/",
+            model
+          );
+          $this.$router.push({ name: "users" });
+        },
+        label: "",
+        validateBeforeSubmit: true,
+      },
+    ];
+
+    this.schema.fields = fields;
   },
 };
 </script>

@@ -4,13 +4,10 @@
           Sing Up for the <span>newsletter</span>
       </p>
       <form class="form">
-          <div class="input__wrapper">
-
           <div class="input-mama">
             <input class="input__email" placeholder="Enter Your Email" type="email">
           </div>
           <button class="btn"><p><i class="fa fa-envelope"></i> Subscribe</p></button>
-          </div>
       </form>
       <div class="socials">
           <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
@@ -37,7 +34,6 @@ export default {
     flex-direction: column;
     .title__form{
         margin-top: 30px;
-        margin-bottom: 15px;
         color: #1A1A1A;
         font-size: 32px;
         font-weight: 200;
@@ -50,17 +46,22 @@ export default {
         display: flex;
         justify-content: center;
          width: 500px;
-         .input__wrapper{
-             display: flex;
-             background: linear-gradient(to right, #72E019, #1A1A1A,#1A1A1A);
-             width: 100%;
-            padding: -5px;
-             z-index: 1000;
-             border-radius: 25px;
-         }
+         
         .input-mama{
-            margin: 0px;
             border-radius: 20px 0 0 20px;
+            position: relative;
+            &:before{
+                content:"";
+                position: absolute;
+                top:0.5px;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                z-index: -1;
+                background:linear-gradient(to right, #72E019,#1A1A1A);
+                border-radius: 25px 0 0 25px ;
+                outline: none;
+            }
         }
         .input__email{
             margin: 3px 0 3px 3px;
@@ -89,6 +90,18 @@ export default {
 
               display: block;
             position: relative;
+             &:before{
+                content:"";
+                position: absolute;
+                top:-3px;
+                left: 0;
+                height: 118%;
+                width: 104%;
+                z-index: -1;
+                background:linear-gradient(to right, #1A1A1A,#1A1A1A);
+                border-radius: 0 28px 28px 0;
+                outline: none;
+            }
             width: 160px;
             background: #1A1A1A;
             border-radius: 0 20px 20px 0;
