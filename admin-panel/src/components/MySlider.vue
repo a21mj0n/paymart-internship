@@ -1,12 +1,13 @@
 <template>
 
   <div class="wrapper" >
-        <h1 style="{color: 'red'}">slider</h1>
+        <h1 style="{color: 'red'}">Price</h1>
         <vue-slider
             v-model="value"
             :min="0"
             :max="100"
             :min-range="0"
+            :max-range="100"
             :height="10"
             :process-dragable="true"
             :process-style="processStyle"
@@ -54,7 +55,7 @@ export default {
         return {
         // value: [0, 5000],
         from: 0,
-        to: 0,
+        to: 100,
         processStyle: {
             backgroundColor: '#73e019bd',
         },
@@ -62,15 +63,27 @@ export default {
     },
     methods: {
         plusTo(){
+            if(this.to === 100){
+                return
+            }
             this.to = this.to + 1
         },
         minusTo(){
+            if(this.to === 0){
+                return
+            }
             this.to = this.to - 1
         }, 
         plusFrom(){
+            if(this.from === 100){
+                return
+            }
             this.from = this.from + 1
         },
         minusFrom(){
+            if(this.from === 0){
+                return
+            }
             this.from = this.from - 1
         }
     },
@@ -103,6 +116,7 @@ export default {
     }
     .flex{
         display: flex;
+        margin: 0 -10px;
     }
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
@@ -112,8 +126,8 @@ export default {
     .price-input{
         display: flex;
         border: 1px solid #ccc;
-        margin-right: 10px;
-        width: 100px;
+        margin: 0 10px;
+        width: 50%;
         input{
             border: none;
             outline: none;
@@ -123,11 +137,12 @@ export default {
     }
     .row{
         display: flex;
+        width: 100%;
     }
 
     .btns{
         width: 20px;
-        height: 100%;
+        height: 50%;
         span{
             width: 100%;
             display: inline-block;

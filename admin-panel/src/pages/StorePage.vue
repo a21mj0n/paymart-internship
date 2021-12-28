@@ -4,6 +4,7 @@
       <div class="store-page">
         <div class="aside-wrapper">
           <aside-checkouts/>
+          <my-slider/>
         </div>
         <div class="content-wrapper">
           <div class="components-changer">
@@ -48,6 +49,7 @@
 
 <script>
 import AsideCheckouts from "../components/home/AsideCheckouts.vue"
+import MySlider from '../components/MySlider.vue'
 export default {
   data(){
     return{
@@ -56,6 +58,7 @@ export default {
   },
   components:{
     AsideCheckouts,
+    MySlider,
   }
 }
 </script>

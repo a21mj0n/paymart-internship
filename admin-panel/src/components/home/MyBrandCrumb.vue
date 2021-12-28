@@ -1,9 +1,9 @@
 <template>
-  <div class="breadcrumb">
+  <div class="breadcrumb" v-if="links.length > 1">
     <div class="container">
-      <ul class="breadcrumb_list">
-        <li class="breadcrumb_item" v-for="link in links" :key="link.name">
-          <router-link :to="{ name: link.name }" class="breadcrumb_link">
+      <ul class="breadcrumb_list" >
+        <li class="breadcrumb_item" v-for="link in links" :key="link.name" >
+          <router-link :to="{ name: link.name }" class="breadcrumb_link" >
             {{ link.text }}
           </router-link>
         </li>
@@ -15,10 +15,22 @@
 <script>
 export default {
   computed: {
-  links() {
-    return this.$route.meta.breadcrumbItems;
+    links() {
+      let links = this.$route.meta.breadcrumbItems || 0;
+      let currentRoutePath = 0
+
+      if(links){
+        currentRoutePath = links.findIndex(route => route.name == this.$route.name);
+        links.slice(0, currentRoutePath + 1)
+      }
+
+      return links
+
+    }
+  },
+  created(){
+    this.links
   }
-}
 };
 </script>
 
