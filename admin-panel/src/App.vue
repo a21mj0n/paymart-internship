@@ -10,6 +10,7 @@
 import AdminLayout from './layouts/AdminLayout.vue';
 import EmptyLayout from './layouts/EmptyLayout.vue';
 import HomeLayout from './layouts/HomeLayout.vue'
+import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 
 export default {
   name: "App",
