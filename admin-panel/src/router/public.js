@@ -27,7 +27,7 @@ export default [
             breadcrumbItems: [
                 {
                     name: 'home',
-                    text: 'Home /',
+                    text: 'Home',
                     isDisabled: false,
                 },
                 {

@@ -15,10 +15,10 @@
 <script>
 export default {
   computed: {
-  links() {
-    return this.$route.meta.breadcrumbItems;
-  }
-}
+    links() {
+      return this.$route.meta.breadcrumbItems;
+    },
+  },
 };
 </script>
 
@@ -41,9 +41,11 @@ $green-color: #72e019;
     text-transform: uppercase;
   }
   &_link {
-    margin-left: 5px;
+    margin: 5px;
     color: #000;
+   
     &.router-link-exact-active {
+      display: inline-block;
       color: $green-color;
       font-size: 14px;
     }
