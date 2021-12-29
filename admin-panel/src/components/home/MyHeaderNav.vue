@@ -13,10 +13,10 @@
                     ref="close"
                     @click="close()"
                     >back</button>
-                <router-link tag="li" :to="{name: 'home'}">home</router-link>
-                <router-link tag="li" :to="{name: 'checkout'}">Checkout</router-link>
-                <router-link tag="li" :to="{name: 'store'}">Store</router-link>
-                <router-link tag="li" :to="{name: 'home.product.view'}">Product by id</router-link>
+                <router-link tag="li" class="nav-link" :to="{name: 'home'}">home</router-link>
+                <router-link tag="li" class="nav-link" :to="{name: 'checkout'}">Checkout</router-link>
+                <router-link tag="li" class="nav-link" :to="{name: 'store'}">Store</router-link>
+                <router-link tag="li" class="nav-link" :to="{name: 'home.product.view'}">Product by id</router-link>
                 <li>smartphones</li>
                 <li>cameras</li>
                 <li>accessories</li>
@@ -41,7 +41,6 @@ export default {
             this.$refs.nav.classList.remove('open')
             this.$refs.nav.classList.add('close')
             this.$refs.nav.style.pointerEvents = 'none'
-            console.log('click');
         }
     }
 
@@ -49,6 +48,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.nav-link{
+    &.router-link-exact-active{
+        color:#72E019 ;
+    }
+}
 .open{
     opacity: 1 !important;
     
@@ -101,14 +105,15 @@ export default {
             transition: all 0.3s linear;
             color: #1A1A1A;
             cursor: pointer;
+            &.router-link-exact-acitve{
+                color: #72E019;
+            }
             &::before{
                 content: '';
                 width: 0;
                 transition: all 0.3s ease;
             }
-            .active{
-                color: #72E019;
-            }
+
             &:hover {
                 color: #72E019;
                  &::before{ 

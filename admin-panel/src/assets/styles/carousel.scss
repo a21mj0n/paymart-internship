@@ -1,9 +1,9 @@
 $green-color:#72E019;
 $green-shadow: #64c515;
-  // carousel ===========================================================
-  .slick-dots{
-      display: flex !important;
-      justify-content: center;
+
+.slick-dots{
+    display: flex !important;
+    justify-content: center;
     li{
         list-style: none !important;
         list-style: none !important;
@@ -14,14 +14,14 @@ $green-shadow: #64c515;
         border-radius: 50% !important;
         cursor: pointer;
     }
- 
+
     .slick-active{
         background-color: $green-color;
         border-color: $green-shadow;
     }
-  }
+}
   
-  .slick-prev {
+.slick-custom-prev {
     cursor: pointer;
     position: absolute;
     background-color: transparent;
@@ -43,28 +43,27 @@ $green-shadow: #64c515;
             color: $green-color;
         }
     }
-  }
-  .slick-next{
-      cursor: pointer;
-      position: absolute;
-      background-color: transparent;
-      border: none;
-      transform: none;
-      bottom: 20px;
-      right: -30px;
-      width: 25px;
-      height: 25px;
-      display: inline-block !important;
-      margin: 0px 2px;
-      z-index: 99;
-      border: 1px solid #ccc;
-      border-radius: 50px;
-      &:hover{
-          box-shadow: 0 0 3px $green-color;
-          border-color: $green-color;
-          i{
-              color: $green-color;
-          }
-      }
-      
-  }
+}
+.slick-custom-next{
+    cursor: pointer;
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    transform: none;
+    bottom: 20px;
+    right: -30px;
+    width: 25px;
+    height: 25px;
+    display: inline-block !important;
+    margin: 0px 2px;
+    z-index: 99;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    &:hover{
+        box-shadow: 0 0 3px $green-color;
+        border-color: $green-color;
+        i{
+            color: $green-color;
+        }
+    }
+}

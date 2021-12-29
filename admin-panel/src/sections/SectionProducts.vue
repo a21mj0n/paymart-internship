@@ -13,15 +13,16 @@
                 <cart-item/>
 
                 <template #prevArrow="">
-                    <button class="slick-custom-arrow ">
+                    <button class="slick-custom-prev">
                         <i class="fa fa-angle-left"/>
                     </button>
                 </template>
                  <template #nextArrow="">
-                    <button class="slick-custom-arrow ">
+                    <button class="slick-custom-next">
                         <i class="fa fa-angle-right"/>
                     </button>
                 </template>
+                
                  <template #customPaging="">
                     <div class="custom-dot">
                         
@@ -101,11 +102,6 @@ export default {
             }
         }
     },
-    created(){
-        console.log(
-            this.carouselDots
-        );
-    }
     
 }
 </script>

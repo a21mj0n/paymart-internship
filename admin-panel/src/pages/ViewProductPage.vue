@@ -167,12 +167,7 @@ export default {
       },
     };
   },
-  created(){
-    
-  },
-  beforeDestroy: function(){
-    console.log('DESTROYYYY!!!')
-  }
+
 };
 </script>
 
@@ -180,6 +175,7 @@ export default {
 .bg{
     background: #FBFBFC;
 }
+
 .d-flex{
     display: flex;
 }
