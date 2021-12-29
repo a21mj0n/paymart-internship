@@ -1,21 +1,21 @@
 <template>
    <div class="wrapper">
         <div class="row">
-            <my-sidebar/>
+            <admin-sidebar/>
             <div :class="(isActive) ? 'content-wrapper' : 'content-full'">
-                <my-header @onToggle="onToggleIcon" :isActive="isActive"/>
+                <admin-header @onToggle="onToggleIcon" :isActive="isActive"/>
                 <router-view/>
             </div>
         </div>
     </div>
 </template>
 <script>
-import MyHeader from '../components/admin-panel/MyHeader.vue'
-import MySidebar from '../components/admin-panel/MySidebar.vue'
+import AdminHeader from '../components/admin-panel/AdminHeader.vue'
+import AdminSidebar from '../components/admin-panel/AdminSidebar.vue'
 
 export default {
     name: "AdminLayout",
-    components: { MySidebar, MyHeader},
+    components: { AdminHeader, AdminSidebar},
     data(){
         return {
             isActive: true

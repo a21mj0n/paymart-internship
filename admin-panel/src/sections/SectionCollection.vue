@@ -1,7 +1,7 @@
 <template>
     <section class="collection">
         <div class="container">
-            <div class="card__link-wrapper">
+            <div class="card__link-wrapper row">
                 <my-card-link
                     :srcImage="srcImageLaptop"
                 />
@@ -28,6 +28,8 @@ export default {
     }
 }
 </script>
-<style lang="scss">
-    
+<style scoped lang="scss">
+    .row{
+        display: flex;
+    }
 </style>

@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    
     <div class="checkout_wrapper">
       <div class="checkout_form">
         <h2 class="checkout_title">Billing address</h2>
@@ -280,22 +281,18 @@ input[type="radio"] {
 }
 
 .checkout_wrapper {
-  padding-bottom: 100px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  margin-right: auto;
-  margin-left: auto;
+  align-items: center;
+  margin: 0 auto;
   .checkout_form {
-    padding-top: 50px;
+    padding-top: 33px;
     margin-right: 50px;
     width: 100%;
     form {
-      margin-bottom: 50px;
       display: flex;
-      flex-direction: column;
-      padding-top: 10px 20px;
+      flex-direction: column;   
       .checkout_accaunt {
         padding: 15px;
         &-item {
@@ -303,7 +300,6 @@ input[type="radio"] {
             margin: 10px 0;
           }
           input {
-            
             height: 40px;
             width: 100%;
             padding: 0px 15px;
@@ -326,6 +322,10 @@ input[type="radio"] {
   }
 }
 
+.wrapper{
+  margin-top: 0;
+}
+
 .vue-form-generator .form-control {
   height: 45px;
 }
@@ -346,6 +346,7 @@ input[type="radio"] {
   border-left: 1px solid #e4e7ed;
   border-bottom: 1px solid #e4e7ed;
   width: 100%;
+  align-self: flex-start;
   &::before {
     content: "";
     position: absolute;

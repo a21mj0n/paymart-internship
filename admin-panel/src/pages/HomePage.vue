@@ -2,16 +2,12 @@
     <div class="wrapper" >
 
         <section-collection />
-        
+
         <section-products />
 
         <my-promotion/>
 
         <section-selling />
-
-        <section-subscribe/> 
-
-        <section-navigation/>
 
     </div>
 </template>
@@ -19,33 +15,31 @@
 <script>
 
 import MyPromotion from '../components/home/MyPromotion.vue'
-import SectionNavigation from '../sections/SectionNavigation.vue'
 import SectionCollection from '../sections/SectionCollection.vue'
 import SectionProducts from '../sections/SectionProducts.vue'
 import SectionSelling from '../sections/SectionSelling.vue'
-import SectionSubscribe from '../sections/SectionSubscribe.vue'
 
 export default {
+    name: "home",
     components: { 
         MyPromotion,
-        SectionNavigation,
-        SectionSubscribe,
         SectionCollection,
         SectionProducts,
-        SectionSelling
+        SectionSelling,
     },
-    name: "home",
-    data(){
-        return{
-
+    data: () => ({
+        range: {
+            min: 0,
+            max: 20000,
+            value: 0
+        }
+    })
 }
-    }
 
-}
 
 </script>
 
-<style lang="scss" >
+<style scoped lang="scss" >
 .wrapper{
     margin: 0 auto;
 }

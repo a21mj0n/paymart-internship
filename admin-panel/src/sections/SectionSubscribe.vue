@@ -26,6 +26,7 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper{
+    border-top: 1px solid #ccc;
     margin: 50px 0;
     width: 100%;
     display: flex;

@@ -13,10 +13,10 @@
                     ref="close"
                     @click="close()"
                     >back</button>
-                <li class="home">home</li>
-                <li>hot deals</li>
-                <li>categories</li>
-                <li>laptops</li>
+                <router-link tag="li" :to="{name: 'home'}">home</router-link>
+                <router-link tag="li" :to="{name: 'checkout'}">Checkout</router-link>
+                <router-link tag="li" :to="{name: 'store'}">Store</router-link>
+                <router-link tag="li" :to="{name: 'home.product.view'}">Product by id</router-link>
                 <li>smartphones</li>
                 <li>cameras</li>
                 <li>accessories</li>
@@ -106,8 +106,11 @@ export default {
                 width: 0;
                 transition: all 0.3s ease;
             }
+            .active{
+                color: #72E019;
+            }
             &:hover {
-                 color: #72E019;
+                color: #72E019;
                  &::before{ 
                 content: '';
                 position: absolute;
