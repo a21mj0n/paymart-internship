@@ -6,6 +6,8 @@
           <aside-checkouts/>
           <my-slider/>
           <aside-checkouts/>
+          <h3>Top selling</h3>
+          <product-item v-for="i in 3" :key="i"/>
         </div>
         <div class="content-wrapper">
           <div class="components-changer">
@@ -55,6 +57,7 @@
 import AsideCheckouts from "../components/home/AsideCheckouts.vue"
 import MySlider from '../components/MySlider.vue'
 import CartItem from '../components/home/CartItem.vue'
+import ProductItem from '../components/home/ProductItem.vue'
 export default {
   data(){
     return{
@@ -65,6 +68,7 @@ export default {
     AsideCheckouts,
     MySlider,
     CartItem,
+    ProductItem,
   }
 }
 </script>
@@ -79,6 +83,10 @@ export default {
   .aside-wrapper{
     width: 25%;
     padding-right: 30px;
+    h3{
+      margin-bottom: 30px;
+      text-transform: uppercase;
+    }
   }
   .content-wrapper{
     width: 75%;
