@@ -20,6 +20,7 @@
 
 <script>
 import axios from "axios"
+import config  from '../../../config';
 export default {
     name:  "createProduct",
     data(){
@@ -29,12 +30,12 @@ export default {
     },
     methods:{
       async editProduct(){
-          await axios.put(`https://61ade31fd228a9001703b022.mockapi.io/api/products/${this.$route.params.id}`, this.product)
-          this.$router.push({name: "admin.products"})
+          await axios.put(`${config.URL.dev}/api/dashboard/products/${this.$route.params.id}`, this.product)
+          this.$router.push({name: "admin.products.test"})
        }
         },
     async created(){
-          const {data} = await axios.get(`https://61ade31fd228a9001703b022.mockapi.io/api/products/${this.$route.params.id}`)
+          const {data} = await axios.get(`${config.URL.dev}/api/dashboard/products/${this.$route.params.id}`)
           this.product = data
     
     }

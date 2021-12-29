@@ -1,46 +1,105 @@
 <template>
   <div class="content">
-    <h2>Create Brand</h2>
-    <form @submit.prevent="createBrand">
+    <h2>{{$t('createPlaceholder.main')}}</h2>
+    <!-- <form @submit.prevent="createBrand">
       <div class="form-wrapper">
         <input v-model="name" type="text" placeholder="Brand name" name='brand-name'>
         <input v-model='image' type="text" placeholder="Brand image" name='brand-image'>
-        <!-- <label for="file">
+        <label for="file">
           <input type="text" readonly name='file-name' placeholder="Brand image">
           <input type="file" class="hide" id="file" placeholder="brand image" name='brand-image' onchange="javascript:this.previousElementSibling.value = this.files[0].name">
           <span><p>Choose file</p></span>
-        </label> -->
+        </label>
         <span class="btn-def">
           <button type='submit'>Create brand</button>
         </span>
+      </div>
+    </form> -->
+    <form @submit.prevent="createBrand">
+      <div class="form-wrapper">
+        <vue-form-generator
+        :schema="schema"
+        :model="model"
+        :options="formOptions"
+        ></vue-form-generator>
+        <!-- <span class="btn-def">
+          <button type='submit'>Create brand</button>
+        </span> -->
       </div>
     </form>
   </div>
 </template>
 
 <script>
+import config from '../../../config'
+import i18n from '../../../i18n/i18n'
 import axios from 'axios'
+import {mapGetters} from 'vuex'
 export default {
   data(){
     return{
-      name:'',
-      image:'',
+      model:{
+        name:'',
+      },
+      schema: {
+        fields: []
+      },
+      formOptions:{
+        validateAfterLoad: false,
+        validateAfterChange: true,
+        validateBeforeSubmit:true,
+        validateAsync: true,
+      }
     }
   },
-  methods:{
-  async createBrand(){
-      const brand = {
-        name:this.name,
-        image:this.image,
+    methods:{
+      fillFields($this){
+        this.schema.fields = [
+          {
+            type: 'input',
+            inputType: 'text',
+            placeholder:i18n.t('createPlaceholder.name'),
+            model: 'name',
+            required: true,
+            validator: 'string'
+          },
+          {
+            type: 'submit',
+            async onSubmit(model){
+              await axios.post(`${config.URL.dev}/api/dashboard/brands`, model)
+              model.name = model.image = ''
+              await $this.$router.push({ name: 'admin.brands' });
+            },
+            label: '',
+            buttonText: i18n.t('createPlaceholder.button'),
+            validateBeforeSubmit: true
+
+          },
+        ];
       }
-      await axios.post('https://61ade31fd228a9001703b022.mockapi.io/api/brands',brand)
-      this.image = this.name = ''
+    },
+  
+  computed: {
+    ...mapGetters({
+      langChanged: 'lang/langChanged'
+    }),
+  },
+  watch: {
+    langChanged(){
+      this.fillFields()
     }
+  },
+  created() {
+    const $this = this;
+    this.fillFields($this);
   }
 }
 </script>
 
 <style lang='scss' scoped>
+  fieldset{
+    border:none !important;
+  }
   .content{
     h2{
       margin-bottom: 30px;
@@ -53,13 +112,15 @@ export default {
       #file{
         display:none;
       }
-      input{
-        height: 50px;
-        padding: 5px 20px;
-        border:none;
-        outline: none;
-        margin-bottom: 20px;
-        min-width: 20%;
+      .vue-form-generator{
+        .form-control{
+          height: 50px;
+          padding: 5px 20px;
+          border:none;
+          outline: none;
+          margin-bottom: 20px;
+          min-width: 20%;
+        }
       }
       label{
         min-width: 20%;

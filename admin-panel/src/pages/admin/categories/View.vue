@@ -1,13 +1,13 @@
 <template>
     <div class="view">
-        <h2 v-if="this.categoryById !== null">{{$t('category.view_title')}}: {{this.categoryById[0].name}}</h2>
+        <h2 v-if="this.categoryById !== null">Страница: {{this.categoryById[0].name}}</h2>
         <vuetable
             :data="categoryById"
             :fields="fields"
             :api-mode="false"
         >
             <template slot="actions">
-                <button  @click="$router.push({name: 'admin.categories'})">{{$t('category.view_btn')}}</button>
+                <button  @click="$router.push({name: 'admin.categories'})">Back</button>
             </template>
         </vuetable>
     </div>

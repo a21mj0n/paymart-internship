@@ -8,11 +8,9 @@
         @click.prevent="visible = !visible"
         
         >
-          <div class="user-wrapper"
-          
-          >
+          <div class="user-wrapper">
             <p class="user__img side__bar-visible">img</p>
-            <p class="user__name">Tania Andrew</p>
+            <p class="user__name">{{$t('message.username')}}</p>
           </div>
           <i class="fa fa-caret-down" aria-hidden="true"
          
@@ -21,9 +19,9 @@
         </a>
         <transition name="slide">
           <div class="user__config" v-if="visible">
-                <a href=""><span class="side__bar-visible">MP</span>My Profile</a>
-                <a href=""><span class="side__bar-visible">EP</span>Edit Profile</a>
-                <a href=""><span class="side__bar-visible">S</span>Settings</a>
+                <a href=""><span class="side__bar-visible">{{$t('sidebar.insideProfile.shortcutMP')}}</span>{{$t('sidebar.insideProfile.myprofile')}}</a>
+                <a href=""><span class="side__bar-visible">{{$t('sidebar.insideProfile.shortcutE')}}</span>{{$t('sidebar.insideProfile.edit')}}</a>
+                <a href=""><span class="side__bar-visible">{{$t('sidebar.insideProfile.shortcutS')}}</span>{{$t('sidebar.insideProfile.settings')}}</a>
             </div>
         </transition>
             
@@ -32,23 +30,46 @@
     </div>
     <nav>
         <ul class="navigation">
-            <li><span class="side__bar-visible"><i class="fa fa-users" aria-hidden="true"></i></span>Пользователи</li>
-            <router-link tag='li' :to="{name: 'admin.categories'}"><span class="side__bar-visible"><i class="fa fa-th" aria-hidden="true"></i></span>Категории</router-link>
-            <li @click="productVisible = !productVisible"><span class="side__bar-visible"><i class="fa fa-square" aria-hidden="true"></i></span>Продукты</li>
+            <li @click="usersVisible = !usersVisible" >
+              <span class="side__bar-visible">
+                <i class="fa fa-users" aria-hidden="true"></i>
+              </span>
+              {{$t('sidebar.users')}}
+            </li>
+            
+            <transition name="slide">
+              <div class="config" v-if="usersVisible">
+                <router-link :to="{name: 'admin.users'}">
+                  <span class="side__bar-visible">
+                    {{$t('user.view_sb_ms')}}
+                  </span>
+                  {{$t('user.view_sb_xs')}}
+                </router-link>
+                <router-link :to="{name: 'admin.users.create-role'}">
+                  <span class="side__bar-visible">
+                    {{$t('user.create_sb_ms')}}
+                  </span>
+                    {{$t('user.create_sb_xs')}}
+                </router-link>
+              </div>
+          </transition>
+
+            <router-link tag='li' :to="{name: 'admin.categories'}"><span class="side__bar-visible"><i class="fa fa-th" aria-hidden="true"></i></span>{{$t('sidebar.categories')}}</router-link>
+            <li @click="productVisible = !productVisible"><span class="side__bar-visible"><i class="fa fa-square" aria-hidden="true"></i></span>{{$t('sidebar.products')}}</li>
               <transition name="slide">
           <div class="config" v-if="productVisible">
-              <router-link :to="{name: 'admin.products'}"><span class="side__bar-visible">VP</span>View Products</router-link>
-              <router-link :to="{name: 'admin.products.create'}"><span class="side__bar-visible">CP</span>Create Product</router-link>
+              <router-link :to="{name: 'admin.products.create'}"><span class="side__bar-visible">{{$t('sidebar.insideProducts.shortcutCreate')}}</span>{{$t('sidebar.insideProducts.create')}}</router-link>
+              <router-link :to="{name: 'admin.products.test'}"><span class="side__bar-visible">{{$t('sidebar.insideProducts.shortcutView')}}</span>{{$t('sidebar.insideProducts.view')}}</router-link>
             </div>
         </transition>
-            <li @click="brandVisible = !brandVisible"><span class="side__bar-visible"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>Бренды</li>
+            <li @click="brandVisible = !brandVisible"><span class="side__bar-visible"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>{{$t('sidebar.brands')}}</li>
             <transition name="slide">
           <div class="config" v-if="brandVisible">
-              <router-link :to="{name: 'admin.brands'}"><span class="side__bar-visible">VB</span>View Brands</router-link>
-              <router-link :to="{name: 'admin.brands.create'}"><span class="side__bar-visible">CB</span>Create Brand</router-link>
+              <router-link :to="{name: 'admin.brands'}"><span class="side__bar-visible">{{$t('sidebar.insideBrands.shortcutView')}}</span>{{$t('sidebar.insideBrands.view')}}</router-link>
+              <router-link :to="{name: 'admin.brands.create'}"><span class="side__bar-visible">{{$t('sidebar.insideBrands.shortcutCreate')}}</span>{{$t('sidebar.insideBrands.create')}}</router-link>
             </div>
             </transition>
-            <li><span class="side__bar-visible"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>Заказы</li>
+            <li><span class="side__bar-visible"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>{{$t('sidebar.cart')}}</li>
         </ul>
     </nav>
   </div>
@@ -61,12 +82,16 @@ export default {
         visible:false,
         productVisible: false,
         brandVisible: false,
+        usersVisible: false
       }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+$green-color:#72E019;
+$green-shadow: #64c515;  
+
 
 .side__bar-visible{
     display: block;
@@ -76,7 +101,7 @@ export default {
 }
 .side__bar-wrapper {
   position: absolute;
-  overflow-y: auto;
+  overflow-y: scroll;
   top: 0;
   left: 0;
   width: 260px;
@@ -121,8 +146,9 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-      background: red;
+      background: $green-shadow;
       height: 50px;
+      margin-bottom: 0;
 
       border-radius: 50%;
       margin-right: 10px;
@@ -164,8 +190,8 @@ nav{
                 color: #fff;
             }
             &:hover{
-                background: red;
-                border-radius: 10px;
+              background:$green-shadow;
+              border-radius: 10px;
             }
             
         }

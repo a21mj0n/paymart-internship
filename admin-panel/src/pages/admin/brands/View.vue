@@ -5,17 +5,18 @@
       <h3>{{this.brandByID.name}}</h3>
     </div>
     <div class="change-buttons">
-      <span class="btn-def" @click="$router.push({name: 'admin.brands.edit', params: {id: $route.params.id}})">
-        <p>Edit</p>
+      <span class="btn-def" @click="$router.push({name: 'admin.brands'})">
+        <p>{{$t('viewButton.name')}}</p>
       </span>
-      <span class="btn-def" @click="removeCategory(brandByID.id)">
+      <!-- <span class="btn-def" @click="removeCategory(brandByID.id)">
         <p>Delete</p>
-      </span>
+      </span> -->
     </div>
   </div>
 </template>
 
 <script>
+import config from '../../../config'
 import axios from 'axios'
 export default {
   data(){
@@ -24,16 +25,16 @@ export default {
     }
   },
   methods:{
-    async removeCategory(id){
-      if(window.confirm("Are you sure that you want to delete brand?")){
-        await axios.delete(`https://61ade31fd228a9001703b022.mockapi.io/api/brands/${id}`)
-        this.$router.push({name: 'admin.brands'})
-      }
+    // async removeCategory(id){
+    //   if(window.confirm("Are you sure that you want to delete brand?")){
+    //     await axios.delete(`https://marketpaymart.herokuapp.com/api/dashboard/brands/${id}`)
+    //     this.$router.push({name: 'admin.brands'})
+    //   }
 
-    }
+    // }
   },
   async created(){
-    const {data} = await axios.get(`https://61ade31fd228a9001703b022.mockapi.io/api/brands/${this.$route.params.id}`)
+    const {data} = await axios.get(`${config.URL.dev}/api/dashboard/brands/${this.$route.params.id}`)
     this.brandByID = data
   }
 }

@@ -9,11 +9,11 @@
             <span></span>  
           </a>
         </div>
-        <p>Dashboard</p>
+        <p>{{$t('message.name')}}</p>
       </div>
       <div class="right-side">
         <div class="search-wrapper">
-          <input type="text" placeholder="Search...">
+          <input type="text" :placeholder="$t('message.placeholder')">
           <a href="#" class="search-button">
             <i class="fa fa-search"></i>
           </a>
@@ -28,6 +28,9 @@
             <i class="fa fa-bell"></i>
           </a>
         </div>
+        <div class="lang-wrapper">
+          <lang-change></lang-change>
+        </div>
         <div class="profile-wrapper">
           <a href="#" @click.prevent="logout">
             <i class="fa fa-user"></i>
@@ -37,9 +40,10 @@
     </div>
   </div>
 </template>
-
 <script>
+import langChange from '../LangChange.vue'
 export default {
+  components:{langChange},
   props: ['isActive'],
   methods: {
     onClick(){
@@ -67,7 +71,7 @@ export default {
       padding-left: 30px;
       padding-right: 30px;
       height:100px;
-      background-color:#ddd;
+      background-color:rgb(231, 231, 231);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -138,7 +142,7 @@ export default {
           height: 40px;
           border:none;
           outline: none;
-          background-color: #ddd;
+          background-color: rgb(231, 231, 231);
           border-bottom: 1px solid #8d8d8d;
         }
         .search-button{
@@ -162,6 +166,14 @@ export default {
       }
       .notification-wrapper{
         margin-right: 30px;
+      }
+      .lang-wrapper{
+        margin-right: 30px;
+        select{
+          background-color: rgb(236, 236, 236);;
+          border:none;
+          outline: none;
+        }
       }
     }
   }

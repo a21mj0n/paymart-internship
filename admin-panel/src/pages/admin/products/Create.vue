@@ -1,102 +1,159 @@
 <template>
   <div class="content">
-          <div class="center">
-            <vue-form-generator
-            :schema="schema"
-            :model="model"
-            :options="formOptions"
+    <div class="center">
+      <Loader v-if="loading"/>
+      <form v-else>
+        <vue-form-generator
+          :schema="schema"
+          :model="model"
+          :options="formOptions"
         ></vue-form-generator>
-          </div>
+        <!-- <input type="file" name="" id="" @change="change"> -->
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
+import VueFormGenerator from "vue-form-generator/dist/vfg-core.js";
+import config  from '../../../config';
 
 export default {
   name: "createProduct",
   data() {
     return {
-      model:{
-        img: '',
-        name: '',
-        brand: '',
-        color: '',
-        size: '',
-        price: '',
-        qty: 0,
-        amount: ''
+       loading: true,
 
+
+      pullCat: "",
+      pullBrand: "",
+      model: {
+        id: Date.now(),
+        images: [],
+        name: "",
+        brand_id: '',
+        category_id: "",
+        price: "",
+        quantity: null,
+        created_at: new Date().toLocaleString(),
       },
-      schema:{
-        fields:[
-          {
-            type: 'input',
-            inputType: 'text',
-            label: 'Название товара',
-            model: 'name',
-            required: true,
-            validator: 'string'
-          },
-          {
-            type: 'input',
-            inputType: 'text',
-            label: 'Название бренда',
-            model: 'brand',
-            required: true,
-            validator: 'string'
-          },
-          {
-            type: 'select',
-            label: 'Выберите цвет',
-            model: 'color',
-            required: true,
-            values: ['white', 'black', 'green', 'blue', 'purple', 'orange','yellow']
-            
-          },
-          {
-            type: 'select',
-            label: 'Выберите размер',
-            model: 'size',
-            required: true,
-            values: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL']
-            
-          },
-          {
-            type: 'input',
-            inputType: 'number',
-            label: 'Назовите цену',
-            model: 'price',
-            required: true,
-            validator: 'number'
-          },
-           {
-            type: 'submit',
-            async onSubmit(model){
-              await axios.post('https://61ade31fd228a9001703b022.mockapi.io/api/products', model)
-            },
-            label: '',
-            buttonText: 'Добавить продукт',
-            validateBeforeSubmit: true
-
-          },
-           
-        
-
-        ],
-         
-      },
-      formOptions:{
+      schema: {},
+      formOptions: {
+        validateBeforeSubmit: true,
         validateAfterLoad: false,
-        validateAfterChange: true,
+        validateAfterChanged: true,
         validateAsync: true,
-      }
+      },
     };
+  },
+  methods: {
+    change(e) {
+      this.model.images = e.target.files;
+    },
+    async getCategory() {
+      const resp = await axios.get(
+        `${config.URL.dev}/api/dashboard/categories`
+      );
+      const resp2 = await axios.get(
+        `${config.URL.dev}/api/dashboard/brands`
+      );
+      
+      this.pullCat = resp.data
+      this.pullBrand = resp2.data
+      
+    },
+  },
+  async created() {
    
   },
-  
- 
- 
+  async mounted(){
+
+     await this.getCategory();
+    const $this = this;
+    const fields = {
+      fields: [
+        {
+          type: "select",
+          label: "Выберите категорию",
+          model: "category_id",
+          values: () => this.pullCat,
+        },
+        {
+          type: "select",
+          label: "Выберите бренд",
+          model: "brand_id",
+          values: () => this.pullBrand,
+        },
+        {
+          type: "input",
+          inputType: "text",
+          label: "Название товара",
+          model: "name",
+          required: true,
+          validator: VueFormGenerator.validators.string.locale({
+            fieldIsRequired: "Введите корректное название",
+          }),
+        },
+
+       
+        {
+          type: "input",
+          inputType: "number",
+          label: "Назовите цену",
+          model: "price",
+          required: true,
+          validator: "number",
+        },
+        {
+          type: "input",
+          inputType: "number",
+          label: "Выберите колличество",
+          model: "quantity",
+          default: 0,
+          validator: "number",
+        },
+        {
+          
+          type:'upload',
+          // model: "images",
+          files: true,
+          multiple: true,
+          onChanged(model, schema, event) {
+            console.log(schema);
+            return model.images = event.target.files[0];
+          } 
+        },
+        {
+          type: "submit",
+          label: "",
+          buttonText: "добавить",
+          validateBeforeSubmit: true,
+          async onSubmit(model) {
+            console.log(model);
+            const formData = new FormData()
+            formData.append('сategory_id', model.category_id)
+            formData.append('images[]', model.images)
+            formData.append('brand_id', model.brand_id)
+            formData.append('name', model.name)
+            formData.append('price', model.price)
+            formData.append('quantity', model.quantity)
+            
+            await axios.post(
+              `${config.URL.dev}/api/dashboard/products`,
+              formData
+            );
+            console.log('success');
+            await $this.$router.push({ name: "admin.products.test" });
+          },
+        },
+      ],
+    };
+
+    this.schema = fields;
+
+    this.loading = false
+  }
 };
 </script>
 
@@ -112,10 +169,9 @@ export default {
   height: calc(100vh - 100px);
   overflow-y: auto;
 }
-.center{
+.center {
   max-width: 500px;
   width: 100%;
   height: 700px;
 }
-
 </style>

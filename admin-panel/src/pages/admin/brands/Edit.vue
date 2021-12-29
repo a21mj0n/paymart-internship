@@ -1,18 +1,14 @@
 <template>
   <div class="content">
-    <h3>Edit {{brandByID.name}}</h3>
+    <h3>{{$t('editPage.main')}} {{brandByID.name}}</h3>
     <form @submit.prevent="editCategory">
       <div class="change-wrapper">
         <div class="input-wrapper">
-          <p>Name</p>
-          <input type="text" v-model="brandByID.name" name='name' placeholder="Change name" >
-        </div>
-        <div class="input-wrapper">
-          <p>Image link</p>
-          <input type="text" v-model="brandByID.image" name='link' placeholder="Change image" >
+          <p>{{$t('editPage.name')}}</p>
+          <input type="text" v-model="brandByID.name" name='name' :placeholder="$t('editPage.placeholder')" >
         </div>
         <span class="btn-def">
-          <button>Edit</button>
+          <button>{{$t('editPage.button')}}</button>
         </span>
       </div>
     </form>
@@ -20,6 +16,7 @@
 </template>
 
 <script>
+import config from '../../../config'
 import axios from 'axios'
 export default {
   data(){
@@ -29,12 +26,12 @@ export default {
   },
   methods: {
     async editCategory(){
-      await axios.put(`https://61ade31fd228a9001703b022.mockapi.io/api/brands/${this.$route.params.id}`, this.brandByID)
+      await axios.put(`${config.URL.dev}/api/dashboard/brands/${this.$route.params.id}`, this.brandByID)
       this.$router.push({name: 'admin.brands'})
     }
   },
   async created(){
-    const {data} = await axios.get(`https://61ade31fd228a9001703b022.mockapi.io/api/brands/${this.$route.params.id}`)
+    const {data} = await axios.get(`${config.URL.dev}/api/dashboard/brands/${this.$route.params.id}`)
     this.brandByID = data
   }
 }

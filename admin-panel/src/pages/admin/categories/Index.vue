@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-        <h1>Раздел категории</h1> 
+        <h1>{{$t('category.category_title')}}</h1> 
         <button 
             class="btn btn__add"
             @click="$router.push({name: 'admin.categories.create'})"
@@ -11,11 +11,9 @@
         <div class="wrapper__table" :style="{marginTop: '20px'}">
           
             <vuetable 
-                v-if="categoriesData.length"
                 :data="categoriesData"
                 :api-mode="false"
                 :fields="fields"
-                :per-page="5"
             >
                 <template slot="actions" slot-scope="props">
                     <div class="icons__flex">
@@ -38,21 +36,20 @@
                 </template>
 
         </vuetable>
-            <h2 v-else>{{$t('category.category_if')}}</h2>
 
-            <!-- pagination -->
-            <div class="pagination">
-                <button 
-                    v-for="pageNumber in this.totalPages" 
-                    :key="pageNumber"  
-                    @click="changePage(pageNumber)"
-                    :class="{
-                        'btn__active': page ===pageNumber
-                    }"
-                >
-                    {{pageNumber}}
-                </button>
-            </div>
+        <!-- pagination -->
+        <div class="pagination" v-if="this.totalPages > 1" >
+            <button 
+                v-for="pageNumber in this.totalPages" 
+                :key="pageNumber"  
+                @click="changePage(pageNumber)"
+                :class="{
+                    'btn__active': page ===pageNumber
+                }"
+            >
+                {{pageNumber}}
+            </button>
+        </div>
             
         </div>
     </div>
@@ -62,6 +59,7 @@
 import axios from 'axios';
 import Vuetable  from 'vuetable-2';
 import TableFields from './TableFields';
+import config  from '../../../config';
 export default {
     name: "categories",
     components: {
@@ -87,19 +85,21 @@ export default {
     methods: {
         async removeCategory({id}){
             if(window.confirm("Вы точно хотите удалить ?")){
-                await axios.delete(`https://marketpaymart.herokuapp.com/api/dashboard/categories/${id}`)
-                this.categoriesData = this.categoriesData.filter(cat => cat.id !== id)
+                await axios.delete(`${config.URL.dev}/api/dashboard/categories/${id}`)
+                this.fetchData()
             }
         }, 
         changePage(pageNumber){
             this.page = pageNumber
         },
         async fetchData(){
-            const resp = await axios.get('https://marketpaymart.herokuapp.com/api/dashboard/categories',{
+            const resp = await axios.get(`${config.URL.dev}/api/dashboard/categories`,{
             params: {
+                limit: this.perPage,
                 page: this.page
             }})
             this.totalPages = Math.ceil(resp.data.meta.total / this.perPage)
+            console.log(this.totalPages);
             this.categoriesData = resp.data.data
         }
       // end methods ==================================================================

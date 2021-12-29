@@ -8,14 +8,7 @@ export default [
         },
         component: () => import('../pages/AdminPage')
     },
-    {
-        path: '/',
-        name: "auth",
-        meta: {
-            layout: "empty",
-        },
-        component:  () => import('../pages/AuthPage')
-    },
+
     // categories
     {
         path: '/admin/categories',
@@ -62,6 +55,15 @@ export default [
             protected: true,
         },
         component:  () => import('../pages/admin/products/Index')
+    },
+    {
+        path: '/admin/products/test',
+        name: "admin.products.test",
+        meta: {
+            layout: "admin",
+            protected: true,
+        },
+        component:  () => import('../pages/admin/products/TestIndex')
     },
     {
         path: '/admin/products/create',
@@ -127,7 +129,25 @@ export default [
         },
         component:  () => import('../pages/admin/users/View')
     },
+    {
+        path: '/admin/users/create-role',
+        name: "admin.users.create-role",
+        meta: {
+            layout: "admin",
+            protected: true,
+        },
+        component:  () => import('../pages/admin/users/CreateRole')
+    },
     // brands
+    {
+        path: '/admin/brands/Index2',
+        name: "admin.brands.index2",
+        meta: {
+            layout: "admin",
+            protected: true,
+        },
+        component:  () => import('../pages/admin/brands/Index2')
+    },
     {
         path: '/admin/brands',
         name: "admin.brands",
