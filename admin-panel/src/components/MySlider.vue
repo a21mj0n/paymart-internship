@@ -1,7 +1,7 @@
 <template>
 
   <div class="wrapper" >
-        <h1 style="{color: 'red'}">Price</h1>
+        <h3 style="{color: 'red'}">Price</h3>
         <vue-slider
             v-model="value"
             :min="0"
@@ -113,6 +113,11 @@ export default {
     $green-color:#73e019bd;
     .wrapper{
         width: 100%;
+        margin-bottom: 30px;
+        h3{
+            margin-bottom: 20px;
+            text-transform:uppercase;
+        }
     }
     .flex{
         display: flex;
