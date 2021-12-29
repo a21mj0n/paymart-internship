@@ -20,7 +20,6 @@ export default {
   },
   computed: {
     layout(){
-      console.log(this.$route.meta.layout);
       return (this.$route.meta.layout || 'empty') + '-layout';
     }
   }
@@ -52,16 +51,16 @@ export default {
         }
       }
       select{
-        padding: 10px 5px;
-        padding: 10px !important;
+        padding: 12px;
+        line-height: 1.4;
         outline: none;
         &:focus{
           border-color: $green-color;
         }
       }
       button{
-        line-height: 0 !important;
         padding: 10px !important;
+        line-height: 14px;
       }
       
       input[type="submit"]{
@@ -71,7 +70,11 @@ export default {
         outline: none !important;
         box-shadow: none !important;
         width: 120px;
-        line-height: 0 !important;
+        line-height: 14px;
+      }
+
+      .wrapper{
+        width: 100%;
       }
       
     }
