@@ -5,6 +5,7 @@
         <div class="aside-wrapper">
           <aside-checkouts/>
           <my-slider/>
+          <aside-checkouts/>
         </div>
         <div class="content-wrapper">
           <div class="components-changer">
@@ -33,9 +34,10 @@
               </div>
             </div>
           </div>
+          <div class="products">
+            <cart-item v-for="i in 9" :key="i"/>
+          </div>
           <div class="navigation-block">
-
-            
             <div class="text-info">
               <p>SHOWING {{number}}-100 PRODUCTS</p>
             </div>
@@ -52,6 +54,7 @@
 <script>
 import AsideCheckouts from "../components/home/AsideCheckouts.vue"
 import MySlider from '../components/MySlider.vue'
+import CartItem from '../components/home/CartItem.vue'
 export default {
   data(){
     return{
@@ -61,6 +64,7 @@ export default {
   components:{
     AsideCheckouts,
     MySlider,
+    CartItem,
   }
 }
 </script>
@@ -79,6 +83,7 @@ export default {
   .content-wrapper{
     width: 75%;
     .components-changer{
+      margin-bottom: 30px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -122,6 +127,14 @@ export default {
             }
           }
         }
+      }
+    }
+    .products{
+      margin-bottom: 30px;
+      display: flex;
+      flex-wrap:wrap;
+      .item-wrapper{
+        width: 33.3%;
       }
     }
     .navigation-block{
