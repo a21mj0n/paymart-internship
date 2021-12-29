@@ -1,5 +1,5 @@
 <template>
-  <div class="breadcrumb" v-if="links">
+  <div class="breadcrumb" v-if="links.length > 1">
     <div class="container">
       <ul class="breadcrumb_list" >
         <li class="breadcrumb_item" v-for="link in links" :key="link.name" >
@@ -16,12 +16,12 @@
 export default {
   computed: {
     links() {
-      let links = this.$route.meta.breadcrumbItems || [0];
+      let links = this.$route.meta.breadcrumbItems || false;
       let currentRoutePath = 0
 
       if(links){
         currentRoutePath = links.findIndex(route => route.name == this.$route.name);
-        links.slice(0, currentRoutePath + 1)
+        return links.slice(0, currentRoutePath + 1)
       }
 
       return links

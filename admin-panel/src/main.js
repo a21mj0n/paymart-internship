@@ -7,23 +7,19 @@ import store from './store'
 import i18n from './i18n/i18n'
 import VueFormGenerator from 'vue-form-generator/dist/vfg-core.js'
 import VueSlickCarousel from 'vue-slick-carousel'
-
+import VueCarousel from 'vue-carousel'
 import Loader from '@/components/Loader'
+
+// css styles 
 import '../node_modules/vue-form-generator/dist/vfg-core.css'
 
-Vue.config.productionTip = false
 
-import VueCarousel from 'vue-carousel'
+Vue.config.productionTip = false
 
 Vue.use(VueCarousel)
 Vue.use(VueFormGenerator)
 Vue.use(VueSlickCarousel)
-
-
-
 Vue.component('Loader', Loader)
-Vue.use(VueCarousel)
-Vue.use(VueFormGenerator)
 
 
 new Vue({

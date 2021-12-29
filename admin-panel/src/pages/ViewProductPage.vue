@@ -415,23 +415,24 @@ export default {
             cursor: pointer;
             border-radius: 30px;
             transition: all 0.3s ease;
-            i{  display: none;
-                z-index: 1;
-                margin-right: -10px;
-                color: #1A1A1A;
+            i{  
+              opacity: 0;
+              display: inline-block;
+              margin-right: -10px;
+              color: #1A1A1A;
             }
             &:hover{
-                display: flex;
-                padding: 5px 30px;
+              display: flex;
+              padding: 5px 30px;
+              color: #72e019;
+              background: #fff;
+              border: 2px solid #72e019;
+              i{  
+                opacity: 1;
+                margin-bottom: 2px;
+                margin-right: 20px;
                 color: #72e019;
-                background: #fff;
-                border: 2px solid #72e019;
-                i{  
-                    display: inline-block;
-                    margin-bottom: 2px;
-                    margin-right: 20px;
-                    color: #72e019;
-                }
+              }
             }
 
 

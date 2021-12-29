@@ -13,10 +13,10 @@
                     ref="close"
                     @click="close()"
                     >back</button>
-                <li><router-link :to="{name: 'home'}">home</router-link></li>
-                <li><router-link :to="{name: 'checkout'}">Checkout</router-link></li>
-                <li><router-link :to="{name: 'store'}">Store</router-link></li>
-                <li><router-link :to="{name: 'home.product.view'}">Product by id</router-link></li>
+                <router-link tag="li" :to="{name: 'home'}">home</router-link>
+                <router-link tag="li" :to="{name: 'checkout'}">Checkout</router-link>
+                <router-link tag="li" :to="{name: 'store'}">Store</router-link>
+                <router-link tag="li" :to="{name: 'home.product.view'}">Product by id</router-link>
                 <li>smartphones</li>
                 <li>cameras</li>
                 <li>accessories</li>
@@ -99,19 +99,18 @@ export default {
             font-size: 18px;
             font-weight: 500;
             transition: all 0.3s linear;
-            a{
-                color: #1A1A1A;
-            }
+            color: #1A1A1A;
             cursor: pointer;
             &::before{
                 content: '';
                 width: 0;
                 transition: all 0.3s ease;
             }
+            .active{
+                color: #72E019;
+            }
             &:hover {
-                a{
-                    color: #72E019;
-                }
+                color: #72E019;
                  &::before{ 
                 content: '';
                 position: absolute;

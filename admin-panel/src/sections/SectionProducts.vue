@@ -1,7 +1,7 @@
 <template>
     <section class="products">
         <div class="container">
-            <item-categories/>
+            <item-categories v-if="itemCategories"/>
             <VueSlickCarousel 
                v-bind="slickOptions"
             >
@@ -38,7 +38,25 @@ import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import CartItem from '../components/home/CartItem.vue'
 import ItemCategories from '../components/home/ItemCategories.vue'
 export default {
-  components: { 
+    props: {
+        'slidesToShow': {
+            type: Number,
+            default: 4
+        }, 
+        'itemCategories':{
+            type: Boolean,
+            default: true
+        },
+        'carouselDots': {
+            type: Boolean,
+            default: true
+        },
+        'carouselArrows':{
+            type: Boolean,
+            default: true
+        }
+    },
+    components: { 
         CartItem ,
         VueSlickCarousel,
         ItemCategories
@@ -46,10 +64,11 @@ export default {
     data(){
         return{
             slickOptions:{
-                "dots": true,
+                "dots": this.carouselDots,
+                "arrows": this.carouselArrows,
                 "infinite": false,
                 "speed": 500,
-                "slidesToShow": 4,
+                "slidesToShow": this.slidesToShow,
                 "slidesToScroll": 1,
                 "initialSlide": 0,
                 "responsive": [
@@ -59,7 +78,7 @@ export default {
                             "slidesToShow": 3,
                             "slidesToScroll": 3,
                             "infinite": true,
-                            "dots": true
+                            "dots": this.carouselDots
                         }
                     },
                     {
@@ -80,6 +99,11 @@ export default {
                 ]
             }
         }
+    },
+    created(){
+        console.log(
+            this.carouselDots
+        );
     }
     
 }

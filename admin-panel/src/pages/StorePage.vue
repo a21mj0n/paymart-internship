@@ -34,6 +34,8 @@
             </div>
           </div>
           <div class="navigation-block">
+
+            
             <div class="text-info">
               <p>SHOWING {{number}}-100 PRODUCTS</p>
             </div>
