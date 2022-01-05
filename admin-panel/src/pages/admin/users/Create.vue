@@ -9,7 +9,6 @@
           :options="formOptions"
         >
         </vue-form-generator>
-        <button type="submit">{{$t('msg.btn')}}</button>
       </div>
     </form>
   </div>
@@ -18,6 +17,8 @@
 <script>
 import axios from "axios";
 import config from '../../../config';
+import i18n from '../../../i18n/i18n'
+
 export default {
   name: "create",
 
@@ -25,7 +26,8 @@ export default {
     return {
       model: {
         username: "",
-        full_name: "",
+        first_name: "",
+        last_name: "",
         avatar: [],
         email: "",
       },
@@ -43,18 +45,45 @@ export default {
           {
             type: "input",
             inputType: "text",
-            placeholder: "enter your fullname",
-            model: "full_name",
+            placeholder: "enter your first name",
+            model: "first_name",
             required: true,
             validator: "string",
             styleClasses: "inps",
           },
           {
             type: "input",
-            inputType: "",
+            inputType: "text",
+            placeholder: "enter your last name",
+            model: "last_name",
+            required: false,
+            validator: "string",
+            styleClasses: "inps",
+          },
+          {
+            type: "input",
+            inputType: "password",
+            placeholder: "enter your password",
+            model: "password",
+            required: true,
+            validator: "string",
+            styleClasses: "inps",
+          },
+          {
+            type: "input",
+            inputType: "password",
+            placeholder: "confirm you passwrod",
+            model: "password_confirmation",
+            required: true,
+            validator: "string",
+            styleClasses: "inps",
+          },
+          {
+            type: "input",
+            inputType: "file",
             placeholder: "file",
             model: "avatar",
-            required: true,
+            required: false,
             styleClasses: "inps",
           },
           {
@@ -64,6 +93,16 @@ export default {
             model: "email",
             required: true,
             styleClasses: "inps",
+          },
+          {
+            type: "submit",
+            buttonText: i18n.t('msg.btn'),
+              async onSubmit(model){
+                await axios.post(`${config.URL.dev}/api/dashboard/categories`, model);
+                  // $this.$router.push({name: 'admin.categories'});
+              },
+            label: '',
+            validateBeforeSubmit: true
           },
         ],
       },
@@ -92,7 +131,8 @@ export default {
 
 <style lang="scss"  scoped>
 .add{
-  width: 100%;
+  width: 500px;
+  margin: 0 auto;
   height: calc(100vh - 100px);
   background-color: #fff;
   .form {

@@ -70,7 +70,7 @@ export default {
         border-color: $green-color !important;
         outline: none !important;
         box-shadow: none !important;
-        width: 120px;
+        min-width: 120px;
         line-height: 14px;
       }
 

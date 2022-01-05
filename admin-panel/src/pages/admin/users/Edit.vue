@@ -4,7 +4,7 @@
       <h2>{{ $t("user.edit_title") }}</h2>
       <VueFormGenerator :schema="schema" :model="model" :options="formOptions">
       </VueFormGenerator>
-      <button type="submit">{{ $t("user.edit_title") }}</button>
+      <!-- <button type="submit">{{ $t("user.edit_title") }}</button> -->
     </form>
   </div>
 </template>
@@ -12,6 +12,7 @@
 import axios from "axios";
 import VueFormGenerator from "vue-form-generator";
 import i18n from "../../../i18n/i18n";
+import config from '../../../config';
 export default {
   name: "editOneUser",
   data() {
@@ -35,7 +36,7 @@ export default {
     async editOneUser() {
       try {
         const resp = await axios.put(
-          `https://marketpaymart.herokuapp.com/api/dashboard/users/${this.$route.params.id}`,
+          `${config.URL.dev}/api/dashboard/users/${this.$route.params.id}`,
           this.userData
         );
         this.$router.push({ name: "admin.users" });
@@ -47,7 +48,7 @@ export default {
   },
   async created() {
     const { data } = await axios.get(
-      `https://marketpaymart.herokuapp.com/api/dashboard/users/${this.$route.params.id}`
+      `${config.URL.dev}/api/dashboard/users/${this.$route.params.id}`
     );
     this.userData = data;
     this.model.username = this.userData.username;
@@ -70,8 +71,8 @@ export default {
       {
         type: "input",
         inputType: "text",
-        name: "fullname",
-        model: "full_name",
+        name: "first_name",
+        model: "first_name",
         label: i18n.t("user.edit_fullname"),
         validator: VueFormGenerator.validators.string.locale({
           fieldIsRequired: "Поля не может быть пустым",
@@ -101,8 +102,9 @@ export default {
         type: "submit",
         buttonText: i18n.t("user.edit_btn"),
         async onSubmit(model) {
-          await axios.post(
-            "https://marketpaymart.herokuapp.com/api/dashboard/users/",
+          console.log('MODEL:', model);
+          await axios.put(
+            `${config.URL.dev}/api/dashboard/users/${$this.$route.params.id}`,
             model
           );
           $this.$router.push({ name: "users" });

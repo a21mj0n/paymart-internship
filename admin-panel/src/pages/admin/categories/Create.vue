@@ -37,7 +37,6 @@ export default {
     },
     methods: {
         async createCategory(){
-            console.log(this.model)
             await axios.post(`${config.URL.dev}/api/dashboard/categories`, this.model);
             this.$router.push({name: 'admin.categories'});
         },

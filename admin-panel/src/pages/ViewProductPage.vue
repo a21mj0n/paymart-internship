@@ -48,7 +48,7 @@
               </div>
             </div>
           </template>
-          <template #prevArrow="">
+            <template #prevArrow="">
             <div class="big-custom-arrow-prev">
               <div class="big-custom">
                 <i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -150,11 +150,9 @@
 
 <script>
 import VueSlickCarousel from "vue-slick-carousel";
+import "vue-slick-carousel/dist/vue-slick-carousel.css";
 
 export default {
-  components: {
-    VueSlickCarousel,
-  },
   data() {
     return {
       setting: {
@@ -167,7 +165,12 @@ export default {
       },
     };
   },
-
+  components: {
+    VueSlickCarousel,
+  },
+  created(){
+    
+  }
 };
 </script>
 
