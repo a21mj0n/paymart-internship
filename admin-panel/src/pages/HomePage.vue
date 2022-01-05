@@ -3,7 +3,7 @@
 
         <section-collection />
 
-        <section-products />
+        <section-products ref="slider" />
 
         <my-promotion/>
 
@@ -33,7 +33,11 @@ export default {
             max: 20000,
             value: 0
         }
-    })
+    }),
+    beforeDestroy: function(){
+        // this.$refs.slider = null
+        console.log(this.$refs.slider);
+    }
 }
 
 
@@ -49,13 +53,7 @@ export default {
     }
     .small-carousel{
         width:33.333%;
-        .VueCarousel-navigation-button {
-            z-index: 99;
-            top: -5% !important;
-        }
-        .VueCarousel-navigation > button{
-            left: 75% !important;
-        }
+
     }
     // collections ========================================================
     .collection{
