@@ -17,6 +17,7 @@ import axios from 'axios';
 import VueFormGenerator from 'vue-form-generator';
 import i18n from '../../../i18n/i18n';
 import { mapGetters } from 'vuex';
+import config from '../../../config';
 
 export default {
     name: "editCategory",
@@ -36,8 +37,10 @@ export default {
     },
     methods: {
         async editCategory(){
-            const resp = await axios.put(`https://marketpaymart.herokuapp.com/api/dashboard/categories/${this.$route.params.id}`, this.categoryData)
-            console.log(resp);
+            await axios.put(
+                `${config.URL.dev}/api/dashboard/categories/${this.$route.params.id}`, 
+                this.model
+            );
             this.$router.push({name: 'admin.categories'})
         },
         getEditFields($this){
@@ -56,7 +59,12 @@ export default {
                     type: 'submit',
                     buttonText: i18n.t('category.edit_btn'),
                     async onSubmit(model){
-                        await axios.post('https://marketpaymart.herokuapp.com/api/dashboard/categories', model);
+                        
+                        await axios.put(
+                            `${config.URL.dev}/api/dashboard/categories/${$this.$route.params.id}`, 
+                            model
+                        );
+
                         $this.$router.push({name: 'admin.categories'});
                     },
                     label: '',
@@ -77,9 +85,8 @@ export default {
         }
     },
     async created(){
-        const {data} = await axios.get(`https://marketpaymart.herokuapp.com/api/dashboard/categories/${this.$route.params.id}`)
-        this.categoryData = data
-        this.model.name = this.categoryData.name
+        const {data} = await axios.get(`${config.URL.dev}/api/dashboard/categories/${this.$route.params.id}`)
+        this.model.name = data.name
         const $this = this
         this.getEditFields($this)
     }

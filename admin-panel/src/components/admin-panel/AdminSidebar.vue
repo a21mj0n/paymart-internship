@@ -175,7 +175,6 @@ $green-shadow: #64c515;
 }
 nav{
     .navigation{
-      
         padding: 8px 15px;
         li{
             cursor: pointer;
