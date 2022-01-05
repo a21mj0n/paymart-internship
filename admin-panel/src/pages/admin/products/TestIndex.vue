@@ -111,12 +111,14 @@ export default {
     return {
 
       loading: true,
-
+      selected: 'All',
+      categories: null,
+      sortedProducts: [],
 
 
       brand: '',
       defaultImage,
-      productsData: [],
+      productsData: null,
       perPage: 5,
       page: 1,
       totalPages: "",
@@ -126,7 +128,7 @@ export default {
   },
   computed:{
  filterProducts() {
-    // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+
       if (this.sortedProducts.length) {
         return this.sortedProducts;
       } else {
@@ -139,11 +141,12 @@ export default {
       this.selected = option.name;
     },
      sortByCategories(category) {
+       console.log(this.productsData);
       this.productsData
       this.sortedProducts = [];
       let vm = this;
       this.productsData.map(function (item) {
-        // eslint-disable-next-line no-empty
+
         if (item.category.name == category.name) {
           vm.sortedProducts.push(item);
           
@@ -174,7 +177,7 @@ export default {
           
         }})
         // this.totalPages = Math.ceil(resp.data.meta.total / this.perPage)
-        this.productsData = resp.data.data
+        this.productsData = resp.data
     }
   },
   async created() {
@@ -182,8 +185,11 @@ export default {
     const resp = await axios.get(
       `${config.URL.dev}/api/dashboard/products`
     );
-    this.productsData = resp.data.reverse();   
-    console.log(resp.data); 
+    const resp2 = await axios.get(
+      `${config.URL.dev}/api/dashboard/categories`
+    )
+    this.productsData = resp.data; 
+    this.categories = resp2.data
   },
    async mounted(){
     await this.fetchData();

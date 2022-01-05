@@ -39,7 +39,7 @@ export default {
     
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .VueCarousel-navigation-button {
         z-index: 99;
         top: -5% !important;
