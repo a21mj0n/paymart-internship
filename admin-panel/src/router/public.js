@@ -64,6 +64,14 @@ export default [
         },
         component:  () => import('../pages/ViewProductPage')
     },
+    {
+        path: '/home/wishlist',
+        name: "home.wishList",
+        meta: {
+            layout: "home",
+        },
+        component:  () => import('../pages/wishList')
+    },
 
 
 
