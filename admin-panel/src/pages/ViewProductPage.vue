@@ -178,6 +178,7 @@ export default {
 .bg{
     background: #FBFBFC;
 }
+
 .d-flex{
     display: flex;
 }

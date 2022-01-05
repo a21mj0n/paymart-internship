@@ -1,6 +1,6 @@
 <template>
-    <div class="item-wrapper"> 
-        <div class="item">
+    <div :class="(vertical) ? 'item-wrapper vertical-wrapper' : 'item-wrapper' "> 
+        <div :class="(vertical) ? 'item vertical-item' : 'item' ">
             <div class="item-img">
                 <div class="item-status">
                     <span>-30%</span>
@@ -12,22 +12,24 @@
                 />
             </div>
             <div class="item-body">
-                <p class="item-category">
-                    Category
-                </p>
-                <h3 class="item-title">
-                    name
-                </h3>
-                <h4 class="item-price">
-                    100$
-                    <span
-                        class="item-price-old"
-                    >
-                        150$
-                    </span>
-                </h4>
-                <div class="item-rating">
-                    *****
+                <div class="information">
+                    <p class="item-category">
+                        Category
+                    </p>
+                    <h3 class="item-title">
+                        name
+                    </h3>
+                    <h4 class="item-price">
+                        100$
+                        <span
+                            class="item-price-old"
+                        >
+                            150$
+                        </span>
+                    </h4>
+                    <div class="item-rating">
+                        *****
+                    </div>
                 </div>
                 <div class="item-buttons">
                     <button>
@@ -47,17 +49,24 @@
             <div class="item-add">
                 <button @click="console.log('clicked')">
                     <i class="fa fa-shopping-cart"></i>
-                    ADD
+                    <span>ADD</span>
                 </button>
             </div>
         </div>
     </div>
 </template>
+
 <script>
 export default {
-    
+    props: ['vertical'],
+    created(){
+        console.log(
+            this.vertical
+        );
+    }    
 }
 </script>
+
 <style lang="scss" scoped>
     // variables
     $green-color:#72E019;
@@ -82,25 +91,63 @@ export default {
 
     }
     .item{
+        &.vertical-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 10px 0;
+            .item-img{
+                width: 50%;
+            }
+            .item-body{
+                width: 50%;
+                text-align: left;
+                justify-content: space-between;
+                display: flex;
+                padding: 0 50px 0 0;
+            }
+            .item-buttons{
+                display: flex;
+                flex-direction: column;
+            }
+            .item-add{
+                transform: translateY(50px);
+                background-color: transparent;
+                border: 1px solid #ccc;
+                button{
+                    background-color: rgb($green-color, 1);
+                    color: #fff;
+                    width: 120px;
+                    text-align: center;
+                    span{
+                        padding-left: 10px;
+                    }
+                    i{
+                        color: #fff;
+                        opacity: 1;
+                    }
+                }
+            }
+        }
         position: relative;
         border: 1px solid #ccc;
         box-sizing: border-box;
         background-color: white;
         border-radius: 2px;
-          &-add{
+        &-add{
             transition: all 0.3s ease;
             position: absolute;
             bottom: 0px;
             width: 100%;
-            background-color: #010101;
             text-align: center;
             padding: 10px;
             z-index: -99;
             transform:none;
             border-radius: 0 0 10px 10px;
+            border: 1px solid #ccc;
             button{
                 background-color: #fff;
-                padding: 8px 0 5px 20px;
+                padding: 5px 10px;
                 color: $green-color;
                 border: 1px solid $green-color;
                 cursor: pointer;
@@ -114,12 +161,17 @@ export default {
                     color: #fff;
                     width: 120px;
                     text-align: center;
+                    span{
+                        transition: padding 300ms ease-in;
+                        padding-left: 10px;
+                    }
                     i{
                         color: #fff;
-                        visibility: visible;
+                        opacity: 1;
                     }
                 }
                 i{
+                    opacity: 0;
                     position: absolute;
                     left: 20px;
                     color: $green-color;
@@ -176,7 +228,6 @@ export default {
         &-title{
             font-weight: 700;
             text-transform: uppercase;
-            text-align: center;
             margin: 0;
             margin: 0 0 10px;
             &:hover{

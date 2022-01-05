@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content content-full">
     <div class="content__wrapper">
       <admin-cart :items="users" name="users" />
       <admin-cart :items="categories" name="categories" />
@@ -46,10 +46,9 @@ export default {
 </script>
 <style lang="scss" scoped>
  .content__wrapper{
-     display: flex;
-     max-width: 1100px;
-     overflow-x: auto;
-     
+    display: flex;
+    max-width: 1100px;
+    overflow-x: auto;
  }
 
 .user__card {

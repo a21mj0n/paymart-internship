@@ -4,24 +4,25 @@
             New Products
         </h2>
         <ul class="categories">
-            <li>
-                Laptops
-            </li>
-            <li>
-                SmartPhones
-            </li>
-            <li>
-                Cameras
-            </li>
-            <li>
-                Accessories
+            <li v-for="category in this.categories" :key="category">
+                {{category}}
             </li>
         </ul>
     </div>
 </template>
 <script>
+import axios from 'axios'
+import config from '../../config'
 export default {
-    
+   data(){
+       return{
+           categories: ['Laptops', 'SmartPhones', 'Cameras']
+       }
+    },
+    async created(){
+        const resp = await axios.get(`${config.URL.dev}/api/categories`)
+        console.log(resp);
+    }
 }
 </script>
 <style scoped lang="scss" >

@@ -37,7 +37,6 @@ export default {
     },
     methods: {
         async createCategory(){
-            console.log(this.model)
             await axios.post(`${config.URL.dev}/api/dashboard/categories`, this.model);
             this.$router.push({name: 'admin.categories'});
         },
@@ -46,35 +45,35 @@ export default {
         },
         fillSchemaFields($this){
             this.schema.fields = [
-            {
-                type: 'input',
-                inputType: 'text',
-                required: true,
-                label: i18n.t('category.category_name'),
-                model: 'name',
-                validator: VueFormGenerator.validators.string.locale({
-                    fieldIsRequired: "Поля не может быть пустым",
-                    textTooSmall: ""
-                })
-            },
-            {
-                type: 'input',
-                inputType: 'text',
-                required: false,
-                label: i18n.t('category.category_icon'),
-                model: 'icon_name',
-            },
-            {
-                type: 'submit',
-                buttonText: i18n.t('category.category_btn'),
-                async onSubmit(model){
-                    await axios.post(`${config.URL.dev}/api/dashboard/categories`, model);
-                    $this.$router.push({name: 'admin.categories'});
+                {
+                    type: 'input',
+                    inputType: 'text',
+                    required: true,
+                    label: i18n.t('category.category_name'),
+                    model: 'name',
+                    validator: VueFormGenerator.validators.string.locale({
+                        fieldIsRequired: "Поля не может быть пустым",
+                        textTooSmall: ""
+                    })
                 },
-                label: '',
-                validateBeforeSubmit: true
-            }
-        ];
+                {
+                    type: 'input',
+                    inputType: 'text',
+                    required: false,
+                    label: i18n.t('category.category_icon'),
+                    model: 'icon_name',
+                },
+                {
+                    type: 'submit',
+                    buttonText: i18n.t('category.category_btn'),
+                    async onSubmit(model){
+                        await axios.post(`${config.URL.dev}/api/dashboard/categories`, model);
+                        $this.$router.push({name: 'admin.categories'});
+                    },
+                    label: '',
+                    validateBeforeSubmit: true
+                }
+            ];
         }
     },
     computed: {

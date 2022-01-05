@@ -107,7 +107,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 $main-color: rgb(31, 7, 110);
     .vuetable-body-wrapper{
         min-height: 300px;

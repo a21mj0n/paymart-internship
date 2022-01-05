@@ -10,6 +10,7 @@
 import AdminLayout from './layouts/AdminLayout.vue';
 import EmptyLayout from './layouts/EmptyLayout.vue';
 import HomeLayout from './layouts/HomeLayout.vue'
+import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 
 export default {
   name: "App",
@@ -69,7 +70,7 @@ export default {
         border-color: $green-color !important;
         outline: none !important;
         box-shadow: none !important;
-        width: 120px;
+        min-width: 120px;
         line-height: 14px;
       }
 

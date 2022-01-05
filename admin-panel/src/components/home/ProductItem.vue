@@ -15,7 +15,7 @@
                     product name goes here
                 </h3>
                 <h4 class="product-price">
-                    100$
+                        100$
                     <span
                         class="product-price-old"
                     >
@@ -31,7 +31,7 @@ export default {
     
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
     $green-color:#72E019;
     $green-shadow: #64c515;
     .product {
@@ -82,4 +82,5 @@ export default {
         }
         
     }
+  
 </style>
