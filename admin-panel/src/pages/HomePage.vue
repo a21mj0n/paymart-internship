@@ -2,13 +2,12 @@
     <div class="wrapper" >
 
         <section-collection />
-        
+
         <section-products />
 
         <my-promotion/>
 
         <section-selling />
-
 
     </div>
 </template>
@@ -21,24 +20,26 @@ import SectionProducts from '../sections/SectionProducts.vue'
 import SectionSelling from '../sections/SectionSelling.vue'
 
 export default {
+    name: "home",
     components: { 
         MyPromotion,
         SectionCollection,
         SectionProducts,
-        SectionSelling
+        SectionSelling,
     },
-    name: "home",
-    data(){
-        return{
-
+    data: () => ({
+        range: {
+            min: 0,
+            max: 20000,
+            value: 0
+        }
+    })
 }
-    }
 
-}
 
 </script>
 
-<style lang="scss" >
+<style scoped lang="scss" >
 .wrapper{
     margin: 0 auto;
 }

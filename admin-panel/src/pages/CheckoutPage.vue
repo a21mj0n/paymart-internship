@@ -115,15 +115,12 @@
         </div>
       </div>
     </div>
-    <section-subscribe />
   </div>
 </template>
 
 <script>
-import SectionSubscribe from "../sections/SectionSubscribe.vue";
 
 export default {
-  components: { SectionSubscribe, },
   data() {
     return {
       ShowSecond: false,

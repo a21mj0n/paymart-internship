@@ -48,6 +48,28 @@ export default [
         component: () => import('../pages/AuthPage')
     },
     {
+        path: '/store',
+        name: "store",
+        meta: {
+            layout: "home",
+        },
+        component:  () => import('../pages/StorePage')
+    },
+
+    {
+        path: '/home/product/view/',
+        name: "home.product.view",
+        meta: {
+            layout: "home",
+        },
+        component:  () => import('../pages/ViewProductPage')
+    },
+
+
+
+    
+    // not found page
+    {
         path: '*',
         name: "notFound",
         meta: {

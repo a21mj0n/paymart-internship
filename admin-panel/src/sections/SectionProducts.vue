@@ -1,7 +1,7 @@
 <template>
     <section class="products">
         <div class="container">
-            <item-categories/>
+            <item-categories v-if="itemCategories"/>
             <VueSlickCarousel 
                v-bind="slickOptions"
             >
@@ -13,12 +13,12 @@
                 <cart-item/>
 
                  <template #prevArrow="">
-                    <button class="slick-arrow slick-prev">
+                    <button class="slick-custom-arrow ">
                         <i class="fa fa-angle-left"/>
                     </button>
                 </template>
                  <template #nextArrow="">
-                    <button class="slick-arrow slick-next">
+                    <button class="slick-custom-arrow ">
                         <i class="fa fa-angle-right"/>
                     </button>
                 </template>
@@ -38,7 +38,25 @@ import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import CartItem from '../components/home/CartItem.vue'
 import ItemCategories from '../components/home/ItemCategories.vue'
 export default {
-  components: { 
+    props: {
+        'slidesToShow': {
+            type: Number,
+            default: 4
+        }, 
+        'itemCategories':{
+            type: Boolean,
+            default: true
+        },
+        'carouselDots': {
+            type: Boolean,
+            default: true
+        },
+        'carouselArrows':{
+            type: Boolean,
+            default: true
+        }
+    },
+    components: { 
         CartItem ,
         VueSlickCarousel,
         ItemCategories
@@ -46,10 +64,11 @@ export default {
     data(){
         return{
             slickOptions:{
-                "dots": true,
+                "dots": this.carouselDots,
+                "arrows": this.carouselArrows,
                 "infinite": false,
                 "speed": 500,
-                "slidesToShow": 4,
+                "slidesToShow": this.slidesToShow,
                 "slidesToScroll": 1,
                 "initialSlide": 0,
                 "responsive": [
@@ -59,7 +78,7 @@ export default {
                             "slidesToShow": 3,
                             "slidesToScroll": 3,
                             "infinite": true,
-                            "dots": true
+                            "dots": this.carouselDots
                         }
                     },
                     {
@@ -80,6 +99,11 @@ export default {
                 ]
             }
         }
+    },
+    created(){
+        console.log(
+            this.carouselDots
+        );
     }
     
 }
@@ -103,8 +127,8 @@ export default {
             cursor: pointer;
         }
         .slick-active{
-            background-color: $green-color !important;
-            border-color: $green-shadow !important;
+            background-color: $green-color ;
+            border-color: $green-shadow ;
         }
     }
     .slick-prev {
@@ -117,7 +141,7 @@ export default {
         right: 0;
         width: 25px;
         height: 25px;
-        display: inline-block !important;
+        display: inline-block ;
         margin: 0px 2px;
         z-index: 99;
         border: 1px solid #ccc;
