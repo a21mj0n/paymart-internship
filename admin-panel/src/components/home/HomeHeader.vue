@@ -189,6 +189,7 @@ export default {
       align-items: center;
       justify-content: space-between;
       .cart-wrapper{
+        z-index: 2222;
         border:1px solid black;
         padding: 20px;
         width: 300px;
