@@ -94,7 +94,6 @@
 
 import Vuetable from "vuetable-2";
 import  productFields  from "@/utils-vuetable/productVuetable/Fields";
-import axios from "axios";
 import defaultImage from '../../../assets/login_bg.jpg'
 import config  from '../../../config';
 import Loader from '../../../components/Loader.vue';
@@ -109,13 +108,10 @@ export default {
   },
   data() {
     return {
-
       loading: true,
       selected: 'All',
       categories: null,
       sortedProducts: [],
-
-
       brand: '',
       defaultImage,
       productsData: null,
@@ -123,12 +119,11 @@ export default {
       page: 1,
       totalPages: "",
       fields: productFields(this.$i18n),
-      configURL: config.URL.dev
+      configURL: config.URL
     };
   },
   computed:{
  filterProducts() {
-
       if (this.sortedProducts.length) {
         return this.sortedProducts;
       } else {
@@ -172,7 +167,7 @@ export default {
       this.page = pageNumber
     },
     async fetchData(){
-        const resp = await axios.get(`${config.URL.dev}/api/dashboard/products`,{
+        const resp = await this.$axios.get(`/api/dashboard/products`,{
         params: {
           
         }})
@@ -182,11 +177,11 @@ export default {
   },
   async created() {
 
-    const resp = await axios.get(
-      `${config.URL.dev}/api/dashboard/products`
+    const resp = await this.$axios.get(
+      `/api/dashboard/products`
     );
-    const resp2 = await axios.get(
-      `${config.URL.dev}/api/dashboard/categories`
+    const resp2 = await this.$axios.get(
+      `/api/dashboard/categories`
     )
     this.productsData = resp.data; 
     this.categories = resp2.data

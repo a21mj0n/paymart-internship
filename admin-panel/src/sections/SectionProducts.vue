@@ -5,18 +5,23 @@
             <VueSlickCarousel 
                v-bind="slickOptions"
             >
-                <cart-item/>
-                <cart-item/>
-                <cart-item/>
-                <cart-item/>
-                <cart-item/>
-                <cart-item/>
+                <cart-item
+                    v-for="product in this.products"
+                    :key="product.id"
+                    :name="product.name"
+                    :price="product.price"
+                    :oldPrice="product.oldPrice"
+                    :image="product.image[0]"
+                    :categoryId="product.category_id"
+                    :productId="product.id"
+                />
 
                 <template #prevArrow="">
                     <button class="slick-custom-prev">
                         <i class="fa fa-angle-left"/>
                     </button>
                 </template>
+
                  <template #nextArrow="">
                     <button class="slick-custom-next">
                         <i class="fa fa-angle-right"/>
@@ -38,6 +43,8 @@ import VueSlickCarousel from 'vue-slick-carousel'
 import CartItem from '../components/home/CartItem.vue'
 import ItemCategories from '../components/home/ItemCategories.vue'
 import '../assets/styles/carousel.scss'
+// import config from '../config'
+// import axios from 'axios'
 
 export default {
     props: {
@@ -99,9 +106,15 @@ export default {
                         }
                     }
                 ]
-            }
+            },
+            products: []
         }
     },
+    async created(){
+        // const resp = await axios.get(`${config.URL.dev}/api/products`)
+        const resp = await this.$axios.get(`/api/products`)
+        this.products = resp.data
+    }
     
 }
 </script>

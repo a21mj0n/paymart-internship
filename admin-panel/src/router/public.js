@@ -65,12 +65,21 @@ export default [
         component:  () => import('../pages/ViewProductPage')
     },
     {
-        path: '/home/wishlist',
-        name: "home.wishList",
+        path: '/home/WishlistPage',
+        name: "home.WishlistPage",
         meta: {
             layout: "home",
         },
-        component:  () => import('../pages/wishList')
+        component:  () => import('../pages/WishlistPage')
+    },
+
+    {
+        path: '/cart',
+        name: "cart",
+        meta: {
+            layout: "easy",
+        },
+        component:  () => import('../pages/CartPage')
     },
 
 

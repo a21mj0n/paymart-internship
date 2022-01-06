@@ -17,6 +17,7 @@
 </template>
 <script>
 import MyCardLink from '../components/home/MyCardLink.vue'
+
 export default {
     components: { MyCardLink },
     data(){
@@ -25,7 +26,7 @@ export default {
             srcImageLaptop: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0QfaPWOIyXNa0rq9vjtQ0OusYrU3ztKzR-g&usqp=CAU',
             srcImageCamera: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdc8v84ZjbEfCS7O5jB0uWSUIYSUMjcrPsmA&usqp=CAU',
         }
-    }
+    },
 }
 </script>
 <style scoped lang="scss">

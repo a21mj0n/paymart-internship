@@ -10,22 +10,29 @@
         ></vue-form-generator>
         <!-- <input type="file" name="" id="" @change="change"> -->
       </form>
+      <div class="row"> 
+        <img 
+          v-for="(image, index) in previews" 
+          :key="index" 
+          :src="image" 
+          alt="preview"
+          width="400px"
+        >
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+
 import VueFormGenerator from "vue-form-generator/dist/vfg-core.js";
-import config  from '../../../config';
 
 export default {
   name: "createProduct",
   data() {
     return {
-       loading: true,
-
-
+      loading: true,
+      previews: [],
       pullCat: "",
       pullBrand: "",
       model: {
@@ -52,11 +59,11 @@ export default {
       this.model.images = e.target.files;
     },
     async getCategory() {
-      const resp = await axios.get(
-        `${config.URL.dev}/api/dashboard/categories`
+      const resp = await this.$axios.get(
+        `/api/dashboard/categories`
       );
-      const resp2 = await axios.get(
-        `${config.URL.dev}/api/dashboard/brands`
+      const resp2 = await this.$axios.get(
+        `/api/dashboard/brands`
       );
       
       this.pullCat = resp.data
@@ -120,7 +127,13 @@ export default {
           files: true,
           multiple: true,
           onChanged(model, schema, event) {
-            console.log(schema);
+            let files = event.target.files;
+
+            Object.entries(files).forEach(([key, file]) => {
+              console.log(key);
+              $this.previews.push(URL.createObjectURL(file))
+            });
+
             return model.images = event.target.files[0];
           } 
         },
@@ -139,8 +152,8 @@ export default {
             formData.append('price', model.price)
             formData.append('quantity', model.quantity)
             
-            await axios.post(
-              `${config.URL.dev}/api/dashboard/products`,
+            await this.$axios.post(
+              `/api/dashboard/products`,
               formData
             );
             console.log('success');

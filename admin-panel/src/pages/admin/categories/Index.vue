@@ -56,10 +56,9 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Vuetable  from 'vuetable-2';
 import TableFields from './TableFields';
-import config  from '../../../config';
+
 export default {
     name: "categories",
     components: {
@@ -85,7 +84,7 @@ export default {
     methods: {
         async removeCategory({id}){
             if(window.confirm("Вы точно хотите удалить ?")){
-                await axios.delete(`${config.URL.dev}/api/dashboard/categories/${id}`)
+                await this.$axios.delete(`/api/dashboard/categories/${id}`)
                 this.fetchData()
             }
         }, 
@@ -93,7 +92,7 @@ export default {
             this.page = pageNumber
         },
         async fetchData(){
-            const resp = await axios.get(`${config.URL.dev}/api/dashboard/categories`,{
+            const resp = await this.$axios.get(`/api/dashboard/categories`,{
             params: {
                 limit: this.perPage,
                 page: this.page

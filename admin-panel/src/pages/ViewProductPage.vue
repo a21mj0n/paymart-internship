@@ -119,7 +119,7 @@
                   <button class="add-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Add to Cart</button>
               </div>
               <div class="product-wish-compare">
-                  <a href=""><i class="fa fa-heart-o" aria-hidden="true"></i>add to wishlist</a>
+                  <a href=""><i class="fa fa-heart-o" aria-hidden="true"></i>add to WishlistPage</a>
                   <a href=""><i class="fa fa-exchange"></i>add to compare</a>
               </div>
               <div class="product-category d-flex">

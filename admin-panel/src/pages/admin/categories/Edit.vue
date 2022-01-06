@@ -37,8 +37,8 @@ export default {
     },
     methods: {
         async editCategory(){
-            await axios.put(
-                `${config.URL.dev}/api/dashboard/categories/${this.$route.params.id}`, 
+            await this.$axios.put(
+                `/api/dashboard/categories/${this.$route.params.id}`, 
                 this.model
             );
             this.$router.push({name: 'admin.categories'})
@@ -60,8 +60,8 @@ export default {
                     buttonText: i18n.t('category.edit_btn'),
                     async onSubmit(model){
                         
-                        await axios.put(
-                            `${config.URL.dev}/api/dashboard/categories/${$this.$route.params.id}`, 
+                        await $this.$axios.put(
+                            `/api/dashboard/categories/${$this.$route.params.id}`, 
                             model
                         );
 

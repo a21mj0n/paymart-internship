@@ -60,7 +60,7 @@
           </div>
           <div class="actions">
             <div class="item">
-              <router-link :to="{name: 'home.wishList'}">
+              <router-link :to="{name: 'home.WishlistPage'}">
                 <i class="fa fa-heart-o"></i>
                 <p>Your Wishlist</p>
                 <div class="number"><span>2</span></div>
@@ -83,13 +83,13 @@
               <h3>SUBTOTAL: $2940.00</h3>
             </div>
             <div class="buttons">
-              <a href="" class="button-view button">
+              <router-link to="/cart" class="button-view button">
                 <p>View Cart</p>
-              </a>
-              <a href="" class="button-checkout button">
+              </router-link>
+              <router-link to="/checkout" class="button-checkout button">
                 <p>Checkout</p>
                 <i class="fa fa-arrow-circle-right"></i>
-              </a>
+              </router-link>
             </div>
           </div>
         </div>

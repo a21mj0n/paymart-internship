@@ -6,35 +6,41 @@
                     <span>-30%</span>
                     <span>NEW</span>
                 </div>
+                <!-- TODO: fix src with config -->
                 <img 
                     alt="image"
-                    src="http://market.local/img/product08.png"
+                    :src="`${configURL}/storage/product_images/${this.productId}/${this.image.name}`"
                 />
+                    <!-- src="http://market.local/img/product08.png" -->
             </div>
             <div class="item-body">
                 <div class="information">
                     <p class="item-category">
-                        Category
+                        {{this.category}}
                     </p>
                     <h3 class="item-title">
-                        name
+                        {{this.name.toLowerCase()}}
                     </h3>
                     <h4 class="item-price">
-                        100$
+                        {{this.price}}$
                         <span
                             class="item-price-old"
                         >
-                            150$
+                            {{this.oldPrice}} $
                         </span>
                     </h4>
                     <div class="item-rating">
-                        *****
+                        <div class="fa fa-star"></div>
+                        <div class="fa fa-star"></div>
+                        <div class="fa fa-star"></div>
+                        <div class="fa fa-star"></div>
+                        <div class="fa fa-star"></div>
                     </div>
                 </div>
                 <div class="item-buttons">
                     <button>
                         <i class="fa fa-heart"></i>
-                        <span class="tooltipp">add to wishlist</span>
+                        <span class="tooltipp">add to WishlistPage</span>
                     </button>
                     <button>
                         <i class="fa fa-exchange"></i>
@@ -57,12 +63,52 @@
 </template>
 
 <script>
+import config from '../../config';
 export default {
-    props: ['vertical'],
-    created(){
-        console.log(
-            this.vertical
-        );
+    props: {
+        vertical : {
+            type: String
+        },
+        price: {
+            type: String,
+            required: true,
+        },
+        oldPrice: {
+            default: 100,
+            type: Number
+        },
+        name: {
+            required: true,
+            type: String,
+        },
+        categoryId: {
+            required: true,
+            default: 'Category not found'
+        },
+        image:{
+            type: Object,
+            default: null
+        },
+        productId: {
+            default: null
+        },
+    },
+    data(){
+        return{
+            // database from back
+            configURL: config.URL,
+            categories: [],
+            category: ''
+        }
+    },
+    async created(){
+        try{
+            const resp = await this.$axios.get(`/api/categories`)
+            this.categories = resp.data
+            this.category = this.categories.find(cat => cat.id === this.categoryId).name
+        }catch(err){
+            console.log(err);
+        }
     }    
 }
 </script>
@@ -156,6 +202,7 @@ export default {
                 position: relative;
                 width: 100px;
                 position: relative;
+                border-radius: 3px;
                 &:hover{
                     background-color: rgb($green-color, 1);
                     color: #fff;
@@ -204,16 +251,15 @@ export default {
                 margin: 0 5px;
                 border: 1px solid $green-color;
                 padding: 5px;
-                color: $green-color;
                 padding: 2px 10px;
                 font-size: 12px;
-                background-color: #fff;
                 cursor: pointer;
                 transition: all 300ms linear;
                 border-radius: 5px 0 5px 0;
+                background-color: rgb($green-color, .7);
+                color: #fff;
                 &:hover{
-                    background-color: rgb($green-color, .7);
-                    color: #fff;
+                    transform: scale(1.1);
                     box-shadow: 0 0 3px $green-shadow;
                 }
             }
@@ -309,4 +355,8 @@ export default {
             }
         }
     }
+    // rating 
+    // .fa-star{
+    //     color: transparent;
+    // }
 </style>

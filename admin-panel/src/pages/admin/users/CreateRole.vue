@@ -38,7 +38,7 @@ import axios from 'axios'
 import VueFormGenerator from 'vue-form-generator'
 import i18n from '../../../i18n/i18n'
 import { mapGetters } from 'vuex'
-import config  from '../../../config';
+
 export default {
     name: 'CreateRole',
     data(){
@@ -60,8 +60,7 @@ export default {
     },
     methods: {
         async createCategory(){
-            console.log(this.model)
-            await axios.post(`${config.URL.dev}/api/dashboard/categories`, this.model);
+            await this.$axios.post(`/api/dashboard/categories`, this.model);
             this.$router.push({name: 'admin.categories'});
         },
         onValidated(isValid, errors) {
@@ -130,7 +129,7 @@ export default {
                     }
                     
                     try{
-                        await axios.post(`${config.URL.dev}/api/dashboard/roles`, data);
+                        await $this.$axios.post(`/api/dashboard/roles`, data);
                         // clear inputs 
                         model.name = ''
                         model.permission = ''

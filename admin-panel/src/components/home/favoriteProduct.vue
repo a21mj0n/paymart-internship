@@ -1,9 +1,6 @@
 <template>
   <div class="product_wrapper">
-    <cardItem :vertical="false" />
-    <cardItem :vertical="false" />
-    <cardItem :vertical="false" />
-    
+  
 
     <!-- <div class="product">
       <div class="item-img">
@@ -75,9 +72,9 @@
 </template>
 
 <script>
-import cardItem from "./CartItem.vue";
+
 export default {
-  components: { cardItem },
+
   data() {
     return {};
   },
