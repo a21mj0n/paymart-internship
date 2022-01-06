@@ -1,6 +1,11 @@
 <template>
-  <div class="wrapper">
-    <div class="product">
+  <div class="product_wrapper">
+    <cardItem :vertical="false" />
+    <cardItem :vertical="false" />
+    <cardItem :vertical="false" />
+    
+
+    <!-- <div class="product">
       <div class="item-img">
         <img alt="image" src="http://market.local/img/product06.png" />
       </div>
@@ -65,12 +70,14 @@
           <span>ADD</span>
         </button>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
+import cardItem from "./CartItem.vue";
 export default {
+  components: { cardItem },
   data() {
     return {};
   },
@@ -81,14 +88,16 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+ <style lang="scss"  >
 $green-color: #72e019;
 $green-shadow: #64c515;
 
-.wrapper {
+.product_wrapper {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: start;
+  // flex-wrap: w rap;
+  justify-content: space-around;
   flex-direction: row;
   padding: 0 100px;
   margin: 10px 0;
@@ -124,7 +133,7 @@ $green-shadow: #64c515;
         border-radius: 1px;
         position: relative;
         width: 100px;
-        
+
         &:hover {
           background-color: rgb($green-color, 1);
           color: #fff;
@@ -223,4 +232,4 @@ $green-shadow: #64c515;
     }
   }
 }
-</style>
+</style> 
