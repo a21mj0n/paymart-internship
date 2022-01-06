@@ -27,7 +27,7 @@ export default [
             breadcrumbItems: [
                 {
                     name: 'home',
-                    text: 'Home /',
+                    text: 'Home',
                     isDisabled: false,
                 },
                 {
@@ -63,6 +63,15 @@ export default [
             layout: "home",
         },
         component:  () => import('../pages/ViewProductPage')
+    },
+
+    {
+        path: '/cart',
+        name: "cart",
+        meta: {
+            layout: "easy",
+        },
+        component:  () => import('../pages/CartPage')
     },
 
 

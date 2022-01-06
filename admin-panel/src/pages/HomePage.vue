@@ -34,10 +34,10 @@ export default {
             value: 0
         }
     }),
-    beforeDestroy: function(){
-        // this.$refs.slider = null
-        console.log(this.$refs.slider);
-    }
+    // beforeDestroy: function(){
+    //     // this.$refs.slider = null
+    //     console.log(this.$refs.slider);
+    // }
 }
 
 

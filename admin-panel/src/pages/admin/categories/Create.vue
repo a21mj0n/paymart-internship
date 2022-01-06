@@ -13,11 +13,9 @@
 </template>
 
 <script>
-import axios from 'axios'
 import VueFormGenerator from 'vue-form-generator'
 import i18n from '../../../i18n/i18n'
 import { mapGetters } from 'vuex'
-import config  from '../../../config';
 export default {
     name: 'createCategory',
     data(){
@@ -37,7 +35,7 @@ export default {
     },
     methods: {
         async createCategory(){
-            await axios.post(`${config.URL.dev}/api/dashboard/categories`, this.model);
+            await this.$axios.post(`/api/dashboard/categories`, this.model);
             this.$router.push({name: 'admin.categories'});
         },
         onValidated(isValid, errors) {
@@ -67,7 +65,7 @@ export default {
                     type: 'submit',
                     buttonText: i18n.t('category.category_btn'),
                     async onSubmit(model){
-                        await axios.post(`${config.URL.dev}/api/dashboard/categories`, model);
+                        await $this.$axios.post(`/api/dashboard/categories`, model);
                         $this.$router.push({name: 'admin.categories'});
                     },
                     label: '',

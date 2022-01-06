@@ -5,17 +5,22 @@
             <div :class="(isActive) ? 'content-wrapper' : 'content-full'">
                 <admin-header @onToggle="onToggleIcon" :isActive="isActive"/>
                 <router-view/>
+                <custom-loader v-show="isLoading"/>  
             </div>
         </div>
     </div>
 </template>
+
 <script>
 import AdminHeader from '../components/admin-panel/AdminHeader.vue'
 import AdminSidebar from '../components/admin-panel/AdminSidebar.vue'
+import loaderMixin from '../mixins/loader.mixin.js'
+import CustomLoader from '../components/CustomLoader.vue'
 
 export default {
     name: "AdminLayout",
-    components: { AdminHeader, AdminSidebar},
+    mixins: [loaderMixin],
+    components: { AdminHeader, AdminSidebar, CustomLoader},
     data(){
         return {
             isActive: true
@@ -28,6 +33,7 @@ export default {
     },
 }
 </script>
+
 <style lang="scss">
     .fa{
         color: black;

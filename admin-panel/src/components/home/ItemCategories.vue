@@ -4,15 +4,13 @@
             New Products
         </h2>
         <ul class="categories">
-            <li v-for="category in this.categories" :key="category">
-                {{category}}
+            <li v-for="category in this.categories" :key="category.id">
+                {{category.name}}
             </li>
         </ul>
     </div>
 </template>
 <script>
-import axios from 'axios'
-import config from '../../config'
 export default {
    data(){
        return{
@@ -20,8 +18,12 @@ export default {
        }
     },
     async created(){
-        const resp = await axios.get(`${config.URL.dev}/api/categories`)
-        console.log(resp);
+        try{
+            const resp = await this.$axios.get(`/api/categories`)
+            this.categories = resp.data
+        }catch(err){
+            console.log(err);
+        }
     }
 }
 </script>

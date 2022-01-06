@@ -8,6 +8,7 @@ Vue.use(Vuex)
 // modules
 import auth from './auth/#index'
 import lang from './lang/#index'
+import common from './common/#index'
 
 const authState = createPersistedState({
     key: 'auth',
@@ -37,6 +38,6 @@ const langState = createPersistedState({
 
 
 export default new Vuex.Store({
-    modules: { auth,lang },
+    modules: { auth,lang, common },
     plugins: [authState,langState]
 })
