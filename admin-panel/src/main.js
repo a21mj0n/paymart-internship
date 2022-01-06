@@ -11,6 +11,7 @@ import Loader from '@/components/Loader'
 // css styles 
 import '../node_modules/vue-form-generator/dist/vfg-core.css'
 
+import './utils/axios'
 
 Vue.config.productionTip = false
 

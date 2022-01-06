@@ -32,79 +32,7 @@ export default {
         email: "",
       },
       schema: {
-        fields: [
-          {
-            type: "input",
-            inputType: "text",
-            placeholder: "enter your username",
-            model: "username",
-            required: true,
-            validator: "string",
-            styleClasses: "inps",
-          },
-          {
-            type: "input",
-            inputType: "text",
-            placeholder: "enter your first name",
-            model: "first_name",
-            required: true,
-            validator: "string",
-            styleClasses: "inps",
-          },
-          {
-            type: "input",
-            inputType: "text",
-            placeholder: "enter your last name",
-            model: "last_name",
-            required: false,
-            validator: "string",
-            styleClasses: "inps",
-          },
-          {
-            type: "input",
-            inputType: "password",
-            placeholder: "enter your password",
-            model: "password",
-            required: true,
-            validator: "string",
-            styleClasses: "inps",
-          },
-          {
-            type: "input",
-            inputType: "password",
-            placeholder: "confirm you passwrod",
-            model: "password_confirmation",
-            required: true,
-            validator: "string",
-            styleClasses: "inps",
-          },
-          {
-            type: "input",
-            inputType: "file",
-            placeholder: "file",
-            model: "avatar",
-            required: false,
-            styleClasses: "inps",
-          },
-          {
-            type: "input",
-            inputType: "text",
-            placeholder: "enter your email",
-            model: "email",
-            required: true,
-            styleClasses: "inps",
-          },
-          {
-            type: "submit",
-            buttonText: i18n.t('msg.btn'),
-              async onSubmit(model){
-                await axios.post(`${config.URL.dev}/api/dashboard/categories`, model);
-                  // $this.$router.push({name: 'admin.categories'});
-              },
-            label: '',
-            validateBeforeSubmit: true
-          },
-        ],
+       
       },
       formOptions: {
         validateAfterChanged: true,
@@ -126,6 +54,92 @@ export default {
       }
     },
   },
+  created(){
+    const $this = this;
+    this.schema.fields = [
+      {
+        type: "input",
+        inputType: "text",
+        placeholder: "enter your username",
+        model: "username",
+        required: true,
+        validator: "string",
+        styleClasses: "inps",
+      },
+      {
+        type: "input",
+        inputType: "text",
+        placeholder: "enter your first name",
+        model: "first_name",
+        required: true,
+        validator: "string",
+        styleClasses: "inps",
+      },
+      {
+        type: "input",
+        inputType: "text",
+        placeholder: "enter your last name",
+        model: "last_name",
+        required: false,
+        validator: "string",
+        styleClasses: "inps",
+      },
+      {
+        type: "input",
+        inputType: "password",
+        placeholder: "enter your password",
+        model: "password",
+        required: true,
+        validator: "string",
+        styleClasses: "inps",
+      },
+      {
+        type: "input",
+        inputType: "password",
+        placeholder: "confirm you passwrod",
+        model: "password_confirmation",
+        required: true,
+        validator: "string",
+        styleClasses: "inps",
+      },
+      {
+        type: "input",
+        inputType: "file",
+        placeholder: "file",
+        model: "avatar",
+        required: false,
+        styleClasses: "inps",
+      },
+      {
+        type: "input",
+        inputType: "text",
+        placeholder: "enter your email",
+        model: "email",
+        required: true,
+        styleClasses: "inps",
+      },
+      {
+        type: "submit",
+        buttonText: i18n.t('msg.btn'),
+          async onSubmit(model){
+              const formData = new FormData()
+              
+              formData.append('username', model.username)
+              formData.append('avatar', model.avatar)
+              formData.append('first_name', model.first_name)
+              formData.append('last_name', model.last_name)
+              formData.append('email', model.email)
+              formData.append('password', model.password)
+              formData.append('password_confirmation', model.password_confirmation)
+              
+              await axios.post(`${config.URL.dev}/api/dashboard/users`, formData);
+              await $this.$router.push({ name: "admin.users" });
+          },
+        label: '',
+        validateBeforeSubmit: true
+      },
+    ];
+  }
 };
 </script>
 

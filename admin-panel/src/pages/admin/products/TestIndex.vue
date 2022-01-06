@@ -109,13 +109,10 @@ export default {
   },
   data() {
     return {
-
       loading: true,
       selected: 'All',
       categories: null,
       sortedProducts: [],
-
-
       brand: '',
       defaultImage,
       productsData: null,
@@ -128,7 +125,6 @@ export default {
   },
   computed:{
  filterProducts() {
-
       if (this.sortedProducts.length) {
         return this.sortedProducts;
       } else {

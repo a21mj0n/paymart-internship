@@ -51,6 +51,7 @@ export default {
       `${config.URL.dev}/api/dashboard/users/${this.$route.params.id}`
     );
     this.userData = data;
+    console.log('DATA:', data);
     this.model.username = this.userData.username;
     this.model.full_name = this.userData.full_name;
     this.model.avatar = this.userData.avatar;

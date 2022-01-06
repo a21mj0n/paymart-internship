@@ -65,6 +65,15 @@ export default [
         component:  () => import('../pages/ViewProductPage')
     },
 
+    {
+        path: '/cart',
+        name: "cart",
+        meta: {
+            layout: "easy",
+        },
+        component:  () => import('../pages/CartPage')
+    },
+
 
 
     

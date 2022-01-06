@@ -9,15 +9,19 @@
 <script>
 import AdminLayout from './layouts/AdminLayout.vue';
 import EmptyLayout from './layouts/EmptyLayout.vue';
-import HomeLayout from './layouts/HomeLayout.vue'
+import HomeLayout from './layouts/HomeLayout.vue';
+import EasyLayout from './layouts/EasyLayout.vue';
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
+import CustomLoader from './components/CustomLoader.vue'
 
 export default {
   name: "App",
   components: {
     AdminLayout,
     EmptyLayout,
-    HomeLayout
+    HomeLayout,
+    EasyLayout,
+    CustomLoader,
   },
   computed: {
     layout(){
