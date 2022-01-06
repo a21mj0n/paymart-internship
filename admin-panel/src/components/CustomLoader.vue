@@ -20,6 +20,7 @@ export default {
 <style lang="scss" scoped>
 
 .app-loader {
+  z-index: 3333;
   position: fixed;
   width: 100%;
   height: 100%;

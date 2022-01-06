@@ -39,7 +39,7 @@
                 </div>
                 <div class="item-buttons">
                     <button>
-                        <i class="fa fa-heart"></i>
+                        <i :class="`fa ${type}`"></i>
                         <span class="tooltipp">add to wishlist</span>
                     </button>
                     <button>
@@ -92,6 +92,9 @@ export default {
         productId: {
             default: null
         },
+        type: {
+            default: 'fa-heart'
+        }
     },
     data(){
         return{
