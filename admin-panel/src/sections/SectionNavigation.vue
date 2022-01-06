@@ -36,7 +36,7 @@
             <ul>
                 <li><a href="">My Account</a></li>
                 <li><a href="">View Cart</a></li>
-                <li><a href="">WishlistPage</a></li>
+                <li><a href="">WishlistPagePage</a></li>
                 <li><a href="">Track My Order</a></li>
                 <li><a href="">Help</a></li>
             </ul>

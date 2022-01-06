@@ -40,7 +40,7 @@
                 <div class="item-buttons">
                     <button>
                         <i class="fa fa-heart"></i>
-                        <span class="tooltipp">add to WishlistPage</span>
+                        <span class="tooltipp">add to WishlistPagePage</span>
                     </button>
                     <button>
                         <i class="fa fa-exchange"></i>

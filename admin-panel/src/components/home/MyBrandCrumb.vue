@@ -4,7 +4,7 @@
       <ul class="list">
         <li class="item" v-for="link in links" :key="link.name">
           <router-link :to="{ name: link.name }" class="link">
-            {{ link.text }} /
+            {{ link.text }}
           </router-link>
         </li>
       </ul>
@@ -51,17 +51,24 @@ $green-color: #72e019;
       font-size: 12px;
       font-weight: 500;
       text-transform: uppercase;
-
+      
       .link {
-        margin-left: 5px;
+        margin: 0 5px;
         color: #000;
-        &::before {
-          content: '/';
-          
+
+        &:after {
+          content: "/";
         }
         &.router-link-exact-active {
           color: $green-color;
           font-size: 14px;
+        }
+      }
+      &:last-child{
+        .link{
+          &:after{
+            display: none;
+          }
         }
       }
     }
