@@ -2,7 +2,7 @@
   <div class="wrapper">
     <home-header />
     <my-header-nav />
-    <MyBrandCrumb ></MyBrandCrumb>
+    <MyBrandCrumb></MyBrandCrumb>
     <router-view />
     <section-subscribe />
     <section-navigation />

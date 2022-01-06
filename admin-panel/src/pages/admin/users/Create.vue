@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import axios from "axios";
-import config from '../../../config';
 import i18n from '../../../i18n/i18n'
 
 export default {
@@ -42,8 +40,8 @@ export default {
   methods: {
     async createUser() {
       try {
-        const resp = await axios.post(
-          `${config.URL.dev}/api/dashboard/users`,
+        const resp = await this.$axios.post(
+          `/api/dashboard/users`,
           this.model
         );
         this.value, this.value_surname, this.value_age, this.value_address;
@@ -132,7 +130,7 @@ export default {
               formData.append('password', model.password)
               formData.append('password_confirmation', model.password_confirmation)
               
-              await axios.post(`${config.URL.dev}/api/dashboard/users`, formData);
+              await $this.$axios.post(`/api/dashboard/users`, formData);
               await $this.$router.push({ name: "admin.users" });
           },
         label: '',

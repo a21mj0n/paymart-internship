@@ -31,9 +31,7 @@
 </template>
 
 <script>
-import config from '../../../config'
 import i18n from '../../../i18n/i18n'
-import axios from 'axios'
 import {mapGetters} from 'vuex'
 export default {
   data(){
@@ -66,7 +64,7 @@ export default {
           {
             type: 'submit',
             async onSubmit(model){
-              await axios.post(`${config.URL.dev}/api/dashboard/brands`, model)
+              await $this.$axios.post(`/api/dashboard/brands`, model)
               model.name = model.image = ''
               await $this.$router.push({ name: 'admin.brands' });
             },

@@ -9,10 +9,9 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 import VueFormGenerator from "vue-form-generator";
 import i18n from "../../../i18n/i18n";
-import config from '../../../config';
+
 export default {
   name: "editOneUser",
   data() {
@@ -35,8 +34,8 @@ export default {
   methods: {
     async editOneUser() {
       try {
-        const resp = await axios.put(
-          `${config.URL.dev}/api/dashboard/users/${this.$route.params.id}`,
+        const resp = await this.$axios.put(
+          `/api/dashboard/users/${this.$route.params.id}`,
           this.userData
         );
         this.$router.push({ name: "admin.users" });
@@ -47,8 +46,8 @@ export default {
     },
   },
   async created() {
-    const { data } = await axios.get(
-      `${config.URL.dev}/api/dashboard/users/${this.$route.params.id}`
+    const { data } = await this.$axios.get(
+      `/api/dashboard/users/${this.$route.params.id}`
     );
     this.userData = data;
     console.log('DATA:', data);
@@ -104,8 +103,8 @@ export default {
         buttonText: i18n.t("user.edit_btn"),
         async onSubmit(model) {
           console.log('MODEL:', model);
-          await axios.put(
-            `${config.URL.dev}/api/dashboard/users/${$this.$route.params.id}`,
+          await $this.$axios.put(
+            `/api/dashboard/users/${$this.$route.params.id}`,
             model
           );
           $this.$router.push({ name: "users" });

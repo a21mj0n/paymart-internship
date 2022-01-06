@@ -62,11 +62,9 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 import Vuetable from "vuetable-2";
 import UserFields from "./UserFields";
-import config from '../../../config';
-// import config from "../../../config";
+
 
 export default {
   name: "users",
@@ -94,7 +92,7 @@ export default {
     async removeUser(id) {
       if (window.confirm("Are you want to  delete ?")) {
         this.users = this.users.filter((user) => user.id !== id);
-        await axios.delete(`${config.URL.dev}/api/dashboard/users/${id}`);
+        await this.$axios.delete(`/api/dashboard/users/${id}`);
         this.fetchData()
       }
     },
@@ -102,7 +100,7 @@ export default {
       this.page = pageNumber;
     },
     async fetchData() {
-      const resp = await axios.get(`${config.URL.dev}/api/dashboard/users`, {
+      const resp = await this.$axios.get(`/api/dashboard/users`, {
         params: {
           limit: 9,
           page: this.page,

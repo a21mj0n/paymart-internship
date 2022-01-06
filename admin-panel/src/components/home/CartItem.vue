@@ -63,7 +63,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import config from '../../config';
 export default {
     props: {
@@ -97,14 +96,14 @@ export default {
     data(){
         return{
             // database from back
-            configURL: config.URL.dev,
+            configURL: config.URL,
             categories: [],
             category: ''
         }
     },
     async created(){
         try{
-            const resp = await axios.get(`${config.URL.dev}/api/categories`)
+            const resp = await this.$axios.get(`/api/categories`)
             this.categories = resp.data
             this.category = this.categories.find(cat => cat.id === this.categoryId).name
         }catch(err){

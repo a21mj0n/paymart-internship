@@ -9,8 +9,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
-import config from "../config";
+
 import AdminCart from "../components/admin-panel/AdminCart.vue";
 export default {
   components: { AdminCart },
@@ -26,15 +25,15 @@ export default {
     };
   },
   async created() {
-    const usersData = await axios.get(`${config.URL.dev}/api/dashboard/users`);
+    const usersData = await this.$axios.get(`/api/dashboard/users`);
     this.users = usersData.data;
-    const categoriesData = await axios.get(
-      `${config.URL.dev}/api/dashboard/categories`
+    const categoriesData = await this.$axios.get(
+      `/api/dashboard/categories`
     );
     this.categories = categoriesData.data;
-      const brandsData = await axios.get(`${config.URL.dev}/api/dashboard/brands`)
+      const brandsData = await this.$axios.get(`/api/dashboard/brands`)
       this.brands = brandsData.data
-      const productsData = await axios.get(`${config.URL.dev}/api/dashboard/products`)
+      const productsData = await this.$axios.get(`/api/dashboard/products`)
       this.products = productsData.data
   },
   methods: {

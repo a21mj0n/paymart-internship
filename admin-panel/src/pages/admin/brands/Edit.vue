@@ -16,8 +16,7 @@
 </template>
 
 <script>
-import config from '../../../config'
-import axios from 'axios'
+
 export default {
   data(){
     return{
@@ -26,12 +25,12 @@ export default {
   },
   methods: {
     async editCategory(){
-      await axios.put(`${config.URL.dev}/api/dashboard/brands/${this.$route.params.id}`, this.brandByID)
+      await this.$axios.put(`/api/dashboard/brands/${this.$route.params.id}`, this.brandByID)
       this.$router.push({name: 'admin.brands'})
     }
   },
   async created(){
-    const {data} = await axios.get(`${config.URL.dev}/api/dashboard/brands/${this.$route.params.id}`)
+    const {data} = await this.$axios.get(`/api/dashboard/brands/${this.$route.params.id}`)
     this.brandByID = data
   }
 }

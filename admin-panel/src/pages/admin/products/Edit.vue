@@ -19,8 +19,7 @@
 </template>
 
 <script>
-import axios from "axios"
-import config  from '../../../config';
+
 export default {
     name:  "createProduct",
     data(){
@@ -30,12 +29,12 @@ export default {
     },
     methods:{
       async editProduct(){
-          await axios.put(`${config.URL.dev}/api/dashboard/products/${this.$route.params.id}`, this.product)
+          await this.$axios.put(`/api/dashboard/products/${this.$route.params.id}`, this.product)
           this.$router.push({name: "admin.products.test"})
        }
         },
     async created(){
-          const {data} = await axios.get(`${config.URL.dev}/api/dashboard/products/${this.$route.params.id}`)
+          const {data} = await this.$axios.get(`/api/dashboard/products/${this.$route.params.id}`)
           this.product = data
     
     }

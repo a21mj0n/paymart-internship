@@ -48,7 +48,7 @@ export default {
 }
 
 .ui.inverted.dimmer .ui.loader:before {
-  border-color: #fff;
+  border-color: #72E019;
 }
 
 .ui.inverted.dimmer .ui.loader {
