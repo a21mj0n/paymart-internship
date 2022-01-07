@@ -13,7 +13,7 @@
                     :price="product.price"
                     :oldPrice="product.oldPrice"
                     :image="product.image[0]"
-                    :categoryId="product.category_id"
+                    :category="categories.find(cat => cat.id === product.category_id).name"
                     :productId="product.id"
                 />
 
@@ -106,12 +106,22 @@ export default {
                     }
                 ]
             },
-            products: []
+            products: [],
+            categories: []
         }
     },
     async created(){
-        const resp = await this.$axios.get(`/api/products`)
-        this.products = resp.data
+        try{
+            const resp = await this.$axios.get(`/api/products`)
+            this.products = resp.data
+            
+            console.log('categories request from section Products!');
+            
+            const categoriesData = await this.$axios.get(`/api/categories`)
+            this.categories = categoriesData.data
+        }catch(err){
+            console.log(err);
+        }
     }
     
 }

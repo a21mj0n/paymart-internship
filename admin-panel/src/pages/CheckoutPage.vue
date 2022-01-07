@@ -212,6 +212,7 @@ export default {
             hint: "Max 500 characters",
             required: true,
             validator: "string",
+           
           },
           // {
           //   type: "checkbox",

@@ -67,7 +67,9 @@ export default {
         padding: 10px !important;
         line-height: 14px;
       }
-      
+      textarea {
+        resize: none;
+      }
       input[type="submit"]{
         padding: 10px !important;
         background-color: $green-color !important;

@@ -60,11 +60,11 @@
           </div>
           <div class="actions">
             <div class="item">
-              <a href="#">
+              <router-link :to="{name: 'home.WishlistPage'}">
                 <i class="fa fa-heart-o"></i>
                 <p>Your Wishlist</p>
                 <div class="number"><span>2</span></div>
-              </a>
+              </router-link>
             </div>
             <div class="item">
               <a href="#" @click.prevent="isOpen = !isOpen">
@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import HeaderCart from './HeaderCart.vue'
+import HeaderCart from "./HeaderCart.vue";
 export default {
   name: 'HomeHeader',
   data(){
@@ -123,271 +123,269 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-  $color-1:#72E019;
-  $color-2:#1A1A1A;
-  .home-header{
-    background-color: $color-2;
-  }
-  .header-top-wrapper{
-    width:100%;
-    .header-top{
-      padding: 20px 0;
+$color-1: #72e019;
+$color-2: #1a1a1a;
+.home-header {
+  background-color: $color-2;
+}
+.header-top-wrapper {
+  width: 100%;
+  .header-top {
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .mobile-menu {
+      display: none;
+      @media (max-width: 991px) {
+        display: block;
+      }
+      span {
+        display: block;
+        width: 30px;
+        height: 3px;
+        background-color: $color-1;
+        margin-bottom: 2px;
+      }
+    }
+    .login {
+      .item {
+        margin-right: 0;
+      }
+    }
+    .item {
+      margin-right: 30px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      .mobile-menu{
-        display: none;
-        @media(max-width:991px){
-          display: block;
-        }
-        span{
-          display: block;
-          width: 30px;
-          height: 3px;
-          background-color: $color-1;
-          margin-bottom: 2px;
-        }
+      justify-content: center;
+      color: white;
+      i {
+        transition: all 0.3s ease;
+        margin-right: 10px;
+        color: $color-1;
       }
-      .login{
-        .item{
-          margin-right: 0;
-        }
-      }
-      .item{
-        margin-right: 30px;
+      a {
+        color: white;
+        text-decoration: none;
         display: flex;
         align-items: center;
         justify-content: center;
-        color:white;
-        i{
-          transition: all 0.3s ease;
-          margin-right:10px;
-          color:$color-1;
+        transition: all 0.3s ease;
+        &:hover {
+          color: $color-1;
         }
-        a{
-          color:white;
-          text-decoration: none;
-          display: flex;
-          align-items:center;
-          justify-content: center;
-          transition: all 0.3s ease;
-          &:hover{
-            color:$color-1;
-          }
-        }
-      }
-    }
-    .contacts-info{
-      display: flex;
-      align-items: center;
-      @media(max-width:991px){
-        display: none;
       }
     }
   }
-  .header-bottom-wrapper{
-    padding-top: 20px;
-    padding-bottom: 20px;
-    border-bottom: 3px solid $color-1;
-    img{
-      max-width: 100%;
+  .contacts-info {
+    display: flex;
+    align-items: center;
+    @media (max-width: 991px) {
+      display: none;
     }
-    .header-bottom{
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      .cart-wrapper{
-        z-index: 2222;
-        border:1px solid black;
-        padding: 20px;
-        width: 300px;
-        position: absolute;
-        bottom:0;
-        transform:translateY(100%);
-        right: 0;
-        background-color: white;
-        .items{
-          margin-bottom: 20px;
-          max-height: 200px;
-          overflow-y: auto;
-        }
-        .item{
-          position: relative;
-          display: flex;
-          align-items: center;
-          margin-top: 20px;
-          &:first-child{
-            margin-top: 0;
-          }
-          .left-side{
-            width: 30%;
-            margin-right: 5%;
-          }
-          .right-side{
-            width: 65%;
-            .prod-info{
-              display: flex;
-              align-items: center;
-              h3{
-                margin: 0;
-              }
-              p{
-                margin: 0;
-                margin-right: 20px;
-              }
-            }
-          }
-          .remove{
-            position: absolute;
-          }
-        }
-        .total-price{
-          padding: 20px 0;
-          border-top: 1px solid #000;
-          p{
-            margin-bottom: 0;
-          }
-          h3{
-            margin-top:0;
-          }
-        }
-        .buttons{
-          display: flex;
-          margin: -20px -20px;
-          margin-top: 0;
-          a{
-            padding: 5px 20px;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 40px;
-            width: 100%;
-            transition: all 0.3s ease;
-            color:white;
-            p{
-              margin-bottom: 0;
-            }
-            i{
-              margin-left: 10px;
-              color:white;
-            }
-          }
-          .button-view{
-            background-color: $color-2;
-          }
-          .button-checkout{
-            background-color: $color-1;
-          }
-        }
+  }
+}
+.header-bottom-wrapper {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 3px solid $color-1;
+  img {
+    max-width: 100%;
+  }
+  .header-bottom {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .cart-wrapper {
+      border: 1px solid black;
+      padding: 20px;
+      width: 300px;
+      position: absolute;
+      bottom: 0;
+      transform: translateY(100%);
+      right: 0;
+      background-color: white;
+      .items {
+        margin-bottom: 20px;
+        max-height: 200px;
+        overflow-y: auto;
       }
-      .search-wrapper{
-        @media(max-width:991px){
-          display: none;
-        }
-        .form-content{
-          display: flex;
-          align-items: center;
-
-        }
-        border-radius: 30px;
-        overflow: hidden;
-        input{
-          padding: 5px 10px;
-          outline: none;
-          border:none;
-          height: 40px;
-        }
-        button{
-          outline: none;
-          border:none;
-          height: 40px;
-          padding: 5px 20px;
-          transition: all 0.3s ease;
-          cursor: pointer;
-          &:hover{
-            background-color: $color-1;
-            color:white;
-          }
-        }
-        select{
-          padding-left: 20px;
-          outline: none;
-          border:none;
-          border-right: 1px solid $color-1;
-          height: 40px;
-        }
-      }
-      .actions{
-        color:white;
+      .item {
+        position: relative;
         display: flex;
         align-items: center;
-        p{
-          @media(max-width:991px){
-            display: none;
+        margin-top: 20px;
+        &:first-child {
+          margin-top: 0;
+        }
+        .left-side {
+          width: 30%;
+          margin-right: 5%;
+        }
+        .right-side {
+          width: 65%;
+          .prod-info {
+            display: flex;
+            align-items: center;
+            h3 {
+              margin: 0;
+            }
+            p {
+              margin: 0;
+              margin-right: 20px;
+            }
           }
         }
-        .item{
-          a{
-            color:white;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            &:hover{
-              color:$color-1;
-              i{
-                color:$color-1;
-              }
+        .remove {
+          position: absolute;
+        }
+      }
+      .total-price {
+        padding: 20px 0;
+        border-top: 1px solid #000;
+        p {
+          margin-bottom: 0;
+        }
+        h3 {
+          margin-top: 0;
+        }
+      }
+      .buttons {
+        display: flex;
+        margin: -20px -20px;
+        margin-top: 0;
+        a {
+          padding: 5px 20px;
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 40px;
+          width: 100%;
+          transition: all 0.3s ease;
+          color: white;
+          p {
+            margin-bottom: 0;
+          }
+          i {
+            margin-left: 10px;
+            color: white;
+          }
+        }
+        .button-view {
+          background-color: $color-2;
+        }
+        .button-checkout {
+          background-color: $color-1;
+        }
+      }
+    }
+    .search-wrapper {
+      @media (max-width: 991px) {
+        display: none;
+      }
+      .form-content {
+        display: flex;
+        align-items: center;
+      }
+      border-radius: 30px;
+      overflow: hidden;
+      input {
+        padding: 5px 10px;
+        outline: none;
+        border: none;
+        height: 40px;
+      }
+      button {
+        outline: none;
+        border: none;
+        height: 40px;
+        padding: 5px 20px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        &:hover {
+          background-color: $color-1;
+          color: white;
+        }
+      }
+      select {
+        padding-left: 20px;
+        outline: none;
+        border: none;
+        border-right: 1px solid $color-1;
+        height: 40px;
+      }
+    }
+    .actions {
+      color: white;
+      display: flex;
+      align-items: center;
+      p {
+        @media (max-width: 991px) {
+          display: none;
+        }
+      }
+      .item {
+        a {
+          color: white;
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-decoration: none;
+          transition: all 0.3s ease;
+          &:hover {
+            color: $color-1;
+            i {
+              color: $color-1;
             }
           }
-          .number{
-            position: absolute;
-            top:0;
-            right: 50%;
-            min-width:  20px;
-            max-width:  20px;
-            min-height: 20px;
-            max-height: 20px;
-            transform:translate(150%,-50%);
-            border-radius: 50%;
-            background-color: $color-1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        }
+        .number {
+          position: absolute;
+          top: 0;
+          right: 50%;
+          min-width: 20px;
+          max-width: 20px;
+          min-height: 20px;
+          max-height: 20px;
+          transform: translate(150%, -50%);
+          border-radius: 50%;
+          background-color: $color-1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        p {
+          margin: 0;
+        }
+        span {
+          color: white;
+        }
+        i {
+          transition: all 0.3s ease;
+          font-size: 20px;
+          margin-bottom: 10px;
+          color: white;
+          @media (max-width: 991px) {
+            margin-bottom: 0;
           }
-          p{
-            margin: 0;
-          }
-          span{
-            color:white;
-          }
-          i{
-            transition:all 0.3s ease;
-            font-size: 20px;
-            margin-bottom: 10px;
-            color:white;
-            @media(max-width:991px){
-              margin-bottom: 0;
-            }
-          }
+        }
+        margin-right: 20px;
+        @media (max-width: 991px) {
+          margin-right: 40px;
+        }
+        &:last-child {
           margin-right: 20px;
-          @media(max-width:991px){
-            margin-right: 40px;
-          }
-          &:last-child{
-            margin-right: 20px;
-          }
-          @media(min-width:992px){
-            &:last-child{
-              margin-right: 0;
-            }
+        }
+        @media (min-width: 992px) {
+          &:last-child {
+            margin-right: 0;
           }
         }
       }
     }
   }
+}
 </style>
