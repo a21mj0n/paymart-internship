@@ -29,7 +29,9 @@ export default {
     },
     methods: {
         async removeItem(){
-            await this.$axios.delete(`api/cart/${this.cartId}`)
+            if(window.confirm('Точно хотите удалить ?')){
+                await this.$axios.delete(`api/cart/${this.cartId}`)
+            }
         }
     }
 }

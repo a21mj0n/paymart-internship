@@ -41,7 +41,6 @@ export default {
     },
     async created(){
     const resp = await this.$axios.get('api/cart')
-        console.log('RESP:',resp);
         // products 
         this.cartItems = resp.data.cart
         // amount
