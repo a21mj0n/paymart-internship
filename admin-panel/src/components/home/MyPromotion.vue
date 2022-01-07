@@ -34,9 +34,8 @@
 export default {
     data(){
         return{
-            countDownDate: new Date("Dec 25, 2021 00:00:00").getTime(),
+            countDownDate: new Date("Dec 25, 2022 00:00:00").getTime(),
             nowDate: '',
-            
             dist: null,
             day: null,
             hour: null,

@@ -2,7 +2,13 @@
   <div class="content">
      <form class="from" @submit.prevent="editProduct">
          <p>Ссылка для картинки:</p>
-      <input class="img" placeholder="Введите ссылку картинки" type="text" v-model="product.img"/>
+      <input 
+        class="img" 
+        placeholder="Введите ссылку картинки" 
+        type="text" 
+        v-model="product.img"
+        
+      />
       <p>Название продукта: {{product.name}}</p>
       <input class="name" placeholder="Введите название товара" type="text" v-model="product.name" />
       <p>Название бренда: {{product.brand}}</p>
@@ -36,6 +42,7 @@ export default {
     async created(){
           const {data} = await this.$axios.get(`/api/dashboard/products/${this.$route.params.id}`)
           this.product = data
+          console.log(data);
     
     }
 }

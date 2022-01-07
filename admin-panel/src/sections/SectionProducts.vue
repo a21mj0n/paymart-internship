@@ -4,9 +4,10 @@
             <item-categories v-if="itemCategories"/>
             <VueSlickCarousel 
                v-bind="slickOptions"
+               v-if="products.length"
             >
                 <cart-item
-                    v-for="product in this.products"
+                    v-for="product in products"
                     :key="product.id"
                     :name="product.name"
                     :price="product.price"
@@ -43,8 +44,6 @@ import VueSlickCarousel from 'vue-slick-carousel'
 import CartItem from '../components/home/CartItem.vue'
 import ItemCategories from '../components/home/ItemCategories.vue'
 import '../assets/styles/carousel.scss'
-// import config from '../config'
-// import axios from 'axios'
 
 export default {
     props: {
@@ -111,7 +110,6 @@ export default {
         }
     },
     async created(){
-        // const resp = await axios.get(`${config.URL.dev}/api/products`)
         const resp = await this.$axios.get(`/api/products`)
         this.products = resp.data
     }
