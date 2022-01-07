@@ -22,7 +22,7 @@
                 :categoryId="product.category_id"
                 :image="product.image[0]"
                 :productId="product.id"
-                :oldPrice="product.old_price"
+               
               />
               <!-- <product-item />
                             <product-item /> -->

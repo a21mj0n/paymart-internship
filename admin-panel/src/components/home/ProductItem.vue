@@ -13,7 +13,7 @@
         <h4 class="product-price">
           {{ this.price + "$" }}
           <span class="product-price-old">
-            {{ (this.oldPrice = this.price * 1.5 + "$") }}
+           {{this.price * 1.5 + "$" }}
           </span>
         </h4>
       </div>
@@ -43,10 +43,10 @@ export default {
     productId: {
       default: null,
     },
-    oldPrice: {
-      type: Object,
-      required: true,
-    },
+    
+  },
+  methods: {
+
   },
   data() {
     return {
