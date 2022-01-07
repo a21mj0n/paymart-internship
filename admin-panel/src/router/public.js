@@ -15,6 +15,11 @@ export default [
                     text: 'Checkout',
                     isDisabled: true,
                 },
+                {
+                    name: 'store',
+                    text: 'store',
+                    isDisabled: true,
+                },
             ]
         },
         component: () => import('../pages/HomePage')
@@ -35,6 +40,11 @@ export default [
                     text: 'Checkout',
                     isDisabled: true,
                 },
+                {
+                    name: 'store',
+                    text: 'store',
+                    isDisabled: true,
+                },
             ]
         },
         component: () => import('../pages/CheckoutPage')
@@ -52,8 +62,25 @@ export default [
         name: "store",
         meta: {
             layout: "home",
+            breadcrumbItems: [
+                {
+                    name: 'home',
+                    text: 'Home',
+                    isDisabled: false,
+                },
+                {
+                    name: 'checkout',
+                    text: 'Checkout',
+                    isDisabled: true,
+                },
+                {
+                    name: 'store',
+                    text: 'store',
+                    isDisabled: true,
+                },
+            ]
         },
-        component:  () => import('../pages/StorePage')
+        component: () => import('../pages/StorePage')
     },
 
     {
@@ -61,8 +88,9 @@ export default [
         name: "home.product.view",
         meta: {
             layout: "home",
+            
         },
-        component:  () => import('../pages/ViewProductPage')
+        component: () => import('../pages/ViewProductPage')
     },
     {
         path: '/home/WishlistPage',
@@ -70,7 +98,7 @@ export default [
         meta: {
             layout: "home",
         },
-        component:  () => import('../pages/WishlistPage')
+        component: () => import('../pages/WishlistPage')
     },
 
     {
@@ -79,12 +107,12 @@ export default [
         meta: {
             layout: "easy",
         },
-        component:  () => import('../pages/CartPage')
+        component: () => import('../pages/CartPage')
     },
 
 
 
-    
+
     // not found page
     {
         path: '*',
