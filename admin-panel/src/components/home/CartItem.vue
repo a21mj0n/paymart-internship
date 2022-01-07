@@ -8,7 +8,7 @@
                 </div>
                 <img 
                     alt="image"
-                    :src="`${configURL}/storage/product_images/${this.productId}/${this.image.name}` ? `${configURL}/storage/product_images/${this.productId}/${this.image.name}`: '1' "
+                    :src="this.imgUrl"
                 />
             </div>
             <div class="item-body">
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="item-add">
-                <button @click="console.log('clicked')">
+                <button @click="addToCart">
                     <i class="fa fa-shopping-cart"></i>
                     <span>ADD</span>
                 </button>
@@ -99,9 +99,9 @@ export default {
     data(){
         return{
             // database from back
-            configURL: config.URL,
             categories: [],
-            category: ''
+            category: '',
+            imgUrl: this.image ? `${config.URL}/storage/product_images/${this.productId}/${this.image.name}` : 'https://shoppovia.com/store-front/images/product-default.png'
         }
     },
     async created(){
@@ -112,7 +112,13 @@ export default {
         }catch(err){
             console.log(err);
         }
-    }    
+    },
+    // functions
+    methods: {
+        async addToCart(){
+            await this.$axios.post('api/cart', {product_id: this.productId, amount: 1})
+        }
+    }
 }
 </script>
 
