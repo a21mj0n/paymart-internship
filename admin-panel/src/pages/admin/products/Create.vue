@@ -152,10 +152,7 @@ export default {
             formData.append('price', model.price)
             formData.append('quantity', model.quantity)
             
-            await this.$axios.post(
-              `/api/dashboard/products`,
-              formData
-            );
+            await $this.$axios.post(`/api/dashboard/products`, formData);
             console.log('success');
             await $this.$router.push({ name: "admin.products.test" });
           },

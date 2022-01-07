@@ -19,7 +19,7 @@
                         {{this.category}}
                     </p>
                     <h3 class="item-title">
-                        {{this.name.toLowerCase()}}
+                        {{this.name}}
                     </h3>
                     <h4 class="item-price">
                         {{this.price}}$
@@ -67,11 +67,12 @@ import config from '../../config';
 export default {
     props: {
         vertical : {
-            type: String
+            type: Boolean,
         },
         price: {
             type: String,
             required: true,
+            default: '100'
         },
         oldPrice: {
             default: 100,
@@ -80,6 +81,7 @@ export default {
         name: {
             required: true,
             type: String,
+            default: "name"
         },
         categoryId: {
             required: true,
@@ -358,8 +360,8 @@ export default {
             }
         }
     }
-    // rating 
-    // .fa-star{
-    //     color: transparent;
-    // }
+    .item-rating 
+    .fa-star{
+        color: rgb($green-color, .8);
+    }
 </style>
