@@ -151,6 +151,8 @@ export default {
             formData.append('name', model.name)
             formData.append('price', model.price)
             formData.append('quantity', model.quantity)
+
+            console.log(model.images);
             
             await $this.$axios.post(`/api/dashboard/products`, formData);
             console.log('success');

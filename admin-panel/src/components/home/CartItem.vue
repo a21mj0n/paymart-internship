@@ -46,7 +46,14 @@
                         <i class="fa fa-exchange"></i>
                         <span class="tooltipp">add to compare</span>
                     </button>
-                    <button>
+                    <button
+                    @click="
+                $router.push({
+                  name: 'admin.products.view',
+                  params: { id: product.id },
+                })
+              "
+                    >
                         <i class="fa fa-eye"></i>
                         <span class="tooltipp">Quick View</span>
                     </button>
