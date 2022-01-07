@@ -31,7 +31,8 @@
 
         <div class="product-content">
           <div class="product-wrapper">
-            <p class="product-name">PRODUCT NAME GOES HERE</p>
+            <p class="product-name">{{product.name}}</p>
+            <p class="product-brand"><span>By </span> {{brandName}}</p>
             <div class="review-block d-flex">
               <div class="stars">
                 <i class="fa fa-star"></i>
@@ -45,8 +46,8 @@
               </a>
             </div>
             <div class="price-block d-flex">
-              <p class="price">$980.00</p>
-              <p class="old-price">$990.00</p>
+              <p class="price">${{product.price}}</p>
+              <p v-if="product.old_price" class="old-price">{{product.old_price}}</p>
             </div>
             <p class="product-description">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
@@ -123,6 +124,10 @@ import "swiper/swiper-bundle.min.css";
 export default {
   data() {
     return {
+      categories: [],
+      categoryName: '',
+      brands: [],
+      brandName:'',
       swiperOption: {
         slidesPerView: 4,
         spaceBetween: 32,
@@ -143,6 +148,7 @@ export default {
         },
         pagination: { el: ".swiper-pagination", clickable: true },
       },
+      product: '',
     };
   },
   components: {},
@@ -201,6 +207,22 @@ export default {
       thumbs: { swiper: galleryThumbs },
     });
   },
+  async created(){
+    const {data} = await this.$axios.get(`/api/products/${this.$route.params.id}`)
+    this.product = data
+    try{
+            const category = await this.$axios.get(`/api/categories`)
+            const brands = await this.$axios.get(`/api/dashboard/brands`)
+            this.categories = category.data
+            this.brands = brands.data
+            this.categoryName = this.categories.find(cat => cat.id === data.category_id).name
+            this.brandName = this.brands.find(brand => brand.id === data.brand_id).name
+            
+        }catch(err){
+            console.log(err);
+        }
+
+}
 };
 </script>
 
@@ -288,6 +310,12 @@ export default {
     color: #1a1a1a;
     font-weight: bold;
     margin-bottom: 10px;
+  }
+  .product-brand{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+
   }
   .review-block {
     .stars {
