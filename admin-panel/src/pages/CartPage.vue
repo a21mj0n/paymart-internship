@@ -16,7 +16,7 @@
                     Корзина пуста
                 </h2>
             </div>
-            <button class="cart-back" @click="$router.push({name: 'home'})">Оформить заказ</button>
+            <button class="cart-order" @click="$router.push({name: 'checkout'})">Оформить заказ</button>
         </div>
     </div>
 </template>
@@ -76,14 +76,14 @@ export default {
 
 
     }
-    .cart-back{
+    .cart-order{
         width: 150px;
-        border: 1px solid #000;
+        border: 1px solid $green-color;
         color: #fff;
         background-color: $green-color;
         cursor: pointer;
         &:hover{
-            box-shadow: 0 0 3px #000;
+            box-shadow: 0 0 3px $green-color;
         }
     }
 

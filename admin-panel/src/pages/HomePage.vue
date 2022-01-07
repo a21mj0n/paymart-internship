@@ -3,7 +3,7 @@
 
         <section-collection />
 
-        <section-products ref="slider" />
+        <section-products />
 
         <my-promotion/>
 
@@ -34,10 +34,7 @@ export default {
             value: 0
         }
     }),
-    // beforeDestroy: function(){
-    //     // this.$refs.slider = null
-    //     console.log(this.$refs.slider);
-    // }
+
 }
 
 
