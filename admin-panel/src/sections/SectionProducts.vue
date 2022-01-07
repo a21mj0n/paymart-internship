@@ -4,6 +4,7 @@
             <item-categories v-if="itemCategories"/>
             <VueSlickCarousel 
                v-bind="slickOptions"
+               v-if="products.length"
             >
                 <cart-item
                     v-for="product in products"
