@@ -112,6 +112,7 @@ export default {
     async created(){
         const resp = await this.$axios.get(`/api/products`)
         this.products = resp.data
+        console.log(resp.data);
     }
     
 }

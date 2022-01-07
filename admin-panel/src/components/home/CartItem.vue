@@ -9,7 +9,7 @@
                 <!-- TODO: fix src with config -->
                 <img 
                     alt="image"
-                    :src="`${configURL}/storage/product_images/${this.productId}/${this.image.name}`"
+                    :src="imgUrl"
                 />
                     <!-- src="http://market.local/img/product08.png" -->
             </div>
@@ -101,9 +101,9 @@ export default {
     data(){
         return{
             // database from back
-            configURL: config.URL,
             categories: [],
-            category: ''
+            category: '',
+            imgUrl:this.image ? `${config.URL}/storage/product_images/${this.productId}/${this.image.name}` : 'https://www.bevi.com/static/files/0/ecommerce-default-product.png'
         }
     },
     async created(){
@@ -116,6 +116,7 @@ export default {
         }
     }    
 }
+
 </script>
 
 <style lang="scss" scoped>
