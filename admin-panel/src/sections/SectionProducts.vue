@@ -49,7 +49,7 @@ export default {
     props: {
         'slidesToShow': {
             type: Number,
-            default: 4
+            default: 4  
         }, 
         'itemCategories':{
             type: Boolean,

@@ -6,12 +6,10 @@
                     <span>-30%</span>
                     <span>NEW</span>
                 </div>
-                <!-- TODO: fix src with config -->
                 <img 
                     alt="image"
-                    :src="`${configURL}/storage/product_images/${this.productId}/${this.image.name}`"
+                    :src="`${configURL}/storage/product_images/${this.productId}/${this.image.name}` ? `${configURL}/storage/product_images/${this.productId}/${this.image.name}`: '1' "
                 />
-                    <!-- src="http://market.local/img/product08.png" -->
             </div>
             <div class="item-body">
                 <div class="information">
