@@ -115,9 +115,9 @@ export default {
   async created(){
     const resp = await this.$axios.get('api/cart')
     // amount
-    this.totalCount = resp.data[0].cart.length
+    this.totalCount = resp.data.cart.length
     // all price 
-    this.totalPrice = resp.data[0].cart.reduce((sum, {product}) => parseInt(product.price) + sum,0)
+    this.totalPrice = resp.data.cart.reduce((sum, {product}) => parseInt(product.price) + sum,0)
   }
 }
 </script>
