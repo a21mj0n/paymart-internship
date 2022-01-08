@@ -13,8 +13,9 @@
             :autoplayHoverPause="true"
             :loop="true"
             :perPage="3"
+            v-if="products.length > 1 && categories.length > 1"
           >
-            <Slide v-for="i in 3" :key="i">
+            <Slide v-for="i in 3" :key="i" >
               <product-item
                 v-for="product in products"
                 :key="product.id"
@@ -22,7 +23,7 @@
                 :price="product.price"
                 :image="product.image[0]"
                 :productId="product.id"
-                :category="categories.filter(item => item.id === product.category_id)[0].name"
+                :category="categories.find(item => item.id === product.category_id).name !== '' ? categories.find(item => item.id === product.category_id).name : 'no-category'"
               />
             </Slide>
           </Carousel>
@@ -47,7 +48,7 @@ export default {
     try {
       const resp = await this.$axios.get(`/api/products`);
       this.products = resp.data;
-      console.log('categories request from section selling!');
+
       const categoriesData = await this.$axios.get("/api/categories");
       this.categories = categoriesData.data
 

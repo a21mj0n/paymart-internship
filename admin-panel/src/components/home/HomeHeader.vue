@@ -206,6 +206,7 @@ $color-2: #1a1a1a;
       transform: translateY(100%);
       right: 0;
       background-color: white;
+      z-index: 9999;
       .items {
         margin-bottom: 20px;
         max-height: 200px;

@@ -1,42 +1,32 @@
 <template>
   <div class="checkout-component">
     <h3>Categories</h3>
-    <div class="item">
+    <div class="item" v-for="category in categories"
+                    :key="category.id"
+                    :name="category.name">
       <label>
         <input type="checkbox" class="hidden">
         <div class="box">
           <i class="fa fa-check"></i>
         </div>
       </label>
-      <p>Laptops</p>
-      <span>(120)</span>
-    </div>
-    <div class="item">
-      <label>
-        <input type="checkbox" class="hidden">
-        <div class="box">
-          <i class="fa fa-check"></i>
-        </div>
-      </label>
-      <p>Laptops</p>
-      <span>(120)</span>
-    </div>
-    <div class="item">
-      <label>
-        <input type="checkbox" class="hidden">
-        <div class="box">
-          <i class="fa fa-check"></i>
-        </div>
-      </label>
-      <p>Laptops</p>
-      <span>(120)</span>
+      <p>{{category.name}}</p>
+      <span>({{category.product.length}})</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-
+  data(){
+    return{
+      categories:[],
+    }
+  },
+  async created(){
+    const prod_categories = await this.$axios.get(`/api/categories`)
+    this.categories = prod_categories.data
+  },
 }
 </script>
 

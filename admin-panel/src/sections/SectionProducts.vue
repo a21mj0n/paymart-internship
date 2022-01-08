@@ -4,7 +4,7 @@
             <item-categories v-if="itemCategories"/>
             <VueSlickCarousel 
                v-bind="slickOptions"
-               v-if="products.length"
+               v-if="products.length > 1 && categories.length > 1"
             >
                 <cart-item
                     v-for="product in products"
@@ -13,8 +13,8 @@
                     :price="product.price"
                     :oldPrice="product.oldPrice"
                     :image="product.image[0]"
-                    :category="categories.find(cat => cat.id === product.category_id).name"
                     :productId="product.id"
+                    :category="categories.find(cat => cat.id === product.category_id).name"
                 />
 
                 <template #prevArrow="">
@@ -29,12 +29,13 @@
                     </button>
                 </template>
                 
-                 <template #customPaging="">
+                <template #customPaging="">
                     <div class="custom-dot">
                         
                     </div>
                 </template>
             </VueSlickCarousel>
+  
         </div>
     </section>
 </template>
@@ -112,13 +113,12 @@ export default {
     },
     async created(){
         try{
-            const resp = await this.$axios.get(`/api/products`)
-            this.products = resp.data
-            
-            console.log('categories request from section Products!');
-            
-            const categoriesData = await this.$axios.get(`/api/categories`)
-            this.categories = categoriesData.data
+            const resp = await this.$axios.get(`/api/products`);
+            this.products = resp.data;
+            // \\
+            const categoriesData = await this.$axios.get(`/api/categories`);
+            this.categories = categoriesData.data;
+
         }catch(err){
             console.log(err);
         }

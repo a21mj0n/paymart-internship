@@ -38,9 +38,15 @@
           </div>
           <div class="products">
             <cart-item 
-              v-for="i in 9" 
+              v-for="product in products" 
               :vertical="(vertical) ? true : false "
-              :key="i"
+              :key="product.id"
+              :name="product.name"
+              :price="product.price"
+              :oldPrice="product.oldPrice"
+              :image="product.image[0]"
+              :categoryId="product.category_id"
+              :productId="product.id"
             />
           </div>
           <div class="navigation-block">
@@ -66,7 +72,8 @@ export default {
   data(){
     return{
       number:'20',
-      vertical: true
+      vertical: true,
+      products:[]
     }
   },
   components:{
@@ -82,6 +89,10 @@ export default {
     horizantalPosition(){
       this.vertical = false
     }
+  },
+  async created(){
+    const resp = await this.$axios.get(`/api/products`)
+    this.products = resp.data
   }
   
 }

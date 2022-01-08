@@ -83,7 +83,7 @@ export default {
         },
         category: {
             required: true,
-            default: 'Category not found'
+            type: String
         },
         image:{
             type: Object,
@@ -112,6 +112,7 @@ export default {
         }
     }
 }
+
 </script>
 
 <style lang="scss" scoped>

@@ -55,7 +55,7 @@ export default {
     };
   },
   async created() {
-    console.log(this.category);
+    console.log(this.category, 'CAT:');
     // try {
     //   const resp = await this.$axios.get("/api/categories");
     //   this.categories = resp.data;
