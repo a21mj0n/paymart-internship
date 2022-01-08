@@ -3,27 +3,37 @@
     <div class="container">
       <div class="wrapper-product d-flex">
         <div class="wrapper-sliders">
-
-          <div class="swiper-container gallery-thumbs"  :options="swiperOption">
-           
-              <!-- <div class="swiper-button-next"></div>
-              <div class="swiper-button-prev"></div> -->
+          <div 
+            v-if="imagesLength > 1"
+            class="swiper-container gallery-thumbs"  
+            :options="swiperOption"
+          >
+            <!-- <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div> -->
             <div class="swiper-wrapper">
+              
               <div
                 class="swiper-slide"
-                v-for="(image, index) in 4"
-                :key="index"
+                v-for="image in product.image"
+                :key="image.id"
               >
-                <div class="image">{{ index }}</div>
+                <img :src="`${configURL}/storage/product_images/${image.product_id}/${image.name}`" alt="">
               </div>
             </div>
           </div>
-          <div class="swiper-container gallery-top">
+          <div 
+            class="swiper-container gallery-top"
+            
+          >
             <div class="swiper-wrapper">
               <div class="swiper-button-next"></div>
               <div class="swiper-button-prev"></div>
-              <div class="swiper-slide image"  v-for="(n, i) in 4" :key="i">
-                <div>{{ i }}</div>
+              <div 
+                class="swiper-slide image"   
+                v-for="image in product.image"
+                :key="image.id"
+              >
+                <img class="swiper-image" :src="`${configURL}/storage/product_images/${image.product_id}/${image.name}`" alt="">
               </div>
             </div>
           </div>
@@ -120,6 +130,7 @@
 <script>
 import Swiper from "swiper/swiper-bundle.min.js";
 import "swiper/swiper-bundle.min.css";
+import config from '../config';
 
 export default {
   data() {
@@ -142,20 +153,38 @@ export default {
             freeMode: false,
           },
           // when window width is >= 640px
-          768: { slidesPerView: 2, spaceBetween: 32, freeMode: false },
-          992: { slidesPerView: 3, spaceBetween: 32 },
-          1200: { slidesPerView: 6, spaceBetween: 25 },
+          768: { slidesPerView: 1, spaceBetween: 32, freeMode: false },
+          992: { slidesPerView: 1, spaceBetween: 32 },
+          1200: { slidesPerView: 1, spaceBetween: 25 },
         },
         pagination: { el: ".swiper-pagination", clickable: true },
       },
-      product: '',
+      product: {},
+      imagesLength: 0,
+      imagesWidth: (100 / this.imagesLength) + '%',
+      configURL: config.URL
     };
   },
   components: {},
-  mounted() {
+  async mounted() {
+    const {data} = await this.$axios.get(`/api/products/${this.$route.params.id}`)
+    this.product = data;
+    this.imagesLength = this.product.image.length
+    try{
+            const category = await this.$axios.get(`/api/categories`)
+            const brands = await this.$axios.get(`/api/dashboard/brands`)
+            this.categories = category.data
+            this.brands = brands.data
+            this.categoryName = this.categories.find(cat => cat.id === data.category_id).name
+            this.brandName = this.brands.find(brand => brand.id === data.brand_id).name
+            
+        }catch(err){
+            console.log(err);
+      }
+    console.log(this.product.image.length);
     var galleryThumbs = new Swiper(".gallery-thumbs", {
       spaceBetween: 5,
-      slidesPerView: 4,
+      slidesPerView: this.product.image.length - 1,
       freeMode: false,
       direction: 'vertical',
       watchSlidesVisibility: true,
@@ -168,25 +197,25 @@ export default {
       breakpoints: {
         // when window width is >= 320px
         320: {
-          slidesPerView: 2.5,
+          slidesPerView: this.product.image.length - 1,
           spaceBetween: 4,
         },
         // when window width is >= 480px
         576: {
-          slidesPerView: 3,
+          slidesPerView: this.product.image.length - 1,
           spaceBetween: 4,
         },
         // when window width is >= 640px
         768: {
-          slidesPerView: 3,
+          slidesPerView: this.product.image.length - 1,
           spaceBetween: 5,
         },
         992: {
-          slidesPerView: 3,
+          slidesPerView: this.product.image.length - 1,
           spaceBetween: 5,
         },
         1200: {
-          slidesPerView: 4,
+          slidesPerView: this.product.image.length - 1,
           spaceBetween: 20,
         },
       },
@@ -200,29 +229,12 @@ export default {
       //   disableOnInteraction: false,
       // },
       navigation: {
-        
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       },
-      thumbs: { swiper: galleryThumbs },
+      thumbs: this.product.image.length > 1 ? { swiper: galleryThumbs } : null,
     });
   },
-  async created(){
-    const {data} = await this.$axios.get(`/api/products/${this.$route.params.id}`)
-    this.product = data
-    try{
-            const category = await this.$axios.get(`/api/categories`)
-            const brands = await this.$axios.get(`/api/dashboard/brands`)
-            this.categories = category.data
-            this.brands = brands.data
-            this.categoryName = this.categories.find(cat => cat.id === data.category_id).name
-            this.brandName = this.brands.find(brand => brand.id === data.brand_id).name
-            
-        }catch(err){
-            console.log(err);
-        }
-
-}
 };
 </script>
 
@@ -249,6 +261,13 @@ export default {
     height: 340px;
     border: 1px solid #72e019; 
     transition: all 0.5s linear;
+    display: flex;
+      justify-content: center;
+      align-items: center;
+    .swiper-image{
+      max-width: 100%;
+      
+    }
     .swiper-button-next, .swiper-button-prev{
       opacity: 0;
       pointer-events: none;
@@ -279,14 +298,21 @@ export default {
   .gallery-thumbs {
     overflow:hidden;
     width: 17%;
+    
     height: 410px;
     .swiper-wrapper {
       .swiper-slide{ 
         cursor: pointer;
         border: 1px solid #e4e7ed;
-        width: 100% !important;
-        .image{
-          width: 100%;
+        margin-top: 10px;
+        width: 95px !important;
+        height: auto !important;
+        
+        
+        overflow: hidden;
+        img{
+          max-width: 100%;
+
         }
       }
       .swiper-slide-thumb-active {

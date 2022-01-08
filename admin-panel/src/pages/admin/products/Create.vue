@@ -143,14 +143,14 @@ export default {
           buttonText: "добавить",
           validateBeforeSubmit: true,
           async onSubmit(model) {
-            console.log(model);
+            console.log(model.images);
             const formData = new FormData()
             formData.append('category_id', model.category_id)
             formData.append('brand_id', model.brand_id)
             formData.append('name', model.name)
             formData.append('price', model.price)
             formData.append('quantity', model.quantity)
-
+            formData.append('images[]', model.images)
             
             await $this.$axios.post(`/api/dashboard/products`, formData);
             console.log('success');

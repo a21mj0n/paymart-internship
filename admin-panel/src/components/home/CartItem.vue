@@ -16,7 +16,11 @@
                     <p class="item-category">
                         {{this.category}}
                     </p>
-                    <h3 class="item-title">
+                    <h3 class="item-title"
+                      @click="$router.push({
+                        name: 'home.product.view',
+                        params: { id: productId },
+                    })">
                         {{this.name}}
                     </h3>
                     <h4 class="item-price">
