@@ -3,9 +3,11 @@
     <div class="container">
       <div class="store-page">
         <div class="aside-wrapper">
-          <aside-checkouts/>
+          <aside-checkouts
+          :checkedCat="checkedCat"
+          @setCategory="setCategory"
+          />
           <my-slider/>
-          <aside-checkouts/>
           <h3>Top selling</h3>
           <product-item v-for="i in 3" :key="i"/>
         </div>
@@ -54,7 +56,7 @@
               <p>SHOWING {{number}}-100 PRODUCTS</p>
             </div>
             <div class="pagination">
-
+              <button @click.prevent="pageCategory"></button>
             </div>
           </div>
         </div>
@@ -71,9 +73,12 @@ import ProductItem from '../components/home/ProductItem.vue'
 export default {
   data(){
     return{
+      checkedCat:'',
       number:'20',
       vertical: true,
-      products:[]
+      products:[],
+      showCategory:[],
+      categories:[],
     }
   },
   components:{
@@ -88,11 +93,20 @@ export default {
     },
     horizantalPosition(){
       this.vertical = false
+    },
+    setCategory(name, checked){
+      if(checked){
+        console.log(name)
+      }else{
+        console.log('all')
+      }
     }
   },
   async created(){
     const resp = await this.$axios.get(`/api/products`)
     this.products = resp.data
+    const prod_categories = await this.$axios.get(`/api/categories`)
+    this.categories = prod_categories.data
   }
   
 }
