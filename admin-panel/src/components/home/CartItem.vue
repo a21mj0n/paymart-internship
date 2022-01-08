@@ -16,7 +16,11 @@
                     <p class="item-category">
                         {{this.category}}
                     </p>
-                    <h3 class="item-title">
+                    <h3 class="item-title"
+                      @click="$router.push({
+                        name: 'home.product.view',
+                        params: { id: productId },
+                    })">
                         {{this.name}}
                     </h3>
                     <h4 class="item-price">
@@ -44,7 +48,12 @@
                         <i class="fa fa-exchange"></i>
                         <span class="tooltipp">add to compare</span>
                     </button>
-                    <button>
+                    <button
+                    @click="$router.push({
+                        name: 'home.product.view',
+                        params: { id: productId },
+                    })"
+                    >
                         <i class="fa fa-eye"></i>
                         <span class="tooltipp">Quick View</span>
                     </button>
