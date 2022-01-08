@@ -14,7 +14,7 @@
                     :oldPrice="product.oldPrice"
                     :image="product.image[0]"
                     :productId="product.id"
-                    :category="categories.find(cat => cat.id === product.category_id).name"
+                    :category="categoryName(product.category_id)"
                 />
 
                 <template #prevArrow="">
@@ -65,6 +65,9 @@ export default {
             default: true
         }
     },
+    computed: {
+       
+    },
     components: { 
         CartItem ,
         VueSlickCarousel,
@@ -109,6 +112,13 @@ export default {
             },
             products: [],
             categories: []
+        }
+    },
+    methods: {
+        categoryName(productCategoryId) {
+            const category = this.categories.find(cat => cat.id === productCategoryId)
+            
+            return category ? category.name : 'default-category'
         }
     },
     async created(){

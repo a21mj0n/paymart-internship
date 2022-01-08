@@ -21,10 +21,7 @@
               </div>
             </div>
           </div>
-          <div 
-            class="swiper-container gallery-top"
-            
-          >
+          <div class="swiper-container gallery-top">
             <div class="swiper-wrapper">
               <div class="swiper-button-next"></div>
               <div class="swiper-button-prev"></div>
@@ -32,8 +29,12 @@
                 class="swiper-slide image"   
                 v-for="image in product.image"
                 :key="image.id"
+                :style="{ 
+                  background: `url(${configURL}/storage/product_images/${image.product_id}/${image.name})`, 
+                  backgroundSize: 'cover'
+                }"
               >
-                <img class="swiper-image" :src="`${configURL}/storage/product_images/${image.product_id}/${image.name}`" alt="">
+                <!-- <img class="swiper-image" :src="`${configURL}/storage/product_images/${image.product_id}/${image.name}`" alt=""> -->
               </div>
             </div>
           </div>

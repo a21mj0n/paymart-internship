@@ -134,7 +134,7 @@ export default {
               $this.previews.push(URL.createObjectURL(file))
             });
 
-            return model.images = event.target.files[0];
+            return model.images = event.target.files;
           } 
         },
         {
@@ -144,13 +144,17 @@ export default {
           validateBeforeSubmit: true,
           async onSubmit(model) {
             console.log(model.images);
+
             const formData = new FormData()
             formData.append('category_id', model.category_id)
             formData.append('brand_id', model.brand_id)
             formData.append('name', model.name)
             formData.append('price', model.price)
             formData.append('quantity', model.quantity)
-            formData.append('images[]', model.images)
+
+            Object.entries(model.images).forEach(([ , image ]) => {
+              formData.append('images[]', image)
+            })
             
             await $this.$axios.post(`/api/dashboard/products`, formData);
             console.log('success');
