@@ -1,7 +1,7 @@
 <template>
   <section class="wrapper">
       <p class="title__form">
-          Sing Up for the <span>newsletter</span>
+        Sing Up for the <span>newsletter</span>
       </p>
       <form class="form">
           <div class="input-mama">

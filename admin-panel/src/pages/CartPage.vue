@@ -8,8 +8,17 @@
                     Удалить все
                 </p>
             </div>
-            <div class="cart-items" v-if="true">
-                <cart-item v-for="i in 3" :key="i"/>
+            <div class="cart-items" v-if="cartItems.length">
+                <cart-item 
+                    v-for="cartItem in cartItems" 
+                    :key="cartItem.id"
+                    :name="cartItem.product.name"
+                    :price="cartItem.product.price"
+                    :amount="cartItem.amount"
+                    :image="cartItem.product.image[0]"
+                    :productId="cartItem.product.id"
+                    :cartId="cartItem.id"
+                />
             </div>
             <div class="cart-empty" v-else>
                 <h2>
@@ -27,8 +36,18 @@ export default {
     components: { CartItem },
     data(){
         return{
-
+            cartItems: []
         }
+    },
+    async created(){
+    const resp = await this.$axios.get('api/cart')
+        // products 
+        this.cartItems = resp.data.cart
+        // amount
+        this.totalCount = resp.data.cart.length
+        // all price 
+        this.totalPrice = resp.data.cart.reduce((sum, {product}) => parseInt(product.price) + sum,0)
+        console.log(this.cartItems);
     },
     methods:{
         removeAll(){

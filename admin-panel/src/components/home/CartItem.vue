@@ -6,19 +6,21 @@
                     <span>-30%</span>
                     <span>NEW</span>
                 </div>
-                <!-- TODO: fix src with config -->
                 <img 
                     alt="image"
-                    :src="imgUrl"
+                    :src="this.imgUrl"
                 />
-                    <!-- src="http://market.local/img/product08.png" -->
             </div>
             <div class="item-body">
                 <div class="information">
                     <p class="item-category">
                         {{this.category}}
                     </p>
-                    <h3 class="item-title">
+                    <h3 class="item-title"
+                      @click="$router.push({
+                        name: 'home.product.view',
+                        params: { id: productId },
+                    })">
                         {{this.name}}
                     </h3>
                     <h4 class="item-price">
@@ -39,21 +41,26 @@
                 </div>
                 <div class="item-buttons">
                     <button>
-                        <i :class="`fa ${type}`"></i>
-                        <span class="tooltipp">add to wishlist</span>
+                        <i class="fa fa-heart"></i>
+                        <span class="tooltipp">add to WishlistPagePage</span>
                     </button>
                     <button>
                         <i class="fa fa-exchange"></i>
                         <span class="tooltipp">add to compare</span>
                     </button>
-                    <button>
+                    <button
+                    @click="$router.push({
+                        name: 'home.product.view',
+                        params: { id: productId },
+                    })"
+                    >
                         <i class="fa fa-eye"></i>
                         <span class="tooltipp">Quick View</span>
                     </button>
                 </div>
             </div>
             <div class="item-add">
-                <button @click="console.log('clicked')">
+                <button @click="addToCart">
                     <i class="fa fa-shopping-cart"></i>
                     <span>ADD</span>
                 </button>
@@ -83,9 +90,9 @@ export default {
             type: String,
             default: "name"
         },
-        categoryId: {
+        category: {
             required: true,
-            default: 'Category not found'
+            type: String
         },
         image:{
             type: Object,
@@ -101,20 +108,18 @@ export default {
     data(){
         return{
             // database from back
-            categories: [],
-            category: '',
-            imgUrl:this.image ? `${config.URL}/storage/product_images/${this.productId}/${this.image.name}` : 'https://www.bevi.com/static/files/0/ecommerce-default-product.png'
+            imgUrl: this.image ? `${config.URL}/storage/product_images/${this.productId}/${this.image.name}` : 'https://shoppovia.com/store-front/images/product-default.png'
         }
     },
     async created(){
-        try{
-            const resp = await this.$axios.get(`/api/categories`)
-            this.categories = resp.data
-            this.category = this.categories.find(cat => cat.id === this.categoryId).name
-        }catch(err){
-            console.log(err);
+        console.log(this.category, 'CAT:');
+    },
+    // functions
+    methods: {
+        async addToCart(){
+            await this.$axios.post('api/cart', {product_id: this.productId, amount: 1})
         }
-    }    
+    }
 }
 
 </script>

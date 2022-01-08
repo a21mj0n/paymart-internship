@@ -4,7 +4,7 @@
             <item-categories v-if="itemCategories"/>
             <VueSlickCarousel 
                v-bind="slickOptions"
-               v-if="products.length"
+               v-if="products.length > 1 && categories.length > 1"
             >
                 <cart-item
                     v-for="product in products"
@@ -13,8 +13,8 @@
                     :price="product.price"
                     :oldPrice="product.oldPrice"
                     :image="product.image[0]"
-                    :categoryId="product.category_id"
                     :productId="product.id"
+                    :category="categories.find(cat => cat.id === product.category_id).name"
                 />
 
                 <template #prevArrow="">
@@ -29,12 +29,13 @@
                     </button>
                 </template>
                 
-                 <template #customPaging="">
+                <template #customPaging="">
                     <div class="custom-dot">
                         
                     </div>
                 </template>
             </VueSlickCarousel>
+  
         </div>
     </section>
 </template>
@@ -49,7 +50,7 @@ export default {
     props: {
         'slidesToShow': {
             type: Number,
-            default: 4
+            default: 4  
         }, 
         'itemCategories':{
             type: Boolean,
@@ -106,13 +107,21 @@ export default {
                     }
                 ]
             },
-            products: []
+            products: [],
+            categories: []
         }
     },
     async created(){
-        const resp = await this.$axios.get(`/api/products`)
-        this.products = resp.data
-        console.log(resp.data);
+        try{
+            const resp = await this.$axios.get(`/api/products`);
+            this.products = resp.data;
+            // \\
+            const categoriesData = await this.$axios.get(`/api/categories`);
+            this.categories = categoriesData.data;
+
+        }catch(err){
+            console.log(err);
+        }
     }
     
 }
