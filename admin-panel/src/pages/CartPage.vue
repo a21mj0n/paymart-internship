@@ -9,16 +9,19 @@
                 </p>
             </div>
             <div class="cart-items" v-if="cartItems.length">
-                <cart-item 
-                    v-for="cartItem in cartItems" 
-                    :key="cartItem.id"
-                    :name="cartItem.product.name"
-                    :price="cartItem.product.price"
-                    :amount="cartItem.amount"
-                    :image="cartItem.product.image[0]"
-                    :productId="cartItem.product.id"
-                    :cartId="cartItem.id"
-                />
+                <div class="items">
+                    <cart-item 
+                        v-for="cartItem in cartItems" 
+                        :key="cartItem.id"
+                        :name="cartItem.product.name"
+                        :price="cartItem.product.price"
+                        :amount="cartItem.amount"
+                        :image="cartItem.product.image[0]"
+                        :productId="cartItem.product.id"
+                        :cartId="cartItem.id"
+                        @removeItem="removeItem"
+                    />
+                </div>
                 <div class="row j-center">
                     <button class="cart-order" @click="$router.push({name: 'checkout'})">Оформить заказ</button>
                     <button class="cart-back" @click="$router.push({name: 'home'})">Вернутся назад</button>
@@ -59,12 +62,9 @@ export default {
                 alert('Все товары удалены!')
             }
         },
-        // async removeItem(){
-        //     if(window.confirm('Точно хотите удалить ?')){
-        //         await this.$axios.delete(`api/cart/${this.cartItem.product.id}`)
-        //         window.location.reload()
-        //     }
-        // }
+        async removeItem(id){
+            this.cartItems = this.cartItems.filter(item => item.id !== id)
+        }
     }
     
 }
@@ -104,6 +104,13 @@ export default {
         }
 
 
+    }
+    .cart-items{
+        display: flex;
+        flex-direction: column;
+        .items{
+            flex: 1 1 auto;
+        }
     }
     .cart-order{
         width: 150px;

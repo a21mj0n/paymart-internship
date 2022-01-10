@@ -29,7 +29,19 @@ export default {
     },
     methods: {
         async removeItem(){
-            await this.$axios.delete(`api/cart/${this.productId}`)
+            try{
+                const resp = await this.$axios.delete(`api/cart/${this.cartId}`);
+                if(resp.data === "Successful"){
+                    this.$emit('removeItem', this.cartId)
+                }else{
+                    alert('Не удалось удалить продукт')
+                }
+            }catch(err){
+                if(err){
+                    console.log(err);
+                    alert('Не удалось удалить продукт')
+                }
+            }
         }
     }
 }

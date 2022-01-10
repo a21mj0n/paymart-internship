@@ -88,4 +88,10 @@ export default {
 .VueCarousel-navigation > button {
   left: 75% !important;
 }
+.row{
+  flex-wrap:wrap;
+}
+.small-carousel{
+  width: 33.3%;
+}
 </style>

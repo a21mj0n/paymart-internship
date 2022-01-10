@@ -2,12 +2,23 @@
   <div class="wrapper">
     <div class="container">
       <div class="store-page">
-        <div class="aside-wrapper">
-          <aside-checkouts/>
+        <div class="aside-wrapper"
+        v-if="products.length > 1 && categories.length > 1"
+        >
+          <aside-checkouts
+          :checkedCat="checkedCat"
+          @setCategory="setCategory"
+          />
           <my-slider/>
-          <aside-checkouts/>
           <h3>Top selling</h3>
-          <product-item v-for="i in 3" :key="i"/>
+          <product-item  v-for="product in products"
+                :key="product.id"
+                :name="product.name"
+                :price="product.price"
+                :image="product.image[0]"
+                :productId="product.id"
+                :category="categories.find(item => item.id === product.category_id).name !== '' ? categories.find(item => item.id === product.category_id).name : 'no-category'"
+          />
         </div>
         <div class="content-wrapper">
           <div class="components-changer">
@@ -36,12 +47,15 @@
               </div>
             </div>
           </div>
-          <div class="products">
-            <cart-item 
+          <div class="products"
+          v-if="products.length > 1 && categories.length > 1"
+          >
+            <cart-item  
               v-for="product in products" 
               :vertical="(vertical) ? true : false "
               :key="product.id"
               :name="product.name"
+              :category="categories.find(item => item.id === product.category_id).name !== '' ? categories.find(item => item.id === product.category_id).name : 'no-category'"
               :price="product.price"
               :oldPrice="product.oldPrice"
               :image="product.image[0]"
@@ -54,7 +68,7 @@
               <p>SHOWING {{number}}-100 PRODUCTS</p>
             </div>
             <div class="pagination">
-
+              <button @click.prevent="pageCategory"></button>
             </div>
           </div>
         </div>
@@ -71,9 +85,12 @@ import ProductItem from '../components/home/ProductItem.vue'
 export default {
   data(){
     return{
+      checkedCat:'',
       number:'20',
       vertical: true,
-      products:[]
+      products:[],
+      showCategory:[],
+      categories:[],
     }
   },
   components:{
@@ -88,11 +105,21 @@ export default {
     },
     horizantalPosition(){
       this.vertical = false
+    },
+    async setCategory(event,name){
+      if(event === true){
+        const resp = await this.$axios.get(`/api/products`)
+        this.products = resp.data.filter(item=> item.category_id === name)
+
+      }
     }
   },
   async created(){
     const resp = await this.$axios.get(`/api/products`)
     this.products = resp.data
+    const prod_categories = await this.$axios.get(`/api/categories`)
+    this.categories = prod_categories.data
+    console.log(this.products)
   }
   
 }
