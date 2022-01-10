@@ -109,14 +109,20 @@ export default {
       totalPrice: 0
     }
   },
+  watch:{
+    // чтобы следить за продуктами в корзине 
+    totalCount(){
+      this.totalCount
+    }
+  },
   components:{
     HeaderCart
   },
   async created(){
     const resp = await this.$axios.get('api/cart')
-    // amount
+    // кол-во
     this.totalCount = resp.data.cart.length
-    // all price 
+    // общая сумма 
     this.totalPrice = resp.data.cart.reduce((sum, {product}) => parseInt(product.price) + sum,0)
   }
 }

@@ -19,13 +19,17 @@
                     :productId="cartItem.product.id"
                     :cartId="cartItem.id"
                 />
+                <div class="row j-center">
+                    <button class="cart-order" @click="$router.push({name: 'checkout'})">Оформить заказ</button>
+                    <button class="cart-back" @click="$router.push({name: 'home'})">Вернутся назад</button>
+                </div>
             </div>
             <div class="cart-empty" v-else>
                 <h2>
                     Корзина пуста
                 </h2>
+                <button class="cart-back" @click="$router.push({name: 'checkout'})">Вернутся назад</button>
             </div>
-            <button class="cart-order" @click="$router.push({name: 'checkout'})">Оформить заказ</button>
         </div>
     </div>
 </template>
@@ -47,14 +51,20 @@ export default {
         this.totalCount = resp.data.cart.length
         // all price 
         this.totalPrice = resp.data.cart.reduce((sum, {product}) => parseInt(product.price) + sum,0)
-        console.log(this.cartItems);
+      
     },
     methods:{
         removeAll(){
             if(confirm('Вы точно хотите удалить все товары?')){
                 alert('Все товары удалены!')
             }
-        }
+        },
+        // async removeItem(){
+        //     if(window.confirm('Точно хотите удалить ?')){
+        //         await this.$axios.delete(`api/cart/${this.cartItem.product.id}`)
+        //         window.location.reload()
+        //     }
+        // }
     }
     
 }
@@ -112,5 +122,16 @@ export default {
             font-size: 16px;
         }
         cursor: pointer;
+    }
+    .j-center{
+        justify-content: center;
+        button{
+            margin: 0 10px;
+        }
+    }
+    .cart-back{
+        background-color: #000;
+        color: #fff;
+        border: 1px solid #000;
     }
 </style>

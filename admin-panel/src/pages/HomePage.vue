@@ -28,11 +28,7 @@ export default {
         SectionSelling,
     },
     data: () => ({
-        range: {
-            min: 0,
-            max: 20000,
-            value: 0
-        }
+        
     }),
 
 }
