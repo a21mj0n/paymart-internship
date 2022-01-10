@@ -2,14 +2,23 @@
   <div class="wrapper">
     <div class="container">
       <div class="store-page">
-        <div class="aside-wrapper">
+        <div class="aside-wrapper"
+        v-if="products.length > 1 && categories.length > 1"
+        >
           <aside-checkouts
           :checkedCat="checkedCat"
           @setCategory="setCategory"
           />
           <my-slider/>
           <h3>Top selling</h3>
-          <product-item v-for="i in 3" :key="i"/>
+          <product-item  v-for="product in products"
+                :key="product.id"
+                :name="product.name"
+                :price="product.price"
+                :image="product.image[0]"
+                :productId="product.id"
+                :category="categories.find(item => item.id === product.category_id).name !== '' ? categories.find(item => item.id === product.category_id).name : 'no-category'"
+          />
         </div>
         <div class="content-wrapper">
           <div class="components-changer">
@@ -38,12 +47,15 @@
               </div>
             </div>
           </div>
-          <div class="products">
-            <cart-item 
+          <div class="products"
+          v-if="products.length > 1 && categories.length > 1"
+          >
+            <cart-item  
               v-for="product in products" 
               :vertical="(vertical) ? true : false "
               :key="product.id"
               :name="product.name"
+              :category="categories.find(item => item.id === product.category_id).name !== '' ? categories.find(item => item.id === product.category_id).name : 'no-category'"
               :price="product.price"
               :oldPrice="product.oldPrice"
               :image="product.image[0]"
@@ -94,11 +106,11 @@ export default {
     horizantalPosition(){
       this.vertical = false
     },
-    setCategory(name, checked){
-      if(checked){
-        console.log(name)
-      }else{
-        console.log('all')
+    async setCategory(event,name){
+      if(event === true){
+        const resp = await this.$axios.get(`/api/products`)
+        this.products = resp.data.filter(item=> item.category_id === name)
+
       }
     }
   },
@@ -107,6 +119,7 @@ export default {
     this.products = resp.data
     const prod_categories = await this.$axios.get(`/api/categories`)
     this.categories = prod_categories.data
+    console.log(this.products)
   }
   
 }

@@ -6,7 +6,7 @@
                     :name="category.name"
                     >
       <label>
-        <input type="checkbox" class="hidden" @click="setCat(category.name)" v-model="checked">
+        <input type="checkbox" class="hidden" @change="setCat($event  ,category.id)">
         <div class="box">
           <i class="fa fa-check"></i>
         </div>
@@ -24,14 +24,12 @@ export default {
   ],
   data(){
     return{
-      checked:false,
       categories:[],
     }
   },
   methods:{
-    setCat(name,checked){
-      this.$emit('setCategory',name,checked)
-
+    setCat(event,name){
+      this.$emit('setCategory',event.target.checked,name)
     }
   },
   async created(){

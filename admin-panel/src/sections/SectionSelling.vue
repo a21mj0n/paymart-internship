@@ -48,7 +48,6 @@ export default {
     try {
       const resp = await this.$axios.get(`/api/products`);
       this.products = resp.data;
-
       const categoriesData = await this.$axios.get("/api/categories");
       this.categories = categoriesData.data
 
@@ -65,5 +64,8 @@ export default {
 }
 .VueCarousel-navigation > button {
   left: 75% !important;
+}
+.small-carousel{
+  width: 33.3%;
 }
 </style>
