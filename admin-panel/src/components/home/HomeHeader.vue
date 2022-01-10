@@ -70,7 +70,7 @@
               <a href="#" @click.prevent="isOpen = !isOpen">
                 <i class="fa fa-shopping-cart"></i>
                 <p>Your Cart</p>
-                <div class="number"><span>3</span></div>
+                <div class="number"><span>{{this.totalCount}}</span></div>
               </a>
             </div>
           </div>
@@ -79,8 +79,8 @@
               <header-cart/>
             </div>
             <div class="total-price">
-              <p>3 Item(s) selected</p>
-              <h3>SUBTOTAL: $2940.00</h3>
+              <p>{{this.totalCount}} Item(s) selected</p>
+              <h3>SUBTOTAL: ${{this.totalPrice}}</h3>
             </div>
             <div class="buttons">
               <router-link to="/cart" class="button-view button">

@@ -1,26 +1,52 @@
 <template>
     <div class="cart-item">
-        <div>
-            Название товара: Название
+        <div class="item-info">
+            <img 
+                :src="imgUrl"
+            />
+            Название товара: <br/>
+            {{this.name}}
         </div>
         <div>
             Количество товара: 
             <strong>
-                10
+                {{this.amount}}
             </strong>
         </div>
-        <button class="cart-remove">
+        <button class="cart-remove" @click="removeItem">
             Удалить
         </button>
     </div>
 </template>
 <script>
+import config from '../config'
 export default {
-    
+    props: ['name', 'price', 'amount', 'productId', 'image', 'cartId'],
+    data(){
+        return{
+            imgUrl: this.image ? `${config.URL}/storage/product_images/${this.productId}/${this.image.name}` : 'https://shoppovia.com/store-front/images/product-default.png'
+        }
+    },
+    methods: {
+        async removeItem(){
+            if(window.confirm('Точно хотите удалить ?')){
+                await this.$axios.delete(`api/cart/${this.cartId}`)
+            }
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>
     .cart{
+        img{
+            height:100px;
+            width: 100px;
+            object-fit: contain;
+        }
+        .item-info{
+            display: flex;
+            align-items: center;
+        }
         &-item{
             padding: 20px;
             border: 1px solid #ccc;
