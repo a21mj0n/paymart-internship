@@ -122,6 +122,7 @@
 
 export default {
   data() {
+
     return {
       ShowSecond: false,
       ShowOne: false,
@@ -212,6 +213,7 @@ export default {
             hint: "Max 500 characters",
             required: true,
             validator: "string",
+           
           },
           // {
           //   type: "checkbox",
@@ -225,10 +227,21 @@ export default {
       formOptions: {
         validateAfterChanged: true,
       },
+      cartItems: [],
+      totalCount: ''
     };
   },
 
-  mounted() {},
+   async created(){
+    const resp = await this.$axios.get('api/cart')
+        // products 
+        this.cartItems = resp.data.cart
+        // amount
+        this.totalCount = resp.data.cart.length
+        // all price 
+        this.totalPrice = resp.data.cart.reduce((sum, {product}) => parseInt(product.price) + sum,0)
+        console.log(this.cartItems);
+    },
 
   methods: {},
 };

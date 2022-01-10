@@ -17,6 +17,7 @@
                 <router-link tag="li" class="nav-link" :to="{name: 'checkout'}">Checkout</router-link>
                 <router-link tag="li" class="nav-link" :to="{name: 'store'}">Store</router-link>
                 <router-link tag="li" class="nav-link" :to="{name: 'home.product.view'}">Product by id</router-link>
+                <router-link tag="li" class="nav-link" :to="{name: 'home.order.page'}">UserOrder</router-link>
                 <li>smartphones</li>
                 <li>cameras</li>
                 <li>accessories</li>

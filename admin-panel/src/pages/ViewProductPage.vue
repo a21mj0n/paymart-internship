@@ -21,10 +21,7 @@
               </div>
             </div>
           </div>
-          <div 
-            class="swiper-container gallery-top"
-            
-          >
+          <div class="swiper-container gallery-top">
             <div class="swiper-wrapper">
               <div class="swiper-button-next"></div>
               <div class="swiper-button-prev"></div>
@@ -32,8 +29,12 @@
                 class="swiper-slide image"   
                 v-for="image in product.image"
                 :key="image.id"
+                :style="{ 
+                  background: `url(${configURL}/storage/product_images/${image.product_id}/${image.name})`, 
+                  backgroundSize: 'cover'
+                }"
               >
-                <img class="swiper-image" :src="`${configURL}/storage/product_images/${image.product_id}/${image.name}`" alt="">
+                <!-- <img class="swiper-image" :src="`${configURL}/storage/product_images/${image.product_id}/${image.name}`" alt=""> -->
               </div>
             </div>
           </div>
@@ -65,24 +66,6 @@
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
               nisi ut aliquip ex ea commodo consequat.
             </p>
-            <div class="selects d-flex">
-              <div class="select-wrapper d-flex">
-                <p class="select-label">size</p>
-                <select class="size product-select" name="">
-                  <option>15.7</option>
-                  <option>13.3</option>
-                  <option>17.0</option>
-                </select>
-              </div>
-              <div class="select-wrapper d-flex">
-                <p class="select-label">color</p>
-                <select class="color product-select" name="">
-                  <option>red</option>
-                  <option>blue</option>
-                  <option>green</option>
-                </select>
-              </div>
-            </div>
             <div class="add-wrapper d-flex">
               <div class="qty d-flex">
                 <p class="qty-label">QTY</p>
@@ -184,7 +167,7 @@ export default {
     console.log(this.product.image.length);
     var galleryThumbs = new Swiper(".gallery-thumbs", {
       spaceBetween: 5,
-      slidesPerView: this.product.image.length - 1,
+      slidesPerView: this.product.image.length ,
       freeMode: false,
       direction: 'vertical',
       watchSlidesVisibility: true,
@@ -197,25 +180,25 @@ export default {
       breakpoints: {
         // when window width is >= 320px
         320: {
-          slidesPerView: this.product.image.length - 1,
+          slidesPerView: this.product.image.length ,
           spaceBetween: 4,
         },
         // when window width is >= 480px
         576: {
-          slidesPerView: this.product.image.length - 1,
+          slidesPerView: this.product.image.length ,
           spaceBetween: 4,
         },
         // when window width is >= 640px
         768: {
-          slidesPerView: this.product.image.length - 1,
+          slidesPerView: this.product.image.length ,
           spaceBetween: 5,
         },
         992: {
-          slidesPerView: this.product.image.length - 1,
+          slidesPerView: this.product.image.length ,
           spaceBetween: 5,
         },
         1200: {
-          slidesPerView: this.product.image.length - 1,
+          slidesPerView: this.product.image.length,
           spaceBetween: 20,
         },
       },

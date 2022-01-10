@@ -1,7 +1,7 @@
 <template>
   <section class="wrapper">
       <p class="title__form">
-          Sing Up for the <span>newsletter</span>
+        Sing Up for the <span>newsletter</span>
       </p>
       <form class="form">
           <div class="input-mama">
@@ -34,6 +34,7 @@ export default {
     align-items: center;
     flex-direction: column;
     .title__form{
+        margin-bottom: 30px;
         margin-top: 30px;
         color: #1A1A1A;
         font-size: 32px;
@@ -54,10 +55,10 @@ export default {
             &:before{
                 content:"";
                 position: absolute;
-                top:0.5px;
-                left: 0;
+                top:0px;
+                right: 0;
                 height: 100%;
-                width: 100%;
+                width: 95.5%;
                 z-index: -1;
                 background:linear-gradient(to right, #72E019,#1A1A1A);
                 border-radius: 25px 0 0 25px ;
@@ -65,7 +66,7 @@ export default {
             }
         }
         .input__email{
-            margin: 3px 0 3px 3px;
+            transform:scale(0.9);
             padding-left: 15px;
             border-radius: 20px 0 0 20px ;
             display: block;
@@ -75,8 +76,6 @@ export default {
             position: relative;
 
             &:focus{
-                margin: 3px 0 3px 3px;
-                border: 3px solid  transparent;
                 outline: none;
                 // outline-width: 3px ;
                 // outline-color: #1A1A1A;
@@ -86,23 +85,10 @@ export default {
             
         }
         .btn{
-             margin: 3px 0 3px 0px;
               border: none;
 
               display: block;
             position: relative;
-             &:before{
-                content:"";
-                position: absolute;
-                top:-3px;
-                left: 0;
-                height: 118%;
-                width: 104%;
-                z-index: -1;
-                background:linear-gradient(to right, #1A1A1A,#1A1A1A);
-                border-radius: 0 28px 28px 0;
-                outline: none;
-            }
             width: 160px;
             background: #1A1A1A;
             border-radius: 0 20px 20px 0;
