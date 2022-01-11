@@ -134,6 +134,7 @@ export default {
           password: this.password,
         }
         const resp = await axios.post('https://marketpaymart.herokuapp.com/api/login', user)
+        console.log('USER:', resp);
         if(resp.data.access_token){
           this.$store.dispatch('auth/login', { isAuthenticated: true, token: resp.data.access_token });
           this.$router.push({name: "admin"})

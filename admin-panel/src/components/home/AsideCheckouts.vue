@@ -3,9 +3,10 @@
     <h3>Categories</h3>
     <div class="item" v-for="category in categories"
                     :key="category.id"
-                    :name="category.name">
+                    :name="category.name"
+                    >
       <label>
-        <input type="checkbox" class="hidden">
+        <input type="checkbox" class="hidden" @change="setCat($event  ,category.id)">
         <div class="box">
           <i class="fa fa-check"></i>
         </div>
@@ -18,14 +19,24 @@
 
 <script>
 export default {
+  props:[
+    "checkedCat",
+  ],
   data(){
     return{
       categories:[],
     }
   },
+  methods:{
+    setCat(event,name){
+      this.$emit('setCategory',event.target.checked,name)
+    }
+  },
   async created(){
     const prod_categories = await this.$axios.get(`/api/categories`)
     this.categories = prod_categories.data
+    //console.log(prod_categories.data)
+    //console.log(this.checkedCat)
   },
 }
 </script>

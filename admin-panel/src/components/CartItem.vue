@@ -30,8 +30,18 @@ export default {
     },
     methods: {
         async removeItem(){
-            if(window.confirm('Точно хотите удалить ?')){
-                await this.$axios.delete(`api/cart/${this.cartId}`)
+            try{
+                const resp = await this.$axios.delete(`api/cart/${this.cartId}`);
+                if(resp.data === "Successful"){
+                    this.$emit('removeItem', this.cartId)
+                }else{
+                    alert('Не удалось удалить продукт')
+                }
+            }catch(err){
+                if(err){
+                    console.log(err);
+                    alert('Не удалось удалить продукт')
+                }
             }
         }
     }

@@ -112,7 +112,6 @@ export default {
         }
     },
     async created(){
-
     },
     // functions
     methods: {
