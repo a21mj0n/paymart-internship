@@ -12,20 +12,19 @@
             :autoplayTimeout="2000"
             :autoplayHoverPause="true"
             :loop="true"
+            :perPage="3"
+            v-if="products.length > 1 && categories.length > 1"
           >
-            <Slide v-for="i in 3" :key="i">
+            <Slide v-for="i in 3" :key="i" >
               <product-item
                 v-for="product in products"
                 :key="product.id"
                 :name="product.name"
                 :price="product.price"
-                :categoryId="product.category_id"
                 :image="product.image[0]"
                 :productId="product.id"
-               
+                :category="categories.find(item => item.id === product.category_id).name !== '' ? categories.find(item => item.id === product.category_id).name : 'no-category'"
               />
-              <!-- <product-item />
-                            <product-item /> -->
             </Slide>
           </Carousel>
         </div>
@@ -41,11 +40,21 @@ export default {
   data() {
     return {
       products: [],
+      categories: [],
+      category: ''
     };
   },
   async created() {
-    const resp = await this.$axios.get(`/api/products`);
-    this.products = resp.data;
+    try {
+      const resp = await this.$axios.get(`/api/products`);
+      this.products = resp.data;
+
+      const categoriesData = await this.$axios.get("/api/categories");
+      this.categories = categoriesData.data
+
+    } catch (error) {
+      console.log(error);
+    }
   },
 };
 </script>

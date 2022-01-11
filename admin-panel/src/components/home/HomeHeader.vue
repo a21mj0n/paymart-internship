@@ -101,16 +101,26 @@
 <script>
 import HeaderCart from "./HeaderCart.vue";
 export default {
-  name: "HomeHeader",
-  data() {
-    return {
+  name: 'HomeHeader',
+  data(){
+    return{
       isOpen: false,
-    };
+      totalCount: 0,
+      totalPrice: 0
+    }
   },
-  components: {
-    HeaderCart,
+  components:{
+    HeaderCart
   },
-};
+  async created(){
+    const resp = await this.$axios.get('api/cart')
+    
+    // amount
+    this.totalCount = resp.data.cart.length
+    // all price 
+    this.totalPrice = resp.data.cart.reduce((sum, {product}) => parseInt(product.price) + sum,0)
+  }
+}
 </script>
 
 <style lang='scss' scoped>
@@ -197,6 +207,7 @@ $color-2: #1a1a1a;
       transform: translateY(100%);
       right: 0;
       background-color: white;
+      z-index: 9999;
       .items {
         margin-bottom: 20px;
         max-height: 200px;

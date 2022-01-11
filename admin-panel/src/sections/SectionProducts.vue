@@ -4,7 +4,7 @@
             <item-categories v-if="itemCategories"/>
             <VueSlickCarousel 
                v-bind="slickOptions"
-               v-if="products.length"
+               v-if="products.length > 1 && categories.length > 1"
             >
                 <cart-item
                     v-for="product in products"
@@ -13,8 +13,8 @@
                     :price="product.price"
                     :oldPrice="product.oldPrice"
                     :image="product.image[0]"
-                    :categoryId="product.category_id"
                     :productId="product.id"
+                    :category="categoryName(product.category_id)"
                 />
 
                 <template #prevArrow="">
@@ -29,12 +29,13 @@
                     </button>
                 </template>
                 
-                 <template #customPaging="">
+                <template #customPaging="">
                     <div class="custom-dot">
                         
                     </div>
                 </template>
             </VueSlickCarousel>
+  
         </div>
     </section>
 </template>
@@ -63,6 +64,9 @@ export default {
             type: Boolean,
             default: true
         }
+    },
+    computed: {
+       
     },
     components: { 
         CartItem ,
@@ -106,12 +110,28 @@ export default {
                     }
                 ]
             },
-            products: []
+            products: [],
+            categories: []
+        }
+    },
+    methods: {
+        categoryName(productCategoryId) {
+            const category = this.categories.find(cat => cat.id === productCategoryId)
+            
+            return category ? category.name : 'default-category'
         }
     },
     async created(){
-        const resp = await this.$axios.get(`/api/products`)
-        this.products = resp.data
+        try{
+            const resp = await this.$axios.get(`/api/products`);
+            this.products = resp.data;
+            // \\
+            const categoriesData = await this.$axios.get(`/api/categories`);
+            this.categories = categoriesData.data;
+
+        }catch(err){
+            console.log(err);
+        }
     }
     
 }

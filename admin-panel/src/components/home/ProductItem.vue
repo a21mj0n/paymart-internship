@@ -4,7 +4,7 @@
       <div class="product-img">
         <img
           alt="image"
-          :src="`${configURL}/storage/product_images/${this.productId}/${this.image.name}`"
+          :src="imgUrl"
         />
       </div>
       <div class="product-body">
@@ -32,13 +32,12 @@ export default {
       type: String,
       required: true,
     },
-    categoryId: {
-      default: 1,
+    category: {
+      default: '',
       required: true,
     },
     image: {
-      type: Object,
-      required: true,
+      required: true
     },
     productId: {
       default: null,
@@ -51,20 +50,19 @@ export default {
   data() {
     return {
       configURL: config.URL,
-      category: "",
       categories: [],
+      imgUrl: this.image ? `${config.URL}/storage/product_images/${this.productId}/${this.image.name}` : 'https://shoppovia.com/store-front/images/product-default.png'
     };
   },
   async created() {
-    try {
-      const resp = await this.$axios.get("/api/categories");
-      this.categories = resp.data;
-      this.category = this.categories.find(
-        (item) => item.id === this.categoryId
-      ).name;
-    } catch (error) {
-      console.log(error);
-    }
+    console.log(this.category, 'CAT:');
+    // try {
+    //   const resp = await this.$axios.get("/api/categories");
+    //   this.categories = resp.data;
+    //   this.category = this.categories.filter(item => item.id === this.categoryId).name;
+    // } catch (error) {
+    //   console.log(error);
+    // }
   },
 };
 </script>

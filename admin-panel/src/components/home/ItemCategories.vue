@@ -4,9 +4,9 @@
             New Products
         </h2>
         <ul class="categories">
-            <!-- <li v-for="category in this.categories" :key="category.id">
+            <li v-for="category in this.categories" :key="category.id">
                 {{category.name}}
-            </li> -->
+            </li>
         </ul>
     </div>
 </template>

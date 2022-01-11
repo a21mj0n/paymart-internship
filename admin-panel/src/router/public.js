@@ -84,7 +84,7 @@ export default [
     },
 
     {
-        path: '/home/product/view/',
+        path: '/home/product/view/:id',
         name: "home.product.view",
         meta: {
             layout: "home",
