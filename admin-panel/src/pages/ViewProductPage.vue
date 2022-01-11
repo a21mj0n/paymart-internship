@@ -61,39 +61,20 @@
               <p v-if="product.old_price" class="old-price">{{product.old_price}}</p>
             </div>
             <p class="product-description">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              {{product.description}}
             </p>
-            <div class="selects d-flex">
-              <div class="select-wrapper d-flex">
-                <p class="select-label">size</p>
-                <select class="size product-select" name="">
-                  <option>15.7</option>
-                  <option>13.3</option>
-                  <option>17.0</option>
-                </select>
-              </div>
-              <div class="select-wrapper d-flex">
-                <p class="select-label">color</p>
-                <select class="color product-select" name="">
-                  <option>red</option>
-                  <option>blue</option>
-                  <option>green</option>
-                </select>
-              </div>
-            </div>
             <div class="add-wrapper d-flex">
               <div class="qty d-flex">
                 <p class="qty-label">QTY</p>
-                <h2 class="qty-count">0</h2>
+                <h2 class="qty-count">{{amount}}</h2>
                 <div class="qty-buttons">
-                  <p class="qty-plus btn"><i class="fa fa-plus"></i></p>
-                  <p class="qty-minus btn"><i class="fa fa-minus"></i></p>
+                  <p class="qty-plus btn" @click="plus()"><i class="fa fa-plus"></i></p>
+                  <p class="qty-minus btn" @click="minus()"><i class="fa fa-minus"></i></p>
                 </div>
               </div>
-              <button class="add-cart">
+              <button class="add-cart" 
+              @click="addToCart"
+              >
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>Add to
                 Cart
               </button>
@@ -163,13 +144,33 @@ export default {
       product: {},
       imagesLength: 0,
       imagesWidth: (100 / this.imagesLength) + '%',
-      configURL: config.URL
+      configURL: config.URL,
+      amount: 0,
     };
+  },
+  methods:{
+    plus(){
+      this.amount++
+    },
+    minus(){
+      if(this.amount > 1){
+        this.amount = 1
+
+      }
+
+       
+    
+    },
+     async addToCart(){
+            await this.$axios.post('api/cart', {product_id: this.product.id, amount: this.amount})
+        }
+
   },
   components: {},
   async mounted() {
     const {data} = await this.$axios.get(`/api/products/${this.$route.params.id}`)
     this.product = data;
+    
     this.imagesLength = this.product.image.length
     try{
             const category = await this.$axios.get(`/api/categories`)
@@ -185,7 +186,7 @@ export default {
     console.log(this.product.image.length);
     var galleryThumbs = new Swiper(".gallery-thumbs", {
       spaceBetween: 5,
-      slidesPerView: this.product.image.length - 1,
+      slidesPerView: this.product.image.length ,
       freeMode: false,
       direction: 'vertical',
       watchSlidesVisibility: true,
@@ -198,25 +199,25 @@ export default {
       breakpoints: {
         // when window width is >= 320px
         320: {
-          slidesPerView: this.product.image.length - 1,
+          slidesPerView: this.product.image.length ,
           spaceBetween: 4,
         },
         // when window width is >= 480px
         576: {
-          slidesPerView: this.product.image.length - 1,
+          slidesPerView: this.product.image.length ,
           spaceBetween: 4,
         },
         // when window width is >= 640px
         768: {
-          slidesPerView: this.product.image.length - 1,
+          slidesPerView: this.product.image.length ,
           spaceBetween: 5,
         },
         992: {
-          slidesPerView: this.product.image.length - 1,
+          slidesPerView: this.product.image.length ,
           spaceBetween: 5,
         },
         1200: {
-          slidesPerView: this.product.image.length - 1,
+          slidesPerView: this.product.image.length,
           spaceBetween: 20,
         },
       },

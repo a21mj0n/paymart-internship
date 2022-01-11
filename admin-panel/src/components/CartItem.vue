@@ -15,6 +15,7 @@
         </div>
         <button class="cart-remove" @click="removeItem">
             Удалить
+           
         </button>
     </div>
 </template>

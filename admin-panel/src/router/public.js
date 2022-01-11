@@ -100,6 +100,14 @@ export default [
         },
         component: () => import('../pages/WishlistPage')
     },
+    {
+        path: '/home/User_order',
+        name: "home.order.page",
+        meta: {
+            layout: "home",
+        },
+        component: () => import('../pages/OrderPage')
+    },
 
     {
         path: '/cart',

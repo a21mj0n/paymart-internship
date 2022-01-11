@@ -42,6 +42,7 @@ export default {
         brand_id: '',
         category_id: "",
         price: "",
+        description: "",
         quantity: null,
         created_at: new Date().toLocaleString(),
       },
@@ -138,6 +139,16 @@ export default {
           } 
         },
         {
+            type: "textArea",
+            inputType: "text",
+            placeholder: "Order  Notes",
+            model: "description",
+            hint: "Max 500 characters",
+            required: true,
+            validator: "string",
+
+          },
+        {
           type: "submit",
           label: "",
           buttonText: "добавить",
@@ -148,6 +159,7 @@ export default {
             const formData = new FormData()
             formData.append('category_id', model.category_id)
             formData.append('brand_id', model.brand_id)
+            formData.append('description', model.description)
             formData.append('name', model.name)
             formData.append('price', model.price)
             formData.append('quantity', model.quantity)

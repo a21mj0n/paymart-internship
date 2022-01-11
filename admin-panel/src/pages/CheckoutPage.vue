@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    
     <div class="checkout_wrapper">
       <div class="checkout_form">
         <h2 class="checkout_title">Billing address</h2>
@@ -37,19 +36,20 @@
             <span><strong>PRODUCT</strong> </span>
             <span><strong>TOTAL</strong></span>
           </div>
-          <div class="checkout_products-item">
-            <span>1x Product Name Goes Here </span> <span>$980.00 </span>
-          </div>
-
-          <div class="checkout_products-item">
-            <span>2x Product Name Goes Here </span> <span>$980.00</span>
+          <div
+            class="checkout_products-item"
+            v-for="item in cartItems"
+            :key="item.id"
+          >
+            <span>{{ item.amount }}x {{ item.product.name }}</span>
+            <span>${{ item.product.price }} </span>
           </div>
           <div class="checkout_products-item">
             <span>Shiping </span> <span><strong>FREE</strong> </span>
           </div>
           <div class="checkout_products-item">
             <span><strong>TOTAL</strong> </span>
-            <span class="price">$2940.00</span>
+            <span class="price">${{ totalPrice }}</span>
           </div>
         </div>
 
@@ -106,12 +106,18 @@
             </div>
           </div>
           <div class="checkout_products-check checkout_products-check_mt20">
-            <input type="checkbox" />
-            <label>I've read and accept the terms & conditions</label>
+            <input type="checkbox" @change="checked" />
+            <label>I've read and accept the terms & conditions </label>
           </div>
         </div>
         <div class="submit">
-          <button class="btn" type="submit">Place order</button>
+          <button
+            type="submit"
+            :class="[!iAgree ? 'disabled-btn' : iAgree, 'btn']"
+            @click="ordering"
+          >
+            Place order
+          </button>
         </div>
       </div>
     </div>
@@ -122,22 +128,22 @@
 
 export default {
   data() {
+
     return {
       ShowSecond: false,
       ShowOne: false,
       ShowThird: false,
       ShowPassword: false,
       model: {
-        FirstName: "",
-        LastName: "",
+        first_name: "",
+        last_name: "",
         email: "",
         address: "",
         city: "",
         country: "",
-        zipCode: "",
-        telephone: "",
-        textarea: "",
-        accaunt: "",
+        zip_code: "",
+        tel: "",
+        order_notes: "",
       },
       schema: {
         fields: [
@@ -145,7 +151,7 @@ export default {
             type: "input",
             inputType: "text",
             placeholder: "First name",
-            model: "FirstName",
+            model: "first_name",
             required: true,
             validator: "string",
           },
@@ -153,7 +159,7 @@ export default {
             type: "input",
             inputType: "text",
             placeholder: "Last name",
-            model: "LastName",
+            model: "last_name",
             required: true,
             validator: "string",
           },
@@ -163,6 +169,7 @@ export default {
             placeholder: "Email",
             model: "email",
             required: true,
+            validator: 'email'
           },
           {
             type: "input",
@@ -192,27 +199,27 @@ export default {
             type: "input",
             inputType: "number",
             placeholder: "ZipCode",
-            model: "zipCode",
+            model: "zip_code",
             required: true,
-            validator: "string",
+            validator: "number",
           },
           {
             type: "input",
             inputType: "tel",
             placeholder: "Telephone",
-            model: "telephone",
+            model: "tel",
             required: true,
-            validator: "string",
+            validator: "",
           },
           {
             type: "textArea",
             inputType: "text",
             placeholder: "Order  Notes",
-            model: "textarea",
+            model: "order_notes",
             hint: "Max 500 characters",
             required: true,
             validator: "string",
-           
+
           },
           // {
           //   type: "checkbox",
@@ -226,16 +233,48 @@ export default {
       formOptions: {
         validateAfterChanged: true,
       },
+      cartItems: '',
+      totalCount: '',
+      totalPrice: 0,
+      iAgree: false,
+      count: 0,
+
     };
   },
+  methods:{
+   checked(){
+      this.iAgree = !this.iAgree
+    },
 
-  mounted() {},
 
-  methods: {},
+
+   async ordering(){
+     await this.$axios.post('api/user_orders', this.model);
+     const items = this.cartItems
+      if(this.cartItems.length){
+     await  items.forEach(item =>  this.$axios.delete(`api/cart/${item.id}`)
+        )
+        // await this.$axios.delete('api/cart')
+      }
+    }
+  },
+
+   async created(){
+    const resp = await this.$axios.get('api/cart')
+        // products
+        this.cartItems = resp.data.cart
+        // amount
+        this.totalCount = resp.data.cart.length
+        // all price
+        this.totalPrice = resp.data.cart.reduce((sum, {product}) => parseInt(product.price) + sum,0)
+
+    },
+
+
 };
 </script>
 
-<style lang="scss" scoped >
+<style lang="scss" scoped>
 $main_color: #72e019;
 .submit {
   display: flex;
@@ -269,12 +308,28 @@ input[type="radio"] {
   -webkit-transition: 0.2s all;
   transition: 0.5s all;
   width: 100%;
+  pointer-events: auto;
   &:hover {
     border: 1px solid $main_color;
     color: $main_color;
     background-color: #fff;
     cursor: pointer;
   }
+}
+.disabled-btn {
+  margin-top: 87px;
+  padding: 19px 30px;
+  background-color: #e3e3e3;
+  border: none;
+  border-radius: 40px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: center;
+  -webkit-transition: 0.2s all;
+  transition: 0.5s all;
+  width: 100%;
+  pointer-events: none;
 }
 .price {
   font-size: 14px;
@@ -293,7 +348,7 @@ input[type="radio"] {
     width: 100%;
     form {
       display: flex;
-      flex-direction: column;   
+      flex-direction: column;
       .checkout_accaunt {
         padding: 15px;
         &-item {
@@ -323,7 +378,7 @@ input[type="radio"] {
   }
 }
 
-.wrapper{
+.wrapper {
   margin-top: 0;
 }
 
