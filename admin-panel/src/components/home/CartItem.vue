@@ -112,7 +112,7 @@ export default {
         }
     },
     async created(){
-        console.log(this.category, 'CAT:');
+
     },
     // functions
     methods: {

@@ -36,7 +36,7 @@ export default {
             this.$refs.nav.classList.remove('close')
             this.$refs.nav.classList.add('open')
             this.$refs.nav.style.pointerEvents = 'auto'
-            console.log('click');
+
         },
         close(){
             this.$refs.nav.classList.remove('open')

@@ -43,6 +43,7 @@ export default {
     const resp = await this.$axios.get('api/cart')
         // products 
         this.cartItems = resp.data.cart
+        console.log(this.cartItems);
         // amount
         this.totalCount = resp.data.cart.length
         // all price 
