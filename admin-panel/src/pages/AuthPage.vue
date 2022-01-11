@@ -90,7 +90,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 export default {
   name: "LoginPage",
   data(){
@@ -117,7 +116,7 @@ export default {
         password_confirmation: this.password_confirmation
       }
       try{
-         const resp = await axios.post('https://marketpaymart.herokuapp.com/api/register', user)
+         const resp = await this.$axios.post('api/register', user);
         if(resp.data.access_token){
           this.$store.dispatch('auth/login', { isAuthenticated: true, token: resp.data.access_token });
           this.$router.push({name: "admin"})
@@ -133,8 +132,7 @@ export default {
           username: this.username,
           password: this.password,
         }
-        const resp = await axios.post('https://marketpaymart.herokuapp.com/api/login', user)
-        console.log('USER:', resp);
+        const resp = await this.$axios.post('api/login', user);
         if(resp.data.access_token){
           this.$store.dispatch('auth/login', { isAuthenticated: true, token: resp.data.access_token });
           this.$router.push({name: "admin"})

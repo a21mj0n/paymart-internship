@@ -39,10 +39,10 @@
               </div>
             </div>
             <div class="view-changer">
-              <div class="item" @click="horizantalPosition">
+              <div :class="!activeType ? 'item active' : 'item' " @click="horizantalPosition">
                 <i class="fa fa-th"></i>
               </div>
-              <div class="item" @click="verticalPosition" >
+              <div :class="activeType ? 'item active' : 'item' " @click="verticalPosition" >
                 <i class="fa fa-th-list"></i>
               </div>
             </div>
@@ -91,6 +91,7 @@ export default {
       products:[],
       showCategory:[],
       categories:[],
+      activeType: true
     }
   },
   components:{
@@ -102,9 +103,11 @@ export default {
   methods: {
     verticalPosition(){
       this.vertical = true
+      this.activeType = !this.activeType
     },
     horizantalPosition(){
       this.vertical = false
+      this.activeType = !this.activeType
     },
     async setCategory(event,name){
       if(event === true){
@@ -182,6 +185,14 @@ export default {
           &:hover{
             border:1px solid transparent;
             background-color: $color-1;
+            i{
+              color:white;
+            }
+          }
+          &.active{
+            border:1px solid transparent;
+            background-color: $color-1;
+            box-shadow: 0 0 3px $color-1;
             i{
               color:white;
             }

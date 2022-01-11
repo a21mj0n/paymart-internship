@@ -31,7 +31,7 @@
                 <h2>
                     Корзина пуста
                 </h2>
-                <button class="cart-back" @click="$router.push({name: 'checkout'})">Вернутся назад</button>
+                <button class="cart-back" @click="$router.push({name: 'home'})">Вернутся назад</button>
             </div>
         </div>
     </div>
