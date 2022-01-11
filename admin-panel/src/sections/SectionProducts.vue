@@ -128,7 +128,7 @@ export default {
             // \\
             const categoriesData = await this.$axios.get(`/api/categories`);
             this.categories = categoriesData.data;
-
+    
         }catch(err){
             console.log(err);
         }

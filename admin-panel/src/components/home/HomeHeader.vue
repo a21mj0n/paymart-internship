@@ -75,21 +75,32 @@
             </div>
           </div>
           <div class="cart-wrapper" v-if="isOpen">
-            <div class="items">
-              <header-cart/>
+            <div v-if="this.totalCount > 0"> 
+              <div class="cart-close" @click="isOpen = false">&times;</div>
+              <div class="items">
+                <header-cart
+                  v-for="item in cartItems"
+                  :key="item.id"
+                  :item="item"
+                />
+              </div>
+              <div class="total-price">
+                <p>{{this.totalCount}} Item(s) selected</p>
+                <h3>SUBTOTAL: ${{this.totalPrice}}</h3>
+              </div>
+              <div class="buttons">
+                <router-link to="/cart" class="button-view button">
+                  <p>View Cart</p>
+                </router-link>
+                <router-link to="/checkout" class="button-checkout button">
+                  <p>Checkout</p>
+                  <i class="fa fa-arrow-circle-right"></i>
+                </router-link>
+              </div>
             </div>
-            <div class="total-price">
-              <p>{{this.totalCount}} Item(s) selected</p>
-              <h3>SUBTOTAL: ${{this.totalPrice}}</h3>
-            </div>
-            <div class="buttons">
-              <router-link to="/cart" class="button-view button">
-                <p>View Cart</p>
-              </router-link>
-              <router-link to="/checkout" class="button-checkout button">
-                <p>Checkout</p>
-                <i class="fa fa-arrow-circle-right"></i>
-              </router-link>
+            <div v-else class="empty-cart">
+              <div class="empty-close" @click="isOpen = false">&times;</div>
+              Корзина пуста
             </div>
           </div>
         </div>
@@ -106,25 +117,38 @@ export default {
     return{
       isOpen: false,
       totalCount: 0,
-      totalPrice: 0
+      totalPrice: 0,
+      cartItems: []
     }
   },
   watch:{
     // чтобы следить за продуктами в корзине 
     totalCount(){
-      this.totalCount
+      this.fetchData() 
     }
+    
   },
   components:{
     HeaderCart
   },
+  methods: {
+    async fetchData(){
+      const resp = await this.$axios.get('api/cart')
+      this.cartItems = resp.data.cart
+      console.log(this.cartItems);
+      // кол-во
+      this.totalCount = this.cartItems.length
+      // общая сумма 
+      this.totalPrice = this.cartItems.reduce((sum, {product}) => parseInt(product.price) + sum,0)
+    },
+    closeCart(){
+      this.isOpen = false
+    }
+  },
   async created(){
-    const resp = await this.$axios.get('api/cart')
-    // кол-во
-    this.totalCount = resp.data.cart.length
-    // общая сумма 
-    this.totalPrice = resp.data.cart.reduce((sum, {product}) => parseInt(product.price) + sum,0)
+    this.fetchData()
   }
+
 }
 </script>
 
@@ -213,10 +237,34 @@ $color-2: #1a1a1a;
       right: 0;
       background-color: white;
       z-index: 9999;
+      .cart-close{
+        position: absolute;
+        top: -20px;
+        right: -15px;
+        position: absolute;
+        font-size: 20px;
+        border-radius: 50px;
+        font-weight: 700;
+        background: red;
+        color: #fff;
+        padding: 10px;
+        height: 30px;
+        width: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        &:hover{
+          transition: all 300ms linear;
+          box-shadow: 0 0 5px red;
+          transform: scale(1.1);
+        }
+      }
       .items {
         margin-bottom: 20px;
         max-height: 200px;
         overflow-y: auto;
+        position: relative;
       }
       .item {
         position: relative;
@@ -288,6 +336,34 @@ $color-2: #1a1a1a;
         }
       }
     }
+      .empty-cart{
+        text-align: center;      
+        padding: 20px;
+        position: relative;
+        .empty-close{
+          position: absolute;
+          top: -35px;
+          right: -35px;
+          font-size: 20px;
+          border-radius: 50px;
+          font-weight: 700;
+          background: red;
+          color: #fff;
+          padding: 10px;
+          height: 30px;
+          width: 30px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          &:hover{
+            transition: all 300ms linear;
+            box-shadow: 0 0 5px red;
+            transform: scale(1.1);
+          }
+      }
+    }
+    
     .search-wrapper {
       @media (max-width: 991px) {
         display: none;
