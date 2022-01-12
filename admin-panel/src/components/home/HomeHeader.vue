@@ -18,12 +18,12 @@
             </div>
             <div class="item">
               <i class="fa fa-map-marker"></i>
-              <p> 1734 Stonecoal Road</p>
+              <p>1734 Stonecoal Road</p>
             </div>
           </div>
           <div class="login">
             <div class="item">
-              <a href="#" @click.prevent="$router.push({name: 'auth'})">
+              <a href="#" @click.prevent="$router.push({ name: 'auth' })">
                 <i class="fa fa-user"></i>
                 <p>login</p>
               </a>
@@ -41,8 +41,8 @@
       <div class="container">
         <div class="header-bottom">
           <div class="logo">
-            <a href="#" @click.prevent='$router.push({name:"home"})'>
-              <img src="../../assets/logo.png" alt="">
+            <a href="#" @click.prevent="$router.push({ name: 'home' })">
+              <img src="../../assets/logo.png" alt="" />
             </a>
           </div>
           <div class="search-wrapper">
@@ -53,34 +53,38 @@
                   <option>PC</option>
                   <option>Phones</option>
                 </select>
-                <input type="text">
+                <input type="text" />
                 <button>Поиск</button>
               </div>
             </form>
           </div>
           <div class="actions">
             <div class="item">
-              <router-link :to="{name: 'home.WishlistPage'}">
+              <router-link :to="{ name: 'home.WishlistPage' }">
                 <i class="fa fa-heart-o"></i>
                 <p>Your Wishlist</p>
-                <div class="number"><span>2</span></div>
+                <div class="number">
+                  <span>{{ getCount }}</span>
+                </div>
               </router-link>
             </div>
             <div class="item">
               <a href="#" @click.prevent="isOpen = !isOpen">
                 <i class="fa fa-shopping-cart"></i>
                 <p>Your Cart</p>
-                <div class="number"><span>{{this.totalCount}}</span></div>
+                <div class="number">
+                  <span>{{ this.totalCount }}</span>
+                </div>
               </a>
             </div>
           </div>
           <div class="cart-wrapper" v-if="isOpen">
             <div class="items">
-              <header-cart/>
+              <header-cart />
             </div>
             <div class="total-price">
-              <p>{{this.totalCount}} Item(s) selected</p>
-              <h3>SUBTOTAL: ${{this.totalPrice}}</h3>
+              <p>{{ this.totalCount }} Item(s) selected</p>
+              <h3>SUBTOTAL: ${{ this.totalPrice }}</h3>
             </div>
             <div class="buttons">
               <router-link to="/cart" class="button-view button">
@@ -101,26 +105,31 @@
 <script>
 import HeaderCart from "./HeaderCart.vue";
 export default {
-  name: 'HomeHeader',
-  data(){
-    return{
+  name: "HomeHeader",
+  data() {
+    return {
       isOpen: false,
       totalCount: 0,
-      totalPrice: 0
-    }
+      totalPrice: 0,
+      getCount: "",
+    };
   },
-  components:{
-    HeaderCart
+  components: {
+    HeaderCart,
   },
-  async created(){
-    const resp = await this.$axios.get('api/cart')
-    
+  async created() {
+    this.getCount = this.$store.getters["wishlist/getCount"];
+    const resp = await this.$axios.get("api/cart");
+
     // amount
-    this.totalCount = resp.data.cart.length
-    // all price 
-    this.totalPrice = resp.data.cart.reduce((sum, {product}) => parseInt(product.price) + sum,0)
-  }
-}
+    this.totalCount = resp.data.cart.length;
+    // all price
+    this.totalPrice = resp.data.cart.reduce(
+      (sum, { product }) => parseInt(product.price) + sum,
+      0
+    );
+  },
+};
 </script>
 
 <style lang='scss' scoped>

@@ -37,9 +37,8 @@
           </div>
         </div>
         <div class="item-buttons">
-          <button @click="addToWishlist(productId, oldPrice,name,price, image,type,category)">
-            <i
-            :class="`fa ${this.type}`" ></i>
+          <button @click="addToWishlist(productId)">
+            <i :class="`fa ${this.type}`"></i>
             <span class="tooltipp">add to WishlistPage</span>
           </button>
           <button>
@@ -91,7 +90,7 @@ export default {
       default: "name",
     },
     category: {
-    default:" Russel Group ",
+      default: " Russel Group ",
       type: String,
     },
     image: {
@@ -107,7 +106,6 @@ export default {
   },
   data() {
     return {
-      
       // database from back
       imgUrl: this.image
         ? `${config.URL}/storage/product_images/${this.productId}/${this.image.name}`
@@ -116,9 +114,9 @@ export default {
   },
   async created() {
     console.log(this.category, "CAT:");
-    console.log(`imageeee is:`, this.image);
-    console.log(`idis :`, this.productId);
   },
+  //
+
   // functions
   methods: {
     async addToCart() {
@@ -128,9 +126,12 @@ export default {
       });
     },
     addToWishlist(payload) {
-      console.log(payload);
-      console.log(this.$store);
-      this.$store.dispatch("wishlist/addWish", payload);
+      if (this.type == "fa-trash") {
+        console.log("deleted", payload);
+        this.$store.dispatch("wishlist/removeWishItem");
+      } else {
+        this.$store.dispatch("wishlist/addWish", payload);
+      }
     },
   },
 };
