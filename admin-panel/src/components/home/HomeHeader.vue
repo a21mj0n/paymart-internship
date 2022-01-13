@@ -5,7 +5,7 @@
         <div class="header-top">
           <div class="contacts-info">
             <div class="item">
-              <a href="tel:+021955184">
+              <a href="tel:+99897-777-07-77">
                 <i class="fa fa-phone"></i>
                 <p>+021-95-51-84</p>
               </a>
@@ -70,22 +70,22 @@
               <a href="#" @click.prevent="isOpen = !isOpen">
                 <i class="fa fa-shopping-cart"></i>
                 <p>Your Cart</p>
-                <div class="number"><span>{{this.totalCount}}</span></div>
+                <div class="number"><span>{{this.$store.getters['cart/getTotalCount']}}</span></div>
               </a>
             </div>
           </div>
           <div class="cart-wrapper" v-if="isOpen">
-            <div v-if="this.totalCount > 0"> 
+            <div v-if="this.cartItems.length > 0"> 
               <div class="cart-close" @click="isOpen = false">&times;</div>
               <div class="items">
                 <header-cart
-                  v-for="item in cartItems"
+                  v-for="item in this.cartItems"
                   :key="item.id"
                   :item="item"
                 />
               </div>
               <div class="total-price">
-                <p>{{this.totalCount}} Item(s) selected</p>
+                <p>{{cartItems.length}} Item(s) selected</p>
                 <h3>SUBTOTAL: ${{this.totalPrice}}</h3>
               </div>
               <div class="buttons">
@@ -93,7 +93,7 @@
                   <p>View Cart</p>
                 </router-link>
                 <router-link to="/checkout" class="button-checkout button">
-                  <p>Checkout</p>
+                  <p>Checkout</p>    
                   <i class="fa fa-arrow-circle-right"></i>
                 </router-link>
               </div>
@@ -116,8 +116,8 @@ export default {
   data(){
     return{
       isOpen: false,
-      totalCount: 0,
       totalPrice: 0,
+      totalCount: 0,
       cartItems: []
     }
   },
@@ -135,10 +135,7 @@ export default {
     async fetchData(){
       const resp = await this.$axios.get('api/cart')
       this.cartItems = resp.data.cart
-      console.log(this.cartItems);
       // кол-во
-      this.totalCount = this.cartItems.length
-      // общая сумма 
       this.totalPrice = this.cartItems.reduce((sum, {product}) => parseInt(product.price) + sum,0)
     },
     closeCart(){
@@ -147,6 +144,7 @@ export default {
   },
   async created(){
     this.fetchData()
+    console.log(this.totalCount);
   }
 
 }

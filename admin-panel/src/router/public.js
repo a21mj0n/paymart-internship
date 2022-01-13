@@ -101,7 +101,7 @@ export default [
         component: () => import('../pages/WishlistPage')
     },
     {
-        path: '/home/User_order',
+        path: '/home/user_order',
         name: "home.order.page",
         meta: {
             layout: "home",

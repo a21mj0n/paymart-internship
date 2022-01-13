@@ -47,15 +47,12 @@ export default {
         }
     },
     async created(){
-    const resp = await this.$axios.get('api/cart')
-        // products 
-        this.cartItems = resp.data.cart
-        console.log(this.cartItems);
+        const resp = await this.$axios.get('api/cart');
+        this.cartItems = resp.data.cart;
         // amount
-        this.totalCount = resp.data.cart.length
+        this.totalCount = resp.data.cart.length;
         // all price 
-        this.totalPrice = resp.data.cart.reduce((sum, {product}) => parseInt(product.price) + sum,0)
-      
+        this.totalPrice = resp.data.cart.reduce((sum, {product}) => parseInt(product.price) + sum,0);
     },
     methods:{
         removeAll(){
@@ -65,6 +62,7 @@ export default {
         },
         async removeItem(id){
             this.cartItems = this.cartItems.filter(item => item.id !== id)
+            this.$store.dispatch("cart/removeCartItem", id)
         }
     }
     
