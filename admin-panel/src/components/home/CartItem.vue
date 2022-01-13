@@ -128,6 +128,7 @@ export default {
     addToWishlist(payload) {
       if (this.type == "fa-trash") {
         console.log("deleted", payload);
+        console.log(payload);
         this.$store.dispatch("wishlist/removeWishItem");
   
       } else {

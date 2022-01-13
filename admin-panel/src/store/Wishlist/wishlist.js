@@ -15,12 +15,13 @@ export default {
             console.log(state);
 
             let index = state.wishlist.indexOf(productId);
-            state.wishlist.splice(index,1)
+            state.wishlist.splice(index,1   )
             // state.wishlist = state.wishlist.filter(item => {
             //     item != product}
                 
             //     )
             console.log(
+                
                 state.wishlist
             );
             // 
@@ -47,7 +48,6 @@ export default {
         },
        getCount(state){
         console.log(state.wishlist.length);
-        
         return state.wishlist.length;
         
        }
