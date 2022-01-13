@@ -77,11 +77,11 @@
             </div>
           </div>
           <div class="cart-wrapper" v-if="isOpen">
-            <div v-if="this.cartItems.length > 0"> 
+            <div v-if="this.$store.getters['cart/getCartItems'].length > 0"> 
               <div class="cart-close" @click="isOpen = false">&times;</div>
               <div class="items">
                 <header-cart
-                  v-for="item in this.cartItems"
+                  v-for="item in this.$store.getters['cart/getCartItems']"
                   :key="item.id"
                   :item="item"
                 />
@@ -119,13 +119,12 @@ export default {
     return {
       isOpen: false,
       totalPrice: 0,
-      totalCount: 0,
       cartItems: this.$store.getters['cart/getCartItems']
     }
   },
   watch:{
     // чтобы следить за продуктами в корзине 
-    totalCount(){
+    cartItems(){
       this.$store.getters['cart/getCartItems']
     }
     

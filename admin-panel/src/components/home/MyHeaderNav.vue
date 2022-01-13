@@ -2,7 +2,6 @@
   <div class="wrapper__nav">
       <div class="container">
           <div class="burger__nav">
-
           <button class="burger__btn" 
             ref="open"
             @click="open()">
@@ -13,14 +12,11 @@
                     ref="close"
                     @click="close()"
                     >back</button>
-                <router-link tag="li" class="nav-link" :to="{name: 'home'}">home</router-link>
-                <router-link tag="li" class="nav-link" :to="{name: 'checkout'}">Checkout</router-link>
+                <router-link tag="li" class="nav-link" :to="{name: 'home'}">Home</router-link>
                 <router-link tag="li" class="nav-link" :to="{name: 'store'}">Store</router-link>
-                <router-link tag="li" class="nav-link" :to="{name: 'home.product.view'}">Product by id</router-link>
-                <router-link tag="li" class="nav-link" :to="{name: 'home.order.page'}">UserOrder</router-link>
-                <li>smartphones</li>
-                <li>cameras</li>
-                <li>accessories</li>
+                <router-link tag="li" class="nav-link" :to="{name: 'home.order.page'}">Orders</router-link>
+                <router-link tag="li" class="nav-link" :to="{name: 'checkout'}">Checkout</router-link>
+                <router-link tag="li" class="nav-link" :to="{name: 'cart'}">Cart</router-link>
             </ul>
           </div>
 
