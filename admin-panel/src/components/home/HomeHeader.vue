@@ -118,7 +118,7 @@ export default {
     HeaderCart,
   },
   async created() {
-    this.getCount = this.$store.getters["wishlist/getCount"];
+    
     const resp = await this.$axios.get("api/cart");
 
     // amount
