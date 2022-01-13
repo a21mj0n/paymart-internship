@@ -11,7 +11,7 @@
           />
           <my-slider/>
           <h3>Top selling</h3>
-          <product-item  v-for="product in products"
+          <product-item  v-for="product in slisedProducts"
                 :key="product.id"
                 :name="product.name"
                 :price="product.price"
@@ -122,7 +122,7 @@ export default {
     this.products = resp.data
     const prod_categories = await this.$axios.get(`/api/categories`)
     this.categories = prod_categories.data
-    console.log(this.products)
+    this.slisedProducts = resp.data.slice(0,5)
   }
   
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="home-header">
+  <div class="home-header" @click="closeCart">
     <div class="header-top-wrapper">
       <div class="container">
         <div class="header-top">
@@ -141,7 +141,12 @@ export default {
       this.totalPrice = this.cartItems.reduce((sum, {product}) => parseInt(product.price) + sum,0)
     },
     closeCart(){
-      this.isOpen = false
+      const $this = this
+      document.addEventListener('mouseup',function(e) {
+        if (!e.target.closest(".cart-wrapper")) {
+          $this.isOpen = false
+        }
+      });
     }
   },
   async created(){
