@@ -47,6 +47,7 @@ export default {
         },
        getCount(state){
         console.log(state.wishlist.length);
+        
         return state.wishlist.length;
         
        }

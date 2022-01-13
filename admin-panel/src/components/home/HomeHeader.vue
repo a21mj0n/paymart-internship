@@ -60,11 +60,11 @@
           </div>
           <div class="actions">
             <div class="item">
-              <router-link :to="{ name: 'home.WishlistPage' }">
+              <router-link :to="{ name: 'home.wishlistPage' }">
                 <i class="fa fa-heart-o"></i>
                 <p>Your Wishlist</p>
                 <div class="number">
-                  <span>{{ getCount }}</span>
+                  <span>{{  this.$store.getters["wishlist/getCount"]}}</span>
                 </div>
               </router-link>
             </div>
@@ -111,7 +111,7 @@ export default {
       isOpen: false,
       totalCount: 0,
       totalPrice: 0,
-      getCount: "",
+    
     };
   },
   components: {

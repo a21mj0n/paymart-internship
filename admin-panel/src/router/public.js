@@ -94,7 +94,7 @@ export default [
     },
     {
         path: '/home/WishlistPage',
-        name: "home.WishlistPage",
+        name: "home.wishlistPage",
         meta: {
             layout: "home",
         },
