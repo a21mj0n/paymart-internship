@@ -9,7 +9,7 @@
             <div>
               <p class="text order-id">Номер заказа: <span>{{ order.id }}</span> </p>
               <p class="text order-created">
-                Время оформления заказа: <span>{{ order.created_at }}</span> 
+                Время оформления заказа: <span>{{ order.created_at.slice(0,10) }} {{ order.created_at.slice(11,19) }} </span> 
               </p>
               <hr>
             </div>

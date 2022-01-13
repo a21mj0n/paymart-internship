@@ -34,6 +34,7 @@ export default {
                 const resp = await this.$axios.delete(`api/cart/${this.cartId}`);
                 if(resp.data === "Successful"){
                     this.$emit('removeItem', this.cartId)
+                    this.$store.dispatch('cart/removeCartItem', this.productId)
                 }else{
                     alert('Не удалось удалить продукт')
                 }
