@@ -40,11 +40,6 @@ export default [
                     text: 'Checkout',
                     isDisabled: true,
                 },
-                {
-                    name: 'store',
-                    text: 'store',
-                    isDisabled: true,
-                },
             ]
         },
         component: () => import('../pages/CheckoutPage')
@@ -67,11 +62,6 @@ export default [
                     name: 'home',
                     text: 'Home',
                     isDisabled: false,
-                },
-                {
-                    name: 'checkout',
-                    text: 'Checkout',
-                    isDisabled: true,
                 },
                 {
                     name: 'store',
@@ -106,6 +96,18 @@ export default [
         meta: {
             layout: "home",
         },
+        breadcrumbItems: [
+            {
+                name: 'home',
+                text: 'home',
+                isDisabled: false,
+            },
+            {
+                name: 'orders',
+                text: 'orders',
+                isDisabled: true,
+            },
+        ],
         component: () => import('../pages/OrderPage')
     },
 
