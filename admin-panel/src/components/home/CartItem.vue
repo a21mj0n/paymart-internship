@@ -120,11 +120,14 @@ export default {
         product_id: this.productId,
         amount: 1,
       });
-      // const productDate = {
-      //   id: this.productId,
-      //   img: this.pro
-      // }
-      this.$store.dispatch("cart/addToCart", this.productId)
+      const productDate = {
+        id: this.productId,
+        image: this.image,
+        price: this.price,
+        name: this.name,
+        amount: 1
+      }
+      this.$store.dispatch("cart/addToCart", productDate)
       // window.location.reload()
     },
     addToWishlist(payload) {
