@@ -10,7 +10,6 @@ import auth from './auth/#index'
 import lang from './lang/#index'
 import common from './common/#index'
 import wishlist from './Wishlist/wishlist'
-import cart from './cart/#index'  
 
 const authState = createPersistedState({
   key: 'auth',
@@ -38,9 +37,9 @@ const langState = createPersistedState({
   },
 })
 
-const cartState = createPersistedState({
-  key: 'cart',
-  paths: ['cart'],
+const wishlistState = createPersistedState({
+  key: 'wishlist',
+  paths: ['wishlist'],
   storage: {
     getItem: (key) => Cookies.get(key),
     setItem: (key, value) => Cookies.set(key, value, { expires: 1, secure: true }),
@@ -50,16 +49,6 @@ const cartState = createPersistedState({
 
 
 export default new Vuex.Store({
-  modules: { 
-    auth,
-    lang, 
-    common,  
-    wishlist, 
-    cart
-  },
-  plugins: [
-    authState,
-    langState,
-    cartState
-  ]
+  modules: { auth, lang, common, wishlist },
+  plugins: [authState, langState, wishlistState]
 })

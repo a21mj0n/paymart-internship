@@ -37,10 +37,9 @@
           </div>
         </div>
         <div class="item-buttons">
-          <button @click="addToWishlist(productId, oldPrice,name,price, image,type,category)">
-            <i
-            :class="`fa ${this.type}`" ></i>
-            <span class="tooltipp">add to WishlistPage</span>
+          <button @click="addToWishlist(productId)">
+            <i :class="`fa ${this.type}`"></i>
+            <span class="tooltipp">add to wishlist</span>
           </button>
           <button>
             <i class="fa fa-exchange"></i>
@@ -91,7 +90,7 @@ export default {
       default: "name",
     },
     category: {
-    default:" Russel Group ",
+      default: " Russel Group ",
       type: String,
     },
     image: {
@@ -107,11 +106,14 @@ export default {
   },
   data() {
     return {
+      // database from back
       imgUrl: this.image
         ? `${config.URL}/storage/product_images/${this.productId}/${this.image.name}`
         : "https://shoppovia.com/store-front/images/product-default.png",
     };
   },
+
+  // functions
   methods: {
     async addToCart() {
       await this.$axios.post("api/cart", {
@@ -126,7 +128,13 @@ export default {
       // window.location.reload()
     },
     addToWishlist(payload) {
-      this.$store.dispatch("wishlist/addWish", payload)
+      if (this.type == "fa-trash") {
+        console.log("deleted", payload);
+        this.$store.dispatch("wishlist/removeWishItem");
+  
+      } else {
+        this.$store.dispatch("wishlist/addWish", payload);
+      }
     },
   },
 };

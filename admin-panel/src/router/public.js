@@ -93,8 +93,8 @@ export default [
         component: () => import('../pages/ViewProductPage')
     },
     {
-        path: '/home/WishlistPage',
-        name: "home.WishlistPage",
+        path: '/home/wishlist',
+        name: "home.wishlist",
         meta: {
             layout: "home",
         },

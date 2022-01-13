@@ -18,12 +18,12 @@
             </div>
             <div class="item">
               <i class="fa fa-map-marker"></i>
-              <p> 1734 Stonecoal Road</p>
+              <p>1734 Stonecoal Road</p>
             </div>
           </div>
           <div class="login">
             <div class="item">
-              <a href="#" @click.prevent="$router.push({name: 'auth'})">
+              <a href="#" @click.prevent="$router.push({ name: 'auth' })">
                 <i class="fa fa-user"></i>
                 <p>login</p>
               </a>
@@ -41,8 +41,8 @@
       <div class="container">
         <div class="header-bottom">
           <div class="logo">
-            <a href="#" @click.prevent='$router.push({name:"home"})'>
-              <img src="../../assets/logo.png" alt="">
+            <a href="#" @click.prevent="$router.push({ name: 'home' })">
+              <img src="../../assets/logo.png" alt="" />
             </a>
           </div>
           <div class="search-wrapper">
@@ -53,17 +53,19 @@
                   <option>PC</option>
                   <option>Phones</option>
                 </select>
-                <input type="text">
+                <input type="text" />
                 <button>Поиск</button>
               </div>
             </form>
           </div>
           <div class="actions">
             <div class="item">
-              <router-link :to="{name: 'home.WishlistPage'}">
+              <router-link :to="{ name: 'home.wishlist' }">
                 <i class="fa fa-heart-o"></i>
                 <p>Your Wishlist</p>
-                <div class="number"><span>2</span></div>
+                <div class="number">
+                  <span>{{  this.$store.getters["wishlist/getCount"]}}</span>
+                </div>
               </router-link>
             </div>
             <div class="item">
@@ -112,9 +114,9 @@
 <script>
 import HeaderCart from "./HeaderCart.vue";
 export default {
-  name: 'HomeHeader',
-  data(){
-    return{
+  name: "HomeHeader",
+  data() {
+    return {
       isOpen: false,
       totalPrice: 0,
       totalCount: 0,
@@ -128,8 +130,8 @@ export default {
     }
     
   },
-  components:{
-    HeaderCart
+  components: {
+    HeaderCart,
   },
   methods: {
     async fetchData(){
@@ -144,7 +146,6 @@ export default {
   },
   async created(){
     this.fetchData()
-    console.log(this.totalCount);
   }
 
 }
