@@ -1,12 +1,22 @@
 <template>
   <div class="checkout-component">
     <h3>Categories</h3>
+    <div class="item">
+      <label>
+        <input type="radio" name='categories' class="hidden" @change="setAll($event)" checked="checked">
+        <div class="box">
+          <i class="fa fa-check"></i>
+        </div>
+      </label>
+      <p>All</p>
+      <span>({{totalProducts}})</span>
+    </div>
     <div class="item" v-for="category in categories"
                     :key="category.id"
                     :name="category.name"
                     >
       <label>
-        <input type="checkbox" class="hidden" @change="setCat($event  ,category.id)">
+        <input type="radio" class="hidden" name='categories' @change="setCat($event  ,category.id)">
         <div class="box">
           <i class="fa fa-check"></i>
         </div>
@@ -25,16 +35,22 @@ export default {
   data(){
     return{
       categories:[],
+      totalProducts:'',
     }
   },
   methods:{
     setCat(event,name){
       this.$emit('setCategory',event.target.checked,name)
+    },
+    setAll(event){
+      this.$emit('setAll',event.target.checked)
     }
   },
   async created(){
     const prod_categories = await this.$axios.get(`/api/categories`)
     this.categories = prod_categories.data
+    console.log(this.categories)
+    this.totalProducts = prod_categories.data.reduce((sum, {product}) => parseInt(product.length) + sum,0)
     //console.log(prod_categories.data)
     //console.log(this.checkedCat)
   },

@@ -8,6 +8,7 @@
           <aside-checkouts
           :checkedCat="checkedCat"
           @setCategory="setCategory"
+          @setAll="setAll"
           />
           <my-slider/>
           <h3>Top selling</h3>
@@ -113,6 +114,13 @@ export default {
       if(event === true){
         const resp = await this.$axios.get(`/api/products`)
         this.products = resp.data.filter(item=> item.category_id === name)
+
+      }
+    },
+    async setAll(event){
+      if(event === true){
+        const resp = await this.$axios.get(`/api/products`)
+        this.products = resp.data
 
       }
     }
