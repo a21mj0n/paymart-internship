@@ -26,9 +26,9 @@ export default {
             // 
 
         },
-        replaceWishItem(state, items) {
-            state.items = items;
-        }
+        // replaceWishItem(state, items) {
+        //     state.items = items;
+        // }
     },
 
     actions: {
