@@ -9,23 +9,30 @@
                 </p>
             </div>
             <div class="cart-items" v-if="cartItems.length">
-                <cart-item 
-                    v-for="cartItem in cartItems" 
-                    :key="cartItem.id"
-                    :name="cartItem.product.name"
-                    :price="cartItem.product.price"
-                    :amount="cartItem.amount"
-                    :image="cartItem.product.image[0]"
-                    :productId="cartItem.product.id"
-                    :cartId="cartItem.id"
-                />
+                <div class="items">
+                    <cart-item 
+                        v-for="cartItem in cartItems" 
+                        :key="cartItem.id"
+                        :name="cartItem.product.name"
+                        :price="cartItem.product.price"
+                        :amount="cartItem.amount"
+                        :image="cartItem.product.image[0]"
+                        :productId="cartItem.product.id"
+                        :cartId="cartItem.id"
+                        @removeItem="removeItem"
+                    />
+                </div>
+                <div class="row j-center">
+                    <button class="cart-order" @click="$router.push({name: 'checkout'})">Оформить заказ</button>
+                    <button class="cart-back" @click="$router.push({name: 'home'})">Вернутся назад</button>
+                </div>
             </div>
             <div class="cart-empty" v-else>
                 <h2>
                     Корзина пуста
                 </h2>
+                <button class="cart-back" @click="$router.push({name: 'home'})">Вернутся назад</button>
             </div>
-            <button class="cart-order" @click="$router.push({name: 'checkout'})">Оформить заказ</button>
         </div>
     </div>
 </template>
@@ -40,20 +47,22 @@ export default {
         }
     },
     async created(){
-    const resp = await this.$axios.get('api/cart')
-        // products 
-        this.cartItems = resp.data.cart
+        const resp = await this.$axios.get('api/cart');
+        this.cartItems = resp.data.cart;
         // amount
-        this.totalCount = resp.data.cart.length
+        this.totalCount = resp.data.cart.length;
         // all price 
-        this.totalPrice = resp.data.cart.reduce((sum, {product}) => parseInt(product.price) + sum,0)
-        console.log(this.cartItems);
+        this.totalPrice = resp.data.cart.reduce((sum, {product}) => parseInt(product.price) + sum,0);
     },
     methods:{
         removeAll(){
             if(confirm('Вы точно хотите удалить все товары?')){
                 alert('Все товары удалены!')
             }
+        },
+        async removeItem(id){
+            this.cartItems = this.cartItems.filter(item => item.id !== id)
+            this.$store.dispatch("cart/removeCartItem", id)
         }
     }
     
@@ -95,6 +104,13 @@ export default {
 
 
     }
+    .cart-items{
+        display: flex;
+        flex-direction: column;
+        .items{
+            flex: 1 1 auto;
+        }
+    }
     .cart-order{
         width: 150px;
         border: 1px solid $green-color;
@@ -112,5 +128,16 @@ export default {
             font-size: 16px;
         }
         cursor: pointer;
+    }
+    .j-center{
+        justify-content: center;
+        button{
+            margin: 0 10px;
+        }
+    }
+    .cart-back{
+        background-color: #000;
+        color: #fff;
+        border: 1px solid #000;
     }
 </style>

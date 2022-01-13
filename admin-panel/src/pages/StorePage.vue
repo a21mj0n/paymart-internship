@@ -2,12 +2,23 @@
   <div class="wrapper">
     <div class="container">
       <div class="store-page">
-        <div class="aside-wrapper">
-          <aside-checkouts/>
+        <div class="aside-wrapper"
+        v-if="products.length > 1 && categories.length > 1"
+        >
+          <aside-checkouts
+          :checkedCat="checkedCat"
+          @setCategory="setCategory"
+          />
           <my-slider/>
-          <aside-checkouts/>
           <h3>Top selling</h3>
-          <product-item v-for="i in 3" :key="i"/>
+          <product-item  v-for="product in slisedProducts"
+                :key="product.id"
+                :name="product.name"
+                :price="product.price"
+                :image="product.image[0]"
+                :productId="product.id"
+                :category="categories.find(item => item.id === product.category_id).name !== '' ? categories.find(item => item.id === product.category_id).name : 'no-category'"
+          />
         </div>
         <div class="content-wrapper">
           <div class="components-changer">
@@ -28,20 +39,23 @@
               </div>
             </div>
             <div class="view-changer">
-              <div class="item" @click="horizantalPosition">
+              <div :class="!activeType ? 'item active' : 'item' " @click="horizantalPosition">
                 <i class="fa fa-th"></i>
               </div>
-              <div class="item" @click="verticalPosition" >
+              <div :class="activeType ? 'item active' : 'item' " @click="verticalPosition" >
                 <i class="fa fa-th-list"></i>
               </div>
             </div>
           </div>
-          <div class="products">
-            <cart-item 
+          <div class="products"
+          v-if="products.length > 1 && categories.length > 1"
+          >
+            <cart-item  
               v-for="product in products" 
               :vertical="(vertical) ? true : false "
               :key="product.id"
               :name="product.name"
+              :category="categories.find(item => item.id === product.category_id).name !== '' ? categories.find(item => item.id === product.category_id).name : 'no-category'"
               :price="product.price"
               :oldPrice="product.oldPrice"
               :image="product.image[0]"
@@ -54,7 +68,7 @@
               <p>SHOWING {{number}}-100 PRODUCTS</p>
             </div>
             <div class="pagination">
-
+              <button @click.prevent="pageCategory"></button>
             </div>
           </div>
         </div>
@@ -71,9 +85,13 @@ import ProductItem from '../components/home/ProductItem.vue'
 export default {
   data(){
     return{
+      checkedCat:'',
       number:'20',
       vertical: true,
-      products:[]
+      products:[],
+      showCategory:[],
+      categories:[],
+      activeType: true
     }
   },
   components:{
@@ -85,14 +103,26 @@ export default {
   methods: {
     verticalPosition(){
       this.vertical = true
+      this.activeType = !this.activeType
     },
     horizantalPosition(){
       this.vertical = false
+      this.activeType = !this.activeType
+    },
+    async setCategory(event,name){
+      if(event === true){
+        const resp = await this.$axios.get(`/api/products`)
+        this.products = resp.data.filter(item=> item.category_id === name)
+
+      }
     }
   },
   async created(){
     const resp = await this.$axios.get(`/api/products`)
     this.products = resp.data
+    const prod_categories = await this.$axios.get(`/api/categories`)
+    this.categories = prod_categories.data
+    this.slisedProducts = resp.data.slice(0,5)
   }
   
 }
@@ -155,6 +185,14 @@ export default {
           &:hover{
             border:1px solid transparent;
             background-color: $color-1;
+            i{
+              color:white;
+            }
+          }
+          &.active{
+            border:1px solid transparent;
+            background-color: $color-1;
+            box-shadow: 0 0 3px $color-1;
             i{
               color:white;
             }

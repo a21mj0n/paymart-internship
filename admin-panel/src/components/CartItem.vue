@@ -15,6 +15,7 @@
         </div>
         <button class="cart-remove" @click="removeItem">
             Удалить
+           
         </button>
     </div>
 </template>
@@ -29,8 +30,19 @@ export default {
     },
     methods: {
         async removeItem(){
-            if(window.confirm('Точно хотите удалить ?')){
-                await this.$axios.delete(`api/cart/${this.cartId}`)
+            try{
+                const resp = await this.$axios.delete(`api/cart/${this.cartId}`);
+                if(resp.data === "Successful"){
+                    this.$emit('removeItem', this.cartId)
+                    this.$store.dispatch('cart/removeCartItem', this.productId)
+                }else{
+                    alert('Не удалось удалить продукт')
+                }
+            }catch(err){
+                if(err){
+                    console.log(err);
+                    alert('Не удалось удалить продукт')
+                }
             }
         }
     }

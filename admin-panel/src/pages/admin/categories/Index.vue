@@ -82,13 +82,13 @@ export default {
         },
     },
     methods: {
-        async removeCategory({id}){
-            if(window.confirm("Вы точно хотите удалить ?")){
+        async removeCategory({id}) {
+            if (window.confirm("Вы точно хотите удалить ?")) {
                 await this.$axios.delete(`/api/dashboard/categories/${id}`)
                 this.fetchData()
             }
         }, 
-        changePage(pageNumber){
+        changePage(pageNumber) {
             this.page = pageNumber
         },
         async fetchData(){
@@ -98,7 +98,6 @@ export default {
                 page: this.page
             }})
             this.totalPages = Math.ceil(resp.data.meta.total / this.perPage)
-            console.log(this.totalPages);
             this.categoriesData = resp.data.data
         }
       // end methods ==================================================================
@@ -107,7 +106,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$main-color: rgb(31, 7, 110);
+    $main-color: rgb(31, 7, 110);
+
     .vuetable-body-wrapper{
         min-height: 300px;
     }

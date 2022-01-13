@@ -22,7 +22,7 @@ $green-shadow: #64c515;
 }
   
 .slick-custom-prev {
-    background-color: #fff;
+    background-color: #fff !important;
     cursor: pointer;
     position: absolute;
     background-color: transparent;
@@ -46,7 +46,7 @@ $green-shadow: #64c515;
     }
 }
 .slick-custom-next{
-    background-color: #fff;
+    background-color: #fff !important;
     cursor: pointer;
     position: absolute;
     background-color: transparent;

@@ -1,11 +1,11 @@
 <template>
-  <div class="home-header">
+  <div class="home-header" @click="closeCart">
     <div class="header-top-wrapper">
       <div class="container">
         <div class="header-top">
           <div class="contacts-info">
             <div class="item">
-              <a href="tel:+021955184">
+              <a href="tel:+99897-777-07-77">
                 <i class="fa fa-phone"></i>
                 <p>+021-95-51-84</p>
               </a>
@@ -60,7 +60,7 @@
           </div>
           <div class="actions">
             <div class="item">
-              <router-link :to="{ name: 'home.wishlistPage' }">
+              <router-link :to="{ name: 'home.wishlist' }">
                 <i class="fa fa-heart-o"></i>
                 <p>Your Wishlist</p>
                 <div class="number">
@@ -72,28 +72,37 @@
               <a href="#" @click.prevent="isOpen = !isOpen">
                 <i class="fa fa-shopping-cart"></i>
                 <p>Your Cart</p>
-                <div class="number">
-                  <span>{{ this.totalCount }}</span>
-                </div>
+                <div class="number"><span>{{this.$store.getters['cart/getTotalCount']}}</span></div>
               </a>
             </div>
           </div>
           <div class="cart-wrapper" v-if="isOpen">
-            <div class="items">
-              <header-cart />
+            <div v-if="this.cartItems.length > 0"> 
+              <div class="cart-close" @click="isOpen = false">&times;</div>
+              <div class="items">
+                <header-cart
+                  v-for="item in this.cartItems"
+                  :key="item.id"
+                  :item="item"
+                />
+              </div>
+              <div class="total-price">
+                <p>{{cartItems.length}} Item(s) selected</p>
+                <h3>SUBTOTAL: ${{this.totalPrice}}</h3>
+              </div>
+              <div class="buttons">
+                <router-link to="/cart" class="button-view button">
+                  <p>View Cart</p>
+                </router-link>
+                <router-link to="/checkout" class="button-checkout button">
+                  <p>Checkout</p>    
+                  <i class="fa fa-arrow-circle-right"></i>
+                </router-link>
+              </div>
             </div>
-            <div class="total-price">
-              <p>{{ this.totalCount }} Item(s) selected</p>
-              <h3>SUBTOTAL: ${{ this.totalPrice }}</h3>
-            </div>
-            <div class="buttons">
-              <router-link to="/cart" class="button-view button">
-                <p>View Cart</p>
-              </router-link>
-              <router-link to="/checkout" class="button-checkout button">
-                <p>Checkout</p>
-                <i class="fa fa-arrow-circle-right"></i>
-              </router-link>
+            <div v-else class="empty-cart">
+              <div class="empty-close" @click="isOpen = false">&times;</div>
+              Корзина пуста
             </div>
           </div>
         </div>
@@ -109,27 +118,36 @@ export default {
   data() {
     return {
       isOpen: false,
-      totalCount: 0,
       totalPrice: 0,
+      totalCount: 0,
+      cartItems: this.$store.getters['cart/getCartItems']
+    }
+  },
+  watch:{
+    // чтобы следить за продуктами в корзине 
+    totalCount(){
+      this.$store.getters['cart/getCartItems']
+    }
     
-    };
   },
   components: {
     HeaderCart,
   },
-  async created() {
-    
-    const resp = await this.$axios.get("api/cart");
-
-    // amount
-    this.totalCount = resp.data.cart.length;
-    // all price
-    this.totalPrice = resp.data.cart.reduce(
-      (sum, { product }) => parseInt(product.price) + sum,
-      0
-    );
+  methods: {
+    closeCart(){
+      const $this = this
+      document.addEventListener('mouseup',function(e) {
+        if (!e.target.closest(".cart-wrapper")) {
+          $this.isOpen = false
+        }
+      });
+    }
   },
-};
+  async created(){
+    this.totalPrice = this.$store.getters['cart/getCartItems'].reduce((sum, item) => parseInt(item.price) + sum,0)
+  }
+
+}
 </script>
 
 <style lang='scss' scoped>
@@ -217,10 +235,34 @@ $color-2: #1a1a1a;
       right: 0;
       background-color: white;
       z-index: 9999;
+      .cart-close{
+        position: absolute;
+        top: -20px;
+        right: -15px;
+        position: absolute;
+        font-size: 20px;
+        border-radius: 50px;
+        font-weight: 700;
+        background: red;
+        color: #fff;
+        padding: 10px;
+        height: 30px;
+        width: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        &:hover{
+          transition: all 300ms linear;
+          box-shadow: 0 0 5px red;
+          transform: scale(1.1);
+        }
+      }
       .items {
         margin-bottom: 20px;
         max-height: 200px;
         overflow-y: auto;
+        position: relative;
       }
       .item {
         position: relative;
@@ -292,6 +334,34 @@ $color-2: #1a1a1a;
         }
       }
     }
+      .empty-cart{
+        text-align: center;      
+        padding: 20px;
+        position: relative;
+        .empty-close{
+          position: absolute;
+          top: -35px;
+          right: -35px;
+          font-size: 20px;
+          border-radius: 50px;
+          font-weight: 700;
+          background: red;
+          color: #fff;
+          padding: 10px;
+          height: 30px;
+          width: 30px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          &:hover{
+            transition: all 300ms linear;
+            box-shadow: 0 0 5px red;
+            transform: scale(1.1);
+          }
+      }
+    }
+    
     .search-wrapper {
       @media (max-width: 991px) {
         display: none;

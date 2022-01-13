@@ -21,3 +21,9 @@
 // }
 
 // num == 1 ? console.log('hello') : console.log('null');
+
+const arr = [1, 2, 3]
+
+arr.map(el => {
+    return el.map()
+})

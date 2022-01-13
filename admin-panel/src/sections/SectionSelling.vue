@@ -13,11 +13,33 @@
             :autoplayHoverPause="true"
             :loop="true"
             :perPage="3"
-            v-if="products.length > 1 && categories.length > 1"
+            v-if="products1.length > 1 && categories.length > 1"
           >
-            <Slide v-for="i in 3" :key="i" >
+            <Slide>
               <product-item
-                v-for="product in products"
+                v-for="product in products1"
+                :key="product.id"
+                :name="product.name"
+                :price="product.price"
+                :image="product.image[0]"
+                :productId="product.id"
+                :category="categories.find(item => item.id === product.category_id).name !== '' ? categories.find(item => item.id === product.category_id).name : 'no-category'"
+              />
+            </Slide>
+            <Slide>
+              <product-item
+                v-for="product in products2"
+                :key="product.id"
+                :name="product.name"
+                :price="product.price"
+                :image="product.image[0]"
+                :productId="product.id"
+                :category="categories.find(item => item.id === product.category_id).name !== '' ? categories.find(item => item.id === product.category_id).name : 'no-category'"
+              />
+            </Slide>
+            <Slide >
+              <product-item
+                v-for="product in products3"
                 :key="product.id"
                 :name="product.name"
                 :price="product.price"
@@ -39,7 +61,9 @@ export default {
   components: { ProductItem, Slide, Carousel },
   data() {
     return {
-      products: [],
+      products1: [],
+      products2: [],
+      products3: [],
       categories: [],
       category: ''
     };
@@ -47,7 +71,9 @@ export default {
   async created() {
     try {
       const resp = await this.$axios.get(`/api/products`);
-      this.products = resp.data;
+      this.products1 = resp.data.sort(()=>Math.random()-0.5).slice(0, 3);
+      this.products2 = resp.data.sort(()=>Math.random()-0.5).slice(0, 3);
+      this.products3 = resp.data.sort(()=>Math.random()-0.5).slice(0, 3);
 
       const categoriesData = await this.$axios.get("/api/categories");
       this.categories = categoriesData.data
@@ -65,5 +91,11 @@ export default {
 }
 .VueCarousel-navigation > button {
   left: 75% !important;
+}
+.row{
+  flex-wrap:wrap;
+}
+.small-carousel{
+  width: 33.3%;
 }
 </style>

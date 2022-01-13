@@ -1,26 +1,29 @@
 <template>
   <div class="item">
-    <div class="remove">
-      
-    </div>
     <div class="left-side">
-      <img src="../../assets/login_bg.jpg" alt="">
+      <img :src="imgUrl" :alt="item.name">
     </div>
     <div class="right-side">
       <div class="name">
-        <h3>Product name</h3>
+        <h3>{{item.name}}</h3>
       </div>
       <div class="prod-info">
-        <p>1x</p>
-        <h3>$980</h3>
+        <p>{{item.amount}}x</p>
+        <h3>${{item.price}}</h3>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import config from '../../config'
 export default {
-
+  props: ['item'],
+  data(){
+    return{
+      imgUrl: this.item.image ? `${config.URL}/storage/product_images/${this.item.id}/${this.item.image.name}` : 'https://shoppovia.com/store-front/images/product-default.png'
+    }
+  },
 }
 </script>
 
