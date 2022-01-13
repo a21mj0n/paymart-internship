@@ -120,13 +120,13 @@ export default {
       isOpen: false,
       totalPrice: 0,
       totalCount: 0,
-      cartItems: []
+      cartItems: this.$store.getters['cart/getCartItems']
     }
   },
   watch:{
     // чтобы следить за продуктами в корзине 
     totalCount(){
-      this.fetchData() 
+      this.$store.getters['cart/getCartItems']
     }
     
   },
@@ -134,12 +134,6 @@ export default {
     HeaderCart,
   },
   methods: {
-    async fetchData(){
-      const resp = await this.$axios.get('api/cart')
-      this.cartItems = resp.data.cart
-      // кол-во
-      this.totalPrice = this.cartItems.reduce((sum, {product}) => parseInt(product.price) + sum,0)
-    },
     closeCart(){
       const $this = this
       document.addEventListener('mouseup',function(e) {
@@ -150,7 +144,7 @@ export default {
     }
   },
   async created(){
-    this.fetchData()
+    this.totalPrice = this.$store.getters['cart/getCartItems'].reduce((sum, item) => parseInt(item.price) + sum,0)
   }
 
 }

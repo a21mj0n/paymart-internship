@@ -1,15 +1,15 @@
 <template>
   <div class="item">
     <div class="left-side">
-      <img :src="imgUrl" :alt="item.product.name">
+      <img :src="imgUrl" :alt="item.name">
     </div>
     <div class="right-side">
       <div class="name">
-        <h3>{{item.product.name}}</h3>
+        <h3>{{item.name}}</h3>
       </div>
       <div class="prod-info">
         <p>{{item.amount}}x</p>
-        <h3>${{item.product.price}}</h3>
+        <h3>${{item.price}}</h3>
       </div>
     </div>
   </div>
@@ -21,9 +21,9 @@ export default {
   props: ['item'],
   data(){
     return{
-      imgUrl: this.item.product.image ? `${config.URL}/storage/product_images/${this.item.product.id}/${this.item.product.image[0].name}` : 'https://shoppovia.com/store-front/images/product-default.png'
+      imgUrl: this.item.image ? `${config.URL}/storage/product_images/${this.item.id}/${this.item.image.name}` : 'https://shoppovia.com/store-front/images/product-default.png'
     }
-  }
+  },
 }
 </script>
 
