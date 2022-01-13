@@ -33,4 +33,18 @@ export default {
     .row{
         display: flex;
     }
+    @media (max-width: 768px) {
+        .card__link-wrapper{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            div{
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+        .card_wrapper{
+            width: 100% !important; 
+        }
+    }
 </style>

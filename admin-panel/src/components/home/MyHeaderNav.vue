@@ -82,7 +82,7 @@ export default {
             font-weight: bold;
             color: #fff;
             font-size: 20px;
-            z-index: 450;
+            z-index: 2222;
             text-transform: uppercase;
             cursor: pointer;
             top: 30px;
@@ -158,7 +158,7 @@ export default {
                 position: absolute;
                 left: -15px;
                 top: -30px;
-                z-index: 500;
+                z-index: 99999;
                 flex-direction: column;
                 &::before{
                     content: '';

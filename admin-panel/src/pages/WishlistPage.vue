@@ -51,9 +51,7 @@ export default {
       wishedProducts: [],
     };
   },
-
   async created() {
-
     const resp = await this.$axios.get("api/products");
     this.products = resp.data;
     this.productIds = this.$store.getters["wishlist/getList"];
@@ -64,8 +62,6 @@ export default {
         }
       });
     });
-    console.log("YOUT WISHLIST ::: ", this.wishedProducts);
-   
   },
 
   methods: {},

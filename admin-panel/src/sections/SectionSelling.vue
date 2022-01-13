@@ -98,4 +98,15 @@ export default {
 .small-carousel{
   width: 33.3%;
 }
+@media (max-width: 768px) {
+  .row{
+    justify-content: center;
+  }
+  .small-carousel{
+    width: 50%;
+  }
+  .small-carousel:nth-child(3){
+    display: none;
+  }
+}
 </style>
