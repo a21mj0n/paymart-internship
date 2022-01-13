@@ -129,7 +129,7 @@ export default {
       if (this.type == "fa-trash") {
         console.log("deleted", payload);
         this.$store.dispatch("wishlist/removeWishItem");
-        window.setInterval()
+  
       } else {
         this.$store.dispatch("wishlist/addWish", payload);
       }
