@@ -39,7 +39,7 @@
         <div class="item-buttons">
           <button @click="addToWishlist(productId)">
             <i :class="`fa ${this.type}`"></i>
-            <span class="tooltipp">add to wishlist</span>
+            <span class="tooltipp" >{{iconText}}</span>
           </button>
           <button>
             <i class="fa fa-exchange"></i>
@@ -103,6 +103,10 @@ export default {
     type: {
       default: "fa-heart",
     },
+    iconText: {
+      type: String,
+      default: 'add to WishlistPage'
+    }
   },
   data() {
     return {
@@ -112,6 +116,10 @@ export default {
         : "https://shoppovia.com/store-front/images/product-default.png",
     };
   },
+  async created() {
+    console.log(this.category, "CAT:");
+  },
+  //
 
   // functions
   methods: {
@@ -120,22 +128,11 @@ export default {
         product_id: this.productId,
         amount: 1,
       });
-      const productDate = {
-        id: this.productId,
-        image: this.image,
-        price: this.price,
-        name: this.name,
-        amount: 1
-      }
-      this.$store.dispatch("cart/addToCart", productDate)
-      // window.location.reload()
     },
     addToWishlist(payload) {
       if (this.type == "fa-trash") {
         console.log("deleted", payload);
-        console.log(payload);
         this.$store.dispatch("wishlist/removeWishItem");
-  
       } else {
         this.$store.dispatch("wishlist/addWish", payload);
       }

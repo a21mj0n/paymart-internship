@@ -14,6 +14,7 @@
             :oldPrice="product.price * 2"
             :category="product.category"
             type="fa-trash"
+            iconText="Delete from wishlist"
           />
         </div>
       </div>

@@ -14,22 +14,21 @@ export default {
         removeWishItem(state, productId) {
             console.log(state);
 
-            let index = state.wishlist.indexOf(productId);
-            state.wishlist.splice(index,1   )
-            // state.wishlist = state.wishlist.filter(item => {
-            //     item != product}
+            // let index = state.wishlist.indexOf(productId);
+            // state.wishlist.splice(index,1)
+            state.wishlist.filter(item => {
+                !item !== productId}
                 
-            //     )
+                )
             console.log(
-                
                 state.wishlist
             );
             // 
 
         },
-        // replaceWishItem(state, items) {
-        //     state.items = items;
-        // }
+        replaceWishItem(state, items) {
+            state.items = items;
+        }
     },
 
     actions: {
