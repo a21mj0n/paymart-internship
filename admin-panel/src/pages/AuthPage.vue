@@ -133,10 +133,10 @@ export default {
           password: this.password,
         }
         const resp = await this.$axios.post('api/login', user);
-        if(resp.data.access_token){
+        // if(resp.data.access_token){
           this.$store.dispatch('auth/login', { isAuthenticated: true, token: resp.data.access_token });
           this.$router.push({name: "admin"})
-        }
+        // }
       }catch(err){
         this.error= err.response.data.message
         console.log(err);

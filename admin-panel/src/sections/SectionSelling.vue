@@ -71,9 +71,9 @@ export default {
   async created() {
     try {
       const resp = await this.$axios.get(`/api/products`);
-      this.products1 = resp.data.sort(()=>Math.random()-0.5).slice(0, 3);
-      this.products2 = resp.data.sort(()=>Math.random()-0.5).slice(0, 3);
-      this.products3 = resp.data.sort(()=>Math.random()-0.5).slice(0, 3);
+      this.products1 = resp.data.products.sort(()=>Math.random()-0.5).slice(0, 3);
+      this.products2 = resp.data.products.sort(()=>Math.random()-0.5).slice(0, 3);
+      this.products3 = resp.data.products.sort(()=>Math.random()-0.5).slice(0, 3);
 
       const categoriesData = await this.$axios.get("/api/categories");
       this.categories = categoriesData.data

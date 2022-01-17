@@ -119,10 +119,10 @@ export default {
   },
   async created(){
     const resp = await this.$axios.get(`/api/products`)
-    this.products = resp.data
+    this.products = resp.data.products
     const prod_categories = await this.$axios.get(`/api/categories`)
     this.categories = prod_categories.data
-    this.slisedProducts = resp.data.slice(0,5)
+    this.slisedProducts = resp.data.products.slice(0,5)
   }
   
 }

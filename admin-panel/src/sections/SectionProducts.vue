@@ -124,7 +124,7 @@ export default {
     async created(){
         try{
             const resp = await this.$axios.get(`/api/products`);
-            this.products = resp.data;
+            this.products = resp.data.products;
             // \\
             const categoriesData = await this.$axios.get(`/api/categories`);
             this.categories = categoriesData.data;

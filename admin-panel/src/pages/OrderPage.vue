@@ -4,7 +4,7 @@
       <h2 class="order-title">Ваши заказы</h2>
       <hr class="hr" />
       <div class="orders-wrapper">
-        <div class="orders">
+        <div class="orders" v-if="orders">
           <div class="order" v-for="order in orders" :key="order.id">
             <div>
               <p class="text order-id">Номер заказа: <span>{{ order.id }}</span> </p>
@@ -37,6 +37,9 @@
             <p class="order-items-total-price">Общая стоимость: ${{order.total_amount}}</p>
           </div>
         </div>
+        <div v-else>
+          Заказов пока нет
+        </div>
       </div>
     </div>
   </div>
@@ -53,10 +56,14 @@ export default {
     };
   },
   async created() {
-    const resp = await this.$axios.get("api/user_orders_list");
-    this.orders = resp.data.user_order;
-    // this.orders = this.orderItems.forEach(order => console.log(order.user_order_items))
-    console.log(this.orderItems);
+    try{
+      const resp = await this.$axios.get("api/user_orders_list");
+      this.orders = resp.data.user_order;
+      // this.orders = this.orderItems.forEach(order => console.log(order.user_order_items))
+      console.log(this.orderItems);
+    }catch(e){
+      console.log(e);
+    }
   },
 };
 </script>
