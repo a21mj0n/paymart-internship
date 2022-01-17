@@ -153,16 +153,17 @@ export default {
       this.amount++
     },
     minus(){
-      if(this.amount > 1){
-        this.amount = 1
-
+      this.amount--
+      if(this.amount < 0){
+        this.amount = 0
+        
       }
-
-       
-    
     },
      async addToCart(){
             await this.$axios.post('api/cart', {product_id: this.product.id, amount: this.amount})
+            this.$router.push({
+                  name: 'cart',
+                })
         }
 
   },
@@ -183,7 +184,6 @@ export default {
         }catch(err){
             console.log(err);
       }
-    console.log(this.product.image.length);
     var galleryThumbs = new Swiper(".gallery-thumbs", {
       spaceBetween: 5,
       slidesPerView: this.product.image.length ,
@@ -199,25 +199,25 @@ export default {
       breakpoints: {
         // when window width is >= 320px
         320: {
-          slidesPerView: this.product.image.length ,
+          slidesPerView: this.product.image.length -2,
           spaceBetween: 4,
         },
         // when window width is >= 480px
         576: {
-          slidesPerView: this.product.image.length ,
+          slidesPerView: this.product.image.length -2,
           spaceBetween: 4,
         },
         // when window width is >= 640px
         768: {
-          slidesPerView: this.product.image.length ,
+          slidesPerView: this.product.image.length -2,
           spaceBetween: 5,
         },
         992: {
-          slidesPerView: this.product.image.length ,
+          slidesPerView: this.product.image.length -1,
           spaceBetween: 5,
         },
         1200: {
-          slidesPerView: this.product.image.length,
+          slidesPerView: this.product.image.length -1,
           spaceBetween: 20,
         },
       },

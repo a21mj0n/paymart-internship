@@ -32,7 +32,7 @@ export default {
         async removeItem(){
             try{
                 const resp = await this.$axios.delete(`api/cart/${this.cartId}`);
-                if(resp.data === "Successful"){
+                if(resp.data === "successful"){
                     this.$emit('removeItem', this.cartId)
                 }else{
                     alert('Не удалось удалить продукт')

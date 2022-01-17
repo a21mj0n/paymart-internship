@@ -42,7 +42,8 @@
             :key="item.id"
           >
             <span>{{ item.amount }}x {{ item.product.name }}</span>
-            <span>${{ item.product.price }} </span>
+            <span>${{item.product.price  * item.amount}} </span>
+          
           </div>
           <div class="checkout_products-item">
             <span>Shiping </span> <span><strong>FREE</strong> </span>
@@ -235,7 +236,8 @@ export default {
       },
       cartItems: '',
       totalCount: '',
-      totalPrice: 0,
+      totalPrice: [],
+      priceItem: '',
       iAgree: false,
       count: 0,
 
@@ -266,7 +268,10 @@ export default {
         // amount
         this.totalCount = resp.data.cart.length
         // all price
-        this.totalPrice = resp.data.cart.reduce((sum, {product}) => parseInt(product.price) + sum,0)
+        this.priceItem = resp.data.cart.forEach(element => {this.totalPrice = +this.totalPrice +(element.amount * element.product.price)})
+        console.log(this.totalPrice);
+
+        // this.totalPrice = 
 
     },
 
