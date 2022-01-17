@@ -10,7 +10,9 @@
           @setCategory="setCategory"
           @setAll="setAll"
           />
-          <my-slider/>
+          <my-slider
+          :maxPrice="maxPrice"
+          />
           <h3>Top selling</h3>
           <product-item  v-for="product in slisedProducts"
                 :key="product.id"
@@ -86,6 +88,7 @@ import ProductItem from '../components/home/ProductItem.vue'
 export default {
   data(){
     return{
+      maxPrice:'',
       checkedCat:'',
       number:'20',
       vertical: true,
@@ -113,24 +116,26 @@ export default {
     async setCategory(event,name){
       if(event === true){
         const resp = await this.$axios.get(`/api/products`)
-        this.products = resp.data.filter(item=> item.category_id === name)
+        this.products = resp.data.products.filter(item=> item.category_id === name)
 
       }
     },
     async setAll(event){
       if(event === true){
         const resp = await this.$axios.get(`/api/products`)
-        this.products = resp.data
+        this.products = resp.data.products
 
       }
     }
   },
   async created(){
     const resp = await this.$axios.get(`/api/products`)
-    this.products = resp.data
+    console.log(resp)
+    this.products = resp.data.products
+    this.maxPrice = Math.ceil(resp.data.max_price)
     const prod_categories = await this.$axios.get(`/api/categories`)
     this.categories = prod_categories.data
-    this.slisedProducts = resp.data.slice(0,5)
+    this.slisedProducts = resp.data.products.slice(0,5)
   }
   
 }

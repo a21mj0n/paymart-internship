@@ -5,9 +5,9 @@
         <vue-slider
             v-model="value"
             :min="0"
-            :max="100"
+            :max="this.maxPrice"
             :min-range="0"
-            :max-range="100"
+            :max-range="this.maxPrice"
             :height="10"
             :process-dragable="true"
             :process-style="processStyle"
@@ -48,14 +48,15 @@ import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/antd.css'
 
 export default {
-  components: {
-    VueSlider
-  },
+    props:["maxPrice"],
+    components: {
+        VueSlider
+    },
     data () {
         return {
         // value: [0, 5000],
         from: 0,
-        to: 100,
+        to: this.maxPrice,
         processStyle: {
             backgroundColor: '#73e019bd',
         },
@@ -63,7 +64,7 @@ export default {
     },
     methods: {
         plusTo(){
-            if(this.to === 100){
+            if(this.to === this.maxPrice){
                 return
             }
             this.to = this.to + 1
@@ -105,7 +106,7 @@ export default {
             this.to = null;
         }
         },
-    },
+    }
 }
 </script>
 
