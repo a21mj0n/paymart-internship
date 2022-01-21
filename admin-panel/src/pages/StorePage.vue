@@ -51,7 +51,7 @@
             </div>
           </div>
           <div class="products"
-          v-if="products.length > 1 && categories.length > 1"
+          v-if="products.length && categories.length > 1"
           >
             <cart-item  
               v-for="product in products" 

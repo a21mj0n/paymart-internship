@@ -1,8 +1,8 @@
-<template>
+<0template>
   <div>
     <p>{{ product.name }} {{product.price}}</p>
   </div>
-</template>
+</0template>
 
 <script>
 export default {
