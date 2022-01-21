@@ -85,7 +85,7 @@ export default {
         }
     },
     async created(){
-        const {data} = await axios.get(`${config.URL.dev}/api/dashboard/categories/${this.$route.params.id}`)
+        const {data} = await axios.get(`${config.URL}/api/dashboard/categories/${this.$route.params.id}`)
         this.model.name = data.name
         const $this = this
         this.getEditFields($this)

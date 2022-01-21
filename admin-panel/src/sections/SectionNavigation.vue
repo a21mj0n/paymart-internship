@@ -106,4 +106,13 @@ export default {
         flex-direction: column;
         justify-content: space-between;
     }
+
+    @media (max-width: 768px) {
+        .row{
+            flex-direction: row;
+        }
+        .navigation__wrapper ul{
+            flex-direction: column;
+        }
+    }
 </style>

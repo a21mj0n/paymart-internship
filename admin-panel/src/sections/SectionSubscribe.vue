@@ -134,4 +134,12 @@ export default {
     }
 }
 
+@media (max-width: 768px) {
+    .wrapper{
+        .form{
+            width: 250px;
+        }
+    }
+}
+
 </style>

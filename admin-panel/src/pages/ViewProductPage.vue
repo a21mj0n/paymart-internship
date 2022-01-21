@@ -155,21 +155,31 @@ export default {
     minus(){
       if(this.amount > 1){
         this.amount = 1
-
       }
-
-       
-    
     },
-     async addToCart(){
-            await this.$axios.post('api/cart', {product_id: this.product.id, amount: this.amount})
-        }
+    async addToCart(){
+      //   const productDate = {
+      //   id: this.product.id,
+      //   image: this.product.image[0],
+      //   price: this.product.price,
+      //   name: this.product.name,
+      //   amount: this.amount
+      // }
+      
+      await this.$axios.post('api/cart', {product_id: this.product.id, amount: this.amount})
+      this.$store.dispatch('cart/addToCart', {
+        ...this.product,
+        image: this.product.image[0],
+        amount: this.amount
+      })
+    }
 
   },
   components: {},
   async mounted() {
     const {data} = await this.$axios.get(`/api/products/${this.$route.params.id}`)
     this.product = data;
+    console.log();
     
     this.imagesLength = this.product.image.length
     try{
